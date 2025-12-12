@@ -19,14 +19,14 @@ const Hero = () => {
         <div className="max-w-5xl">
           {/* Label */}
           <p className="animate-fade-up text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground opacity-0 delay-100 mb-8">
-            AI-First Product & Design Leader
+            Interaction Designer
           </p>
 
           {/* Main headline - 2 lines on desktop */}
           <h1 className="animate-fade-up font-display text-5xl font-medium leading-[1.05] tracking-tight opacity-0 delay-200 sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mb-8">
-            Shaping Next-Gen iOS, SaaS,
+            AI-First Product & Design Leader
             <br />
-            <span className="italic text-muted-foreground/60">& Intelligent Apps.</span>
+            <span className="italic text-muted-foreground/60">Shaping Next-Gen iOS, SaaS, & Intelligent Apps.</span>
           </h1>
 
           {/* Description - 2 lines */}
