@@ -85,11 +85,63 @@ const TypewriterTitle = () => {
   );
 };
 
+// Step Content Component with dissolve transition
+const StepContent = ({ step, color }: { step: typeof processSteps[0]; color: string }) => {
+  return (
+    <div className="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
+      {/* Left Column */}
+      <div className="space-y-5">
+        <p 
+          className="text-sm font-medium"
+          style={{ color }}
+        >
+          Step {step.number}:
+        </p>
+        <h3 className="font-display text-lg md:text-xl lg:text-2xl font-medium text-background leading-tight">
+          {step.title}
+        </h3>
+        <div 
+          className="bg-background/10 rounded-[4px] p-4 border-l-2"
+          style={{ borderColor: color }}
+        >
+          <p className="text-xs font-medium text-background/60 mb-1">Goal:</p>
+          <p className="text-sm text-background/90">{step.goal}</p>
+        </div>
+      </div>
+
+      {/* Right Column */}
+      <div className="space-y-5">
+        <div className="flex items-start gap-3">
+          <Sparkles 
+            className="w-4 h-4 flex-shrink-0 mt-0.5" 
+            style={{ color }}
+          />
+          <div>
+            <p className="text-sm font-medium text-background mb-1">AI In Action:</p>
+            <p className="text-sm text-background/70 leading-relaxed">
+              {step.aiAction}
+            </p>
+          </div>
+        </div>
+        
+        <div className="flex items-start gap-3">
+          <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="text-sm font-medium text-background mb-1">Outcome:</p>
+            <p className="text-sm text-background/70 leading-relaxed">
+              {step.outcome}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Process = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const stepsContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -126,8 +178,6 @@ const Process = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const currentStep = processSteps[activeStep];
-  
   // Calculate horizontal scroll position
   const stepWidth = 220;
   const stepGap = 16;
@@ -146,7 +196,7 @@ const Process = () => {
     >
       <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
         {/* Title */}
-        <div className="container pt-16 md:pt-20">
+        <div className="container pt-12 md:pt-16 mb-8 md:mb-12">
           <h2 
             className="font-display font-medium text-xl sm:text-2xl md:text-3xl lg:text-[2rem] xl:text-[2.25rem]"
             style={{ color: 'hsl(var(--background) / 0.7)' }}
@@ -156,7 +206,7 @@ const Process = () => {
         </div>
 
         {/* Steps Timeline Area */}
-        <div className="relative flex-1 flex items-center">
+        <div className="relative h-[140px] md:h-[160px] flex items-start">
           {/* Left Edge Overlay - blends steps into background */}
           <div 
             className="absolute left-0 top-0 bottom-0 w-32 md:w-48 z-20 pointer-events-none"
@@ -175,12 +225,9 @@ const Process = () => {
 
           {/* Steps container */}
           <div 
-            ref={stepsContainerRef}
-            className="absolute w-full flex items-center"
+            className="absolute flex items-start"
             style={{
               transform: `translateX(${horizontalOffset}px)`,
-              transition: 'transform 0.1s linear',
-              willChange: 'transform',
               gap: `${stepGap}px`,
             }}
           >
@@ -199,27 +246,30 @@ const Process = () => {
                       window.scrollTo({ top: targetScroll, behavior: 'smooth' });
                     }
                   }}
-                  className="flex-shrink-0 rounded-[4px] text-left transition-all duration-300 border-2"
+                  className="flex-shrink-0 rounded-[4px] text-left border-2"
                   style={{
                     width: `${stepWidth}px`,
                     padding: '16px 20px',
+                    marginTop: `${verticalOffset}px`,
                     backgroundColor: isActive ? pastelColors[index] : 'transparent',
                     borderColor: isActive ? pastelColors[index] : 'hsl(var(--background) / 0.3)',
-                    transform: `translateY(${verticalOffset}px)`,
+                    transition: 'background-color 0.3s ease, border-color 0.3s ease',
                   }}
                 >
                   <span 
-                    className="block text-xs font-medium mb-1 transition-colors duration-300"
+                    className="block text-xs font-medium mb-1"
                     style={{ 
                       color: isActive ? 'hsl(var(--foreground))' : 'hsl(var(--background) / 0.5)',
+                      transition: 'color 0.3s ease',
                     }}
                   >
                     Step {step.number}
                   </span>
                   <span 
-                    className="block text-sm font-medium whitespace-nowrap transition-colors duration-300"
+                    className="block text-sm font-medium whitespace-nowrap"
                     style={{ 
                       color: isActive ? 'hsl(var(--foreground))' : 'hsl(var(--background) / 0.8)',
+                      transition: 'color 0.3s ease',
                     }}
                   >
                     {step.shortTitle}
@@ -230,57 +280,27 @@ const Process = () => {
           </div>
         </div>
 
-        {/* Step Content */}
-        <div className="container pb-12 md:pb-16">
-          <div className="max-w-5xl mx-auto">
-            <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-6 md:p-8 lg:p-10 border border-background/10">
-              <div className="grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
-                {/* Left Column */}
-                <div className="space-y-4">
-                  <p 
-                    className="text-sm font-medium"
-                    style={{ color: pastelColors[activeStep] }}
-                  >
-                    Step {currentStep.number}:
-                  </p>
-                  <h3 className="font-display text-lg md:text-xl lg:text-2xl font-medium text-background leading-tight">
-                    {currentStep.title}
-                  </h3>
-                  <div 
-                    className="bg-background/10 rounded-[4px] p-4 border-l-2"
-                    style={{ borderColor: pastelColors[activeStep] }}
-                  >
-                    <p className="text-xs font-medium text-background/60 mb-1">Goal:</p>
-                    <p className="text-sm text-background/90">{currentStep.goal}</p>
-                  </div>
+        {/* Step Content with dissolve transition */}
+        <div className="container flex-1 flex flex-col justify-center pb-8 md:pb-12">
+          <div className="max-w-5xl mx-auto w-full">
+            <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-6 md:p-8 lg:p-10 border border-background/10 relative overflow-hidden">
+              {/* Stacked content layers for dissolve effect */}
+              {processSteps.map((step, index) => (
+                <div
+                  key={step.number}
+                  className="transition-opacity duration-500 ease-in-out"
+                  style={{
+                    opacity: index === activeStep ? 1 : 0,
+                    position: index === activeStep ? 'relative' : 'absolute',
+                    top: index === activeStep ? 'auto' : 0,
+                    left: index === activeStep ? 'auto' : 0,
+                    right: index === activeStep ? 'auto' : 0,
+                    pointerEvents: index === activeStep ? 'auto' : 'none',
+                  }}
+                >
+                  <StepContent step={step} color={pastelColors[index]} />
                 </div>
-
-                {/* Right Column */}
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <Sparkles 
-                      className="w-4 h-4 flex-shrink-0 mt-0.5" 
-                      style={{ color: pastelColors[activeStep] }}
-                    />
-                    <div>
-                      <p className="text-sm font-medium text-background mb-1">AI In Action:</p>
-                      <p className="text-sm text-background/70 leading-relaxed">
-                        {currentStep.aiAction}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-medium text-background mb-1">Outcome:</p>
-                      <p className="text-sm text-background/70 leading-relaxed">
-                        {currentStep.outcome}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
 
             {/* Step indicators */}
