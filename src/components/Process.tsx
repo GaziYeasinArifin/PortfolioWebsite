@@ -89,6 +89,7 @@ const Process = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const stepsContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -127,16 +128,13 @@ const Process = () => {
 
   const currentStep = processSteps[activeStep];
   
-  // Calculate positions - steps start at right of divider, end at left
-  const stepGap = 20;
-  const stepWidth = 200; // Width of each step button
-  const totalWidth = (stepWidth + stepGap) * processSteps.length - stepGap;
-  
-  // Start position: first step at right of divider (50% + some offset)
-  // End position: last step at left of divider (50% - some offset)
-  const startOffset = window.innerWidth * 0.3; // Start 30% from center to right
-  const endOffset = -totalWidth + window.innerWidth * 0.2; // End with last step near left of divider
-  
+  // Calculate horizontal scroll position
+  const stepWidth = 220;
+  const stepGap = 16;
+  const totalWidth = (stepWidth + stepGap) * processSteps.length;
+  const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+  const startOffset = viewportWidth * 0.6;
+  const endOffset = -totalWidth + viewportWidth * 0.4;
   const horizontalOffset = startOffset + (endOffset - startOffset) * scrollProgress;
 
   return (
@@ -159,136 +157,74 @@ const Process = () => {
 
         {/* Steps Timeline Area */}
         <div className="relative flex-1 flex items-center">
-          {/* Center Dotted Divider - blends with background */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-px z-20 pointer-events-none">
-            {/* Top gradient blend */}
-            <div 
-              className="absolute top-0 left-0 w-full h-32"
-              style={{ 
-                background: 'linear-gradient(to bottom, hsl(var(--foreground)), transparent)' 
-              }}
-            />
-            {/* Dotted line */}
-            <div 
-              className="absolute top-32 bottom-32 left-0 w-px"
-              style={{
-                backgroundImage: 'repeating-linear-gradient(to bottom, hsl(var(--background) / 0.4) 0px, hsl(var(--background) / 0.4) 4px, transparent 4px, transparent 12px)',
-              }}
-            />
-            {/* Bottom gradient blend */}
-            <div 
-              className="absolute bottom-0 left-0 w-full h-32"
-              style={{ 
-                background: 'linear-gradient(to top, hsl(var(--foreground)), transparent)' 
-              }}
-            />
-          </div>
+          {/* Left Edge Overlay - blends steps into background */}
+          <div 
+            className="absolute left-0 top-0 bottom-0 w-32 md:w-48 z-20 pointer-events-none"
+            style={{
+              background: 'linear-gradient(to right, hsl(var(--foreground)) 0%, hsl(var(--foreground)) 20%, transparent 100%)',
+            }}
+          />
+          
+          {/* Right Edge Overlay - blends steps into background */}
+          <div 
+            className="absolute right-0 top-0 bottom-0 w-32 md:w-48 z-20 pointer-events-none"
+            style={{
+              background: 'linear-gradient(to left, hsl(var(--foreground)) 0%, hsl(var(--foreground)) 20%, transparent 100%)',
+            }}
+          />
 
-          {/* Steps container - full width with clip masks */}
-          <div className="relative w-full h-[200px]">
-            {/* Dark layer (left of divider) */}
-            <div 
-              className="absolute inset-0 overflow-hidden"
-              style={{ clipPath: 'polygon(0 0, 50% 0, 50% 100%, 0 100%)' }}
-            >
-              <div 
-                className="absolute top-1/2 flex items-start"
-                style={{
-                  left: '50%',
-                  transform: `translateX(${horizontalOffset}px) translateY(-50%)`,
-                  gap: `${stepGap}px`,
-                  transition: 'transform 0.1s linear',
-                  willChange: 'transform',
-                }}
-              >
-                {processSteps.map((step, index) => {
-                  const isActive = index === activeStep;
-                  const isPast = index < activeStep;
-                  const verticalOffset = index * 10; // Each step 10px lower
-                  
-                  return (
-                    <div
-                      key={`dark-${step.number}`}
-                      className="flex-shrink-0"
-                      style={{
-                        width: `${stepWidth}px`,
-                        transform: `translateY(${verticalOffset}px)`,
-                      }}
-                    >
-                      <button
-                        className={`w-full px-6 py-3 rounded-[4px] text-left transition-all duration-200 border ${
-                          isActive 
-                            ? 'bg-background/15 border-background/50' 
-                            : isPast 
-                              ? 'bg-background/10 border-background/30'
-                              : 'bg-background/5 border-background/20'
-                        }`}
-                        style={{ 
-                          opacity: isPast || isActive ? 1 : 0.5,
-                        }}
-                      >
-                        <span 
-                          className="text-sm font-medium whitespace-nowrap"
-                          style={{ color: 'hsl(var(--background) / 0.9)' }}
-                        >
-                          {step.shortTitle.toLowerCase()}
-                        </span>
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Colorful layer (right of divider) */}
-            <div 
-              className="absolute inset-0 overflow-hidden"
-              style={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)' }}
-            >
-              <div 
-                className="absolute top-1/2 flex items-start"
-                style={{
-                  left: '50%',
-                  transform: `translateX(${horizontalOffset}px) translateY(-50%)`,
-                  gap: `${stepGap}px`,
-                  transition: 'transform 0.1s linear',
-                  willChange: 'transform',
-                }}
-              >
-                {processSteps.map((step, index) => {
-                  const isActive = index === activeStep;
-                  const isFuture = index > activeStep;
-                  const verticalOffset = index * 10; // Each step 10px lower
-                  
-                  return (
-                    <div
-                      key={`color-${step.number}`}
-                      className="flex-shrink-0"
-                      style={{
-                        width: `${stepWidth}px`,
-                        transform: `translateY(${verticalOffset}px)`,
-                      }}
-                    >
-                      <button
-                        className="w-full px-6 py-3 rounded-[4px] text-left transition-all duration-200 border"
-                        style={{
-                          backgroundColor: pastelColors[index],
-                          borderColor: pastelColors[index],
-                          opacity: isFuture || isActive ? 1 : 0.6,
-                        }}
-                      >
-                        <span 
-                          className="text-sm font-medium whitespace-nowrap"
-                          style={{ color: 'hsl(var(--foreground))' }}
-                        >
-                          {step.shortTitle.toLowerCase()}
-                        </span>
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+          {/* Steps container */}
+          <div 
+            ref={stepsContainerRef}
+            className="absolute w-full flex items-center"
+            style={{
+              transform: `translateX(${horizontalOffset}px)`,
+              transition: 'transform 0.1s linear',
+              willChange: 'transform',
+              gap: `${stepGap}px`,
+            }}
+          >
+            {processSteps.map((step, index) => {
+              const isActive = index === activeStep;
+              
+              return (
+                <button
+                  key={step.number}
+                  onClick={() => {
+                    if (sectionRef.current) {
+                      const sectionTop = sectionRef.current.offsetTop;
+                      const scrollRange = sectionRef.current.offsetHeight - window.innerHeight;
+                      const targetScroll = sectionTop + (scrollRange * (index / processSteps.length));
+                      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+                    }
+                  }}
+                  className="flex-shrink-0 rounded-[4px] text-left transition-all duration-300 border-2"
+                  style={{
+                    width: `${stepWidth}px`,
+                    padding: '16px 20px',
+                    backgroundColor: isActive ? pastelColors[index] : 'transparent',
+                    borderColor: isActive ? pastelColors[index] : 'hsl(var(--background) / 0.3)',
+                  }}
+                >
+                  <span 
+                    className="block text-xs font-medium mb-1 transition-colors duration-300"
+                    style={{ 
+                      color: isActive ? 'hsl(var(--foreground))' : 'hsl(var(--background) / 0.5)',
+                    }}
+                  >
+                    Step {step.number}
+                  </span>
+                  <span 
+                    className="block text-sm font-medium whitespace-nowrap transition-colors duration-300"
+                    style={{ 
+                      color: isActive ? 'hsl(var(--foreground))' : 'hsl(var(--background) / 0.8)',
+                    }}
+                  >
+                    {step.shortTitle}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -303,16 +239,16 @@ const Process = () => {
                     className="text-sm font-medium"
                     style={{ color: pastelColors[activeStep] }}
                   >
-                    step {currentStep.number}:
+                    Step {currentStep.number}:
                   </p>
                   <h3 className="font-display text-lg md:text-xl lg:text-2xl font-medium text-background leading-tight">
-                    {currentStep.title.toLowerCase()}
+                    {currentStep.title}
                   </h3>
                   <div 
                     className="bg-background/10 rounded-[4px] p-4 border-l-2"
                     style={{ borderColor: pastelColors[activeStep] }}
                   >
-                    <p className="text-xs font-medium text-background/60 mb-1">goal:</p>
+                    <p className="text-xs font-medium text-background/60 mb-1">Goal:</p>
                     <p className="text-sm text-background/90">{currentStep.goal}</p>
                   </div>
                 </div>
@@ -325,7 +261,7 @@ const Process = () => {
                       style={{ color: pastelColors[activeStep] }}
                     />
                     <div>
-                      <p className="text-sm font-medium text-background mb-1">ai in action:</p>
+                      <p className="text-sm font-medium text-background mb-1">AI In Action:</p>
                       <p className="text-sm text-background/70 leading-relaxed">
                         {currentStep.aiAction}
                       </p>
@@ -335,7 +271,7 @@ const Process = () => {
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
                     <div>
-                      <p className="text-sm font-medium text-background mb-1">outcome:</p>
+                      <p className="text-sm font-medium text-background mb-1">Outcome:</p>
                       <p className="text-sm text-background/70 leading-relaxed">
                         {currentStep.outcome}
                       </p>
@@ -365,7 +301,7 @@ const Process = () => {
                       ? pastelColors[activeStep] 
                       : 'hsl(var(--background) / 0.3)',
                   }}
-                  aria-label={`Go to step ${index + 1}`}
+                  aria-label={`Go to Step ${index + 1}`}
                 />
               ))}
             </div>
