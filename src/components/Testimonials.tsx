@@ -40,13 +40,13 @@ const Testimonials = () => {
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="card-hover rounded-2xl border border-border bg-card p-8"
+            className="card-hover rounded-lg border border-border bg-card p-8"
             >
               <blockquote className="mb-8 font-display text-lg italic leading-relaxed">
                 "{testimonial.quote}"
               </blockquote>
               <div className="flex items-center gap-4">
-                <div className="h-12 w-12 rounded-full bg-secondary" />
+                <div className="h-12 w-12 rounded-lg bg-secondary" />
                 <div>
                   <p className="font-medium">{testimonial.author}</p>
                   <p className="text-sm text-muted-foreground">{testimonial.role}</p>

@@ -20,7 +20,7 @@ const Hero = () => {
             <div className="animate-fade-up flex flex-wrap items-center gap-4 opacity-0 delay-400">
               <a
                 href="#case-studies"
-                className="rounded-full bg-foreground px-7 py-3.5 text-sm font-medium text-primary-foreground transition-all hover:bg-foreground/90"
+                className="rounded-lg bg-foreground px-7 py-3.5 text-sm font-medium text-primary-foreground transition-all hover:bg-foreground/90"
               >
                 View My Work
               </a>
@@ -33,11 +33,11 @@ const Hero = () => {
             </div>
           </div>
           <div className="animate-fade-up relative aspect-square opacity-0 delay-500">
-            <div className="image-reveal absolute inset-0 rounded-3xl bg-secondary">
+            <div className="image-reveal absolute inset-0 rounded-lg bg-secondary">
               <img
                 src={heroSculpture}
                 alt="Abstract sculptural form representing creative design"
-                className="h-full w-full rounded-3xl object-cover"
+                className="h-full w-full rounded-lg object-cover"
               />
             </div>
           </div>

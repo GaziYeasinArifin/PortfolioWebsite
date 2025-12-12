@@ -19,14 +19,14 @@ const Contact = () => {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a
               href="mailto:hello@portfolio.com"
-              className="inline-flex items-center gap-2 rounded-full bg-primary-foreground px-7 py-3.5 text-sm font-medium text-foreground transition-all hover:bg-primary-foreground/90"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary-foreground px-7 py-3.5 text-sm font-medium text-foreground transition-all hover:bg-primary-foreground/90"
             >
               hello@portfolio.com
               <ArrowUpRight className="h-4 w-4" />
             </a>
             <a
               href="#"
-              className="rounded-full border border-primary-foreground/20 px-7 py-3.5 text-sm font-medium transition-all hover:bg-primary-foreground/10"
+              className="rounded-lg border border-primary-foreground/20 px-7 py-3.5 text-sm font-medium transition-all hover:bg-primary-foreground/10"
             >
               Book a Call
             </a>

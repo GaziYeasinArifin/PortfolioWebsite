@@ -59,14 +59,14 @@ const CaseStudies = () => {
               className="group card-hover cursor-pointer"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="image-reveal relative aspect-[4/5] overflow-hidden rounded-2xl bg-secondary mb-6">
+              <div className="image-reveal relative aspect-[4/5] overflow-hidden rounded-lg bg-secondary mb-6">
                 <img
                   src={study.image}
                   alt={study.title}
                   className="h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 flex items-center justify-center bg-foreground/0 transition-all duration-300 group-hover:bg-foreground/10">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-background opacity-0 transition-all duration-300 group-hover:opacity-100">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-background opacity-0 transition-all duration-300 group-hover:opacity-100">
                     <ArrowUpRight className="h-5 w-5" />
                   </div>
                 </div>
