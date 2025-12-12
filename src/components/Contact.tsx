@@ -18,10 +18,10 @@ const Contact = () => {
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a
-              href="mailto:hello@portfolio.com"
+              href="mailto:arifin.yeasin@gmail.com"
               className="inline-flex items-center gap-2 rounded-lg bg-primary-foreground px-7 py-3.5 text-sm font-medium text-foreground transition-all hover:bg-primary-foreground/90"
             >
-              hello@portfolio.com
+              arifin.yeasin@gmail.com
               <ArrowUpRight className="h-4 w-4" />
             </a>
             <a

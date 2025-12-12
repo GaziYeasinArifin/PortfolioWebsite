@@ -3,9 +3,7 @@ const Footer = () => {
 
   const socialLinks = [
     { label: 'linkedin', href: '#' },
-    { label: 'dribbble', href: '#' },
     { label: 'medium', href: '#' },
-    { label: 'twitter', href: '#' },
   ];
 
   const navLinks = [
