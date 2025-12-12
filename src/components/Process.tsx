@@ -75,14 +75,9 @@ const TypewriterTitle = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Render plain text
-  const renderText = () => {
-    return displayText;
-  };
-
   return (
     <span className="inline-flex items-center">
-      {renderText()}
+      {displayText}
       <span 
         className={`inline-block w-[3px] h-[1em] bg-background ml-1 ${isTyping ? 'animate-pulse' : 'opacity-0'}`}
       />
@@ -109,7 +104,7 @@ const Process = () => {
       
       if (scrollStart <= 0 && scrollStart >= -scrollRange) {
         const progress = Math.abs(scrollStart) / scrollRange;
-        setScrollProgress(progress);
+        setScrollProgress(Math.min(Math.max(progress, 0), 1));
         const stepIndex = Math.min(
           Math.floor(progress * processSteps.length),
           processSteps.length - 1
@@ -132,126 +127,163 @@ const Process = () => {
 
   const currentStep = processSteps[activeStep];
   
-  // Calculate horizontal offset - start centered, move left within 80% of screen
-  const stepWidth = 180;
-  const gap = 20;
-  const totalStepWidth = stepWidth + gap;
-  const horizontalOffset = scrollProgress * totalStepWidth * (processSteps.length - 1);
+  // Calculate positions - steps start at right of divider, end at left
+  const stepGap = 20;
+  const stepWidth = 200; // Width of each step button
+  const totalWidth = (stepWidth + stepGap) * processSteps.length - stepGap;
+  
+  // Start position: first step at right of divider (50% + some offset)
+  // End position: last step at left of divider (50% - some offset)
+  const startOffset = window.innerWidth * 0.3; // Start 30% from center to right
+  const endOffset = -totalWidth + window.innerWidth * 0.2; // End with last step near left of divider
+  
+  const horizontalOffset = startOffset + (endOffset - startOffset) * scrollProgress;
 
   return (
     <section 
       ref={sectionRef}
       id="process" 
       className="relative bg-foreground text-background"
-      style={{ height: `${100 + (processSteps.length * 80)}vh` }}
+      style={{ height: `${100 + (processSteps.length * 100)}vh` }}
     >
       <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
-        {/* Title - Match hero subtitle size */}
+        {/* Title */}
         <div className="container pt-16 md:pt-20">
-          <h2 className="font-display font-medium text-muted-foreground/70 text-xl sm:text-2xl md:text-3xl lg:text-[2rem] xl:text-[2.25rem]" style={{ color: 'hsl(var(--background) / 0.7)' }}>
+          <h2 
+            className="font-display font-medium text-xl sm:text-2xl md:text-3xl lg:text-[2rem] xl:text-[2.25rem]"
+            style={{ color: 'hsl(var(--background) / 0.7)' }}
+          >
             <TypewriterTitle />
           </h2>
         </div>
 
-        {/* Timeline Steps - Horizontal scrolling with wipe effect */}
-        <div className="relative flex-1 flex items-center mt-8">
-          {/* Center divider line - 50% shorter */}
-          <div className="absolute left-1/2 top-1/4 bottom-1/4 w-px bg-background/30 z-10" />
-          
-          {/* Steps container with clip masks for wipe effect - constrained to 80% center */}
-          <div className="relative w-[80%] mx-auto h-[120px]">
-            {/* Dark layer (left side) - clips to show only left of center */}
+        {/* Steps Timeline Area */}
+        <div className="relative flex-1 flex items-center">
+          {/* Center Dotted Divider - blends with background */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-px z-20 pointer-events-none">
+            {/* Top gradient blend */}
             <div 
-              className="absolute inset-0 flex items-center justify-center"
-              style={{
-                clipPath: 'polygon(0 0, 50% 0, 50% 100%, 0 100%)',
+              className="absolute top-0 left-0 w-full h-32"
+              style={{ 
+                background: 'linear-gradient(to bottom, hsl(var(--foreground)), transparent)' 
               }}
+            />
+            {/* Dotted line */}
+            <div 
+              className="absolute top-32 bottom-32 left-0 w-px"
+              style={{
+                backgroundImage: 'repeating-linear-gradient(to bottom, hsl(var(--background) / 0.4) 0px, hsl(var(--background) / 0.4) 4px, transparent 4px, transparent 12px)',
+              }}
+            />
+            {/* Bottom gradient blend */}
+            <div 
+              className="absolute bottom-0 left-0 w-full h-32"
+              style={{ 
+                background: 'linear-gradient(to top, hsl(var(--foreground)), transparent)' 
+              }}
+            />
+          </div>
+
+          {/* Steps container - full width with clip masks */}
+          <div className="relative w-full h-[200px]">
+            {/* Dark layer (left of divider) */}
+            <div 
+              className="absolute inset-0 overflow-hidden"
+              style={{ clipPath: 'polygon(0 0, 50% 0, 50% 100%, 0 100%)' }}
             >
               <div 
-                className="flex items-center"
+                className="absolute top-1/2 flex items-start"
                 style={{
-                  gap: `${gap}px`,
-                  transform: `translateX(calc(-${horizontalOffset}px))`,
-                  transition: 'transform 0.15s ease-out',
+                  left: '50%',
+                  transform: `translateX(${horizontalOffset}px) translateY(-50%)`,
+                  gap: `${stepGap}px`,
+                  transition: 'transform 0.1s linear',
+                  willChange: 'transform',
                 }}
               >
                 {processSteps.map((step, index) => {
                   const isActive = index === activeStep;
                   const isPast = index < activeStep;
+                  const verticalOffset = index * 10; // Each step 10px lower
                   
                   return (
                     <div
                       key={`dark-${step.number}`}
-                      className="flex-shrink-0 transition-all duration-300"
+                      className="flex-shrink-0"
                       style={{
                         width: `${stepWidth}px`,
-                        opacity: isPast || isActive ? 1 : 0.4,
+                        transform: `translateY(${verticalOffset}px)`,
                       }}
                     >
-                      <div 
-                        className={`px-5 py-3 rounded-[4px] whitespace-nowrap border transition-all duration-300 ${
+                      <button
+                        className={`w-full px-6 py-3 rounded-[4px] text-left transition-all duration-200 border ${
                           isActive 
-                            ? 'bg-background/10 border-background/40' 
-                            : 'bg-transparent border-background/20'
+                            ? 'bg-background/15 border-background/50' 
+                            : isPast 
+                              ? 'bg-background/10 border-background/30'
+                              : 'bg-background/5 border-background/20'
                         }`}
-                        style={{ color: 'hsl(var(--background) / 0.8)' }}
+                        style={{ 
+                          opacity: isPast || isActive ? 1 : 0.5,
+                        }}
                       >
-                        <span className="text-sm font-medium">
-                          step {step.number}
-                        </span>
-                        <p className="text-xs mt-1 opacity-70">
+                        <span 
+                          className="text-sm font-medium whitespace-nowrap"
+                          style={{ color: 'hsl(var(--background) / 0.9)' }}
+                        >
                           {step.shortTitle.toLowerCase()}
-                        </p>
-                      </div>
+                        </span>
+                      </button>
                     </div>
                   );
                 })}
               </div>
             </div>
 
-            {/* Colorful layer (right side) - clips to show only right of center */}
+            {/* Colorful layer (right of divider) */}
             <div 
-              className="absolute inset-0 flex items-center justify-center"
-              style={{
-                clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)',
-              }}
+              className="absolute inset-0 overflow-hidden"
+              style={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)' }}
             >
               <div 
-                className="flex items-center"
+                className="absolute top-1/2 flex items-start"
                 style={{
-                  gap: `${gap}px`,
-                  transform: `translateX(calc(-${horizontalOffset}px))`,
-                  transition: 'transform 0.15s ease-out',
+                  left: '50%',
+                  transform: `translateX(${horizontalOffset}px) translateY(-50%)`,
+                  gap: `${stepGap}px`,
+                  transition: 'transform 0.1s linear',
+                  willChange: 'transform',
                 }}
               >
                 {processSteps.map((step, index) => {
-                  const isFuture = index > activeStep;
                   const isActive = index === activeStep;
+                  const isFuture = index > activeStep;
+                  const verticalOffset = index * 10; // Each step 10px lower
                   
                   return (
                     <div
                       key={`color-${step.number}`}
-                      className="flex-shrink-0 transition-all duration-300"
+                      className="flex-shrink-0"
                       style={{
                         width: `${stepWidth}px`,
-                        opacity: isFuture || isActive ? 1 : 0.5,
+                        transform: `translateY(${verticalOffset}px)`,
                       }}
                     >
-                      <div 
-                        className="px-5 py-3 rounded-[4px] whitespace-nowrap border transition-all duration-300"
+                      <button
+                        className="w-full px-6 py-3 rounded-[4px] text-left transition-all duration-200 border"
                         style={{
                           backgroundColor: pastelColors[index],
                           borderColor: pastelColors[index],
-                          color: 'hsl(var(--foreground))',
+                          opacity: isFuture || isActive ? 1 : 0.6,
                         }}
                       >
-                        <span className="text-sm font-medium">
-                          step {step.number}
-                        </span>
-                        <p className="text-xs mt-1 opacity-80">
+                        <span 
+                          className="text-sm font-medium whitespace-nowrap"
+                          style={{ color: 'hsl(var(--foreground))' }}
+                        >
                           {step.shortTitle.toLowerCase()}
-                        </p>
-                      </div>
+                        </span>
+                      </button>
                     </div>
                   );
                 })}
@@ -260,51 +292,51 @@ const Process = () => {
           </div>
         </div>
 
-        {/* Step Content - Increased spacing: 15px increments */}
-        <div className="container pb-16 pt-8">
+        {/* Step Content */}
+        <div className="container pb-12 md:pb-16">
           <div className="max-w-5xl mx-auto">
-            <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-8 md:p-10 border border-background/10">
-              <div className="grid md:grid-cols-2 gap-8 md:gap-10">
+            <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-6 md:p-8 lg:p-10 border border-background/10">
+              <div className="grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
                 {/* Left Column */}
-                <div className="space-y-6">
+                <div className="space-y-4">
                   <p 
                     className="text-sm font-medium"
                     style={{ color: pastelColors[activeStep] }}
                   >
                     step {currentStep.number}:
                   </p>
-                  <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-medium text-background leading-tight mt-2">
+                  <h3 className="font-display text-lg md:text-xl lg:text-2xl font-medium text-background leading-tight">
                     {currentStep.title.toLowerCase()}
                   </h3>
                   <div 
-                    className="bg-background/10 rounded-[4px] p-5 border-l-2 mt-4"
+                    className="bg-background/10 rounded-[4px] p-4 border-l-2"
                     style={{ borderColor: pastelColors[activeStep] }}
                   >
-                    <p className="text-xs font-medium text-background/60 mb-2">goal:</p>
+                    <p className="text-xs font-medium text-background/60 mb-1">goal:</p>
                     <p className="text-sm text-background/90">{currentStep.goal}</p>
                   </div>
                 </div>
 
                 {/* Right Column */}
-                <div className="space-y-6 mt-0">
-                  <div className="flex items-start gap-4">
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
                     <Sparkles 
-                      className="w-4 h-4 flex-shrink-0 mt-1" 
+                      className="w-4 h-4 flex-shrink-0 mt-0.5" 
                       style={{ color: pastelColors[activeStep] }}
                     />
                     <div>
-                      <p className="text-sm font-medium text-background mb-2">ai in action:</p>
-                      <p className="text-sm text-background/70 leading-relaxed mt-1">
+                      <p className="text-sm font-medium text-background mb-1">ai in action:</p>
+                      <p className="text-sm text-background/70 leading-relaxed">
                         {currentStep.aiAction}
                       </p>
                     </div>
                   </div>
                   
-                  <div className="flex items-start gap-4 mt-4">
-                    <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0 mt-1" />
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
                     <div>
-                      <p className="text-sm font-medium text-background mb-2">outcome:</p>
-                      <p className="text-sm text-background/70 leading-relaxed mt-1">
+                      <p className="text-sm font-medium text-background mb-1">outcome:</p>
+                      <p className="text-sm text-background/70 leading-relaxed">
                         {currentStep.outcome}
                       </p>
                     </div>
@@ -313,8 +345,8 @@ const Process = () => {
               </div>
             </div>
 
-            {/* Step indicators - more spacing */}
-            <div className="flex justify-center gap-3 mt-8">
+            {/* Step indicators */}
+            <div className="flex justify-center gap-2 mt-6">
               {processSteps.map((_, index) => (
                 <button
                   key={index}
@@ -328,10 +360,10 @@ const Process = () => {
                   }}
                   className="h-1.5 rounded-full transition-all duration-300"
                   style={{
-                    width: index === activeStep ? '24px' : '6px',
+                    width: index === activeStep ? '20px' : '6px',
                     backgroundColor: index === activeStep 
                       ? pastelColors[activeStep] 
-                      : 'hsla(var(--background) / 0.3)',
+                      : 'hsl(var(--background) / 0.3)',
                   }}
                   aria-label={`Go to step ${index + 1}`}
                 />
