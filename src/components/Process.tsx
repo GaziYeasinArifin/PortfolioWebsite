@@ -195,7 +195,7 @@ const Process = () => {
       ref={sectionRef}
       id="process" 
       className="relative bg-foreground text-background"
-      style={{ height: `${100 + (processSteps.length * 100)}vh` }}
+      style={{ height: `${100 + (processSteps.length * 120)}vh` }}
     >
       <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
         {/* Title - generous top spacing */}
@@ -290,13 +290,14 @@ const Process = () => {
         <div className="container flex-1 flex flex-col">
           <div className="max-w-5xl mx-auto w-full">
             <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-6 md:p-8 lg:p-10 border border-background/10 relative overflow-hidden">
-              {/* Stacked content layers for crossfade */}
+              {/* Stacked content layers with smooth transform */}
               {processSteps.map((step, index) => (
                 <div
                   key={step.number}
-                  className="transition-opacity duration-300 ease-in-out"
                   style={{
                     opacity: index === activeStep ? 1 : 0,
+                    transform: index === activeStep ? 'translateY(0)' : 'translateY(8px)',
+                    transition: 'opacity 0.4s ease, transform 0.4s ease',
                     position: index === activeStep ? 'relative' : 'absolute',
                     top: 0,
                     left: 0,
@@ -312,10 +313,10 @@ const Process = () => {
         </div>
 
         {/* Spacer before pagination */}
-        <div className="h-6 md:h-8" />
+        <div className="h-10 md:h-14" />
 
         {/* Step indicators - grey and lower */}
-        <div className="container pb-10 md:pb-16">
+        <div className="container pb-16 md:pb-24">
           <div className="flex justify-center gap-2">
             {processSteps.map((_, index) => (
               <button
