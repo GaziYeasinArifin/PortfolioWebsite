@@ -26,7 +26,7 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { label: 'Work', href: '#case-studies' },
+    { label: 'Works', href: '#case-studies' },
     { label: 'Process', href: '#process' },
     { label: 'Articles', href: '#articles' },
     { label: 'Contact', href: '#contact' },
@@ -83,10 +83,10 @@ const Header = () => {
               Resume
             </a>
             <a
-              href="#case-studies"
+              href="#contact"
               className="rounded-lg border border-foreground bg-foreground px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground hover:scale-[1.02] active:scale-[0.98]"
             >
-              Works
+              Say Hi 👋
             </a>
           </div>
 
@@ -142,11 +142,11 @@ const Header = () => {
               Resume
             </a>
             <a
-              href="#case-studies"
+              href="#contact"
               onClick={handleNavClick}
               className="rounded-lg border border-foreground bg-foreground px-6 py-4 text-center text-base font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground active:scale-[0.98]"
             >
-              Works
+              Say Hi 👋
             </a>
           </div>
         </nav>
