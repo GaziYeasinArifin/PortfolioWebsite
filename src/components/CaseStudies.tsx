@@ -13,6 +13,7 @@ interface CaseStudy {
   image: string;
   year: string;
   slug?: string;
+  externalUrl?: string;
 }
 
 type TabType = 'ux-projects' | 'branding' | 'writing';
@@ -67,6 +68,7 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       category: 'Brand Identity',
       image: caseStudy2,
       year: '2024',
+      externalUrl: 'https://www.canva.com/design/DAG0BfinlkQ/UvL4uRgqPElvkLF6oUIEig/view?utm_content=DAG0BfinlkQ&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h2ba7e72444',
     },
     {
       id: 2,
@@ -162,9 +164,15 @@ const CaseStudies = () => {
         </div>
 
         <div className="grid gap-8 grid-cols-1 md:grid-cols-2">
-          {studies.map((study, index) => {
-            const CardWrapper = study.slug ? Link : 'div';
-            const cardProps = study.slug ? { to: `/case-study/${study.slug}` } : {};
+        {studies.map((study, index) => {
+            const isExternal = !!study.externalUrl;
+            const isInternal = !!study.slug;
+            const CardWrapper = isExternal ? 'a' : isInternal ? Link : 'div';
+            const cardProps = isExternal 
+              ? { href: study.externalUrl, target: '_blank', rel: 'noopener noreferrer' }
+              : isInternal 
+                ? { to: `/case-study/${study.slug}` } 
+                : {};
             
             return (
               <CardWrapper
