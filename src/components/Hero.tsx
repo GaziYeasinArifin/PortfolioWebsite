@@ -1,35 +1,38 @@
+import heroBg from '@/assets/hero-bg.png';
+
 const Hero = () => {
   return (
     <section className="relative min-h-screen overflow-hidden">
-      {/* Subtle animated background */}
+      {/* Background image */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-background" />
-        {/* Animated gradient orbs */}
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-muted/40 to-transparent blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-tl from-muted/30 to-transparent blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-r from-accent/5 to-muted/20 blur-3xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '4s' }} />
+        <img 
+          src={heroBg} 
+          alt="" 
+          className="w-full h-full object-cover object-top"
+        />
+        {/* Subtle overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background/60" />
       </div>
 
       <div className="container relative z-10 flex min-h-screen flex-col justify-center py-32 lg:py-40">
-        <div className="max-w-4xl">
+        <div className="max-w-5xl">
           {/* Label */}
           <p className="animate-fade-up text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground opacity-0 delay-100 mb-8">
             Interaction Designer
           </p>
 
-          {/* Main headline */}
-          <h1 className="animate-fade-up font-display text-4xl font-medium leading-[1.08] tracking-tight opacity-0 delay-200 sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-8">
-            I craft digital
+          {/* Main headline - 2 lines on desktop */}
+          <h1 className="animate-fade-up font-display text-5xl font-medium leading-[1.05] tracking-tight opacity-0 delay-200 sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mb-8">
+            Crafting Digital Experiences
             <br />
-            experiences that
-            <br />
-            <span className="italic text-muted-foreground/70">resonate</span> with people.
+            <span className="italic text-muted-foreground/60">That Resonate.</span>
           </h1>
 
-          {/* Description */}
-          <p className="animate-fade-up max-w-lg text-base leading-relaxed text-muted-foreground opacity-0 delay-300 mb-12 md:text-lg">
-            Transforming complex problems into elegant, intuitive solutions through
-            research-driven design and thoughtful interactions.
+          {/* Description - 2 lines */}
+          <p className="animate-fade-up max-w-2xl text-lg leading-relaxed text-muted-foreground opacity-0 delay-300 mb-12 md:text-xl lg:text-2xl">
+            Transforming complex problems into elegant solutions
+            <br className="hidden sm:block" />
+            through research-driven design and thoughtful interactions.
           </p>
 
           {/* CTAs */}
@@ -58,12 +61,17 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-8 lg:left-12">
-        <div className="flex items-center gap-4 text-muted-foreground">
-          <div className="h-12 w-[1px] bg-border animate-pulse" />
+      {/* Scroll indicator - right bottom */}
+      <div className="absolute bottom-8 right-8 lg:right-12">
+        <a 
+          href="#case-studies"
+          className="group flex flex-col items-center gap-3 text-muted-foreground transition-colors hover:text-foreground"
+        >
           <span className="text-[10px] font-medium tracking-[0.2em] uppercase">Scroll</span>
-        </div>
+          <div className="relative w-6 h-10 rounded-full border-2 border-current flex justify-center">
+            <div className="absolute top-2 w-1 h-2 rounded-full bg-current animate-bounce" style={{ animationDuration: '1.5s' }} />
+          </div>
+        </a>
       </div>
     </section>
   );
