@@ -186,6 +186,7 @@ const Process = () => {
           >
             {processSteps.map((step, index) => {
               const isActive = index === activeStep;
+              const verticalOffset = index * 20; // Each step 20px lower
               
               return (
                 <button
@@ -204,6 +205,7 @@ const Process = () => {
                     padding: '16px 20px',
                     backgroundColor: isActive ? pastelColors[index] : 'transparent',
                     borderColor: isActive ? pastelColors[index] : 'hsl(var(--background) / 0.3)',
+                    transform: `translateY(${verticalOffset}px)`,
                   }}
                 >
                   <span 
