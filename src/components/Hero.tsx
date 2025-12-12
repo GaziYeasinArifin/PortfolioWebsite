@@ -1,54 +1,68 @@
-import heroSculpture from '@/assets/hero-sculpture.jpg';
-
 const Hero = () => {
   return (
-    <section className="relative min-h-screen overflow-hidden pt-24">
-      <div className="container relative z-10 flex min-h-[calc(100vh-6rem)] flex-col justify-center py-20">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div className="space-y-8">
-            <p className="animate-fade-up text-sm font-medium uppercase tracking-widest text-muted-foreground opacity-0 delay-100">
-              Interaction Designer
-            </p>
-            <h1 className="animate-fade-up font-display text-5xl font-medium leading-[1.1] tracking-tight opacity-0 delay-200 md:text-6xl lg:text-7xl">
-              I craft digital experiences that{' '}
-              <span className="italic text-accent">resonate</span> with people.
-            </h1>
-            <p className="animate-fade-up max-w-md text-lg leading-relaxed text-muted-foreground opacity-0 delay-300">
-              Transforming complex problems into elegant, intuitive solutions through
-              research-driven design and thoughtful interactions.
-            </p>
-            <div className="animate-fade-up flex flex-wrap items-center gap-4 opacity-0 delay-400">
-              <a
-                href="#case-studies"
-                className="rounded-lg bg-foreground px-7 py-3.5 text-sm font-medium text-primary-foreground transition-all hover:bg-foreground/90"
+    <section className="relative min-h-screen overflow-hidden">
+      {/* Subtle animated background */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-background" />
+        {/* Animated gradient orbs */}
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-muted/40 to-transparent blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-tl from-muted/30 to-transparent blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-r from-accent/5 to-muted/20 blur-3xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '4s' }} />
+      </div>
+
+      <div className="container relative z-10 flex min-h-screen flex-col justify-center py-32 lg:py-40">
+        <div className="max-w-4xl">
+          {/* Label */}
+          <p className="animate-fade-up text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground opacity-0 delay-100 mb-8">
+            Interaction Designer
+          </p>
+
+          {/* Main headline */}
+          <h1 className="animate-fade-up font-display text-4xl font-medium leading-[1.08] tracking-tight opacity-0 delay-200 sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-8">
+            I craft digital
+            <br />
+            experiences that
+            <br />
+            <span className="italic text-muted-foreground/70">resonate</span> with people.
+          </h1>
+
+          {/* Description */}
+          <p className="animate-fade-up max-w-lg text-base leading-relaxed text-muted-foreground opacity-0 delay-300 mb-12 md:text-lg">
+            Transforming complex problems into elegant, intuitive solutions through
+            research-driven design and thoughtful interactions.
+          </p>
+
+          {/* CTAs */}
+          <div className="animate-fade-up flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 opacity-0 delay-400">
+            <a
+              href="#case-studies"
+              className="group inline-flex items-center gap-3 rounded-lg bg-foreground px-6 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:scale-[1.02] hover:bg-foreground/90 active:scale-[0.98]"
+            >
+              View My Work
+              <svg 
+                className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
               >
-                View My Work
-              </a>
-              <a
-                href="#process"
-                className="link-underline text-sm font-medium"
-              >
-                Learn My Process
-              </a>
-            </div>
-          </div>
-          <div className="animate-fade-up relative aspect-square opacity-0 delay-500">
-            <div className="image-reveal absolute inset-0 rounded-lg bg-secondary">
-              <img
-                src={heroSculpture}
-                alt="Abstract sculptural form representing creative design"
-                className="h-full w-full rounded-lg object-cover"
-              />
-            </div>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            <a
+              href="#process"
+              className="relative text-sm font-medium text-muted-foreground transition-all duration-300 hover:text-foreground after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:w-0 after:bg-foreground after:transition-all after:duration-300 hover:after:w-full"
+            >
+              Learn My Process
+            </a>
           </div>
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="flex flex-col items-center gap-2 text-muted-foreground">
-          <span className="text-xs tracking-widest">SCROLL</span>
-          <div className="h-12 w-[1px] bg-border" />
+      <div className="absolute bottom-8 left-8 lg:left-12">
+        <div className="flex items-center gap-4 text-muted-foreground">
+          <div className="h-12 w-[1px] bg-border animate-pulse" />
+          <span className="text-[10px] font-medium tracking-[0.2em] uppercase">Scroll</span>
         </div>
       </div>
     </section>
