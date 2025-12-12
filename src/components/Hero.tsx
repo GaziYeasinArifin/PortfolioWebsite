@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ArrowDown } from 'lucide-react';
 import heroBg from '@/assets/hero-bg.png';
 
@@ -18,6 +18,22 @@ const Hero = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [subtitleDisplayed, setSubtitleDisplayed] = useState('');
   const [subtitleStarted, setSubtitleStarted] = useState(false);
+  const [mouseX, setMouseX] = useState(0);
+  const heroRef = useRef<HTMLElement>(null);
+
+  // Mouse tracking for parallax
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!heroRef.current) return;
+      const rect = heroRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const offsetX = (e.clientX - centerX) / rect.width;
+      setMouseX(offsetX * 20); // Max 20px movement
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   // Designer type typewriter effect
   useEffect(() => {
@@ -80,13 +96,16 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
-      {/* Background image */}
+    <section ref={heroRef} className="relative min-h-screen overflow-hidden">
+      {/* Background image with floating and parallax */}
       <div className="absolute inset-0 z-0">
         <img 
           src={heroBg} 
           alt="" 
-          className="w-full object-contain object-top"
+          className="w-full object-contain object-top transition-transform duration-300 ease-out animate-float"
+          style={{
+            transform: `translateX(${mouseX}px)`,
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background/60" />
       </div>
