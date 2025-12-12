@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Sparkles, CheckCircle } from 'lucide-react';
 
-const pastelColors = [
-  'hsl(340, 82%, 76%)', // Pink
-  'hsl(280, 67%, 78%)', // Lavender
-  'hsl(200, 80%, 74%)', // Sky Blue
-  'hsl(160, 60%, 72%)', // Mint
-  'hsl(45, 93%, 75%)',  // Peach/Yellow
+const tealColors = [
+  'hsl(175, 70%, 45%)', // Teal dark
+  'hsl(175, 65%, 52%)', // Teal medium-dark
+  'hsl(175, 60%, 58%)', // Teal medium
+  'hsl(175, 55%, 65%)', // Teal light
+  'hsl(175, 50%, 72%)', // Teal lightest
 ];
 
 const processSteps = [
@@ -276,8 +276,8 @@ const Process = () => {
                     width: `${stepWidth}px`,
                     padding: viewportWidth < 640 ? '12px 14px' : '16px 20px',
                     marginTop: `${verticalOffset}px`,
-                    backgroundColor: isActive ? pastelColors[index] : 'transparent',
-                    borderColor: isActive ? pastelColors[index] : 'hsl(var(--background) / 0.3)',
+                    backgroundColor: isActive ? tealColors[index] : 'transparent',
+                    borderColor: isActive ? tealColors[index] : 'hsl(var(--background) / 0.3)',
                     transition: 'background-color 0.4s ease, border-color 0.4s ease',
                   }}
                 >
@@ -309,7 +309,7 @@ const Process = () => {
         <div className="container px-4 sm:px-6 flex-1 flex items-center">
           <div className="max-w-5xl mx-auto w-full">
             <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-4 sm:p-6 md:p-8 lg:p-10 border border-background/10">
-              <StepContent step={processSteps[activeStep]} color={pastelColors[activeStep]} />
+              <StepContent step={processSteps[activeStep]} color={tealColors[activeStep]} />
             </div>
           </div>
         </div>

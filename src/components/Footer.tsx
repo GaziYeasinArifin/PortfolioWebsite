@@ -10,6 +10,7 @@ const Footer = () => {
         timeZone: 'America/Los_Angeles',
         hour: 'numeric',
         minute: '2-digit',
+        second: '2-digit',
         hour12: true,
       });
       setCurrentTime(pstTime);
@@ -39,8 +40,8 @@ const Footer = () => {
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.1]">
               gazi arifin
             </h2>
-            <p className="mt-4 text-xl sm:text-2xl md:text-3xl text-muted-foreground font-display">PST</p>
-            <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground font-display">{currentTime}</p>
+            <p className="mt-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-muted-foreground font-display">PST</p>
+            <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-muted-foreground font-display tabular-nums">{currentTime}</p>
           </div>
 
           <div>

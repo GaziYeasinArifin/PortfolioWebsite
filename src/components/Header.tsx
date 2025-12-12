@@ -59,7 +59,6 @@ const Header = () => {
   const navLinks = [
     { label: 'works', href: '#case-studies' },
     { label: 'process', href: '#process' },
-    { label: 'articles', href: '#articles' },
     { label: 'contact', href: '#contact' },
   ];
 
