@@ -140,22 +140,8 @@ const StepContent = ({ step, color }: { step: typeof processSteps[0]; color: str
 
 const Process = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [displayedStep, setDisplayedStep] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
-
-  // Handle step change with smooth dissolve
-  useEffect(() => {
-    if (activeStep !== displayedStep && !isTransitioning) {
-      setIsTransitioning(true);
-      const timer = setTimeout(() => {
-        setDisplayedStep(activeStep);
-        setIsTransitioning(false);
-      }, 200);
-      return () => clearTimeout(timer);
-    }
-  }, [activeStep, displayedStep, isTransitioning]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -201,8 +187,8 @@ const Process = () => {
   const endOffset = -totalWidth + viewportWidth * 0.4;
   const horizontalOffset = startOffset + (endOffset - startOffset) * scrollProgress;
 
-  const currentStep = processSteps[displayedStep];
-  const currentColor = pastelColors[displayedStep];
+  const currentStep = processSteps[activeStep];
+  const currentColor = pastelColors[activeStep];
 
   return (
     <section 
@@ -303,14 +289,24 @@ const Process = () => {
         {/* Step Content with dissolve transition */}
         <div className="container flex-1 flex flex-col">
           <div className="max-w-5xl mx-auto w-full">
-            <div 
-              className="bg-background/5 backdrop-blur-sm rounded-[4px] p-6 md:p-8 lg:p-10 border border-background/10"
-              style={{
-                opacity: isTransitioning ? 0.6 : 1,
-                transition: 'opacity 0.2s ease-in-out',
-              }}
-            >
-              <StepContent step={currentStep} color={currentColor} />
+            <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-6 md:p-8 lg:p-10 border border-background/10 relative overflow-hidden">
+              {/* Stacked content layers for crossfade */}
+              {processSteps.map((step, index) => (
+                <div
+                  key={step.number}
+                  className="transition-opacity duration-300 ease-in-out"
+                  style={{
+                    opacity: index === activeStep ? 1 : 0,
+                    position: index === activeStep ? 'relative' : 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    pointerEvents: index === activeStep ? 'auto' : 'none',
+                  }}
+                >
+                  <StepContent step={step} color={pastelColors[index]} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
