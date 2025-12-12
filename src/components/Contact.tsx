@@ -25,7 +25,7 @@ const Contact = () => {
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
             </a>
             <a
-              href="#"
+              href="mailto:arifin.yeasin@gmail.com?subject=Let's%20Book%20a%20Call"
               className="rounded-[4px] border border-primary-foreground/30 px-7 py-3.5 text-sm font-medium transition-all duration-300 hover:bg-primary-foreground hover:text-foreground hover:scale-[1.02] active:scale-[0.98]"
             >
               book a call
