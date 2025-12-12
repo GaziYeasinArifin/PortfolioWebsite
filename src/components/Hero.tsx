@@ -1,7 +1,38 @@
+import { useState, useEffect } from 'react';
 import { ArrowDown } from 'lucide-react';
 import heroBg from '@/assets/hero-bg.png';
 
+const designerTypes = ['Interaction', 'UX', 'Product'];
+
 const Hero = () => {
+  const [currentTypeIndex, setCurrentTypeIndex] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentWord = designerTypes[currentTypeIndex];
+    
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        if (displayText.length < currentWord.length) {
+          setDisplayText(currentWord.slice(0, displayText.length + 1));
+        } else {
+          // Wait before starting to delete
+          setTimeout(() => setIsDeleting(true), 2000);
+        }
+      } else {
+        if (displayText.length > 0) {
+          setDisplayText(displayText.slice(0, -1));
+        } else {
+          setIsDeleting(false);
+          setCurrentTypeIndex((prev) => (prev + 1) % designerTypes.length);
+        }
+      }
+    }, isDeleting ? 50 : 100);
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, currentTypeIndex]);
+
   return (
     <section className="relative min-h-screen overflow-hidden">
       {/* Background image */}
@@ -17,9 +48,10 @@ const Hero = () => {
 
       <div className="container relative z-10 flex min-h-screen flex-col justify-center py-32 lg:py-40">
         <div className="max-w-5xl">
-          {/* Label */}
+          {/* Label with typewriter effect */}
           <p className="animate-fade-up text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground opacity-0 delay-100 mb-8">
-            Interaction Designer
+            <span className="inline-block min-w-[90px]">{displayText}</span>
+            <span className="animate-pulse">|</span> Designer
           </p>
 
           {/* Main headline - 2 lines on desktop */}
@@ -30,7 +62,7 @@ const Hero = () => {
 
           {/* Description - 2 lines */}
           <p className="animate-fade-up max-w-2xl text-lg leading-relaxed text-muted-foreground opacity-0 delay-300 mb-12 md:text-xl lg:text-2xl">
-            Blending Software Engineering (B.S.) + Interaction Design (M.A.), I've led 5 design teams, delivered 27+ cross-platform products, and specialize in Vibe-level prototyping and AI agent architecture for high-impact, scalable experiences.
+            With a background in Software Engineering (B.S.) and Interaction Design (M.A.). Led 5 design teams, built 27+ products, and focus on UX research with AI agents and vibe prototyping.
           </p>
 
           {/* CTAs + Scroll indicator */}
