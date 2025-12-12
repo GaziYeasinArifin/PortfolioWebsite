@@ -6,9 +6,9 @@ const designerTypes = ['Interaction', 'UX', 'Product'];
 const subtitleText = 'Shaping Next-Gen iOS, SaaS, & Intelligent Apps.';
 
 const stats = [
-  { value: '11+', label: 'years experience' },
-  { value: '29+', label: 'projects' },
-  { value: '4', label: 'App Store "Top Chart" Apps' },
+  { value: '11+', label: 'years of experience' },
+  { value: '29+', label: 'projects delivered' },
+  { value: '4', label: 'apps on the App Store top charts' },
   { value: '3', label: 'awards' },
 ];
 
@@ -130,14 +130,14 @@ const Hero = () => {
       </div>
 
       <div className="container relative z-10 flex min-h-screen flex-col justify-center px-6 sm:px-8 lg:px-12 py-24 sm:py-28 md:py-32 lg:py-40">
-        <div className="w-full lg:w-[60%] flex flex-col gap-6 sm:gap-7 md:gap-8">
+        <div className="max-w-5xl flex flex-col gap-6 sm:gap-7 md:gap-8">
           {/* Label with typewriter effect */}
-          <p className="animate-fade-up text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground opacity-0 delay-100 text-justify">
+          <p className="animate-fade-up text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground opacity-0 delay-100">
             {displayText} Designer
           </p>
 
           {/* Main headline */}
-          <h1 className="font-display font-medium leading-[1.05] tracking-tight text-justify">
+          <h1 className="font-display font-medium leading-[1.05] tracking-tight">
             <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-200">
               AI-First Product &
             </span>
@@ -150,20 +150,23 @@ const Hero = () => {
           </h1>
 
           {/* Description */}
-          <p className="animate-fade-up text-base sm:text-lg md:text-lg lg:text-xl leading-relaxed text-muted-foreground opacity-0 delay-300 text-justify">
+          <p className="animate-fade-up max-w-2xl text-base sm:text-lg md:text-lg lg:text-xl leading-relaxed text-muted-foreground opacity-0 delay-300">
             I create AI-driven UX and Vibe prototypes, backed by engineering and design experience.
           </p>
 
           {/* Stats - Modern inline layout */}
-          <div className="animate-fade-up flex flex-wrap items-start gap-6 sm:gap-8 md:gap-10 opacity-0 delay-350">
+          <div className="animate-fade-up flex flex-wrap items-center gap-4 sm:gap-6 md:gap-8 opacity-0 delay-350">
             {stats.map((stat, index) => (
-              <div key={stat.label} className="flex flex-col gap-0.5">
-                <span className="font-display text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] font-medium text-foreground leading-none">
+              <div key={stat.label} className="flex items-baseline gap-1.5 sm:gap-2">
+                <span className="font-display text-xl sm:text-2xl md:text-3xl font-medium text-foreground">
                   {stat.value}
                 </span>
                 <span className="text-xs sm:text-sm text-muted-foreground">
                   {stat.label}
                 </span>
+                {index < stats.length - 1 && (
+                  <span className="hidden sm:block ml-4 sm:ml-6 md:ml-8 w-px h-4 bg-border" />
+                )}
               </div>
             ))}
           </div>
