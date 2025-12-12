@@ -85,29 +85,29 @@ const Hero = () => {
       </div>
 
       <div className="container relative z-10 flex min-h-screen flex-col justify-center px-6 sm:px-8 lg:px-12 py-24 sm:py-28 md:py-32 lg:py-40">
-        <div className="max-w-5xl">
+        <div className="max-w-5xl flex flex-col gap-6 sm:gap-7 md:gap-8">
           {/* Label with typewriter effect */}
-          <p className="animate-fade-up text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground opacity-0 delay-100 mb-6 sm:mb-8">
+          <p className="animate-fade-up text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground opacity-0 delay-100">
             {displayText} Designer
           </p>
 
           {/* Main headline */}
-          <h1 className="font-display font-medium leading-[1.05] tracking-tight mb-6 sm:mb-8">
+          <h1 className="font-display font-medium leading-[1.05] tracking-tight">
             <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-200">
               AI-First Product & Design Leader
             </span>
-            <span className="block text-muted-foreground/80 text-xl sm:text-2xl md:text-3xl lg:text-[2rem] xl:text-[2.25rem] mt-2 sm:mt-3 min-h-[1.5em]">
+            <span className="block text-muted-foreground/70 text-xl sm:text-2xl md:text-3xl lg:text-[2rem] xl:text-[2.25rem] mt-2 sm:mt-3 min-h-[1.5em]">
               {renderSubtitle()}
             </span>
           </h1>
 
           {/* Description */}
-          <p className="animate-fade-up max-w-2xl text-base sm:text-lg md:text-lg lg:text-xl leading-relaxed text-muted-foreground opacity-0 delay-300 mb-8 sm:mb-10 md:mb-12">
+          <p className="animate-fade-up max-w-2xl text-base sm:text-lg md:text-lg lg:text-xl leading-relaxed text-muted-foreground opacity-0 delay-300">
             With a background in Software Engineering (B.S.) and Interaction Design (M.A.). Led 5 design teams, built 27+ products, and focus on UX research with AI agents and vibe prototyping.
           </p>
 
           {/* CTAs + Scroll indicator */}
-          <div className="animate-fade-up flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 opacity-0 delay-400">
+          <div className="animate-fade-up flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 opacity-0 delay-400 mt-2 sm:mt-3 md:mt-4">
             <a
               href="#case-studies"
               className="group inline-flex items-center gap-3 rounded-[4px] border border-foreground bg-foreground px-5 sm:px-6 py-3 sm:py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground hover:scale-[1.02] active:scale-[0.98]"
