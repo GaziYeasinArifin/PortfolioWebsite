@@ -2,7 +2,7 @@ const Marquee = () => {
   const items = ['WORKS', 'CASE STUDIES', 'SELECTED PROJECTS'];
 
   return (
-    <section className="border-y border-border bg-secondary/50 py-6 overflow-hidden">
+    <section className="border-y border-border bg-secondary/50 py-8 overflow-hidden">
       <div className="flex">
         <div className="marquee">
           {[...items, ...items].map((item, index) => (
