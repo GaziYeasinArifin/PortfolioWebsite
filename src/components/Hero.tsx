@@ -8,7 +8,7 @@ const subtitleText = 'Shaping Next-Gen iOS, SaaS, & Intelligent Apps.';
 const stats = [
   { value: '11+', label: 'years of experience' },
   { value: '29+', label: 'projects delivered' },
-  { value: '4', label: 'apps on the top charts' },
+  { value: '4', label: 'apps on the App Store top charts' },
   { value: '3', label: 'awards' },
 ];
 

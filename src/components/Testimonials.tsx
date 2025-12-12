@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 const testimonials = [
   {
@@ -33,6 +33,20 @@ const testimonials = [
 
 const Testimonials = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [animationDuration, setAnimationDuration] = useState(30);
+
+  useEffect(() => {
+    // Adjust animation speed based on content width
+    const scrollContainer = scrollRef.current;
+    if (scrollContainer) {
+      const contentWidth = scrollContainer.scrollWidth / 2;
+      const duration = contentWidth / 50; // pixels per second
+      setAnimationDuration(Math.max(20, duration));
+    }
+  }, []);
+
+  // Duplicate testimonials for seamless loop
+  const duplicatedTestimonials = [...testimonials, ...testimonials];
 
   return (
     <section className="py-24 md:py-32 overflow-hidden">
@@ -48,7 +62,7 @@ const Testimonials = () => {
         </div>
       </div>
 
-      {/* Horizontal scrolling testimonials */}
+      {/* Horizontal auto-scrolling testimonials */}
       <div className="relative">
         {/* Left fade overlay */}
         <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
@@ -58,12 +72,15 @@ const Testimonials = () => {
 
         <div 
           ref={scrollRef}
-          className="flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide px-6 sm:px-12 md:px-24 pb-4"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          className="flex gap-4 sm:gap-6 animate-marquee"
+          style={{ 
+            animationDuration: `${animationDuration}s`,
+            width: 'max-content'
+          }}
         >
-          {testimonials.map((testimonial) => (
+          {duplicatedTestimonials.map((testimonial, index) => (
             <div
-              key={testimonial.id}
+              key={`${testimonial.id}-${index}`}
               className="flex-shrink-0 w-[300px] sm:w-[350px] md:w-[400px] rounded-[4px] border border-border bg-card p-6 sm:p-8 transition-all duration-300 hover:border-accent/50 hover:shadow-lg"
             >
               <blockquote className="mb-6 sm:mb-8 font-display text-sm sm:text-base md:text-lg italic leading-relaxed text-foreground/90">
@@ -84,6 +101,20 @@ const Testimonials = () => {
           ))}
         </div>
       </div>
+
+      <style>{`
+        @keyframes marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        .animate-marquee {
+          animation: marquee linear infinite;
+        }
+      `}</style>
     </section>
   );
 };
