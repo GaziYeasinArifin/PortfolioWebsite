@@ -8,7 +8,7 @@ const Hero = () => {
         <img 
           src={heroBg} 
           alt="" 
-          className="w-full h-full object-cover object-top"
+          className="w-full object-contain object-top"
         />
         {/* Subtle overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background/60" />
