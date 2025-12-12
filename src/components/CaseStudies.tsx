@@ -4,6 +4,7 @@ import caseStudy1 from '@/assets/case-study-1.jpg';
 import caseStudy2 from '@/assets/case-study-2.jpg';
 import caseStudy3 from '@/assets/case-study-3.jpg';
 import brandingCaseStudy1 from '@/assets/branding-case-study-1.png';
+import carepalWriting from '@/assets/carepal-writing.png';
 import { ArrowUpRight } from 'lucide-react';
 
 interface CaseStudy {
@@ -90,7 +91,7 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       title: 'CarePal',
       description: 'Designing a wellness companion for everyday care',
       category: 'Article',
-      image: caseStudy1,
+      image: carepalWriting,
       year: '2024',
       externalUrl: 'https://www.canva.com/design/DAGkpwN0h1k/xyIfEievf8rfQnLJM6ccvw/view?utm_content=DAGkpwN0h1k&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h30849d3be1',
     },
