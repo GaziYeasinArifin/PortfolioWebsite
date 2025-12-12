@@ -140,7 +140,7 @@ const Header = () => {
           {/* Right: Resume + Let's Talk (Desktop) */}
           <div className="hidden md:flex items-center gap-4">
             <a
-              href="/resume.pdf"
+              href="/Gazi_Arifin_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="relative text-sm font-medium tracking-wide text-muted-foreground transition-all duration-300 hover:text-foreground after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-foreground after:transition-all after:duration-300 hover:after:w-full"
@@ -197,7 +197,7 @@ const Header = () => {
             style={{ transitionDelay: isMobileMenuOpen ? '300ms' : '0ms' }}
           >
             <a
-              href="/resume.pdf"
+              href="/Gazi_Arifin_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="py-3 text-lg font-medium text-muted-foreground transition-all duration-300 hover:text-foreground hover:translate-x-2"
