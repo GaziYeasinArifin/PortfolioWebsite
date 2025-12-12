@@ -96,7 +96,7 @@ const Hero = () => {
             <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-200">
               AI-First Product & Design Leader
             </span>
-            <span className="block text-muted-foreground/50 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[2rem] mt-2 sm:mt-3 min-h-[1.5em]">
+            <span className="block text-muted-foreground/80 text-xl sm:text-2xl md:text-3xl lg:text-[2rem] xl:text-[2.25rem] mt-2 sm:mt-3 min-h-[1.5em]">
               {renderSubtitle()}
             </span>
           </h1>
