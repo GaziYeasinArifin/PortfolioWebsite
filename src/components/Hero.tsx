@@ -1,3 +1,4 @@
+import { ArrowDown } from 'lucide-react';
 import heroBg from '@/assets/hero-bg.png';
 
 const Hero = () => {
@@ -39,17 +40,10 @@ const Hero = () => {
           <div className="animate-fade-up flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 opacity-0 delay-400">
             <a
               href="#case-studies"
-              className="group inline-flex items-center gap-3 rounded-lg bg-foreground px-6 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:scale-[1.02] hover:bg-foreground/90 active:scale-[0.98]"
+              className="group inline-flex items-center gap-3 rounded-lg border border-foreground bg-foreground px-6 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground hover:scale-[1.02] active:scale-[0.98]"
             >
               View My Work
-              <svg 
-                className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              <ArrowDown className="w-4 h-4 transition-transform duration-300 -rotate-90 group-hover:rotate-0" />
             </a>
             <a
               href="#process"
