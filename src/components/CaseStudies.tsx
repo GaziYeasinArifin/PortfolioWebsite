@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import caseStudy1 from '@/assets/case-study-1.jpg';
 import caseStudy2 from '@/assets/case-study-2.jpg';
 import caseStudy3 from '@/assets/case-study-3.jpg';
+import brandingCaseStudy1 from '@/assets/branding-case-study-1.png';
 import { ArrowUpRight } from 'lucide-react';
 
 interface CaseStudy {
@@ -66,7 +67,7 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       title: 'Tech Startup Identity',
       description: 'Bold visual language for emerging tech brand',
       category: 'Brand Identity',
-      image: caseStudy2,
+      image: brandingCaseStudy1,
       year: '2024',
       externalUrl: 'https://www.canva.com/design/DAG0BfinlkQ/UvL4uRgqPElvkLF6oUIEig/view?utm_content=DAG0BfinlkQ&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h2ba7e72444',
     },

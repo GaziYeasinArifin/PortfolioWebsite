@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import logo from '@/assets/logo.png';
 
@@ -9,6 +10,9 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [displayedName, setDisplayedName] = useState('');
   const [showLogo, setShowLogo] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,13 +61,41 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { label: 'works', href: '#case-studies' },
-    { label: 'process', href: '#process' },
-    { label: 'contact', href: '#contact' },
+    { label: 'works', href: '/#case-studies' },
+    { label: 'process', href: '/#process' },
+    { label: 'contact', href: '/#contact' },
   ];
 
-  const handleNavClick = () => {
+  const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
+    
+    if (href.startsWith('/#')) {
+      const sectionId = href.substring(2);
+      if (isHomePage) {
+        // On home page, scroll to section
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        // On other pages, navigate to home then scroll
+        navigate('/');
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    }
+  };
+
+  const handleLogoClick = () => {
+    if (isHomePage) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
   };
 
   return (
@@ -75,7 +107,7 @@ const Header = () => {
       >
         <div className="container flex items-center justify-between">
           {/* Left: Logo + Name with typewriter */}
-          <a href="#" className="flex items-center gap-3 group">
+          <button onClick={handleLogoClick} className="flex items-center gap-3 group">
             <img 
               src={logo} 
               alt="Gazi Yeasin Arifin Logo" 
@@ -87,19 +119,19 @@ const Header = () => {
               {displayedName}
               <span className={`inline-block w-[2px] h-[1.1em] bg-foreground ml-0.5 ${displayedName.length < fullName.length ? 'animate-pulse' : 'opacity-0'}`} />
             </span>
-          </a>
+          </button>
 
           {/* Middle: Navigation (Desktop) */}
           <nav className="hidden md:block absolute left-1/2 -translate-x-1/2">
             <ul className="flex items-center gap-8">
               {navLinks.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
+                  <button
+                    onClick={() => handleNavClick(link.href)}
                     className="relative text-sm font-medium tracking-wide text-muted-foreground transition-all duration-300 hover:text-foreground after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-foreground after:transition-all after:duration-300 hover:after:w-full"
                   >
                     {link.label}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -115,12 +147,12 @@ const Header = () => {
             >
               resume
             </a>
-            <a
-              href="#contact"
+            <button
+              onClick={() => handleNavClick('/#contact')}
               className="rounded-[4px] border border-foreground bg-foreground px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground hover:scale-[1.02] active:scale-[0.98]"
             >
               say hi 👋
-            </a>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -150,13 +182,12 @@ const Header = () => {
                 className={`transition-all duration-500 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
                 style={{ transitionDelay: isMobileMenuOpen ? `${index * 75}ms` : '0ms' }}
               >
-                <a
-                  href={link.href}
-                  onClick={handleNavClick}
-                  className="block py-4 text-2xl font-display font-medium text-foreground transition-all duration-300 hover:opacity-60 hover:translate-x-2"
+                <button
+                  onClick={() => handleNavClick(link.href)}
+                  className="block py-4 text-2xl font-display font-medium text-foreground transition-all duration-300 hover:opacity-60 hover:translate-x-2 text-left"
                 >
                   {link.label}
-                </a>
+                </button>
               </li>
             ))}
           </ul>
@@ -169,18 +200,16 @@ const Header = () => {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleNavClick}
               className="py-3 text-lg font-medium text-muted-foreground transition-all duration-300 hover:text-foreground hover:translate-x-2"
             >
               resume
             </a>
-            <a
-              href="#contact"
-              onClick={handleNavClick}
+            <button
+              onClick={() => handleNavClick('/#contact')}
               className="rounded-[4px] border border-foreground bg-foreground px-6 py-4 text-center text-base font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground active:scale-[0.98]"
             >
               say hi 👋
-            </a>
+            </button>
           </div>
         </nav>
       </div>
