@@ -92,21 +92,9 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, [subtitleDisplayed, subtitleStarted]);
 
-  // Render subtitle with italic styling on specific words
+  // Render subtitle (no italic styling)
   const renderSubtitle = () => {
-    const text = subtitleDisplayed;
-    const italicWords = ['iOS', 'SaaS', 'Intelligent'];
-    
-    return text.split(/(\s+)/).map((part, index) => {
-      const cleanPart = part.replace(/[,&.]/g, '');
-      const isItalic = italicWords.some(word => cleanPart.includes(word));
-      
-      return (
-        <span key={index} className={isItalic ? 'italic' : ''}>
-          {part}
-        </span>
-      );
-    });
+    return subtitleDisplayed;
   };
 
   return (
