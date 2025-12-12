@@ -34,6 +34,7 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       category: 'Mobile Design',
       image: caseStudy1,
       year: '2024',
+      slug: 'coming-soon',
     },
     {
       id: 2,
@@ -42,6 +43,7 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       category: 'Spatial Design',
       image: caseStudy2,
       year: '2024',
+      slug: 'coming-soon',
     },
     {
       id: 3,
@@ -50,6 +52,7 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       category: 'Web Design',
       image: caseStudy3,
       year: '2023',
+      slug: 'coming-soon',
     },
     {
       id: 4,
@@ -78,6 +81,7 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       category: 'Visual Design',
       image: caseStudy3,
       year: '2023',
+      slug: 'coming-soon',
     },
   ],
   'writing': [
@@ -88,6 +92,7 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       category: 'Article',
       image: caseStudy1,
       year: '2024',
+      slug: 'coming-soon',
     },
     {
       id: 2,
@@ -96,6 +101,7 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       category: 'Article',
       image: caseStudy3,
       year: '2024',
+      slug: 'coming-soon',
     },
   ],
 };
@@ -168,11 +174,12 @@ const CaseStudies = () => {
         {studies.map((study, index) => {
             const isExternal = !!study.externalUrl;
             const isInternal = !!study.slug;
+            const isComingSoon = study.slug === 'coming-soon';
             const CardWrapper = isExternal ? 'a' : isInternal ? Link : 'div';
             const cardProps = isExternal 
               ? { href: study.externalUrl, target: '_blank', rel: 'noopener noreferrer' }
               : isInternal 
-                ? { to: `/case-study/${study.slug}` } 
+                ? { to: isComingSoon ? '/coming-soon' : `/case-study/${study.slug}` } 
                 : {};
             
             return (
