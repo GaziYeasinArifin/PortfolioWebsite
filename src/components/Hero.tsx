@@ -19,21 +19,19 @@ const Hero = () => {
         <div className="max-w-5xl">
           {/* Label */}
           <p className="animate-fade-up text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground opacity-0 delay-100 mb-8">
-            Interaction Designer
+            AI-First Product & Design Leader
           </p>
 
           {/* Main headline - 2 lines on desktop */}
           <h1 className="animate-fade-up font-display text-5xl font-medium leading-[1.05] tracking-tight opacity-0 delay-200 sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mb-8">
-            Crafting Digital Experiences
+            Shaping Next-Gen iOS, SaaS,
             <br />
-            <span className="italic text-muted-foreground/60">That Resonate.</span>
+            <span className="italic text-muted-foreground/60">& Intelligent Apps.</span>
           </h1>
 
           {/* Description - 2 lines */}
           <p className="animate-fade-up max-w-2xl text-lg leading-relaxed text-muted-foreground opacity-0 delay-300 mb-12 md:text-xl lg:text-2xl">
-            Transforming complex problems into elegant solutions
-            <br className="hidden sm:block" />
-            through research-driven design and thoughtful interactions.
+            Blending Software Engineering (B.S.) + Interaction Design (M.A.), I've led 5 design teams, delivered 27+ cross-platform products, and specialize in Vibe-level prototyping and AI agent architecture for high-impact, scalable experiences.
           </p>
 
           {/* CTAs + Scroll indicator */}
