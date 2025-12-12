@@ -23,6 +23,7 @@ const Footer = () => {
 
   const socialLinks = [
     { label: 'linkedin', href: '#' },
+    { label: 'behance', href: 'https://www.behance.net/arifinyeasin1/projects' },
     { label: 'medium', href: '#' },
   ];
 
