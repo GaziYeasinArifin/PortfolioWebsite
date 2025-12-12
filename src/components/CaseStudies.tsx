@@ -5,6 +5,7 @@ import caseStudy2 from '@/assets/case-study-2.jpg';
 import caseStudy3 from '@/assets/case-study-3.jpg';
 import brandingCaseStudy1 from '@/assets/branding-case-study-1.png';
 import carepalWriting from '@/assets/carepal-writing.png';
+import phantomFootprintThumbnail from '@/assets/phantom-footprint-thumbnail.png';
 import { ArrowUpRight } from 'lucide-react';
 
 interface CaseStudy {
@@ -57,11 +58,11 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
     },
     {
       id: 4,
-      title: 'E-commerce Platform',
-      description: 'Seamless shopping experience for modern retailers',
-      category: 'Web Design',
-      image: caseStudy1,
-      year: '2023',
+      title: 'Phantom Footprint',
+      description: 'IoT-enhanced board game closing the climate feedback loop',
+      category: 'UX Design + Physical Computing',
+      image: phantomFootprintThumbnail,
+      year: '2024',
       slug: 'e-commerce-platform',
     },
   ],
