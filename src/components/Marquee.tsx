@@ -1,28 +1,29 @@
 const Marquee = () => {
   const items = ['works', 'case studies', 'selected projects'];
 
+  const MarqueeContent = () => (
+    <>
+      {items.map((item, index) => (
+        <span key={index} className="inline-flex items-center shrink-0">
+          <span className="font-display text-sm font-light tracking-wide text-muted-foreground/60 sm:text-base md:text-lg lg:text-xl px-4 sm:px-5 md:px-6">
+            {item}
+          </span>
+          <span className="text-muted-foreground/40 text-[5px] sm:text-[6px]">●</span>
+        </span>
+      ))}
+    </>
+  );
+
   return (
-    <section className="border-y border-border bg-secondary/50 py-12 overflow-hidden">
+    <section className="border-y border-border bg-secondary/50 py-8 sm:py-10 md:py-12 overflow-hidden">
       <div className="flex">
-        <div className="marquee">
-          {[...items, ...items].map((item, index) => (
-            <span key={index} className="flex items-center gap-6">
-              <span className="font-display text-base font-light tracking-wide text-muted-foreground/60 md:text-lg lg:text-xl">
-                {item}
-              </span>
-              <span className="text-muted-foreground/40 text-[6px]">●</span>
-            </span>
-          ))}
+        <div className="marquee flex shrink-0">
+          <MarqueeContent />
+          <MarqueeContent />
         </div>
-        <div className="marquee" aria-hidden>
-          {[...items, ...items].map((item, index) => (
-            <span key={index} className="flex items-center gap-6">
-              <span className="font-display text-base font-light tracking-wide text-muted-foreground/60 md:text-lg lg:text-xl">
-                {item}
-              </span>
-              <span className="text-muted-foreground/40 text-[6px]">●</span>
-            </span>
-          ))}
+        <div className="marquee flex shrink-0" aria-hidden="true">
+          <MarqueeContent />
+          <MarqueeContent />
         </div>
       </div>
     </section>
