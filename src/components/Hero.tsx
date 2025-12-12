@@ -3,12 +3,16 @@ import { ArrowDown } from 'lucide-react';
 import heroBg from '@/assets/hero-bg.png';
 
 const designerTypes = ['Interaction', 'UX', 'Product'];
+const subtitleText = 'Shaping Next-Gen iOS, SaaS, & Intelligent Apps.';
 
 const Hero = () => {
   const [currentTypeIndex, setCurrentTypeIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const [subtitleDisplayed, setSubtitleDisplayed] = useState('');
+  const [subtitleStarted, setSubtitleStarted] = useState(false);
 
+  // Designer type typewriter effect
   useEffect(() => {
     const currentWord = designerTypes[currentTypeIndex];
     
@@ -17,7 +21,6 @@ const Hero = () => {
         if (displayText.length < currentWord.length) {
           setDisplayText(currentWord.slice(0, displayText.length + 1));
         } else {
-          // Wait before starting to delete
           setTimeout(() => setIsDeleting(true), 2000);
         }
       } else {
@@ -33,6 +36,42 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, [displayText, isDeleting, currentTypeIndex]);
 
+  // Subtitle typewriter effect - starts after delay
+  useEffect(() => {
+    const startDelay = setTimeout(() => {
+      setSubtitleStarted(true);
+    }, 800);
+    return () => clearTimeout(startDelay);
+  }, []);
+
+  useEffect(() => {
+    if (!subtitleStarted) return;
+    if (subtitleDisplayed.length >= subtitleText.length) return;
+
+    const timeout = setTimeout(() => {
+      setSubtitleDisplayed(subtitleText.slice(0, subtitleDisplayed.length + 1));
+    }, 30);
+
+    return () => clearTimeout(timeout);
+  }, [subtitleDisplayed, subtitleStarted]);
+
+  // Render subtitle with italic styling on specific words
+  const renderSubtitle = () => {
+    const text = subtitleDisplayed;
+    const italicWords = ['iOS', 'SaaS', 'Intelligent'];
+    
+    return text.split(/(\s+)/).map((part, index) => {
+      const cleanPart = part.replace(/[,&.]/g, '');
+      const isItalic = italicWords.some(word => cleanPart.includes(word));
+      
+      return (
+        <span key={index} className={isItalic ? 'italic' : ''}>
+          {part}
+        </span>
+      );
+    });
+  };
+
   return (
     <section className="relative min-h-screen overflow-hidden">
       {/* Background image */}
@@ -42,25 +81,28 @@ const Hero = () => {
           alt="" 
           className="w-full object-contain object-top"
         />
-        {/* Subtle overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background/60" />
       </div>
 
-      <div className="container relative z-10 flex min-h-screen flex-col justify-center py-32 lg:py-40">
+      <div className="container relative z-10 flex min-h-screen flex-col justify-center px-6 sm:px-8 lg:px-12 py-24 sm:py-28 md:py-32 lg:py-40">
         <div className="max-w-5xl">
           {/* Label with typewriter effect */}
-          <p className="animate-fade-up text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground opacity-0 delay-100 mb-8">
+          <p className="animate-fade-up text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground opacity-0 delay-100 mb-6 sm:mb-8">
             {displayText} Designer
           </p>
 
-          {/* Main headline - 2 lines on desktop */}
-          <h1 className="animate-fade-up font-display font-medium leading-[1.05] tracking-tight opacity-0 delay-200 mb-8">
-            <span className="block text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl">AI-First Product & Design Leader</span>
-            <span className="block italic text-muted-foreground/60 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl mt-2">Shaping Next-Gen iOS, SaaS, & Intelligent Apps.</span>
+          {/* Main headline */}
+          <h1 className="font-display font-medium leading-[1.05] tracking-tight mb-6 sm:mb-8">
+            <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-200">
+              AI-First Product & Design Leader
+            </span>
+            <span className="block text-muted-foreground/50 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[2rem] mt-2 sm:mt-3 min-h-[1.5em]">
+              {renderSubtitle()}
+            </span>
           </h1>
 
-          {/* Description - 2 lines */}
-          <p className="animate-fade-up max-w-2xl text-lg leading-relaxed text-muted-foreground opacity-0 delay-300 mb-12 md:text-xl lg:text-2xl">
+          {/* Description */}
+          <p className="animate-fade-up max-w-2xl text-base sm:text-lg md:text-lg lg:text-xl leading-relaxed text-muted-foreground opacity-0 delay-300 mb-8 sm:mb-10 md:mb-12">
             With a background in Software Engineering (B.S.) and Interaction Design (M.A.). Led 5 design teams, built 27+ products, and focus on UX research with AI agents and vibe prototyping.
           </p>
 
@@ -68,7 +110,7 @@ const Hero = () => {
           <div className="animate-fade-up flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 opacity-0 delay-400">
             <a
               href="#case-studies"
-              className="group inline-flex items-center gap-3 rounded-lg border border-foreground bg-foreground px-6 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground hover:scale-[1.02] active:scale-[0.98]"
+              className="group inline-flex items-center gap-3 rounded-[4px] border border-foreground bg-foreground px-5 sm:px-6 py-3 sm:py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground hover:scale-[1.02] active:scale-[0.98]"
             >
               View My Work
               <ArrowDown className="w-4 h-4 transition-transform duration-300 -rotate-90 group-hover:rotate-0" />
@@ -80,10 +122,10 @@ const Hero = () => {
               Learn My Process
             </a>
             
-            {/* Scroll indicator - desktop only, aligned with CTAs */}
+            {/* Scroll indicator - desktop only */}
             <a 
               href="#case-studies"
-              className="hidden lg:flex items-center gap-3 ml-auto text-muted-foreground transition-colors hover:text-foreground group"
+              className="hidden lg:flex items-center gap-3 ml-auto mr-0 text-muted-foreground transition-colors hover:text-foreground group"
             >
               <span className="text-[10px] font-medium tracking-[0.2em] uppercase">Scroll</span>
               <div className="relative w-6 h-10 rounded-full border-2 border-current flex justify-center">
