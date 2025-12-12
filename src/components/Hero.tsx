@@ -23,10 +23,9 @@ const Hero = () => {
           </p>
 
           {/* Main headline - 2 lines on desktop */}
-          <h1 className="animate-fade-up font-display text-5xl font-medium leading-[1.05] tracking-tight opacity-0 delay-200 sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mb-8">
-            AI-First Product & Design Leader
-            <br />
-            <span className="italic text-muted-foreground/60">Shaping Next-Gen iOS, SaaS, & Intelligent Apps.</span>
+          <h1 className="animate-fade-up font-display font-medium leading-[1.05] tracking-tight opacity-0 delay-200 mb-8">
+            <span className="block text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl">AI-First Product & Design Leader</span>
+            <span className="block italic text-muted-foreground/60 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl mt-2">Shaping Next-Gen iOS, SaaS, & Intelligent Apps.</span>
           </h1>
 
           {/* Description - 2 lines */}
