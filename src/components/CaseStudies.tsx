@@ -87,12 +87,12 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
   'writing': [
     {
       id: 1,
-      title: 'Design Systems Guide',
-      description: 'Comprehensive guide to building scalable design systems',
+      title: 'CarePal',
+      description: 'Designing a wellness companion for everyday care',
       category: 'Article',
       image: caseStudy1,
       year: '2024',
-      slug: 'coming-soon',
+      externalUrl: 'https://www.canva.com/design/DAGkpwN0h1k/xyIfEievf8rfQnLJM6ccvw/view?utm_content=DAGkpwN0h1k&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h30849d3be1',
     },
     {
       id: 2,
