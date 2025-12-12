@@ -16,9 +16,9 @@ interface CaseStudy {
 type TabType = 'ux-projects' | 'branding' | 'writing';
 
 const tabConfig: { key: TabType; label: string; title: string }[] = [
-  { key: 'ux-projects', label: 'ux projects', title: 'case studies' },
-  { key: 'branding', label: 'branding', title: 'gallery' },
-  { key: 'writing', label: 'writing', title: 'articles' },
+  { key: 'ux-projects', label: 'UX PROJECTS', title: 'Case Studies' },
+  { key: 'branding', label: 'BRANDING', title: 'Gallery' },
+  { key: 'writing', label: 'WRITING', title: 'Articles' },
 ];
 
 const caseStudiesData: Record<TabType, CaseStudy[]> = {
@@ -134,18 +134,14 @@ const CaseStudies = () => {
   return (
     <section id="case-studies" className="py-24 md:py-32">
       <div className="container">
-        <div className="mb-16 space-y-6">
-          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-            selected works
-          </p>
-          
-          {/* Tabs */}
+        <div className="mb-16 space-y-8">
+          {/* Tabs - ALL CAPS */}
           <div className="flex items-center gap-6 md:gap-8">
             {tabConfig.map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`font-display text-lg md:text-xl font-medium transition-colors duration-200 link-underline ${
+                className={`text-xs font-medium tracking-[0.2em] transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:w-0 after:bg-foreground after:transition-all after:duration-300 hover:after:w-full ${
                   activeTab === tab.key
                     ? 'text-foreground'
                     : 'text-muted-foreground hover:text-foreground'
@@ -156,8 +152,8 @@ const CaseStudies = () => {
             ))}
           </div>
 
-          {/* Dynamic Title with Typewriter */}
-          <h2 className="font-display text-4xl font-medium tracking-tight md:text-5xl">
+          {/* Dynamic Title with Typewriter - Hero sized */}
+          <h2 className="font-display font-medium leading-[1.05] tracking-tight text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem]">
             <TypewriterTitle text={activeConfig.title} />
           </h2>
         </div>
@@ -169,11 +165,11 @@ const CaseStudies = () => {
               className="group cursor-pointer animate-fade-up"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[--radius] bg-secondary mb-6">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[4px] bg-secondary mb-6">
                 <img
                   src={study.image}
                   alt={study.title}
-                  className="h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-110"
+                  className="h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:grayscale"
                 />
                 {/* Overlay with gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/0 to-foreground/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -185,7 +181,7 @@ const CaseStudies = () => {
                 </div>
                 {/* Bottom info bar */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full transition-transform duration-500 ease-out group-hover:translate-y-0">
-                  <span className="inline-block px-3 py-1 text-xs font-medium bg-background/90 backdrop-blur-sm rounded-full">
+                  <span className="inline-block px-3 py-1 text-xs font-medium bg-background/90 backdrop-blur-sm rounded-[4px]">
                     view project
                   </span>
                 </div>
@@ -195,7 +191,7 @@ const CaseStudies = () => {
                   <span>{study.category}</span>
                   <span>{study.year}</span>
                 </div>
-                <h3 className="font-display text-2xl font-medium transition-colors duration-300 group-hover:text-muted-foreground">
+                <h3 className="font-display text-2xl font-medium">
                   {study.title}
                 </h3>
                 <p className="text-muted-foreground">{study.description}</p>
