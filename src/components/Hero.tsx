@@ -6,9 +6,9 @@ const designerTypes = ['Interaction', 'UX', 'Product'];
 const subtitleText = 'Shaping Next-Gen iOS, SaaS, & Intelligent Apps.';
 
 const stats = [
-  { value: '11+', label: 'years of experience' },
-  { value: '29+', label: 'projects delivered' },
-  { value: '4', label: 'apps on the App Store top charts' },
+  { value: '11+', label: 'years experience' },
+  { value: '29+', label: 'projects' },
+  { value: '4', label: 'App Store "Top Chart" Apps' },
   { value: '3', label: 'awards' },
 ];
 
