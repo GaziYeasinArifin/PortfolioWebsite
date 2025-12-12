@@ -19,14 +19,14 @@ const Contact = () => {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a
               href="mailto:arifin.yeasin@gmail.com"
-              className="inline-flex items-center gap-2 rounded-lg bg-primary-foreground px-7 py-3.5 text-sm font-medium text-foreground transition-all hover:bg-primary-foreground/90"
+              className="group inline-flex items-center gap-2 rounded-[4px] border border-primary-foreground bg-primary-foreground px-7 py-3.5 text-sm font-medium text-foreground transition-all duration-300 hover:bg-transparent hover:text-primary-foreground hover:scale-[1.02] active:scale-[0.98]"
             >
               arifin.yeasin@gmail.com
-              <ArrowUpRight className="h-4 w-4" />
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
             </a>
             <a
               href="#"
-              className="rounded-lg border border-primary-foreground/20 px-7 py-3.5 text-sm font-medium transition-all hover:bg-primary-foreground/10"
+              className="rounded-[4px] border border-primary-foreground/30 px-7 py-3.5 text-sm font-medium transition-all duration-300 hover:bg-primary-foreground hover:text-foreground hover:scale-[1.02] active:scale-[0.98]"
             >
               book a call
             </a>

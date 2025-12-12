@@ -81,7 +81,7 @@ const Testimonials = () => {
           {duplicatedTestimonials.map((testimonial, index) => (
             <div
               key={`${testimonial.id}-${index}`}
-              className="flex-shrink-0 w-[300px] sm:w-[350px] md:w-[400px] rounded-[4px] border border-border bg-card p-6 sm:p-8 transition-all duration-300 hover:border-accent/50 hover:shadow-lg"
+              className="flex-shrink-0 w-[300px] sm:w-[350px] md:w-[400px] rounded-[4px] border border-border bg-card p-6 sm:p-8 transition-all duration-300 hover:border-accent/50 hover:shadow-lg will-change-transform"
             >
               <blockquote className="mb-6 sm:mb-8 font-display text-sm sm:text-base md:text-lg italic leading-relaxed text-foreground/90">
                 "{testimonial.quote}"
@@ -113,6 +113,8 @@ const Testimonials = () => {
         }
         .animate-marquee {
           animation: marquee linear infinite;
+          will-change: transform;
+          backface-visibility: hidden;
         }
       `}</style>
     </section>
