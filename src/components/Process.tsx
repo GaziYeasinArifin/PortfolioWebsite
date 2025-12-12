@@ -21,7 +21,7 @@ const processSteps = [
   {
     number: 2,
     shortTitle: 'Hypothesis Formulation',
-    title: 'AI-Driven Problem Definition & Hypothesis',
+    title: 'Problem Definition & Hypothesis with AI',
     goal: 'Clearly define user-centric problems and create testable hypotheses.',
     aiAction: 'I use AI to synthesize research into precise, data-backed problem statements and to generate innovative hypotheses based on user needs.',
     outcome: 'This ensures a sharp focus on solving the most impactful user problems with creative and well-founded solution strategies.',
