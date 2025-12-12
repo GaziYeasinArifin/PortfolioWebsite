@@ -55,7 +55,7 @@ const processSteps = [
 const TypewriterTitle = () => {
   const [displayText, setDisplayText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
-  const fullText = "My AI-Powered Process";
+  const fullText = "my AI-powered process";
 
   useEffect(() => {
     setDisplayText('');
@@ -75,19 +75,18 @@ const TypewriterTitle = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Split text to apply italic to "AI-Powered"
+  // Render with "AI-powered" in italic
   const renderText = () => {
-    const myIndex = displayText.indexOf("My ");
-    const aiIndex = displayText.indexOf("AI-Powered");
-    const processIndex = displayText.indexOf(" Process");
+    const aiStart = fullText.indexOf("AI-powered");
+    const aiEnd = aiStart + "AI-powered".length;
     
-    if (aiIndex === -1) {
+    if (displayText.length <= aiStart) {
       return displayText;
     }
     
-    const beforeAI = displayText.slice(0, 3); // "My "
-    const aiPart = displayText.slice(3, processIndex > -1 ? processIndex : displayText.length);
-    const afterAI = processIndex > -1 ? displayText.slice(processIndex) : '';
+    const beforeAI = displayText.slice(0, aiStart);
+    const aiPart = displayText.slice(aiStart, Math.min(displayText.length, aiEnd));
+    const afterAI = displayText.length > aiEnd ? displayText.slice(aiEnd) : '';
     
     return (
       <>
@@ -164,20 +163,20 @@ const Process = () => {
       style={{ height: `${100 + (processSteps.length * 80)}vh` }}
     >
       <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
-        {/* Title - Left aligned with consistent padding */}
+        {/* Title - Match hero subtitle size */}
         <div className="container pt-16 md:pt-20">
-          <h2 className="font-display font-normal leading-[1.1] tracking-tight text-lg sm:text-xl md:text-2xl lg:text-3xl text-background/70">
+          <h2 className="font-display font-medium text-muted-foreground/70 text-xl sm:text-2xl md:text-3xl lg:text-[2rem] xl:text-[2.25rem]" style={{ color: 'hsl(var(--background) / 0.7)' }}>
             <TypewriterTitle />
           </h2>
         </div>
 
         {/* Timeline Steps - Horizontal scrolling with wipe effect */}
-        <div className="relative flex-1 flex items-center">
-          {/* Center divider line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-background/30 z-10" />
+        <div className="relative flex-1 flex items-center mt-8">
+          {/* Center divider line - 50% shorter */}
+          <div className="absolute left-1/2 top-1/4 bottom-1/4 w-px bg-background/30 z-10" />
           
           {/* Steps container with clip masks for wipe effect - constrained to 80% center */}
-          <div className="relative w-full h-[200px]" style={{ margin: '0 10%' }}>
+          <div className="relative w-[80%] mx-auto h-[120px]">
             {/* Dark layer (left side) - clips to show only left of center */}
             <div 
               className="absolute inset-0 flex items-center justify-center"
@@ -209,15 +208,16 @@ const Process = () => {
                       <div 
                         className={`px-5 py-3 rounded-[4px] whitespace-nowrap border transition-all duration-300 ${
                           isActive 
-                            ? 'bg-background text-foreground border-background' 
-                            : 'bg-transparent text-background/60 border-background/20'
+                            ? 'bg-background/10 border-background/40' 
+                            : 'bg-transparent border-background/20'
                         }`}
+                        style={{ color: 'hsl(var(--background) / 0.8)' }}
                       >
                         <span className="text-sm font-medium">
-                          Step {step.number}
+                          step {step.number}
                         </span>
-                        <p className="text-xs mt-1 opacity-80">
-                          {step.shortTitle}
+                        <p className="text-xs mt-1 opacity-70">
+                          {step.shortTitle.toLowerCase()}
                         </p>
                       </div>
                     </div>
@@ -263,10 +263,10 @@ const Process = () => {
                         }}
                       >
                         <span className="text-sm font-medium">
-                          Step {step.number}
+                          step {step.number}
                         </span>
                         <p className="text-xs mt-1 opacity-80">
-                          {step.shortTitle}
+                          {step.shortTitle.toLowerCase()}
                         </p>
                       </div>
                     </div>
@@ -277,51 +277,51 @@ const Process = () => {
           </div>
         </div>
 
-        {/* Step Content */}
-        <div className="container pb-8">
+        {/* Step Content - Increased spacing: 15px increments */}
+        <div className="container pb-16 pt-8">
           <div className="max-w-5xl mx-auto">
-            <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-6 md:p-8 border border-background/10">
-              <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+            <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-8 md:p-10 border border-background/10">
+              <div className="grid md:grid-cols-2 gap-8 md:gap-10">
                 {/* Left Column */}
-                <div className="space-y-4">
+                <div className="space-y-6">
                   <p 
                     className="text-sm font-medium"
                     style={{ color: pastelColors[activeStep] }}
                   >
-                    Step {currentStep.number}:
+                    step {currentStep.number}:
                   </p>
-                  <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-medium text-background leading-tight">
-                    {currentStep.title}
+                  <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-medium text-background leading-tight mt-2">
+                    {currentStep.title.toLowerCase()}
                   </h3>
                   <div 
-                    className="bg-background/10 rounded-[4px] p-4 border-l-2"
+                    className="bg-background/10 rounded-[4px] p-5 border-l-2 mt-4"
                     style={{ borderColor: pastelColors[activeStep] }}
                   >
-                    <p className="text-xs font-medium text-background/60 mb-1">Goal:</p>
+                    <p className="text-xs font-medium text-background/60 mb-2">goal:</p>
                     <p className="text-sm text-background/90">{currentStep.goal}</p>
                   </div>
                 </div>
 
                 {/* Right Column */}
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
+                <div className="space-y-6 mt-0">
+                  <div className="flex items-start gap-4">
                     <Sparkles 
                       className="w-4 h-4 flex-shrink-0 mt-1" 
                       style={{ color: pastelColors[activeStep] }}
                     />
                     <div>
-                      <p className="text-sm font-medium text-background mb-1">AI in Action:</p>
-                      <p className="text-sm text-background/70 leading-relaxed">
+                      <p className="text-sm font-medium text-background mb-2">ai in action:</p>
+                      <p className="text-sm text-background/70 leading-relaxed mt-1">
                         {currentStep.aiAction}
                       </p>
                     </div>
                   </div>
                   
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-start gap-4 mt-4">
                     <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0 mt-1" />
                     <div>
-                      <p className="text-sm font-medium text-background mb-1">Outcome:</p>
-                      <p className="text-sm text-background/70 leading-relaxed">
+                      <p className="text-sm font-medium text-background mb-2">outcome:</p>
+                      <p className="text-sm text-background/70 leading-relaxed mt-1">
                         {currentStep.outcome}
                       </p>
                     </div>
@@ -330,8 +330,8 @@ const Process = () => {
               </div>
             </div>
 
-            {/* Step indicators */}
-            <div className="flex justify-center gap-2 mt-4">
+            {/* Step indicators - more spacing */}
+            <div className="flex justify-center gap-3 mt-8">
               {processSteps.map((_, index) => (
                 <button
                   key={index}
