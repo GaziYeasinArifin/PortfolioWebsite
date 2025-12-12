@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import caseStudy1 from '@/assets/case-study-1.jpg';
 import caseStudy2 from '@/assets/case-study-2.jpg';
 import caseStudy3 from '@/assets/case-study-3.jpg';
@@ -11,6 +12,7 @@ interface CaseStudy {
   category: string;
   image: string;
   year: string;
+  slug?: string;
 }
 
 type TabType = 'ux-projects' | 'branding' | 'writing';
@@ -54,6 +56,7 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       category: 'Web Design',
       image: caseStudy1,
       year: '2023',
+      slug: 'e-commerce-platform',
     },
   ],
   'branding': [
@@ -159,45 +162,53 @@ const CaseStudies = () => {
         </div>
 
         <div className="grid gap-8 grid-cols-1 md:grid-cols-2">
-          {studies.map((study, index) => (
-            <article
-              key={`${activeTab}-${study.id}`}
-              className="group cursor-pointer animate-fade-up"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[4px] bg-secondary mb-6">
-                <img
-                  src={study.image}
-                  alt={study.title}
-                  className="h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:grayscale"
-                />
-                {/* Overlay with gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/0 to-foreground/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                {/* Floating action button - top right on hover */}
-                <div className="absolute top-4 right-4 opacity-0 scale-75 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-100">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-[4px] bg-background shadow-lg">
-                    <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:rotate-45" />
+          {studies.map((study, index) => {
+            const CardWrapper = study.slug ? Link : 'div';
+            const cardProps = study.slug ? { to: `/case-study/${study.slug}` } : {};
+            
+            return (
+              <CardWrapper
+                key={`${activeTab}-${study.id}`}
+                {...cardProps as any}
+                className="group cursor-pointer animate-fade-up block"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <article>
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-[4px] bg-secondary mb-6">
+                    <img
+                      src={study.image}
+                      alt={study.title}
+                      className="h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:grayscale"
+                    />
+                    {/* Overlay with gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/0 to-foreground/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    {/* Floating action button - top right on hover */}
+                    <div className="absolute top-4 right-4 opacity-0 scale-75 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-100">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-[4px] bg-background shadow-lg">
+                        <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:rotate-45" />
+                      </div>
+                    </div>
+                    {/* Bottom info bar */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full transition-transform duration-500 ease-out group-hover:translate-y-0">
+                      <span className="inline-block px-3 py-1 text-xs font-medium bg-background/90 backdrop-blur-sm rounded-[4px]">
+                        view project
+                      </span>
+                    </div>
                   </div>
-                </div>
-                {/* Bottom info bar */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full transition-transform duration-500 ease-out group-hover:translate-y-0">
-                  <span className="inline-block px-3 py-1 text-xs font-medium bg-background/90 backdrop-blur-sm rounded-[4px]">
-                    view project
-                  </span>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm text-muted-foreground">
-                  <span>{study.category}</span>
-                  <span>{study.year}</span>
-                </div>
-                <h3 className="font-display text-2xl font-medium">
-                  {study.title}
-                </h3>
-                <p className="text-muted-foreground">{study.description}</p>
-              </div>
-            </article>
-          ))}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-sm text-muted-foreground">
+                      <span>{study.category}</span>
+                      <span>{study.year}</span>
+                    </div>
+                    <h3 className="font-display text-2xl font-medium">
+                      {study.title}
+                    </h3>
+                    <p className="text-muted-foreground">{study.description}</p>
+                  </div>
+                </article>
+              </CardWrapper>
+            );
+          })}
         </div>
       </div>
     </section>
