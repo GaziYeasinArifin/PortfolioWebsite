@@ -28,7 +28,7 @@ const Contact = () => {
               href="#"
               className="rounded-lg border border-primary-foreground/20 px-7 py-3.5 text-sm font-medium transition-all hover:bg-primary-foreground/10"
             >
-              Book a Call
+              book a call
             </a>
           </div>
         </div>

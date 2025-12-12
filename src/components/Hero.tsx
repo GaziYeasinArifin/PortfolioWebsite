@@ -112,14 +112,14 @@ const Hero = () => {
               href="#case-studies"
               className="group inline-flex items-center gap-3 rounded-[4px] border border-foreground bg-foreground px-5 sm:px-6 py-3 sm:py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground hover:scale-[1.02] active:scale-[0.98]"
             >
-              View My Work
+              view my work
               <ArrowDown className="w-4 h-4 transition-transform duration-300 -rotate-90 group-hover:rotate-0" />
             </a>
             <a
               href="#process"
               className="relative text-sm font-medium text-muted-foreground transition-all duration-300 hover:text-foreground after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:w-0 after:bg-foreground after:transition-all after:duration-300 hover:after:w-full"
             >
-              Learn My Process
+              learn my process
             </a>
             
             {/* Scroll indicator - desktop only */}

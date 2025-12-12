@@ -44,7 +44,7 @@ const Articles = () => {
             href="#"
             className="link-underline inline-flex items-center gap-2 text-sm font-medium"
           >
-            Read all on Medium
+            read all on medium
             <ArrowUpRight className="h-4 w-4" />
           </a>
         </div>

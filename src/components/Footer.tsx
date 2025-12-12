@@ -2,17 +2,17 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { label: 'LinkedIn', href: '#' },
-    { label: 'Dribbble', href: '#' },
-    { label: 'Medium', href: '#' },
-    { label: 'Twitter', href: '#' },
+    { label: 'linkedin', href: '#' },
+    { label: 'dribbble', href: '#' },
+    { label: 'medium', href: '#' },
+    { label: 'twitter', href: '#' },
   ];
 
   const navLinks = [
-    { label: 'Work', href: '#case-studies' },
-    { label: 'Process', href: '#process' },
-    { label: 'Articles', href: '#articles' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'work', href: '#case-studies' },
+    { label: 'process', href: '#process' },
+    { label: 'articles', href: '#articles' },
+    { label: 'contact', href: '#contact' },
   ];
 
   return (
@@ -21,7 +21,7 @@ const Footer = () => {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
             <a href="#" className="font-display text-2xl font-semibold tracking-tight">
-              Portfolio
+              portfolio
             </a>
             <p className="mt-4 max-w-sm text-muted-foreground">
               Crafting meaningful digital experiences through thoughtful interaction design.
