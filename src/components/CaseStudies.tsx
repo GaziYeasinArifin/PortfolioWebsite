@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import caseStudy1 from '@/assets/case-study-1.jpg';
 import caseStudy2 from '@/assets/case-study-2.jpg';
 import caseStudy3 from '@/assets/case-study-3.jpg';
