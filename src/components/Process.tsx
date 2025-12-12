@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { Sparkles, CheckCircle } from 'lucide-react';
 
 const pastelColors = [
@@ -88,47 +88,47 @@ const TypewriterTitle = () => {
 // Step Content Component
 const StepContent = ({ step, color }: { step: typeof processSteps[0]; color: string }) => {
   return (
-    <div className="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 lg:gap-12">
       {/* Left Column */}
-      <div className="space-y-5">
+      <div className="space-y-4 md:space-y-5">
         <p 
-          className="text-sm font-medium"
+          className="text-xs md:text-sm font-medium"
           style={{ color }}
         >
           Step {step.number}:
         </p>
-        <h3 className="font-display text-lg md:text-xl lg:text-2xl font-medium text-background leading-tight">
+        <h3 className="font-display text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-background leading-tight">
           {step.title}
         </h3>
         <div 
-          className="bg-background/10 rounded-[4px] p-4 border-l-2"
+          className="bg-background/10 rounded-[4px] p-3 md:p-4 border-l-2"
           style={{ borderColor: color }}
         >
           <p className="text-xs font-medium text-background/60 mb-1">Goal:</p>
-          <p className="text-sm text-background/90">{step.goal}</p>
+          <p className="text-xs md:text-sm text-background/90 leading-relaxed">{step.goal}</p>
         </div>
       </div>
 
       {/* Right Column */}
-      <div className="space-y-5">
-        <div className="flex items-start gap-3">
+      <div className="space-y-4 md:space-y-5">
+        <div className="flex items-start gap-2 md:gap-3">
           <Sparkles 
-            className="w-4 h-4 flex-shrink-0 mt-0.5" 
+            className="w-3.5 h-3.5 md:w-4 md:h-4 flex-shrink-0 mt-0.5" 
             style={{ color }}
           />
           <div>
-            <p className="text-sm font-medium text-background mb-1">AI In Action:</p>
-            <p className="text-sm text-background/70 leading-relaxed">
+            <p className="text-xs md:text-sm font-medium text-background mb-1">AI In Action:</p>
+            <p className="text-xs md:text-sm text-background/70 leading-relaxed">
               {step.aiAction}
             </p>
           </div>
         </div>
         
-        <div className="flex items-start gap-3">
-          <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
+        <div className="flex items-start gap-2 md:gap-3">
+          <CheckCircle className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-400 flex-shrink-0 mt-0.5" />
           <div>
-            <p className="text-sm font-medium text-background mb-1">Outcome:</p>
-            <p className="text-sm text-background/70 leading-relaxed">
+            <p className="text-xs md:text-sm font-medium text-background mb-1">Outcome:</p>
+            <p className="text-xs md:text-sm text-background/70 leading-relaxed">
               {step.outcome}
             </p>
           </div>
@@ -141,7 +141,18 @@ const StepContent = ({ step, color }: { step: typeof processSteps[0]; color: str
 const Process = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [viewportWidth, setViewportWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Handle resize for responsive calculations
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -178,17 +189,28 @@ const Process = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Responsive step dimensions
+  const stepWidth = useMemo(() => {
+    if (viewportWidth < 640) return 160;
+    if (viewportWidth < 768) return 180;
+    return 220;
+  }, [viewportWidth]);
+
+  const stepGap = useMemo(() => {
+    if (viewportWidth < 640) return 12;
+    return 16;
+  }, [viewportWidth]);
+
+  const verticalStagger = useMemo(() => {
+    if (viewportWidth < 640) return 12;
+    return 20;
+  }, [viewportWidth]);
+
   // Calculate horizontal scroll position
-  const stepWidth = 220;
-  const stepGap = 16;
   const totalWidth = (stepWidth + stepGap) * processSteps.length;
-  const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
   const startOffset = viewportWidth * 0.6;
   const endOffset = -totalWidth + viewportWidth * 0.4;
   const horizontalOffset = startOffset + (endOffset - startOffset) * scrollProgress;
-
-  const currentStep = processSteps[activeStep];
-  const currentColor = pastelColors[activeStep];
 
   return (
     <section 
@@ -197,41 +219,38 @@ const Process = () => {
       className="relative bg-foreground text-background"
       style={{ height: `${100 + (processSteps.length * 120)}vh` }}
     >
-      <div className="sticky top-16 md:top-20 h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] flex flex-col justify-between py-12 md:py-16 overflow-hidden">
+      <div className="sticky top-14 sm:top-16 md:top-20 h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] flex flex-col justify-between py-6 sm:py-10 md:py-14 lg:py-16 overflow-hidden">
         {/* Title */}
-        <div className="container">
+        <div className="container px-4 sm:px-6">
           <h2 
-            className="font-display font-medium text-xl sm:text-2xl md:text-3xl lg:text-[2rem] xl:text-[2.25rem]"
+            className="font-display font-medium text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[2.25rem]"
             style={{ color: 'hsl(var(--background) / 0.7)' }}
           >
             <TypewriterTitle />
           </h2>
         </div>
 
-        {/* 30px spacer after title */}
-        <div style={{ height: '30px' }} />
-
         {/* Steps Timeline Area */}
-        <div className="relative h-[180px] md:h-[200px] flex items-start">
+        <div className="relative h-[120px] sm:h-[150px] md:h-[180px] lg:h-[200px] flex items-start mt-4 sm:mt-6 md:mt-8">
           {/* Left Edge Overlay */}
           <div 
-            className="absolute left-0 top-0 bottom-0 w-32 md:w-48 z-20 pointer-events-none"
+            className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 z-20 pointer-events-none"
             style={{
-              background: 'linear-gradient(to right, hsl(var(--foreground)) 0%, hsl(var(--foreground)) 20%, transparent 100%)',
+              background: 'linear-gradient(to right, hsl(var(--foreground)) 0%, hsl(var(--foreground)) 30%, transparent 100%)',
             }}
           />
           
           {/* Right Edge Overlay */}
           <div 
-            className="absolute right-0 top-0 bottom-0 w-32 md:w-48 z-20 pointer-events-none"
+            className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 z-20 pointer-events-none"
             style={{
-              background: 'linear-gradient(to left, hsl(var(--foreground)) 0%, hsl(var(--foreground)) 20%, transparent 100%)',
+              background: 'linear-gradient(to left, hsl(var(--foreground)) 0%, hsl(var(--foreground)) 30%, transparent 100%)',
             }}
           />
 
           {/* Steps container */}
           <div 
-            className="absolute flex items-start"
+            className="absolute flex items-start will-change-transform"
             style={{
               transform: `translateX(${horizontalOffset}px)`,
               gap: `${stepGap}px`,
@@ -239,7 +258,7 @@ const Process = () => {
           >
             {processSteps.map((step, index) => {
               const isActive = index === activeStep;
-              const verticalOffset = index * 20;
+              const verticalOffset = index * verticalStagger;
               
               return (
                 <button
@@ -252,10 +271,10 @@ const Process = () => {
                       window.scrollTo({ top: targetScroll, behavior: 'smooth' });
                     }
                   }}
-                  className="flex-shrink-0 rounded-[4px] text-left border-2"
+                  className="flex-shrink-0 rounded-[4px] text-left border-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-background/50"
                   style={{
                     width: `${stepWidth}px`,
-                    padding: '16px 20px',
+                    padding: viewportWidth < 640 ? '12px 14px' : '16px 20px',
                     marginTop: `${verticalOffset}px`,
                     backgroundColor: isActive ? pastelColors[index] : 'transparent',
                     borderColor: isActive ? pastelColors[index] : 'hsl(var(--background) / 0.3)',
@@ -263,7 +282,7 @@ const Process = () => {
                   }}
                 >
                   <span 
-                    className="block text-xs font-medium mb-1"
+                    className="block text-[10px] sm:text-xs font-medium mb-0.5 sm:mb-1"
                     style={{ 
                       color: isActive ? 'hsl(var(--foreground))' : 'hsl(var(--background) / 0.5)',
                       transition: 'color 0.4s ease',
@@ -272,7 +291,7 @@ const Process = () => {
                     Step {step.number}
                   </span>
                   <span 
-                    className="block text-sm font-medium whitespace-nowrap"
+                    className="block text-xs sm:text-sm font-medium whitespace-nowrap"
                     style={{ 
                       color: isActive ? 'hsl(var(--foreground))' : 'hsl(var(--background) / 0.8)',
                       transition: 'color 0.4s ease',
@@ -287,25 +306,17 @@ const Process = () => {
         </div>
 
         {/* Step Content */}
-        <div className="container">
+        <div className="container px-4 sm:px-6 flex-1 flex items-center">
           <div className="max-w-5xl mx-auto w-full">
-            <div 
-              className="bg-background/5 backdrop-blur-sm rounded-[4px] p-6 md:p-8 lg:p-10 border border-background/10"
-              style={{
-                transition: 'height 0.3s ease',
-              }}
-            >
+            <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-4 sm:p-6 md:p-8 lg:p-10 border border-background/10">
               <StepContent step={processSteps[activeStep]} color={pastelColors[activeStep]} />
             </div>
           </div>
         </div>
 
-        {/* 20px spacer before pagination */}
-        <div style={{ height: '20px' }} />
-
         {/* Step indicators */}
-        <div className="container">
-          <div className="flex justify-center gap-2">
+        <div className="container px-4 sm:px-6 pt-4 sm:pt-6">
+          <div className="flex justify-center gap-1.5 sm:gap-2">
             {processSteps.map((_, index) => (
               <button
                 key={index}
@@ -317,9 +328,9 @@ const Process = () => {
                     window.scrollTo({ top: targetScroll, behavior: 'smooth' });
                   }
                 }}
-                className="h-1.5 rounded-full transition-all duration-300"
+                className="h-1 sm:h-1.5 rounded-full transition-all duration-300 focus:outline-none"
                 style={{
-                  width: index === activeStep ? '24px' : '6px',
+                  width: index === activeStep ? (viewportWidth < 640 ? '18px' : '24px') : '6px',
                   backgroundColor: index === activeStep 
                     ? 'hsl(var(--background) / 0.5)' 
                     : 'hsl(var(--background) / 0.2)',
