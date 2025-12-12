@@ -2,9 +2,13 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import logo from '@/assets/logo.png';
 
+const fullName = 'gazi yeasin arifin';
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [displayedName, setDisplayedName] = useState('');
+  const [showLogo, setShowLogo] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +27,33 @@ const Header = () => {
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Typewriter effect for logo and name
+  useEffect(() => {
+    // Show logo first
+    const logoTimeout = setTimeout(() => {
+      setShowLogo(true);
+    }, 200);
+
+    // Then start typing the name
+    let currentIndex = 0;
+    const startTyping = setTimeout(() => {
+      const interval = setInterval(() => {
+        if (currentIndex <= fullName.length) {
+          setDisplayedName(fullName.slice(0, currentIndex));
+          currentIndex++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 60);
+      return () => clearInterval(interval);
+    }, 500);
+
+    return () => {
+      clearTimeout(logoTimeout);
+      clearTimeout(startTyping);
+    };
   }, []);
 
   const navLinks = [
@@ -44,15 +75,18 @@ const Header = () => {
         }`}
       >
         <div className="container flex items-center justify-between">
-          {/* Left: Logo + Name */}
+          {/* Left: Logo + Name with typewriter */}
           <a href="#" className="flex items-center gap-3 group">
             <img 
               src={logo} 
               alt="Gazi Yeasin Arifin Logo" 
-              className="h-[30px] w-auto rounded-[4px] transition-all duration-300 group-hover:scale-105 group-hover:opacity-80" 
+              className={`h-[30px] w-auto rounded-[4px] transition-all duration-500 group-hover:scale-105 group-hover:opacity-80 ${
+                showLogo ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+              }`}
             />
-            <span className="font-display text-lg font-semibold tracking-tight transition-opacity duration-300 group-hover:opacity-70">
-              gazi yeasin arifin
+            <span className="font-display text-lg font-semibold tracking-tight transition-opacity duration-300 group-hover:opacity-70 inline-flex items-center">
+              {displayedName}
+              <span className={`inline-block w-[2px] h-[1.1em] bg-foreground ml-0.5 ${displayedName.length < fullName.length ? 'animate-pulse' : 'opacity-0'}`} />
             </span>
           </a>
 
