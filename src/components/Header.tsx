@@ -26,10 +26,10 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { label: 'Works', href: '#case-studies' },
-    { label: 'Process', href: '#process' },
-    { label: 'Articles', href: '#articles' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'works', href: '#case-studies' },
+    { label: 'process', href: '#process' },
+    { label: 'articles', href: '#articles' },
+    { label: 'contact', href: '#contact' },
   ];
 
   const handleNavClick = () => {
@@ -52,7 +52,7 @@ const Header = () => {
               className="h-[38px] w-auto rounded-lg transition-all duration-300 group-hover:scale-105 group-hover:opacity-80" 
             />
             <span className="font-display text-lg font-semibold tracking-tight transition-opacity duration-300 group-hover:opacity-70">
-              Gazi Arifin
+              gazi arifin
             </span>
           </a>
 
@@ -80,13 +80,13 @@ const Header = () => {
               rel="noopener noreferrer"
               className="relative text-sm font-medium tracking-wide text-muted-foreground transition-all duration-300 hover:text-foreground after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-foreground after:transition-all after:duration-300 hover:after:w-full"
             >
-              Resume
+              resume
             </a>
             <a
               href="#contact"
               className="rounded-lg border border-foreground bg-foreground px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground hover:scale-[1.02] active:scale-[0.98]"
             >
-              Say Hi 👋
+              say hi 👋
             </a>
           </div>
 
@@ -139,14 +139,14 @@ const Header = () => {
               onClick={handleNavClick}
               className="py-3 text-lg font-medium text-muted-foreground transition-all duration-300 hover:text-foreground hover:translate-x-2"
             >
-              Resume
+              resume
             </a>
             <a
               href="#contact"
               onClick={handleNavClick}
               className="rounded-lg border border-foreground bg-foreground px-6 py-4 text-center text-base font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground active:scale-[0.98]"
             >
-              Say Hi 👋
+              say hi 👋
             </a>
           </div>
         </nav>
