@@ -55,7 +55,7 @@ const processSteps = [
 const TypewriterTitle = () => {
   const [displayText, setDisplayText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
-  const fullText = "my AI-powered process";
+  const fullText = "My AI-Powered Process";
 
   useEffect(() => {
     setDisplayText('');
