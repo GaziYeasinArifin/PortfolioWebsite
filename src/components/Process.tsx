@@ -197,9 +197,9 @@ const Process = () => {
       className="relative bg-foreground text-background"
       style={{ height: `${100 + (processSteps.length * 120)}vh` }}
     >
-      <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
-        {/* Title - generous top spacing */}
-        <div className="container pt-16 md:pt-24">
+      <div className="sticky top-0 h-screen flex flex-col justify-between py-12 md:py-16 overflow-hidden">
+        {/* Title */}
+        <div className="container">
           <h2 
             className="font-display font-medium text-xl sm:text-2xl md:text-3xl lg:text-[2rem] xl:text-[2.25rem]"
             style={{ color: 'hsl(var(--background) / 0.7)' }}
@@ -208,8 +208,8 @@ const Process = () => {
           </h2>
         </div>
 
-        {/* Steps Timeline Area - more space above and below */}
-        <div className="relative h-[180px] md:h-[200px] mt-12 md:mt-16 flex items-start">
+        {/* Steps Timeline Area */}
+        <div className="relative h-[180px] md:h-[200px] flex items-start">
           {/* Left Edge Overlay */}
           <div 
             className="absolute left-0 top-0 bottom-0 w-32 md:w-48 z-20 pointer-events-none"
@@ -283,11 +283,8 @@ const Process = () => {
           </div>
         </div>
 
-        {/* Gap between steps and content */}
-        <div className="h-16 md:h-24" />
-
-        {/* Step Content - height animates on change */}
-        <div className="container flex-1 flex flex-col">
+        {/* Step Content */}
+        <div className="container">
           <div className="max-w-5xl mx-auto w-full">
             <div 
               className="bg-background/5 backdrop-blur-sm rounded-[4px] p-6 md:p-8 lg:p-10 border border-background/10"
@@ -300,11 +297,8 @@ const Process = () => {
           </div>
         </div>
 
-        {/* Spacer before pagination */}
-        <div className="h-10 md:h-14" />
-
-        {/* Step indicators - grey and lower */}
-        <div className="container pb-16 md:pb-24">
+        {/* Step indicators */}
+        <div className="container">
           <div className="flex justify-center gap-2">
             {processSteps.map((_, index) => (
               <button
