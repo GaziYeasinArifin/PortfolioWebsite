@@ -110,7 +110,7 @@ const Hero = () => {
 
           {/* Description */}
           <p className="animate-fade-up max-w-2xl text-base sm:text-lg md:text-lg lg:text-xl leading-relaxed text-muted-foreground opacity-0 delay-300">
-            With a background in Software Engineering (B.S.) and Interaction Design (M.A.). Led 5 design teams, built 27+ products, and focus on UX research with AI agents and vibe prototyping.
+            I create AI-driven UX and Vibe prototypes, backed by engineering and design experience.
           </p>
 
           {/* Stats - Modern inline layout */}
