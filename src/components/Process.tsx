@@ -197,7 +197,7 @@ const Process = () => {
       className="relative bg-foreground text-background"
       style={{ height: `${100 + (processSteps.length * 120)}vh` }}
     >
-      <div className="sticky top-0 h-screen flex flex-col justify-between py-12 md:py-16 overflow-hidden">
+      <div className="sticky top-16 md:top-20 h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] flex flex-col justify-between py-12 md:py-16 overflow-hidden">
         {/* Title */}
         <div className="container">
           <h2 
