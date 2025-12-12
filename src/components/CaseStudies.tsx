@@ -173,10 +173,10 @@ const CaseStudies = () => {
                 />
                 {/* Overlay with gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/0 to-foreground/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                {/* Floating action button */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-background shadow-lg opacity-0 scale-75 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-100">
-                    <ArrowUpRight className="h-6 w-6 transition-transform duration-300 group-hover:rotate-45" />
+                {/* Floating action button - top right on hover */}
+                <div className="absolute top-4 right-4 opacity-0 scale-75 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-100">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-[4px] bg-background shadow-lg">
+                    <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:rotate-45" />
                   </div>
                 </div>
                 {/* Bottom info bar */}
