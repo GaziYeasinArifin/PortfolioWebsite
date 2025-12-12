@@ -35,7 +35,7 @@ const Hero = () => {
             through research-driven design and thoughtful interactions.
           </p>
 
-          {/* CTAs */}
+          {/* CTAs + Scroll indicator */}
           <div className="animate-fade-up flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 opacity-0 delay-400">
             <a
               href="#case-studies"
@@ -57,21 +57,19 @@ const Hero = () => {
             >
               Learn My Process
             </a>
+            
+            {/* Scroll indicator - desktop only, aligned with CTAs */}
+            <a 
+              href="#case-studies"
+              className="hidden lg:flex items-center gap-3 ml-auto text-muted-foreground transition-colors hover:text-foreground group"
+            >
+              <span className="text-[10px] font-medium tracking-[0.2em] uppercase">Scroll</span>
+              <div className="relative w-6 h-10 rounded-full border-2 border-current flex justify-center">
+                <div className="absolute top-2 w-1 h-2 rounded-full bg-current animate-bounce" style={{ animationDuration: '1.5s' }} />
+              </div>
+            </a>
           </div>
         </div>
-      </div>
-
-      {/* Scroll indicator - right bottom */}
-      <div className="absolute bottom-8 right-8 lg:right-12">
-        <a 
-          href="#case-studies"
-          className="group flex flex-col items-center gap-3 text-muted-foreground transition-colors hover:text-foreground"
-        >
-          <span className="text-[10px] font-medium tracking-[0.2em] uppercase">Scroll</span>
-          <div className="relative w-6 h-10 rounded-full border-2 border-current flex justify-center">
-            <div className="absolute top-2 w-1 h-2 rounded-full bg-current animate-bounce" style={{ animationDuration: '1.5s' }} />
-          </div>
-        </a>
       </div>
     </section>
   );
