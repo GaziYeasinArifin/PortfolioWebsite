@@ -5,6 +5,13 @@ import heroBg from '@/assets/hero-bg.png';
 const designerTypes = ['Interaction', 'UX', 'Product'];
 const subtitleText = 'Shaping Next-Gen iOS, SaaS, & Intelligent Apps.';
 
+const stats = [
+  { value: '11+', label: 'years of experience' },
+  { value: '29+', label: 'projects delivered' },
+  { value: '4', label: 'apps on the top charts' },
+  { value: '3', label: 'awards' },
+];
+
 const Hero = () => {
   const [currentTypeIndex, setCurrentTypeIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
@@ -105,6 +112,23 @@ const Hero = () => {
           <p className="animate-fade-up max-w-2xl text-base sm:text-lg md:text-lg lg:text-xl leading-relaxed text-muted-foreground opacity-0 delay-300">
             With a background in Software Engineering (B.S.) and Interaction Design (M.A.). Led 5 design teams, built 27+ products, and focus on UX research with AI agents and vibe prototyping.
           </p>
+
+          {/* Stats - Modern inline layout */}
+          <div className="animate-fade-up flex flex-wrap items-center gap-4 sm:gap-6 md:gap-8 opacity-0 delay-350">
+            {stats.map((stat, index) => (
+              <div key={stat.label} className="flex items-baseline gap-1.5 sm:gap-2">
+                <span className="font-display text-xl sm:text-2xl md:text-3xl font-medium text-foreground">
+                  {stat.value}
+                </span>
+                <span className="text-xs sm:text-sm text-muted-foreground">
+                  {stat.label}
+                </span>
+                {index < stats.length - 1 && (
+                  <span className="hidden sm:block ml-4 sm:ml-6 md:ml-8 w-px h-4 bg-border" />
+                )}
+              </div>
+            ))}
+          </div>
 
           {/* CTAs + Scroll indicator */}
           <div className="animate-fade-up flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 opacity-0 delay-400 mt-2 sm:mt-3 md:mt-4">

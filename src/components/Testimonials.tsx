@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 const testimonials = [
   {
     id: 1,
@@ -20,36 +22,62 @@ const testimonials = [
     author: 'Elena Rodriguez',
     role: 'CTO, DataViz Inc',
   },
+  {
+    id: 4,
+    quote:
+      "A rare talent who combines strategic thinking with flawless execution. Every interaction was thoughtful and purposeful.",
+    author: 'David Park',
+    role: 'Founder, StartupXYZ',
+  },
 ];
 
 const Testimonials = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   return (
-    <section className="py-24 md:py-32">
-      <div className="container">
-        <div className="mb-16 space-y-4">
+    <section className="py-24 md:py-32 overflow-hidden">
+      <div className="container mb-12 md:mb-16">
+        <div className="space-y-4">
           <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-            Testimonials
+            testimonials
           </p>
-          <h2 className="max-w-2xl font-display text-3xl font-medium tracking-tight md:text-4xl">
+          <h2 className="max-w-2xl font-display text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight">
             Satisfaction isn't one-sided. It's about building solutions that{' '}
             <span className="text-accent">truly work</span> for all.
           </h2>
         </div>
+      </div>
 
-        <div className="grid gap-8 md:grid-cols-3">
+      {/* Horizontal scrolling testimonials */}
+      <div className="relative">
+        {/* Left fade overlay */}
+        <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+        
+        {/* Right fade overlay */}
+        <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+
+        <div 
+          ref={scrollRef}
+          className="flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide px-6 sm:px-12 md:px-24 pb-4"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-            className="card-hover rounded-lg border border-border bg-card p-8"
+              className="flex-shrink-0 w-[300px] sm:w-[350px] md:w-[400px] rounded-[4px] border border-border bg-card p-6 sm:p-8 transition-all duration-300 hover:border-accent/50 hover:shadow-lg"
             >
-              <blockquote className="mb-8 font-display text-lg italic leading-relaxed">
+              <blockquote className="mb-6 sm:mb-8 font-display text-sm sm:text-base md:text-lg italic leading-relaxed text-foreground/90">
                 "{testimonial.quote}"
               </blockquote>
-              <div className="flex items-center gap-4">
-                <div className="h-12 w-12 rounded-lg bg-secondary" />
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-[4px] bg-secondary flex items-center justify-center">
+                  <span className="text-sm sm:text-base font-medium text-muted-foreground">
+                    {testimonial.author.split(' ').map(n => n[0]).join('')}
+                  </span>
+                </div>
                 <div>
-                  <p className="font-medium">{testimonial.author}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                  <p className="text-sm sm:text-base font-medium">{testimonial.author}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">{testimonial.role}</p>
                 </div>
               </div>
             </div>
