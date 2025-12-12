@@ -13,7 +13,7 @@ const processSteps = [
   {
     number: 1,
     shortTitle: 'Research & Analysis',
-    title: 'AI-Powered Research & Analysis',
+    title: 'AI-Powered User Research & Analysis',
     goal: 'Gain deep insights into user needs and market dynamics.',
     aiAction: 'I use AI to rapidly analyze user data, uncover critical patterns, summarize key findings, and perform comprehensive competitive analysis.',
     outcome: 'This provides quick, actionable insights, ensuring your project starts with a strong, data-driven foundation.',
@@ -21,7 +21,7 @@ const processSteps = [
   {
     number: 2,
     shortTitle: 'Hypothesis Formulation',
-    title: 'Problem Definition & Hypothesis with AI',
+    title: 'Problem Definition, Hypothesis with AI',
     goal: 'Clearly define user-centric problems and create testable hypotheses.',
     aiAction: 'I use AI to synthesize research into precise, data-backed problem statements and to generate innovative hypotheses based on user needs.',
     outcome: 'This ensures a sharp focus on solving the most impactful user problems with creative and well-founded solution strategies.',
@@ -47,7 +47,7 @@ const processSteps = [
     shortTitle: 'Evaluation & Improvement',
     title: 'AI-Driven Evaluation & Improvement',
     goal: 'Proactively monitor product performance and continuously improve the user experience based on real-world data.',
-    aiAction: 'Post-launch, I use AI to analyze real-time performance metrics and user feedback from all channels. This helps me identify optimization opportunities and informs a data-driven improvement cycle.',
+    aiAction: 'Post-launch, I use AI to analyze real-time performance metrics and user feedback from all channels. I optimize opportunities and informs a data-driven improvement cycle.',
     outcome: 'My products evolve intelligently through proactive optimization, ensuring they consistently meet and exceed user needs over time.',
   },
 ];
