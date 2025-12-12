@@ -50,8 +50,7 @@ const Hero = () => {
         <div className="max-w-5xl">
           {/* Label with typewriter effect */}
           <p className="animate-fade-up text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground opacity-0 delay-100 mb-8">
-            <span className="inline-block min-w-[90px]">{displayText}</span>
-            <span className="animate-pulse">|</span> Designer
+            {displayText} Designer
           </p>
 
           {/* Main headline - 2 lines on desktop */}
