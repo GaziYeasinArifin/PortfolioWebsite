@@ -284,30 +284,18 @@ const Process = () => {
         </div>
 
         {/* Gap between steps and content */}
-        <div className="h-8 md:h-12" />
+        <div className="h-16 md:h-24" />
 
-        {/* Step Content with dissolve transition */}
+        {/* Step Content - height animates on change */}
         <div className="container flex-1 flex flex-col">
           <div className="max-w-5xl mx-auto w-full">
-            <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-6 md:p-8 lg:p-10 border border-background/10 relative overflow-hidden">
-              {/* Stacked content layers with smooth transform */}
-              {processSteps.map((step, index) => (
-                <div
-                  key={step.number}
-                  style={{
-                    opacity: index === activeStep ? 1 : 0,
-                    transform: index === activeStep ? 'translateY(0)' : 'translateY(8px)',
-                    transition: 'opacity 0.4s ease, transform 0.4s ease',
-                    position: index === activeStep ? 'relative' : 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    pointerEvents: index === activeStep ? 'auto' : 'none',
-                  }}
-                >
-                  <StepContent step={step} color={pastelColors[index]} />
-                </div>
-              ))}
+            <div 
+              className="bg-background/5 backdrop-blur-sm rounded-[4px] p-6 md:p-8 lg:p-10 border border-background/10"
+              style={{
+                transition: 'height 0.3s ease',
+              }}
+            >
+              <StepContent step={processSteps[activeStep]} color={pastelColors[activeStep]} />
             </div>
           </div>
         </div>
