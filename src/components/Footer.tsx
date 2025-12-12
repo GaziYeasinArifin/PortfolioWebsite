@@ -6,12 +6,12 @@ const Footer = () => {
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      const pstTime = now.toLocaleTimeString('en-US', {
+      const pstTime = now.toLocaleTimeString('en-GB', {
         timeZone: 'America/Los_Angeles',
-        hour: 'numeric',
+        hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
-        hour12: true,
+        hour12: false,
       });
       setCurrentTime(pstTime);
     };
