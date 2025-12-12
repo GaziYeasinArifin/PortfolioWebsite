@@ -48,11 +48,11 @@ const Header = () => {
           <a href="#" className="flex items-center gap-3 group">
             <img 
               src={logo} 
-              alt="Gazi Arifin Logo" 
-              className="h-[38px] w-auto rounded-lg transition-all duration-300 group-hover:scale-105 group-hover:opacity-80" 
+              alt="Gazi Yeasin Arifin Logo" 
+              className="h-[30px] w-auto rounded-[4px] transition-all duration-300 group-hover:scale-105 group-hover:opacity-80" 
             />
             <span className="font-display text-lg font-semibold tracking-tight transition-opacity duration-300 group-hover:opacity-70">
-              gazi arifin
+              gazi yeasin arifin
             </span>
           </a>
 
@@ -84,7 +84,7 @@ const Header = () => {
             </a>
             <a
               href="#contact"
-              className="rounded-lg border border-foreground bg-foreground px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground hover:scale-[1.02] active:scale-[0.98]"
+              className="rounded-[4px] border border-foreground bg-foreground px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground hover:scale-[1.02] active:scale-[0.98]"
             >
               say hi 👋
             </a>
@@ -144,7 +144,7 @@ const Header = () => {
             <a
               href="#contact"
               onClick={handleNavClick}
-              className="rounded-lg border border-foreground bg-foreground px-6 py-4 text-center text-base font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground active:scale-[0.98]"
+              className="rounded-[4px] border border-foreground bg-foreground px-6 py-4 text-center text-base font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground active:scale-[0.98]"
             >
               say hi 👋
             </a>

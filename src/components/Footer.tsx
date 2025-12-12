@@ -32,15 +32,15 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="border-t border-border py-16">
+    <footer className="border-t border-border py-16 md:py-24">
       <div className="container">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
-            <h2 className="font-display text-3xl font-semibold tracking-tight">
+            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.1]">
               gazi arifin
             </h2>
-            <p className="mt-2 text-sm text-muted-foreground">PST</p>
-            <p className="text-sm text-muted-foreground">{currentTime}</p>
+            <p className="mt-4 text-xl sm:text-2xl md:text-3xl text-muted-foreground font-display">PST</p>
+            <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground font-display">{currentTime}</p>
           </div>
 
           <div>
