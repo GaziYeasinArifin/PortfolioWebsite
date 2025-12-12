@@ -75,26 +75,9 @@ const TypewriterTitle = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Render with "AI-powered" in italic
+  // Render plain text
   const renderText = () => {
-    const aiStart = fullText.indexOf("AI-powered");
-    const aiEnd = aiStart + "AI-powered".length;
-    
-    if (displayText.length <= aiStart) {
-      return displayText;
-    }
-    
-    const beforeAI = displayText.slice(0, aiStart);
-    const aiPart = displayText.slice(aiStart, Math.min(displayText.length, aiEnd));
-    const afterAI = displayText.length > aiEnd ? displayText.slice(aiEnd) : '';
-    
-    return (
-      <>
-        {beforeAI}
-        <span className="italic">{aiPart}</span>
-        {afterAI}
-      </>
-    );
+    return displayText;
   };
 
   return (
