@@ -22,9 +22,9 @@ const Footer = () => {
   }, []);
 
   const socialLinks = [
-    { label: 'linkedin', href: '#' },
+    { label: 'linkedin', href: 'https://www.linkedin.com/in/yeasin-arifin/' },
     { label: 'behance', href: 'https://www.behance.net/arifinyeasin1/projects' },
-    { label: 'medium', href: '#' },
+    { label: 'medium', href: 'https://medium.com/@yeasinarifin' },
   ];
 
   const navLinks = [
