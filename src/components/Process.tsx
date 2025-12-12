@@ -31,7 +31,7 @@ const processSteps = [
     shortTitle: 'Creative Design',
     title: 'AI-Assisted Creative Design',
     goal: 'Generate a wide range of innovative design solutions and rapidly visualize concepts.',
-    aiAction: 'I use AI for accelerated ideation, exploring creative concepts, and quickly generating initial wireframes and visual designs. It also helps me maintain a consistent, scalable design system in Figma.',
+    aiAction: 'I use AI for accelerated ideation, exploring creative concepts, and quickly generating wireframes and visuals. It also helps me maintain a consistent, scalable design system.',
     outcome: 'This boosts creative output, significantly speeds up design cycles, and ensures visual consistency across the entire user interface.',
   },
   {
