@@ -16,7 +16,7 @@ const processSteps = [
     title: 'User Research & Data Analysis with AI Agents',
     goal: 'Gain deep insights into user needs and market dynamics.',
     aiAction: 'I use AI to rapidly analyze user data, uncover critical patterns, summarize key findings, and perform comprehensive competitive analysis.',
-    outcome: 'This provides quick, actionable insights, ensuring your project starts with a strong, data-driven foundation.',
+    outcome: 'This provides quick, actionable insights, ensuring your project starts with a strong, data-driven foundation with lean UX.',
   },
   {
     number: 2,
