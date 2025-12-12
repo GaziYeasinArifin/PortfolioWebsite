@@ -85,7 +85,7 @@ const TypewriterTitle = () => {
   );
 };
 
-// Step Content Component with dissolve transition
+// Step Content Component
 const StepContent = ({ step, color }: { step: typeof processSteps[0]; color: string }) => {
   return (
     <div className="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
@@ -140,8 +140,22 @@ const StepContent = ({ step, color }: { step: typeof processSteps[0]; color: str
 
 const Process = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [displayedStep, setDisplayedStep] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Handle step change with smooth dissolve
+  useEffect(() => {
+    if (activeStep !== displayedStep && !isTransitioning) {
+      setIsTransitioning(true);
+      const timer = setTimeout(() => {
+        setDisplayedStep(activeStep);
+        setIsTransitioning(false);
+      }, 200);
+      return () => clearTimeout(timer);
+    }
+  }, [activeStep, displayedStep, isTransitioning]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -187,6 +201,9 @@ const Process = () => {
   const endOffset = -totalWidth + viewportWidth * 0.4;
   const horizontalOffset = startOffset + (endOffset - startOffset) * scrollProgress;
 
+  const currentStep = processSteps[displayedStep];
+  const currentColor = pastelColors[displayedStep];
+
   return (
     <section 
       ref={sectionRef}
@@ -195,8 +212,8 @@ const Process = () => {
       style={{ height: `${100 + (processSteps.length * 100)}vh` }}
     >
       <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
-        {/* Title */}
-        <div className="container pt-12 md:pt-16 mb-8 md:mb-12">
+        {/* Title - generous top spacing */}
+        <div className="container pt-16 md:pt-24">
           <h2 
             className="font-display font-medium text-xl sm:text-2xl md:text-3xl lg:text-[2rem] xl:text-[2.25rem]"
             style={{ color: 'hsl(var(--background) / 0.7)' }}
@@ -205,9 +222,9 @@ const Process = () => {
           </h2>
         </div>
 
-        {/* Steps Timeline Area */}
-        <div className="relative h-[140px] md:h-[160px] flex items-start">
-          {/* Left Edge Overlay - blends steps into background */}
+        {/* Steps Timeline Area - more space above and below */}
+        <div className="relative h-[180px] md:h-[200px] mt-12 md:mt-16 flex items-start">
+          {/* Left Edge Overlay */}
           <div 
             className="absolute left-0 top-0 bottom-0 w-32 md:w-48 z-20 pointer-events-none"
             style={{
@@ -215,7 +232,7 @@ const Process = () => {
             }}
           />
           
-          {/* Right Edge Overlay - blends steps into background */}
+          {/* Right Edge Overlay */}
           <div 
             className="absolute right-0 top-0 bottom-0 w-32 md:w-48 z-20 pointer-events-none"
             style={{
@@ -233,7 +250,7 @@ const Process = () => {
           >
             {processSteps.map((step, index) => {
               const isActive = index === activeStep;
-              const verticalOffset = index * 20; // Each step 20px lower
+              const verticalOffset = index * 20;
               
               return (
                 <button
@@ -253,14 +270,14 @@ const Process = () => {
                     marginTop: `${verticalOffset}px`,
                     backgroundColor: isActive ? pastelColors[index] : 'transparent',
                     borderColor: isActive ? pastelColors[index] : 'hsl(var(--background) / 0.3)',
-                    transition: 'background-color 0.3s ease, border-color 0.3s ease',
+                    transition: 'background-color 0.4s ease, border-color 0.4s ease',
                   }}
                 >
                   <span 
                     className="block text-xs font-medium mb-1"
                     style={{ 
                       color: isActive ? 'hsl(var(--foreground))' : 'hsl(var(--background) / 0.5)',
-                      transition: 'color 0.3s ease',
+                      transition: 'color 0.4s ease',
                     }}
                   >
                     Step {step.number}
@@ -269,7 +286,7 @@ const Process = () => {
                     className="block text-sm font-medium whitespace-nowrap"
                     style={{ 
                       color: isActive ? 'hsl(var(--foreground))' : 'hsl(var(--background) / 0.8)',
-                      transition: 'color 0.3s ease',
+                      transition: 'color 0.4s ease',
                     }}
                   >
                     {step.shortTitle}
@@ -280,53 +297,51 @@ const Process = () => {
           </div>
         </div>
 
-        {/* Step Content with dissolve transition */}
-        <div className="container flex-1 flex flex-col justify-center pb-8 md:pb-12">
-          <div className="max-w-5xl mx-auto w-full">
-            <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-6 md:p-8 lg:p-10 border border-background/10 relative overflow-hidden">
-              {/* Stacked content layers for dissolve effect */}
-              {processSteps.map((step, index) => (
-                <div
-                  key={step.number}
-                  className="transition-opacity duration-500 ease-in-out"
-                  style={{
-                    opacity: index === activeStep ? 1 : 0,
-                    position: index === activeStep ? 'relative' : 'absolute',
-                    top: index === activeStep ? 'auto' : 0,
-                    left: index === activeStep ? 'auto' : 0,
-                    right: index === activeStep ? 'auto' : 0,
-                    pointerEvents: index === activeStep ? 'auto' : 'none',
-                  }}
-                >
-                  <StepContent step={step} color={pastelColors[index]} />
-                </div>
-              ))}
-            </div>
+        {/* Gap between steps and content */}
+        <div className="h-8 md:h-12" />
 
-            {/* Step indicators */}
-            <div className="flex justify-center gap-2 mt-6">
-              {processSteps.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    if (sectionRef.current) {
-                      const sectionTop = sectionRef.current.offsetTop;
-                      const scrollRange = sectionRef.current.offsetHeight - window.innerHeight;
-                      const targetScroll = sectionTop + (scrollRange * (index / processSteps.length));
-                      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-                    }
-                  }}
-                  className="h-1.5 rounded-full transition-all duration-300"
-                  style={{
-                    width: index === activeStep ? '20px' : '6px',
-                    backgroundColor: index === activeStep 
-                      ? pastelColors[activeStep] 
-                      : 'hsl(var(--background) / 0.3)',
-                  }}
-                  aria-label={`Go to Step ${index + 1}`}
-                />
-              ))}
+        {/* Step Content with dissolve transition */}
+        <div className="container flex-1 flex flex-col">
+          <div className="max-w-5xl mx-auto w-full">
+            <div 
+              className="bg-background/5 backdrop-blur-sm rounded-[4px] p-6 md:p-8 lg:p-10 border border-background/10"
+              style={{
+                opacity: isTransitioning ? 0.6 : 1,
+                transition: 'opacity 0.2s ease-in-out',
+              }}
+            >
+              <StepContent step={currentStep} color={currentColor} />
             </div>
+          </div>
+        </div>
+
+        {/* Spacer before pagination */}
+        <div className="h-6 md:h-8" />
+
+        {/* Step indicators - grey and lower */}
+        <div className="container pb-10 md:pb-16">
+          <div className="flex justify-center gap-2">
+            {processSteps.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  if (sectionRef.current) {
+                    const sectionTop = sectionRef.current.offsetTop;
+                    const scrollRange = sectionRef.current.offsetHeight - window.innerHeight;
+                    const targetScroll = sectionTop + (scrollRange * (index / processSteps.length));
+                    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+                  }
+                }}
+                className="h-1.5 rounded-full transition-all duration-300"
+                style={{
+                  width: index === activeStep ? '24px' : '6px',
+                  backgroundColor: index === activeStep 
+                    ? 'hsl(var(--background) / 0.5)' 
+                    : 'hsl(var(--background) / 0.2)',
+                }}
+                aria-label={`Go to Step ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>
