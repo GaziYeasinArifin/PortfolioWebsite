@@ -31,7 +31,7 @@ const Header = () => {
           <img 
             src={logo} 
             alt="Gazi Arifin Logo" 
-            className="w-10 h-10 transition-transform duration-300 group-hover:scale-105" 
+            className="w-7 h-7 transition-transform duration-300 group-hover:scale-105"
           />
           <span className="font-display text-lg font-semibold tracking-tight">
             Gazi Arifin
