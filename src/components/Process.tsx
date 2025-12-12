@@ -208,6 +208,9 @@ const Process = () => {
           </h2>
         </div>
 
+        {/* 30px spacer after title */}
+        <div style={{ height: '30px' }} />
+
         {/* Steps Timeline Area */}
         <div className="relative h-[180px] md:h-[200px] flex items-start">
           {/* Left Edge Overlay */}
@@ -296,6 +299,9 @@ const Process = () => {
             </div>
           </div>
         </div>
+
+        {/* 20px spacer before pagination */}
+        <div style={{ height: '20px' }} />
 
         {/* Step indicators */}
         <div className="container">
