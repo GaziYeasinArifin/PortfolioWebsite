@@ -19,21 +19,35 @@ const Hero = () => {
   const [subtitleDisplayed, setSubtitleDisplayed] = useState('');
   const [subtitleStarted, setSubtitleStarted] = useState(false);
   const [mouseX, setMouseX] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
 
-  // Mouse tracking for parallax
+  // Check if desktop
   useEffect(() => {
+    const checkDesktop = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+    checkDesktop();
+    window.addEventListener('resize', checkDesktop);
+    return () => window.removeEventListener('resize', checkDesktop);
+  }, []);
+
+  // Mouse tracking for parallax (desktop only)
+  useEffect(() => {
+    if (!isDesktop) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       if (!heroRef.current) return;
       const rect = heroRef.current.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const offsetX = (e.clientX - centerX) / rect.width;
-      setMouseX(offsetX * 20); // Max 20px movement
+      setMouseX(offsetX * 25); // Max 25px movement
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [isDesktop]);
 
   // Designer type typewriter effect
   useEffect(() => {
@@ -97,15 +111,20 @@ const Hero = () => {
 
   return (
     <section ref={heroRef} className="relative min-h-screen overflow-hidden">
-      {/* Background image with floating and parallax */}
+      {/* Background image with fade-in and x-axis parallax (desktop only) */}
       <div className="absolute inset-0 z-0">
         <img 
           src={heroBg} 
           alt="" 
-          className="w-full object-contain object-top transition-transform duration-300 ease-out animate-float"
+          className={`w-full object-contain object-top transition-all duration-1000 ease-out ${
+            imageLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
           style={{
-            transform: `translateX(${mouseX}px)`,
+            transform: isDesktop ? `translateX(${mouseX}px)` : 'none',
+            transitionProperty: 'opacity, transform',
+            transitionDuration: imageLoaded ? '300ms, 150ms' : '1000ms, 150ms',
           }}
+          onLoad={() => setImageLoaded(true)}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background/60" />
       </div>
