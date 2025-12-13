@@ -29,11 +29,11 @@ const CaseStudyDetail = () => {
 
           {/* Hero section - The Hook */}
           <div className="mb-16 md:mb-24">
-            <h1 className="font-display font-medium leading-[1.05] tracking-tight text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] mb-6">
+            <h1 className="font-display font-medium leading-[1.05] tracking-tight text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] mb-6 uppercase">
               phantom footprint: closing the climate feedback loop
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-8">
-              challenge: making climate consequences tangible for college students. solution: an iot-enhanced, physical board game.
+              challenge: making climate consequences tangible for college students. solution: an IoT-enhanced, physical board game.
             </p>
             
             {/* Role & Tools */}
@@ -71,14 +71,14 @@ const CaseStudyDetail = () => {
           {/* Chapter I: The Conflict */}
           <section className="mb-24 md:mb-32">
             <div className="mb-12">
-              <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground mb-4">chapter i</p>
+              <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter i</p>
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">the conflict</h2>
             </div>
 
             {/* The Status Quo */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
               <div className="space-y-4">
-                <h3 className="font-display text-xl md:text-2xl font-medium">abstract problem. overwhelmed user.</h3>
+                <h3 className="font-display text-xl md:text-2xl font-medium uppercase">abstract problem. overwhelmed user.</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   climate education is inaccessible, abstract, and doesn't connect daily actions to global outcomes. users feel disconnected from the consequences of their choices.
                 </p>
@@ -94,7 +94,7 @@ const CaseStudyDetail = () => {
                 <p className="text-muted-foreground text-sm text-center px-4">image 2: persona/user insight graphic</p>
               </div>
               <div className="space-y-4 order-1 lg:order-2">
-                <h3 className="font-display text-xl md:text-2xl font-medium">the college student archetype: wanting impact, lacking tools.</h3>
+                <h3 className="font-display text-xl md:text-2xl font-medium uppercase">the college student archetype: wanting impact, lacking tools.</h3>
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   they are digitally engaged but feel passive about climate change.
                 </p>
@@ -118,7 +118,7 @@ const CaseStudyDetail = () => {
             {/* The Gap */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div className="space-y-4">
-                <h3 className="font-display text-xl md:text-2xl font-medium">the opportunity: interactivity {">"} simulation.</h3>
+                <h3 className="font-display text-xl md:text-2xl font-medium uppercase">the opportunity: interactivity {">"} simulation.</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   existing tools (calculators, digital apps) lack the hands-on, immediate, emotional connection required for behavioral change.
                 </p>
@@ -146,14 +146,14 @@ const CaseStudyDetail = () => {
           {/* Chapter II: The Climax */}
           <section className="mb-24 md:mb-32">
             <div className="mb-12">
-              <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground mb-4">chapter ii</p>
+              <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter ii</p>
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">the climax</h2>
             </div>
 
             {/* Ideation & Sketch */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
               <div className="space-y-4">
-                <h3 className="font-display text-xl md:text-2xl font-medium">from paper prototype to tangible mechanic.</h3>
+                <h3 className="font-display text-xl md:text-2xl font-medium uppercase">from paper prototype to tangible mechanic.</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   rapid prototyping phase using double diamond methodology. the game mechanic is built around choice cards representing daily actions with environmental consequences.
                 </p>
@@ -177,7 +177,7 @@ const CaseStudyDetail = () => {
                 </div>
               </div>
               <div className="space-y-4 order-1 lg:order-2">
-                <h3 className="font-display text-xl md:text-2xl font-medium">mapping action to immediate feedback (arduino + rfid).</h3>
+                <h3 className="font-display text-xl md:text-2xl font-medium uppercase">mapping action to immediate feedback (arduino + rfid).</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   the core innovation: using rfid to scan a choice card and trigger an led status light (red/yellow/green) via arduino. this closes the feedback loop instantly, connecting user actions to environmental consequences.
                 </p>
@@ -187,7 +187,7 @@ const CaseStudyDetail = () => {
             {/* Building the System */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
               <div className="space-y-4">
-                <h3 className="font-display text-xl md:text-2xl font-medium">from wiring to final assembly.</h3>
+                <h3 className="font-display text-xl md:text-2xl font-medium uppercase">from wiring to final assembly.</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   showcasing the hands-on nature of full-stack design thinking: digital ux combined with physical product development. soldering, wiring, and final assembly of the board and sensor mechanism.
                 </p>
@@ -217,7 +217,7 @@ const CaseStudyDetail = () => {
                 </div>
               </div>
               <div className="space-y-4 order-1 lg:order-2">
-                <h3 className="font-display text-xl md:text-2xl font-medium">testing ambiguity. improving nuance.</h3>
+                <h3 className="font-display text-xl md:text-2xl font-medium uppercase">testing ambiguity. improving nuance.</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   key finding from usability testing: players craved nuance over simple positive/negative feedback. iteration added a medium impact category (yellow led) to better reflect real-world complexity.
                 </p>
@@ -228,13 +228,13 @@ const CaseStudyDetail = () => {
           {/* Chapter III: The Resolution */}
           <section className="mb-24 md:mb-32">
             <div className="mb-12">
-              <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground mb-4">chapter iii</p>
+              <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter iii</p>
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">the resolution</h2>
             </div>
 
             {/* The Impact */}
             <div className="mb-16">
-              <h3 className="font-display text-xl md:text-2xl font-medium mb-6">bridging the gap. 90% engagement.</h3>
+              <h3 className="font-display text-xl md:text-2xl font-medium uppercase mb-6">bridging the gap. 90% engagement.</h3>
               <div className="bg-secondary rounded-[4px] p-8 md:p-12">
                 <blockquote className="font-display text-xl md:text-2xl lg:text-3xl font-medium text-center leading-relaxed">
                   "the led system helped players connect their choices to tangible results."
@@ -248,7 +248,7 @@ const CaseStudyDetail = () => {
 
             {/* What I Learned */}
             <div className="mb-16 text-center py-12">
-              <h3 className="font-display text-xl md:text-2xl font-medium mb-8">simplicity, iteration, and the power of physical ux.</h3>
+              <h3 className="font-display text-xl md:text-2xl font-medium uppercase mb-8">simplicity, iteration, and the power of physical ux.</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
                 <div>
                   <p className="font-display text-lg font-medium mb-2">simplicity matters</p>
@@ -268,7 +268,7 @@ const CaseStudyDetail = () => {
             {/* Looking Forward */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div className="space-y-4">
-                <h3 className="font-display text-xl md:text-2xl font-medium">scope: from campus game to global platform.</h3>
+                <h3 className="font-display text-xl md:text-2xl font-medium uppercase">scope: from campus game to global platform.</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   future vision includes expanding to younger audiences, gamifying the concept further into a digital companion app, and creating scalable educational tools for climate awareness.
                 </p>
