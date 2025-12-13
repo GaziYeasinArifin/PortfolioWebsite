@@ -34,12 +34,12 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      <div className="relative w-full mt-[50px]">
+      <div className="relative w-screen left-1/2 -translate-x-1/2 mt-[50px]">
         <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-foreground to-transparent z-10 pointer-events-none" />
         <img 
           src={contactImage} 
           alt="Contact visual" 
-          className="w-full object-cover object-bottom"
+          className="w-full h-auto block object-cover object-bottom"
         />
       </div>
     </section>
