@@ -69,17 +69,17 @@ const CaseStudyDetail = () => {
             />
           </div>
 
-          {/* Chapter I: The Conflict */}
+          {/* Chapter I: The Problem */}
           <section className="mb-24 md:mb-32">
             <div className="mb-12">
               <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter i</p>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">the conflict</h2>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">the problem</h2>
             </div>
 
             {/* The Status Quo */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
               <div className="space-y-4">
-                <h3 className="font-display text-xl md:text-2xl font-medium uppercase">abstract problem. overwhelmed user.</h3>
+                <h3 className="font-display text-xl md:text-2xl font-medium uppercase">overwhelmed user.</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   climate education is inaccessible, abstract, and doesn't connect daily actions to global outcomes. users feel disconnected from the consequences of their choices.
                 </p>
