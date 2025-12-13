@@ -1,8 +1,9 @@
 import { ArrowUpRight } from 'lucide-react';
+import contactImage from '@/assets/contact-image.png';
 
 const Contact = () => {
   return (
-    <section id="contact" className="bg-foreground py-24 text-primary-foreground md:py-32">
+    <section id="contact" className="bg-foreground py-24 text-primary-foreground md:py-32 overflow-hidden">
       <div className="container">
         <div className="mx-auto max-w-3xl text-center">
           <p className="mb-4 text-sm font-medium uppercase tracking-widest text-primary-foreground/60">
@@ -31,8 +32,30 @@ const Contact = () => {
               book a call
             </a>
           </div>
+          <div className="mt-[50px] flex justify-center">
+            <img 
+              src={contactImage} 
+              alt="Contact visual" 
+              className="w-auto max-w-full animate-[zoomIn_0.8s_ease-out_forwards] origin-bottom"
+              style={{
+                animation: 'zoomIn 0.8s ease-out forwards',
+              }}
+            />
+          </div>
         </div>
       </div>
+      <style>{`
+        @keyframes zoomIn {
+          from {
+            transform: scale(0.8);
+            opacity: 0;
+          }
+          to {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+      `}</style>
     </section>
   );
 };
