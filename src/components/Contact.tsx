@@ -32,11 +32,12 @@ const Contact = () => {
               book a call
             </a>
           </div>
-          <div className="mt-[50px] flex justify-center">
+          <div className="mt-[50px] relative w-full">
+            <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-foreground to-transparent z-10 pointer-events-none" />
             <img 
               src={contactImage} 
               alt="Contact visual" 
-              className="w-auto max-w-full animate-[zoomIn_0.8s_ease-out_forwards] origin-bottom"
+              className="w-full object-cover object-bottom animate-[zoomIn_0.8s_ease-out_forwards] origin-bottom"
               style={{
                 animation: 'zoomIn 0.8s ease-out forwards',
               }}
