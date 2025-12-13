@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, Cpu, Figma, Lightbulb, Users } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import phantomFootprintHero from '@/assets/phantom-footprint-hero.png';
 
 const CaseStudyDetail = () => {
   const { slug } = useParams();
@@ -58,9 +59,13 @@ const CaseStudyDetail = () => {
             <p className="text-sm text-muted-foreground">4 months (thesis project)</p>
           </div>
 
-          {/* Hero image placeholder */}
-          <div className="relative aspect-[16/9] overflow-hidden rounded-[4px] bg-secondary mb-24 md:mb-32 flex items-center justify-center">
-            <p className="text-muted-foreground text-sm">hero image placeholder</p>
+          {/* Hero image */}
+          <div className="relative aspect-[16/9] overflow-hidden rounded-[4px] bg-secondary mb-24 md:mb-32">
+            <img 
+              src={phantomFootprintHero} 
+              alt="Phantom Footprint - IoT-enhanced board game for climate education" 
+              className="w-full h-full object-cover"
+            />
           </div>
 
           {/* Chapter I: The Conflict */}
