@@ -33,7 +33,7 @@ const CaseStudyDetail = () => {
               phantom footprint: closing the climate feedback loop
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-8">
-              challenge: making climate consequences tangible for college students. solution: an IoT-enhanced, physical board game.
+              Challenge: Making climate consequences tangible for college students. Solution: An IoT-enhanced, physical board game.
             </p>
             
             {/* Role & Tools */}
