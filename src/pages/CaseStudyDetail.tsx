@@ -7,6 +7,7 @@ import phantomFootprintHero from '@/assets/phantom-footprint-hero.png';
 import phantomResearchCardSort from '@/assets/phantom-research-card-sort.jpg';
 import phantomPersonaInsight from '@/assets/phantom-persona-insight.png';
 import phantomPaperPrototype from '@/assets/phantom-paper-prototype.jpg';
+import phantomScreenVsTactile from '@/assets/phantom-screen-vs-tactile.jpg';
 
 const CaseStudyDetail = () => {
   const { slug } = useParams();
@@ -135,22 +136,12 @@ const CaseStudyDetail = () => {
                   Existing tools (calculators, digital apps) lack the hands-on, immediate, emotional connection required for behavioral change.
                 </p>
               </div>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary flex items-center justify-center">
-                <div className="flex items-center gap-8">
-                  <div className="text-center">
-                    <div className="w-16 h-16 rounded-[4px] bg-muted-foreground/20 flex items-center justify-center mb-2">
-                      <span className="text-2xl">📱</span>
-                    </div>
-                    <p className="text-xs text-muted-foreground">Boring screen</p>
-                  </div>
-                  <span className="text-muted-foreground">vs</span>
-                  <div className="text-center">
-                    <div className="w-16 h-16 rounded-[4px] bg-foreground/10 flex items-center justify-center mb-2">
-                      <span className="text-2xl">🎲</span>
-                    </div>
-                    <p className="text-xs text-muted-foreground">Tactile game</p>
-                  </div>
-                </div>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary">
+                <img 
+                  src={phantomScreenVsTactile} 
+                  alt="Boring screen vs tactile game comparison" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </section>
