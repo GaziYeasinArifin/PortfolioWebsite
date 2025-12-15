@@ -13,6 +13,9 @@ import phantomArduino2 from '@/assets/phantom-arduino-2.jpg';
 import phantomAssembly1 from '@/assets/phantom-assembly-1.jpg';
 import phantomAssembly2 from '@/assets/phantom-assembly-2.png';
 import phantomAbTest from '@/assets/phantom-ab-test.png';
+import phantomScope1 from '@/assets/phantom-scope-1.jpg';
+import phantomScope2 from '@/assets/phantom-scope-2.png';
+import phantomScope3 from '@/assets/phantom-scope-3.jpg';
 
 const CaseStudyDetail = () => {
   const { slug } = useParams();
@@ -296,15 +299,45 @@ const CaseStudyDetail = () => {
             </div>
 
             {/* Looking Forward */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="space-y-4">
+            <div className="space-y-8">
+              <div className="space-y-4 max-w-3xl">
                 <h3 className="font-display text-xl md:text-2xl font-medium uppercase">Scope: From Campus Game to Global Platform.</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Future vision includes expanding to younger audiences, gamifying the concept further into a digital companion app, and creating scalable educational tools for climate awareness.
                 </p>
               </div>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary flex items-center justify-center">
-                <p className="text-muted-foreground text-sm text-center px-4">image 7: future vision / digital companion app mock-up</p>
+              
+              {/* Creative 3-image layout */}
+              <div className="grid grid-cols-12 gap-4">
+                {/* Left: Players engaging with game */}
+                <div className="col-span-12 md:col-span-5 relative aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-[4px]">
+                  <img 
+                    src={phantomScope1} 
+                    alt="Players engaging with Phantom Footprint game" 
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+                
+                {/* Right: Two stacked images */}
+                <div className="col-span-12 md:col-span-7 flex flex-col gap-4">
+                  {/* Top: Wide product showcase */}
+                  <div className="relative aspect-[16/9] overflow-hidden rounded-[4px]">
+                    <img 
+                      src={phantomScope2} 
+                      alt="Phantom Footprint product iterations and components" 
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                  
+                  {/* Bottom: Full game board */}
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-[4px]">
+                    <img 
+                      src={phantomScope3} 
+                      alt="Final Phantom Footprint game board design" 
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </section>
