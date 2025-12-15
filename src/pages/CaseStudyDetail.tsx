@@ -490,8 +490,8 @@ const CaseStudyDetail = () => {
 
             {/* Thank You Image - Final */}
             <AnimatedSection>
-              <div className="mt-16 md:mt-24">
-                <div className="relative aspect-[16/9] overflow-hidden rounded-[4px] group">
+              <div className="mt-16">
+                <div className="relative aspect-[16/5] overflow-hidden rounded-[4px] group">
                   <img 
                     src={phantomThankYou} 
                     alt="Thank you - hands holding Earth" 
