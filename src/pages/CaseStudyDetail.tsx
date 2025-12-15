@@ -307,36 +307,33 @@ const CaseStudyDetail = () => {
                 </p>
               </div>
               
-              {/* Creative staggered 3-image layout */}
-              <div className="relative">
-                {/* Main hero: Wide product showcase with matching bg */}
-                <div className="relative aspect-[16/9] overflow-hidden rounded-[4px] bg-[#c8c4c0]">
-                  <img 
-                    src={phantomScope2} 
-                    alt="Phantom Footprint product iterations and components" 
-                    className="w-full h-full object-contain hover:scale-[1.02] transition-transform duration-700"
-                  />
-                </div>
-                
-                {/* Overlapping bottom row */}
-                <div className="relative -mt-16 md:-mt-24 mx-4 md:mx-8 flex gap-4 md:gap-6">
-                  {/* Players photo - offset up */}
-                  <div className="relative w-1/2 aspect-[3/4] overflow-hidden rounded-[4px] shadow-2xl transform hover:-translate-y-2 transition-transform duration-500">
+              {/* 2 portrait top, 1 landscape bottom */}
+              <div className="flex flex-col gap-4">
+                {/* Top row: 2 portrait images */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-[4px]">
                     <img 
                       src={phantomScope1} 
                       alt="Players engaging with Phantom Footprint game" 
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  
-                  {/* Game board - offset down */}
-                  <div className="relative w-1/2 aspect-[3/4] overflow-hidden rounded-[4px] shadow-2xl mt-8 md:mt-12 bg-[#c8c4c0] transform hover:-translate-y-2 transition-transform duration-500">
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-[4px] bg-[#c8c4c0]">
                     <img 
                       src={phantomScope3} 
                       alt="Final Phantom Footprint game board design" 
                       className="w-full h-full object-cover"
                     />
                   </div>
+                </div>
+                
+                {/* Bottom: Landscape image */}
+                <div className="relative aspect-[16/9] overflow-hidden rounded-[4px] bg-[#c8c4c0]">
+                  <img 
+                    src={phantomScope2} 
+                    alt="Phantom Footprint product iterations and components" 
+                    className="w-full h-full object-contain"
+                  />
                 </div>
               </div>
             </div>
