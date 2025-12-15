@@ -350,7 +350,7 @@ const CaseStudyDetail = () => {
             <AnimatedSection>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mt-16">
                 <div className="space-y-4">
-                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase">Code: Where Hardware Meets Intent.</h3>
+                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase">Code</h3>
                   <p className="text-muted-foreground leading-relaxed">
                     Every great interaction begins with elegant code. The RFID-to-LED mapping was built using Arduino's MFRC522 library—reading card data, writing feedback states, and triggering visual responses in under 50 lines of C++.
                   </p>
@@ -373,14 +373,32 @@ const CaseStudyDetail = () => {
   Serial.<span className="text-[#dcdcaa]">begin</span>(<span className="text-[#b5cea8]">9600</span>);
   SPI.<span className="text-[#dcdcaa]">begin</span>();
   rfid.<span className="text-[#dcdcaa]">PCD_Init</span>();
+  Serial.<span className="text-[#dcdcaa]">println</span>(<span className="text-[#ce9178]">"Scan your RFID card to write data..."</span>);
 {"}"}
 
 <span className="text-[#569cd6]">void</span> <span className="text-[#dcdcaa]">loop</span>() {"{"}
-  <span className="text-[#c586c0]">if</span> (!rfid.<span className="text-[#dcdcaa]">PICC_IsNewCardPresent</span>())
+  <span className="text-[#c586c0]">if</span> (!rfid.<span className="text-[#dcdcaa]">PICC_IsNewCardPresent</span>() || !rfid.<span className="text-[#dcdcaa]">PICC_ReadCardSerial</span>())
     <span className="text-[#c586c0]">return</span>;
     
   String cardType = <span className="text-[#ce9178]">"Positive"</span>;
   <span className="text-[#dcdcaa]">writeDataToCard</span>(cardType);
+  
+  rfid.<span className="text-[#dcdcaa]">PICC_HaltA</span>();
+  rfid.<span className="text-[#dcdcaa]">PCD_StopCrypto1</span>();
+  <span className="text-[#dcdcaa]">delay</span>(<span className="text-[#b5cea8]">2000</span>);
+{"}"}
+
+<span className="text-[#569cd6]">void</span> <span className="text-[#dcdcaa]">writeDataToCard</span>(String data) {"{"}
+  <span className="text-[#569cd6]">byte</span> block = <span className="text-[#b5cea8]">1</span>;
+  <span className="text-[#569cd6]">byte</span> buffer[<span className="text-[#b5cea8]">16</span>] = {"{"}{"}"};
+  data.<span className="text-[#dcdcaa]">getBytes</span>(buffer, <span className="text-[#b5cea8]">16</span>);
+  
+  MFRC522::StatusCode status = rfid.<span className="text-[#dcdcaa]">MIFARE_Write</span>(block, buffer, <span className="text-[#b5cea8]">16</span>);
+  <span className="text-[#c586c0]">if</span> (status == MFRC522::STATUS_OK) {"{"}
+    Serial.<span className="text-[#dcdcaa]">println</span>(<span className="text-[#ce9178]">"Write successful! Data written: "</span> + data);
+  {"}"} <span className="text-[#c586c0]">else</span> {"{"}
+    Serial.<span className="text-[#dcdcaa]">println</span>(<span className="text-[#ce9178]">"Write failed!"</span>);
+  {"}"}
 {"}"}</pre>
                   </div>
                 </div>
