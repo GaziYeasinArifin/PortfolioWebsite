@@ -140,7 +140,7 @@ const CaseStudyDetail = () => {
                 <img 
                   src={phantomScreenVsTactile} 
                   alt="Boring screen vs tactile game comparison" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
             </div>
