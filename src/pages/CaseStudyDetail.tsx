@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, Cpu, Figma, Lightbulb, Users } from 'lucide-react';
 import Header from '@/components/Header';
@@ -8,13 +8,24 @@ import phantomResearchCardSort from '@/assets/phantom-research-card-sort.jpg';
 import phantomPersonaInsight from '@/assets/phantom-persona-insight.png';
 import phantomPaperPrototype from '@/assets/phantom-paper-prototype.jpg';
 import phantomScreenVsTactile from '@/assets/phantom-screen-vs-tactile.jpg';
+import phantomArduino1 from '@/assets/phantom-arduino-1.jpg';
+import phantomArduino2 from '@/assets/phantom-arduino-2.jpg';
 
 const CaseStudyDetail = () => {
   const { slug } = useParams();
+  const [arduinoImageIndex, setArduinoImageIndex] = useState(0);
+  const arduinoImages = [phantomArduino1, phantomArduino2];
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setArduinoImageIndex((prev) => (prev + 1) % arduinoImages.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [arduinoImages.length]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -172,16 +183,17 @@ const CaseStudyDetail = () => {
 
             {/* The Tech Solution */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary flex items-center justify-center order-2 lg:order-1">
-                <div className="text-center">
-                  <p className="text-muted-foreground text-sm px-4 mb-4">image 4: arduino/led breadboard circuit</p>
-                  <div className="flex justify-center gap-4">
-                    <div className="w-4 h-4 rounded-full bg-red-500" />
-                    <div className="w-4 h-4 rounded-full bg-yellow-500" />
-                    <div className="w-4 h-4 rounded-full bg-green-500" />
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-2">Red/Yellow/Green LED system</p>
-                </div>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary order-2 lg:order-1">
+                {arduinoImages.map((img, index) => (
+                  <img 
+                    key={index}
+                    src={img} 
+                    alt={`Arduino LED breadboard circuit ${index + 1}`} 
+                    className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
+                      index === arduinoImageIndex ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
+                ))}
               </div>
               <div className="space-y-4 order-1 lg:order-2">
                 <h3 className="font-display text-xl md:text-2xl font-medium uppercase">Mapping Action to Immediate Feedback (Arduino + RFID).</h3>
