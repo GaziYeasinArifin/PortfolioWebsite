@@ -345,6 +345,47 @@ const CaseStudyDetail = () => {
                 </div>
               </div>
             </AnimatedSection>
+
+            {/* Code Section */}
+            <AnimatedSection>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mt-16">
+                <div className="space-y-4">
+                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase">Code: Where Hardware Meets Intent.</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Every great interaction begins with elegant code. The RFID-to-LED mapping was built using Arduino's MFRC522 library—reading card data, writing feedback states, and triggering visual responses in under 50 lines of C++.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Simple, modular, and intentional. The code embodies the same design philosophy as the game itself: clarity over complexity.
+                  </p>
+                </div>
+                <div className="relative overflow-hidden rounded-[4px] bg-[#1e1e1e] p-4 md:p-6 font-mono text-xs md:text-sm leading-relaxed">
+                  <div className="overflow-x-auto">
+                    <pre className="text-[#d4d4d4]">
+<span className="text-[#c586c0]">#include</span> <span className="text-[#ce9178]">&lt;SPI.h&gt;</span>
+<span className="text-[#c586c0]">#include</span> <span className="text-[#ce9178]">&lt;MFRC522.h&gt;</span>
+
+<span className="text-[#c586c0]">#define</span> <span className="text-[#9cdcfe]">RST_PIN</span> <span className="text-[#b5cea8]">9</span>
+<span className="text-[#c586c0]">#define</span> <span className="text-[#9cdcfe]">SS_PIN</span> <span className="text-[#b5cea8]">10</span>
+
+<span className="text-[#4ec9b0]">MFRC522</span> <span className="text-[#9cdcfe]">rfid</span>(<span className="text-[#9cdcfe]">SS_PIN</span>, <span className="text-[#9cdcfe]">RST_PIN</span>);
+
+<span className="text-[#569cd6]">void</span> <span className="text-[#dcdcaa]">setup</span>() {"{"}
+  Serial.<span className="text-[#dcdcaa]">begin</span>(<span className="text-[#b5cea8]">9600</span>);
+  SPI.<span className="text-[#dcdcaa]">begin</span>();
+  rfid.<span className="text-[#dcdcaa]">PCD_Init</span>();
+{"}"}
+
+<span className="text-[#569cd6]">void</span> <span className="text-[#dcdcaa]">loop</span>() {"{"}
+  <span className="text-[#c586c0]">if</span> (!rfid.<span className="text-[#dcdcaa]">PICC_IsNewCardPresent</span>())
+    <span className="text-[#c586c0]">return</span>;
+    
+  String cardType = <span className="text-[#ce9178]">"Positive"</span>;
+  <span className="text-[#dcdcaa]">writeDataToCard</span>(cardType);
+{"}"}</pre>
+                  </div>
+                </div>
+              </div>
+            </AnimatedSection>
           </section>
 
           {/* Chapter III: The Resolution */}
