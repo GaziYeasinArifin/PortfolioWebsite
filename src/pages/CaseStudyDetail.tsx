@@ -10,11 +10,15 @@ import phantomPaperPrototype from '@/assets/phantom-paper-prototype.jpg';
 import phantomScreenVsTactile from '@/assets/phantom-screen-vs-tactile.jpg';
 import phantomArduino1 from '@/assets/phantom-arduino-1.jpg';
 import phantomArduino2 from '@/assets/phantom-arduino-2.jpg';
+import phantomAssembly1 from '@/assets/phantom-assembly-1.jpg';
+import phantomAssembly2 from '@/assets/phantom-assembly-2.jpg';
 
 const CaseStudyDetail = () => {
   const { slug } = useParams();
   const [arduinoImageIndex, setArduinoImageIndex] = useState(0);
+  const [assemblyImageIndex, setAssemblyImageIndex] = useState(0);
   const arduinoImages = [phantomArduino1, phantomArduino2];
+  const assemblyImages = [phantomAssembly1, phantomAssembly2];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -26,6 +30,13 @@ const CaseStudyDetail = () => {
     }, 2000);
     return () => clearInterval(interval);
   }, [arduinoImages.length]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAssemblyImageIndex((prev) => (prev + 1) % assemblyImages.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [assemblyImages.length]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -211,8 +222,17 @@ const CaseStudyDetail = () => {
                   Showcasing the hands-on nature of full-stack design thinking: digital UX combined with physical product development. Soldering, wiring, and final assembly of the board and sensor mechanism.
                 </p>
               </div>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary flex items-center justify-center">
-                <p className="text-muted-foreground text-sm text-center px-4">video/gif 1: soldering, wiring & assembly demo</p>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary">
+                {assemblyImages.map((img, index) => (
+                  <img 
+                    key={index}
+                    src={img} 
+                    alt={`Soldering, wiring & assembly demo ${index + 1}`} 
+                    className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
+                      index === assemblyImageIndex ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
+                ))}
               </div>
             </div>
 
