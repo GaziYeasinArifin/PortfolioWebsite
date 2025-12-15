@@ -174,7 +174,7 @@ const CaseStudyDetail = () => {
                 <img 
                   src={phantomPaperPrototype} 
                   alt="Initial paper prototype & game layout" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
             </div>
