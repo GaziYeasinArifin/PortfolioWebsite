@@ -16,6 +16,7 @@ import phantomAbTest from '@/assets/phantom-ab-test.png';
 import phantomScope1 from '@/assets/phantom-scope-1.jpg';
 import phantomScope2 from '@/assets/phantom-scope-2.png';
 import phantomScope3 from '@/assets/phantom-scope-3.jpg';
+import phantomIterationGraphic from '@/assets/phantom-iteration-graphic.svg';
 
 const CaseStudyDetail = () => {
   const { slug } = useParams();
@@ -281,7 +282,14 @@ const CaseStudyDetail = () => {
 
             {/* What I Learned */}
             <div className="mb-16 text-center py-12">
-              <h3 className="font-display text-xl md:text-2xl font-medium uppercase mb-8">Simplicity, Iteration, and the Power of Physical UX.</h3>
+              <div className="mb-12">
+                <img 
+                  src={phantomIterationGraphic} 
+                  alt="Iteration process graphic" 
+                  className="w-full max-w-4xl mx-auto"
+                />
+              </div>
+              <h3 className="font-display text-xl md:text-2xl font-medium uppercase mb-8">simplicity, iteration, and the power of physical ux.</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
                 <div>
                   <p className="font-display text-lg font-medium mb-2">Simplicity Matters</p>
