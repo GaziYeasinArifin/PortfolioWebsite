@@ -176,7 +176,7 @@ const CaseStudyDetail = () => {
           <section className="mb-24 md:mb-32">
             <div className="mb-12">
               <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter ii</p>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">The Climax</h2>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">Technologies</h2>
             </div>
 
             {/* Ideation & Sketch */}
