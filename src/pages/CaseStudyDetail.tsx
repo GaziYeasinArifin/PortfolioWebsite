@@ -4,6 +4,7 @@ import { ArrowLeft, Cpu, Figma, Lightbulb, Users } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import phantomFootprintHero from '@/assets/phantom-footprint-hero.png';
+import phantomResearchCardSort from '@/assets/phantom-research-card-sort.jpg';
 
 const CaseStudyDetail = () => {
   const { slug } = useParams();
@@ -84,8 +85,12 @@ const CaseStudyDetail = () => {
                   Climate education is inaccessible, abstract, and doesn't connect daily actions to global outcomes. Users feel disconnected from the consequences of their choices.
                 </p>
               </div>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary flex items-center justify-center">
-                <p className="text-muted-foreground text-sm text-center px-4">image 1: research & card sort session</p>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary">
+                <img 
+                  src={phantomResearchCardSort} 
+                  alt="Research & card sort session" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
 
