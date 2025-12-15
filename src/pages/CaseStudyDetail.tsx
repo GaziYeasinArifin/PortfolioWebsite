@@ -12,6 +12,7 @@ import phantomArduino1 from '@/assets/phantom-arduino-1.jpg';
 import phantomArduino2 from '@/assets/phantom-arduino-2.jpg';
 import phantomAssembly1 from '@/assets/phantom-assembly-1.jpg';
 import phantomAssembly2 from '@/assets/phantom-assembly-2.png';
+import phantomAbTest from '@/assets/phantom-ab-test.png';
 
 const CaseStudyDetail = () => {
   const { slug } = useParams();
@@ -237,25 +238,15 @@ const CaseStudyDetail = () => {
             </div>
 
             {/* Iteration Loop */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary flex items-center justify-center order-2 lg:order-1">
-                <div className="text-center px-4">
-                  <p className="text-muted-foreground text-sm mb-4">a/b test comparison</p>
-                  <div className="flex gap-4 justify-center">
-                    <div className="bg-background/50 p-3 rounded-[4px]">
-                      <p className="text-xs font-medium mb-1">v1</p>
-                      <div className="w-3 h-3 rounded-full bg-green-500 mx-auto" />
-                      <p className="text-xs text-muted-foreground mt-1">positive only</p>
-                    </div>
-                    <div className="bg-background/50 p-3 rounded-[4px]">
-                      <p className="text-xs font-medium mb-1">v2</p>
-                      <div className="w-3 h-3 rounded-full bg-yellow-500 mx-auto" />
-                      <p className="text-xs text-muted-foreground mt-1">nuanced</p>
-                    </div>
-                  </div>
-                </div>
+            <div className="space-y-8">
+              <div className="relative aspect-[16/9] overflow-hidden rounded-[4px] bg-secondary">
+                <img 
+                  src={phantomAbTest} 
+                  alt="A/B test comparison - game interface and feedback system iterations" 
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <div className="space-y-4 order-1 lg:order-2">
+              <div className="space-y-4 max-w-3xl">
                 <h3 className="font-display text-xl md:text-2xl font-medium uppercase">Testing Ambiguity. Improving Nuance.</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Key finding from usability testing: players craved nuance over simple positive/negative feedback. Iteration added a medium impact category (yellow LED) to better reflect real-world complexity.
