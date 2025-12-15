@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import phantomFootprintHero from '@/assets/phantom-footprint-hero.png';
 import phantomResearchCardSort from '@/assets/phantom-research-card-sort.jpg';
+import phantomPersonaInsight from '@/assets/phantom-persona-insight.png';
 
 const CaseStudyDetail = () => {
   const { slug } = useParams();
@@ -96,8 +97,12 @@ const CaseStudyDetail = () => {
 
             {/* Defining the User */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary flex items-center justify-center order-2 lg:order-1">
-                <p className="text-muted-foreground text-sm text-center px-4">image 2: persona/user insight graphic</p>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary order-2 lg:order-1">
+                <img 
+                  src={phantomPersonaInsight} 
+                  alt="Persona: The Digital Nomad Student - Alex, 22" 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="space-y-4 order-1 lg:order-2">
                 <h3 className="font-display text-xl md:text-2xl font-medium uppercase">The College Student Archetype: Wanting Impact, Lacking Tools.</h3>
