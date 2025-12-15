@@ -282,7 +282,7 @@ const CaseStudyDetail = () => {
 
             {/* What I Learned */}
             <div className="mb-16 text-center py-12">
-              <div className="mb-12">
+              <div className="mb-8">
                 <img 
                   src={phantomIterationGraphic} 
                   alt="Iteration process graphic" 
