@@ -11,7 +11,7 @@ import phantomScreenVsTactile from '@/assets/phantom-screen-vs-tactile.jpg';
 import phantomArduino1 from '@/assets/phantom-arduino-1.jpg';
 import phantomArduino2 from '@/assets/phantom-arduino-2.jpg';
 import phantomAssembly1 from '@/assets/phantom-assembly-1.jpg';
-import phantomAssembly2 from '@/assets/phantom-assembly-2.jpg';
+import phantomAssembly2 from '@/assets/phantom-assembly-2.png';
 
 const CaseStudyDetail = () => {
   const { slug } = useParams();
