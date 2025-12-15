@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import phantomFootprintHero from '@/assets/phantom-footprint-hero.png';
 import phantomResearchCardSort from '@/assets/phantom-research-card-sort.jpg';
 import phantomPersonaInsight from '@/assets/phantom-persona-insight.png';
+import phantomPaperPrototype from '@/assets/phantom-paper-prototype.jpg';
 
 const CaseStudyDetail = () => {
   const { slug } = useParams();
@@ -169,8 +170,12 @@ const CaseStudyDetail = () => {
                   Rapid prototyping phase using Double Diamond methodology. The game mechanic is built around choice cards representing daily actions with environmental consequences.
                 </p>
               </div>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary flex items-center justify-center">
-                <p className="text-muted-foreground text-sm text-center px-4">image 3: initial paper prototype & game layout</p>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary">
+                <img 
+                  src={phantomPaperPrototype} 
+                  alt="Initial paper prototype & game layout" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
 
