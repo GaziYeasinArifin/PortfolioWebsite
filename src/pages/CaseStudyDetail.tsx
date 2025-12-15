@@ -282,13 +282,13 @@ const CaseStudyDetail = () => {
 
             {/* What I Learned */}
             <div className="mb-16 text-center py-12">
-              <div className="mb-[50px]">
+              <div className="mb-[90px]">
                 <img 
                   src={phantomIterationGraphic} 
                   alt="Iteration process graphic" 
                   className="w-full max-w-4xl mx-auto mb-4"
                 />
-                <p className="text-sm text-muted-foreground">double diamond framework:</p>
+                <p className="text-sm text-muted-foreground">Double Diamond Framework</p>
               </div>
               <h3 className="font-display text-xl md:text-2xl font-medium uppercase mb-8">simplicity, iteration, and the power of physical ux.</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
