@@ -398,61 +398,62 @@ const CaseStudyDetail = () => {
                     Simple, modular, and intentional. The code embodies the same design philosophy as the game itself: clarity over complexity.
                   </p>
                 </div>
-                <div className="relative overflow-hidden rounded-[4px] bg-[#1e1e1e] shadow-xl">
+                <div className="relative overflow-hidden rounded-[4px] bg-[#fafafa] shadow-lg border border-border/50">
                   {/* macOS Window Chrome */}
-                  <div className="flex items-center justify-between px-4 py-3 bg-[#2d2d2d] border-b border-[#3d3d3d]">
+                  <div className="flex items-center justify-between px-4 py-3 bg-[#e8e8e8] border-b border-border/30">
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
                       <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
                       <div className="w-3 h-3 rounded-full bg-[#27ca3f]"></div>
                     </div>
-                    <span className="text-[#808080] text-xs font-mono">phantom_footprint.ino</span>
+                    <span className="text-muted-foreground text-xs font-mono">phantom_footprint.ino</span>
                     <div className="w-16"></div>
                   </div>
                   
                   {/* Code Content */}
                   <div className="overflow-x-auto p-4 md:p-6">
-                    <div className="flex font-mono text-xs md:text-sm leading-relaxed">
+                    <div className="flex font-mono text-xs md:text-sm">
                       {/* Line Numbers */}
-                      <div className="select-none pr-4 md:pr-6 text-right text-[#6d6d6d] border-r border-[#3d3d3d] mr-4 md:mr-6">
+                      <div className="select-none pr-4 md:pr-6 text-right text-muted-foreground/50 border-r border-border/30 mr-4 md:mr-6 leading-6">
                         {Array.from({ length: 31 }, (_, i) => (
                           <div key={i + 1}>{i + 1}</div>
                         ))}
                       </div>
                       
                       {/* Code */}
-                      <pre className="text-[#d4d4d4] flex-1 whitespace-pre">
-<span className="text-[#c586c0]">#include</span> <span className="text-[#ce9178]">&lt;SPI.h&gt;</span>
-<span className="text-[#c586c0]">#include</span> <span className="text-[#ce9178]">&lt;MFRC522.h&gt;</span>
-
-<span className="text-[#c586c0]">#define</span> <span className="text-[#9cdcfe]">RST_PIN</span> <span className="text-[#b5cea8]">9</span>
-<span className="text-[#c586c0]">#define</span> <span className="text-[#9cdcfe]">SS_PIN</span> <span className="text-[#b5cea8]">10</span>
-
-<span className="text-[#4ec9b0]">MFRC522</span> <span className="text-[#9cdcfe]">rfid</span>(<span className="text-[#9cdcfe]">SS_PIN</span>, <span className="text-[#9cdcfe]">RST_PIN</span>);
-
-<span className="text-[#569cd6]">void</span> <span className="text-[#dcdcaa]">setup</span>() {"{"}
-  Serial.<span className="text-[#dcdcaa]">begin</span>(<span className="text-[#b5cea8]">9600</span>);
-  SPI.<span className="text-[#dcdcaa]">begin</span>();
-  rfid.<span className="text-[#dcdcaa]">PCD_Init</span>();
-  Serial.<span className="text-[#dcdcaa]">println</span>(<span className="text-[#ce9178]">"Scan your RFID card..."</span>);
-{"}"}
-
-<span className="text-[#569cd6]">void</span> <span className="text-[#dcdcaa]">loop</span>() {"{"}
-  <span className="text-[#c586c0]">if</span> (!rfid.<span className="text-[#dcdcaa]">PICC_IsNewCardPresent</span>())
-    <span className="text-[#c586c0]">return</span>;
-    
-  String cardType = <span className="text-[#ce9178]">"Positive"</span>;
-  <span className="text-[#dcdcaa]">writeDataToCard</span>(cardType);
-  
-  rfid.<span className="text-[#dcdcaa]">PICC_HaltA</span>();
-  <span className="text-[#dcdcaa]">delay</span>(<span className="text-[#b5cea8]">2000</span>);
-{"}"}
-
-<span className="text-[#569cd6]">void</span> <span className="text-[#dcdcaa]">writeDataToCard</span>(String data) {"{"}
-  <span className="text-[#569cd6]">byte</span> block = <span className="text-[#b5cea8]">1</span>;
-  <span className="text-[#569cd6]">byte</span> buffer[<span className="text-[#b5cea8]">16</span>] = {"{"}{"}"};
-  data.<span className="text-[#dcdcaa]">getBytes</span>(buffer, <span className="text-[#b5cea8]">16</span>);
-{"}"}</pre>
+                      <div className="text-foreground flex-1 leading-6">
+                        <div><span className="text-[#af00db]">#include</span> <span className="text-[#a31515]">&lt;SPI.h&gt;</span></div>
+                        <div><span className="text-[#af00db]">#include</span> <span className="text-[#a31515]">&lt;MFRC522.h&gt;</span></div>
+                        <div>&nbsp;</div>
+                        <div><span className="text-[#af00db]">#define</span> <span className="text-[#001080]">RST_PIN</span> <span className="text-[#098658]">9</span></div>
+                        <div><span className="text-[#af00db]">#define</span> <span className="text-[#001080]">SS_PIN</span> <span className="text-[#098658]">10</span></div>
+                        <div>&nbsp;</div>
+                        <div><span className="text-[#267f99]">MFRC522</span> <span className="text-[#001080]">rfid</span>(<span className="text-[#001080]">SS_PIN</span>, <span className="text-[#001080]">RST_PIN</span>);</div>
+                        <div>&nbsp;</div>
+                        <div><span className="text-[#0000ff]">void</span> <span className="text-[#795e26]">setup</span>() {"{"}</div>
+                        <div>  Serial.<span className="text-[#795e26]">begin</span>(<span className="text-[#098658]">9600</span>);</div>
+                        <div>  SPI.<span className="text-[#795e26]">begin</span>();</div>
+                        <div>  rfid.<span className="text-[#795e26]">PCD_Init</span>();</div>
+                        <div>  Serial.<span className="text-[#795e26]">println</span>(<span className="text-[#a31515]">"Scan your RFID card..."</span>);</div>
+                        <div>{"}"}</div>
+                        <div>&nbsp;</div>
+                        <div><span className="text-[#0000ff]">void</span> <span className="text-[#795e26]">loop</span>() {"{"}</div>
+                        <div>  <span className="text-[#af00db]">if</span> (!rfid.<span className="text-[#795e26]">PICC_IsNewCardPresent</span>())</div>
+                        <div>    <span className="text-[#af00db]">return</span>;</div>
+                        <div>&nbsp;</div>
+                        <div>  String cardType = <span className="text-[#a31515]">"Positive"</span>;</div>
+                        <div>  <span className="text-[#795e26]">writeDataToCard</span>(cardType);</div>
+                        <div>&nbsp;</div>
+                        <div>  rfid.<span className="text-[#795e26]">PICC_HaltA</span>();</div>
+                        <div>  <span className="text-[#795e26]">delay</span>(<span className="text-[#098658]">2000</span>);</div>
+                        <div>{"}"}</div>
+                        <div>&nbsp;</div>
+                        <div><span className="text-[#0000ff]">void</span> <span className="text-[#795e26]">writeDataToCard</span>(String data) {"{"}</div>
+                        <div>  <span className="text-[#0000ff]">byte</span> block = <span className="text-[#098658]">1</span>;</div>
+                        <div>  <span className="text-[#0000ff]">byte</span> buffer[<span className="text-[#098658]">16</span>] = {"{}"};</div>
+                        <div>  data.<span className="text-[#795e26]">getBytes</span>(buffer, <span className="text-[#098658]">16</span>);</div>
+                        <div>{"}"}</div>
+                      </div>
                     </div>
                   </div>
                 </div>
