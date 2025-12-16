@@ -175,7 +175,65 @@ const AddMusicToVideoCaseStudy = () => {
             </div>
           </AnimatedSection>
 
-          {/* Navigation to other projects */}
+          {/* Research & Methodology Section */}
+          <AnimatedSection delay={100}>
+            <div className="mb-24">
+              <h2 className="font-display text-3xl md:text-4xl font-medium mb-4">research & methodology</h2>
+              <p className="text-lg text-muted-foreground mb-12">Unconventional Research Methods</p>
+              
+              {/* Bento Grid */}
+              <div className="grid md:grid-cols-3 gap-6">
+                {/* Card 1 - DJ Study */}
+                <div className="bg-secondary/20 rounded-[4px] p-6">
+                  <div 
+                    className="w-full bg-secondary/40 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center mb-6"
+                    style={{ aspectRatio: '1/1' }}
+                  >
+                    <p className="text-muted-foreground text-xs text-center px-4">
+                      [INSERT: DJ/Audio Waveform visual]
+                    </p>
+                  </div>
+                  <h3 className="font-display text-xl font-medium mb-3">The DJ Study</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    I analyzed DJ beat-matching to understand how non-musicians perceive audio structure.
+                  </p>
+                </div>
+                
+                {/* Card 2 - Cinematic Grammar */}
+                <div className="bg-secondary/20 rounded-[4px] p-6">
+                  <div 
+                    className="w-full bg-secondary/40 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center mb-6"
+                    style={{ aspectRatio: '1/1' }}
+                  >
+                    <p className="text-muted-foreground text-xs text-center px-4">
+                      [INSERT: Movie Scene Breakdown]
+                    </p>
+                  </div>
+                  <h3 className="font-display text-xl font-medium mb-3">Cinematic Grammar</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    I studied movie transitions to create a "logic grammar" for video themes.
+                  </p>
+                </div>
+                
+                {/* Card 3 - Psychology */}
+                <div className="bg-secondary/20 rounded-[4px] p-6">
+                  <div 
+                    className="w-full bg-secondary/40 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center mb-6"
+                    style={{ aspectRatio: '1/1' }}
+                  >
+                    <p className="text-muted-foreground text-xs text-center px-4">
+                      [INSERT: Abstract Psychology/Persona Image]
+                    </p>
+                  </div>
+                  <h3 className="font-display text-xl font-medium mb-3">Psychology</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    Analyzed psychology to understand how users (specifically female demographics) view self-image in editing.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+
           <AnimatedSection delay={100}>
             <div className="pt-16 border-t border-border">
               <Link 
