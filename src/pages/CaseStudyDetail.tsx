@@ -19,7 +19,6 @@ import phantomScope1 from '@/assets/phantom-scope-1.jpg';
 import phantomScope2 from '@/assets/phantom-scope-2.png';
 import phantomScope3 from '@/assets/phantom-scope-3.jpg';
 import phantomIterationGraphic from '@/assets/phantom-iteration-graphic.svg';
-import phantomThankYou from '@/assets/phantom-thank-you.jpg';
 
 // Hook to preload images and track loading state
 const usePreloadImages = (images: string[]) => {
@@ -544,16 +543,10 @@ const CaseStudyDetail = () => {
               </div>
             </AnimatedSection>
 
-            {/* Thank You Image - Final */}
+            {/* Thank You */}
             <AnimatedSection>
-              <div className="mt-16">
-                <div className="relative aspect-[16/5] overflow-hidden rounded-[4px] group">
-                  <OptimizedImage 
-                    src={phantomThankYou} 
-                    alt="Thank you - hands holding Earth" 
-                    className="transition-transform duration-700 group-hover:scale-[1.02]"
-                  />
-                </div>
+              <div className="mt-16 py-24 flex items-center justify-center">
+                <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-medium lowercase">thank you</h2>
               </div>
             </AnimatedSection>
           </section>
