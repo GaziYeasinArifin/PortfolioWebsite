@@ -421,7 +421,7 @@ const CaseStudyDetail = () => {
                       </div>
                       
                       {/* Code */}
-                      <pre className="text-[#d4d4d4] flex-1">
+                      <pre className="text-[#d4d4d4] flex-1 whitespace-pre">
 <span className="text-[#c586c0]">#include</span> <span className="text-[#ce9178]">&lt;SPI.h&gt;</span>
 <span className="text-[#c586c0]">#include</span> <span className="text-[#ce9178]">&lt;MFRC522.h&gt;</span>
 
