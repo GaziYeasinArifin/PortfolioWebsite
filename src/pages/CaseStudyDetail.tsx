@@ -1,41 +1,8 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft, Cpu, Figma, Lightbulb, Users } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import OptimizedImage from '@/components/OptimizedImage';
-import placeholderSvg from '@/assets/placeholder-image.svg';
-import phantomFootprintHero from '@/assets/phantom-footprint-hero.png';
-import phantomResearchCardSort from '@/assets/phantom-research-card-sort.jpg';
-import phantomPersonaInsight from '@/assets/phantom-persona-kartik.png';
-import phantomPaperPrototype from '@/assets/phantom-paper-prototype.jpg';
-import phantomScreenVsTactile from '@/assets/phantom-screen-vs-tactile.jpg';
-import phantomArduino1 from '@/assets/phantom-arduino-1.jpg';
-import phantomArduino2 from '@/assets/phantom-arduino-2.jpg';
-import phantomAssembly1 from '@/assets/phantom-assembly-1.jpg';
-import phantomAssembly2 from '@/assets/phantom-assembly-2.png';
-import phantomAbTest from '@/assets/phantom-ab-test.png';
-import phantomScope1 from '@/assets/phantom-scope-1.jpg';
-import phantomScope2 from '@/assets/phantom-scope-2.png';
-import phantomScope3 from '@/assets/phantom-scope-3.jpg';
-import phantomIterationGraphic from '@/assets/phantom-iteration-graphic.svg';
-
-// Hook to preload images and track loading state
-const usePreloadImages = (images: string[]) => {
-  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
-  
-  useEffect(() => {
-    images.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        setLoadedImages((prev) => new Set([...prev, src]));
-      };
-    });
-  }, [images]);
-  
-  return loadedImages.size === images.length;
-};
 
 // Custom hook for scroll-triggered animations
 const useScrollReveal = () => {
@@ -92,40 +59,161 @@ const AnimatedSection = ({
   );
 };
 
-const CaseStudyDetail = () => {
-  const { slug } = useParams();
-  const [arduinoImageIndex, setArduinoImageIndex] = useState(0);
-  const [assemblyImageIndex, setAssemblyImageIndex] = useState(0);
-  const arduinoImages = [phantomArduino1, phantomArduino2];
-  const assemblyImages = [phantomAssembly1, phantomAssembly2];
-  
-  const arduinoImagesLoaded = usePreloadImages(arduinoImages);
-  const assemblyImagesLoaded = usePreloadImages(assemblyImages);
+// Gray placeholder box component
+const PlaceholderBox = ({ 
+  aspectRatio = '16/9', 
+  label,
+  className = '' 
+}: { 
+  aspectRatio?: string; 
+  label?: string;
+  className?: string;
+}) => (
+  <div 
+    className={`bg-muted/50 border border-border/50 rounded-[4px] flex items-center justify-center ${className}`}
+    style={{ aspectRatio }}
+  >
+    {label && (
+      <span className="text-muted-foreground text-sm font-medium">{label}</span>
+    )}
+  </div>
+);
 
+// Timeline item component
+const TimelineItem = ({ 
+  step, 
+  title, 
+  description, 
+  isLast = false 
+}: { 
+  step: string; 
+  title: string; 
+  description: string; 
+  isLast?: boolean;
+}) => (
+  <div className="relative flex gap-6">
+    {/* Timeline line and dot */}
+    <div className="flex flex-col items-center">
+      <div className="w-10 h-10 rounded-full bg-foreground text-background flex items-center justify-center text-sm font-medium shrink-0">
+        {step}
+      </div>
+      {!isLast && (
+        <div className="w-px h-full bg-border mt-4" />
+      )}
+    </div>
+    
+    {/* Content */}
+    <div className="pb-12">
+      <h4 className="font-display text-lg font-medium mb-2">{title}</h4>
+      <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
+    </div>
+  </div>
+);
+
+// Comparison grid component
+const ComparisonGrid = ({ 
+  beforeLabel, 
+  afterLabel,
+  beforeItems,
+  afterItems
+}: { 
+  beforeLabel: string; 
+  afterLabel: string;
+  beforeItems: string[];
+  afterItems: string[];
+}) => (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {/* Before */}
+    <div className="space-y-4">
+      <div className="flex items-center gap-3 pb-3 border-b border-border">
+        <span className="text-xs font-medium tracking-[0.15em] uppercase text-muted-foreground">before</span>
+        <span className="text-sm text-muted-foreground">— {beforeLabel}</span>
+      </div>
+      <div className="space-y-3">
+        {beforeItems.map((item, i) => (
+          <div key={i} className="flex items-start gap-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground mt-2 shrink-0" />
+            <span className="text-sm text-muted-foreground">{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    {/* After */}
+    <div className="space-y-4">
+      <div className="flex items-center gap-3 pb-3 border-b border-foreground">
+        <span className="text-xs font-medium tracking-[0.15em] uppercase text-foreground">after</span>
+        <span className="text-sm text-foreground">— {afterLabel}</span>
+      </div>
+      <div className="space-y-3">
+        {afterItems.map((item, i) => (
+          <div key={i} className="flex items-start gap-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-foreground mt-2 shrink-0" />
+            <span className="text-sm text-foreground">{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+// Fidelity section component
+const FidelitySection = ({ 
+  level, 
+  title, 
+  description, 
+  tools,
+  deliverables
+}: { 
+  level: 'low' | 'mid' | 'high';
+  title: string; 
+  description: string;
+  tools: string[];
+  deliverables: string[];
+}) => {
+  const levelStyles = {
+    low: 'border-muted-foreground/30',
+    mid: 'border-muted-foreground/60',
+    high: 'border-foreground'
+  };
+  
+  const levelLabels = {
+    low: 'low-fidelity',
+    mid: 'mid-fidelity',
+    high: 'high-fidelity'
+  };
+
+  return (
+    <div className={`border-l-2 ${levelStyles[level]} pl-6 py-2`}>
+      <span className="text-xs font-medium tracking-[0.15em] uppercase text-muted-foreground">{levelLabels[level]}</span>
+      <h4 className="font-display text-xl font-medium mt-2 mb-3">{title}</h4>
+      <p className="text-muted-foreground text-sm leading-relaxed mb-4">{description}</p>
+      
+      <div className="flex flex-wrap gap-4 text-xs">
+        <div>
+          <span className="text-muted-foreground">tools: </span>
+          <span className="text-foreground">{tools.join(', ')}</span>
+        </div>
+        <div>
+          <span className="text-muted-foreground">deliverables: </span>
+          <span className="text-foreground">{deliverables.join(', ')}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const CaseStudyDetail = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setArduinoImageIndex((prev) => (prev + 1) % arduinoImages.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [arduinoImages.length]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setAssemblyImageIndex((prev) => (prev + 1) % assemblyImages.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [assemblyImages.length]);
 
   return (
     <div className="min-h-screen bg-background scroll-smooth">
       <Header />
       
       <main className="pt-32 pb-24">
-        <div className="container">
+        <div className="container max-w-4xl">
           {/* Back link */}
           <AnimatedSection>
             <Link 
@@ -137,433 +225,361 @@ const CaseStudyDetail = () => {
             </Link>
           </AnimatedSection>
 
-          {/* Hero section - The Hook */}
+          {/* Hero Section */}
           <AnimatedSection delay={100}>
-            <div className="mb-16 md:mb-24">
-              <h1 className="font-display font-medium leading-[1.05] tracking-tight text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] mb-6">
-                <span className="uppercase text-foreground">phantom footprint</span>
-                <br />
-                <span className="lowercase text-muted-foreground">closing the climate feedback loop</span>
+            <div className="mb-16">
+              <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">case study</p>
+              <h1 className="font-display font-medium leading-[1.1] tracking-tight text-3xl sm:text-4xl md:text-5xl mb-6">
+                iterative design process
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-8">
-                <span className="text-foreground font-medium">Challenge:</span> Making <span className="text-foreground font-medium">climate consequences</span> tangible for <span className="text-foreground font-medium">college students.</span><br />
-                <span className="text-foreground font-medium">Solution:</span> An <span className="text-foreground font-medium">IoT-enhanced,</span> physical <span className="text-foreground font-medium">board game.</span>
+              <p className="text-lg text-muted-foreground max-w-2xl mb-8">
+                a deep dive into how iterative methodology transforms vague requirements into polished, user-centered experiences.
               </p>
               
-              {/* Role & Tools */}
-              <div className="flex flex-wrap gap-4 md:gap-6 mb-6">
-                <div className="flex items-center gap-2 text-sm">
-                  <Users className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-                  <span>Lead UX Designer, Researcher, Prototyper</span>
+              {/* Meta info */}
+              <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
+                <div>
+                  <span className="text-foreground">role:</span> lead ux designer
                 </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Lightbulb className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-                  <span>Design Thinking</span>
+                <div>
+                  <span className="text-foreground">duration:</span> 8 weeks
                 </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Cpu className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-                  <span>Arduino Uno, RFID</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Figma className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-                  <span>Figma</span>
+                <div>
+                  <span className="text-foreground">team:</span> 4 members
                 </div>
               </div>
-              
-              <p className="text-sm text-muted-foreground">4 Months (Thesis Project)</p>
             </div>
           </AnimatedSection>
 
-          {/* Hero image */}
+          {/* Hero placeholder */}
           <AnimatedSection delay={200}>
-            <div className="relative aspect-[16/9] overflow-hidden rounded-[4px] bg-secondary mb-24 md:mb-32 group">
-              <OptimizedImage 
-                src={phantomFootprintHero} 
-                alt="Phantom Footprint - IoT-enhanced board game for climate education" 
-                className="transition-transform duration-700 group-hover:scale-[1.02]"
-                priority
-              />
-            </div>
+            <PlaceholderBox aspectRatio="16/9" label="hero image" className="mb-24" />
           </AnimatedSection>
 
-          {/* Chapter I: The Problem */}
-          <section className="mb-24 md:mb-32">
+          {/* Overview Section */}
+          <section className="mb-24">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter i</p>
-                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">The Problem</h2>
-              </div>
-            </AnimatedSection>
-
-            {/* The Status Quo */}
-            <AnimatedSection>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-16">
-                <div className="space-y-4">
-                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase">Overwhelmed User.</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Climate education is inaccessible, abstract, and doesn't connect daily actions to global outcomes. Users feel disconnected from the consequences of their choices.
-                  </p>
-                </div>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary group">
-                  <OptimizedImage 
-                    src={phantomResearchCardSort} 
-                    alt="Research & card sort session" 
-                    className="transition-transform duration-500 group-hover:scale-[1.02]"
-                  />
-                </div>
-              </div>
-            </AnimatedSection>
-
-            {/* Defining the User */}
-            <AnimatedSection>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-16">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary order-2 lg:order-1 group">
-                  <OptimizedImage 
-                    src={phantomPersonaInsight} 
-                    alt="Persona: The Digital Nomad Student - Alex, 22" 
-                    className="transition-transform duration-500 group-hover:scale-[1.02]"
-                  />
-                </div>
-                <div className="space-y-4 order-1 lg:order-2">
-                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase">The College Student Archetype: Wanting Impact, Lacking Tools.</h3>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    They are digitally engaged but feel passive about climate change.
-                  </p>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-foreground mt-2 shrink-0" />
-                      <span>Passive learner vs. socially active advocate</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-foreground mt-2 shrink-0" />
-                      <span>Need immediate, tangible feedback</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-foreground mt-2 shrink-0" />
-                      <span>Desire for meaningful action</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </AnimatedSection>
-
-            {/* The Gap */}
-            <AnimatedSection>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-                <div className="space-y-4">
-                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase">The Opportunity: Interactivity {">"} Simulation.</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Existing tools (calculators, digital apps) lack the hands-on, immediate, emotional connection required for behavioral change.
-                  </p>
-                </div>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary group">
-                  <OptimizedImage 
-                    src={phantomScreenVsTactile} 
-                    alt="Boring screen vs tactile game comparison" 
-                    className="transition-transform duration-500 group-hover:scale-[1.02]"
-                    objectPosition="top"
-                  />
-                </div>
-              </div>
-            </AnimatedSection>
-          </section>
-
-          {/* Chapter II: Technologies */}
-          <section className="mb-24 md:mb-32">
-            <AnimatedSection>
-              <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter ii</p>
-                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">Technologies</h2>
-              </div>
-            </AnimatedSection>
-
-            {/* Ideation & Sketch */}
-            <AnimatedSection>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-16">
-                <div className="space-y-4">
-                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase">From Paper Prototype to Tangible Mechanic.</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Rapid prototyping phase using Double Diamond methodology. The game mechanic is built around choice cards representing daily actions with environmental consequences.
-                  </p>
-                </div>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary group">
-                  <OptimizedImage 
-                    src={phantomPaperPrototype} 
-                    alt="Initial paper prototype & game layout" 
-                    className="transition-transform duration-500 group-hover:scale-[1.02]"
-                    objectPosition="top"
-                  />
-                </div>
-              </div>
-            </AnimatedSection>
-
-            {/* The Tech Solution */}
-            <AnimatedSection>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-16">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary order-2 lg:order-1">
-                  {/* Placeholder */}
-                  <img
-                    src={placeholderSvg}
-                    alt=""
-                    aria-hidden="true"
-                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-                      arduinoImagesLoaded ? 'opacity-0' : 'opacity-100'
-                    }`}
-                  />
-                  {/* Cycling images */}
-                  {arduinoImages.map((img, index) => (
-                    <img 
-                      key={index}
-                      src={img} 
-                      alt={`Arduino LED breadboard circuit ${index + 1}`} 
-                      className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
-                        arduinoImagesLoaded && index === arduinoImageIndex ? 'opacity-100' : 'opacity-0'
-                      }`}
-                      loading="lazy"
-                    />
-                  ))}
-                </div>
-                <div className="space-y-4 order-1 lg:order-2">
-                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase">Mapping Action to Immediate Feedback (Arduino + RFID).</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    The core innovation: using RFID to scan a choice card and trigger an LED status light (red/yellow/green) via Arduino. This closes the feedback loop instantly, connecting user actions to environmental consequences.
-                  </p>
-                </div>
-              </div>
-            </AnimatedSection>
-
-            {/* Building the System */}
-            <AnimatedSection>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-16">
-                <div className="space-y-4">
-                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase">From Wiring to Final Assembly.</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Showcasing the hands-on nature of full-stack design thinking: digital UX combined with physical product development. Soldering, wiring, and final assembly of the board and sensor mechanism.
-                  </p>
-                </div>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary">
-                  {/* Placeholder */}
-                  <img
-                    src={placeholderSvg}
-                    alt=""
-                    aria-hidden="true"
-                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-                      assemblyImagesLoaded ? 'opacity-0' : 'opacity-100'
-                    }`}
-                  />
-                  {/* Cycling images */}
-                  {assemblyImages.map((img, index) => (
-                    <img 
-                      key={index}
-                      src={img} 
-                      alt={`Soldering, wiring & assembly demo ${index + 1}`} 
-                      className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
-                        assemblyImagesLoaded && index === assemblyImageIndex ? 'opacity-100' : 'opacity-0'
-                      }`}
-                      loading="lazy"
-                    />
-                  ))}
-                </div>
-              </div>
-            </AnimatedSection>
-
-            {/* Iteration Loop */}
-            <AnimatedSection>
-              <div className="space-y-8">
-                <div className="relative aspect-[16/9] overflow-hidden rounded-[4px] bg-secondary group">
-                  <OptimizedImage 
-                    src={phantomAbTest} 
-                    alt="A/B test comparison - game interface and feedback system iterations" 
-                    className="transition-transform duration-500 group-hover:scale-[1.02]"
-                  />
-                </div>
-                <div className="space-y-4 max-w-3xl">
-                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase">Testing Ambiguity. Improving Nuance.</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Key finding from usability testing: players craved nuance over simple positive/negative feedback. Iteration added a medium impact category (yellow LED) to better reflect real-world complexity.
-                  </p>
-                </div>
-              </div>
-            </AnimatedSection>
-
-            {/* Code Section */}
-            <AnimatedSection>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mt-16">
-                <div className="space-y-4">
-                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase">Code</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Every great interaction begins with elegant code. The RFID-to-LED mapping was built using Arduino's MFRC522 library—reading card data, writing feedback states, and triggering visual responses in under 50 lines of C++.
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Simple, modular, and intentional. The code embodies the same design philosophy as the game itself: clarity over complexity.
-                  </p>
-                </div>
-                <div className="relative overflow-hidden rounded-[4px] bg-[#fafafa] shadow-lg border border-border/50">
-                  {/* macOS Window Chrome */}
-                  <div className="flex items-center justify-between px-4 py-3 bg-[#e8e8e8] border-b border-border/30">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                      <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                      <div className="w-3 h-3 rounded-full bg-[#27ca3f]"></div>
-                    </div>
-                    <span className="text-muted-foreground text-xs font-mono">phantom_footprint.ino</span>
-                    <div className="w-16"></div>
-                  </div>
-                  
-                  {/* Code Content */}
-                  <div className="overflow-x-auto p-4 md:p-6">
-                    <div className="flex font-mono text-xs md:text-sm">
-                      {/* Line Numbers */}
-                      <div className="select-none pr-4 md:pr-6 text-right text-muted-foreground/50 border-r border-border/30 mr-4 md:mr-6 leading-6">
-                        {Array.from({ length: 31 }, (_, i) => (
-                          <div key={i + 1}>{i + 1}</div>
-                        ))}
-                      </div>
-                      
-                      {/* Code */}
-                      <div className="text-foreground flex-1 leading-6">
-                        <div><span className="text-[#af00db]">#include</span> <span className="text-[#a31515]">&lt;SPI.h&gt;</span></div>
-                        <div><span className="text-[#af00db]">#include</span> <span className="text-[#a31515]">&lt;MFRC522.h&gt;</span></div>
-                        <div>&nbsp;</div>
-                        <div><span className="text-[#af00db]">#define</span> <span className="text-[#001080]">RST_PIN</span> <span className="text-[#098658]">9</span></div>
-                        <div><span className="text-[#af00db]">#define</span> <span className="text-[#001080]">SS_PIN</span> <span className="text-[#098658]">10</span></div>
-                        <div>&nbsp;</div>
-                        <div><span className="text-[#267f99]">MFRC522</span> <span className="text-[#001080]">rfid</span>(<span className="text-[#001080]">SS_PIN</span>, <span className="text-[#001080]">RST_PIN</span>);</div>
-                        <div>&nbsp;</div>
-                        <div><span className="text-[#0000ff]">void</span> <span className="text-[#795e26]">setup</span>() {"{"}</div>
-                        <div>  Serial.<span className="text-[#795e26]">begin</span>(<span className="text-[#098658]">9600</span>);</div>
-                        <div>  SPI.<span className="text-[#795e26]">begin</span>();</div>
-                        <div>  rfid.<span className="text-[#795e26]">PCD_Init</span>();</div>
-                        <div>  Serial.<span className="text-[#795e26]">println</span>(<span className="text-[#a31515]">"Scan your RFID card..."</span>);</div>
-                        <div>{"}"}</div>
-                        <div>&nbsp;</div>
-                        <div><span className="text-[#0000ff]">void</span> <span className="text-[#795e26]">loop</span>() {"{"}</div>
-                        <div>  <span className="text-[#af00db]">if</span> (!rfid.<span className="text-[#795e26]">PICC_IsNewCardPresent</span>())</div>
-                        <div>    <span className="text-[#af00db]">return</span>;</div>
-                        <div>&nbsp;</div>
-                        <div>  String cardType = <span className="text-[#a31515]">"Positive"</span>;</div>
-                        <div>  <span className="text-[#795e26]">writeDataToCard</span>(cardType);</div>
-                        <div>&nbsp;</div>
-                        <div>  rfid.<span className="text-[#795e26]">PICC_HaltA</span>();</div>
-                        <div>  <span className="text-[#795e26]">delay</span>(<span className="text-[#098658]">2000</span>);</div>
-                        <div>{"}"}</div>
-                        <div>&nbsp;</div>
-                        <div><span className="text-[#0000ff]">void</span> <span className="text-[#795e26]">writeDataToCard</span>(String data) {"{"}</div>
-                        <div>  <span className="text-[#0000ff]">byte</span> block = <span className="text-[#098658]">1</span>;</div>
-                        <div>  <span className="text-[#0000ff]">byte</span> buffer[<span className="text-[#098658]">16</span>] = {"{}"};</div>
-                        <div>  data.<span className="text-[#795e26]">getBytes</span>(buffer, <span className="text-[#098658]">16</span>);</div>
-                        <div>{"}"}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </AnimatedSection>
-          </section>
-
-          {/* Chapter III: The Resolution */}
-          <section className="mb-24 md:mb-32">
-            <AnimatedSection>
-              <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter iii</p>
-                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">The Resolution</h2>
-              </div>
-            </AnimatedSection>
-
-            {/* The Impact */}
-            <AnimatedSection>
-              <div className="mb-16">
-                <h3 className="font-display text-xl md:text-2xl font-medium uppercase mb-6">Bridging the Gap. 90% Engagement.</h3>
-                <div className="bg-secondary rounded-[4px] p-8 md:p-12">
-                  <blockquote className="font-display text-xl md:text-2xl lg:text-3xl font-medium text-center leading-relaxed">
-                    "The LED system helped players connect their choices to tangible results."
-                  </blockquote>
-                  <p className="text-center text-muted-foreground mt-4">— User Testing Feedback</p>
-                </div>
-                <p className="text-muted-foreground leading-relaxed mt-6">
-                  Immediate feedback led to deeper reflection. Players connected choices to consequences, creating meaningful behavioral awareness.
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">01</p>
+                <h2 className="font-display text-2xl md:text-3xl font-medium mb-6">overview</h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  this project demonstrates how structured iteration—moving from rough sketches to polished prototypes—creates better outcomes than jumping straight to high-fidelity designs. each phase builds upon validated learnings from the previous stage.
                 </p>
               </div>
             </AnimatedSection>
 
-            {/* What I Learned */}
+            {/* Problem / Solution comparison */}
             <AnimatedSection>
-              <div className="mb-16 text-center py-12">
-                <div className="mb-[90px]">
-                  <div className="w-full max-w-4xl mx-auto mb-4 aspect-[16/6]">
-                    <OptimizedImage 
-                      src={phantomIterationGraphic} 
-                      alt="Iteration process graphic" 
-                      objectFit="contain"
-                    />
-                  </div>
-                  <p className="text-sm text-muted-foreground">Double Diamond Framework</p>
-                </div>
-                <h3 className="font-display text-xl md:text-2xl font-medium uppercase mb-8">simplicity, iteration, and the power of physical ux.</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-3xl mx-auto">
+              <ComparisonGrid 
+                beforeLabel="the problem"
+                afterLabel="the solution"
+                beforeItems={[
+                  "users struggled to complete core tasks",
+                  "navigation was confusing and inconsistent",
+                  "feedback loops were missing entirely",
+                  "stakeholder requirements kept changing"
+                ]}
+                afterItems={[
+                  "task completion improved by 47%",
+                  "clear, predictable navigation patterns",
+                  "real-time feedback at every step",
+                  "iterative validation prevented scope creep"
+                ]}
+              />
+            </AnimatedSection>
+          </section>
+
+          {/* Process Timeline Section */}
+          <section className="mb-24">
+            <AnimatedSection>
+              <div className="mb-12">
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">02</p>
+                <h2 className="font-display text-2xl md:text-3xl font-medium">design process</h2>
+              </div>
+            </AnimatedSection>
+
+            {/* Vertical Timeline */}
+            <AnimatedSection>
+              <div className="mb-12">
+                <TimelineItem 
+                  step="1"
+                  title="research & discovery"
+                  description="conducted user interviews, competitive analysis, and stakeholder workshops to understand the problem space and define success metrics."
+                />
+                <TimelineItem 
+                  step="2"
+                  title="ideation & sketching"
+                  description="rapid sketching sessions to explore multiple solutions. divergent thinking before converging on the strongest concepts."
+                />
+                <TimelineItem 
+                  step="3"
+                  title="low-fidelity prototyping"
+                  description="paper prototypes and wireframes to test core flows. quick iterations based on early user feedback."
+                />
+                <TimelineItem 
+                  step="4"
+                  title="mid-fidelity design"
+                  description="grayscale wireframes with interaction patterns. usability testing to validate navigation and information architecture."
+                />
+                <TimelineItem 
+                  step="5"
+                  title="high-fidelity prototyping"
+                  description="full visual design with micro-interactions. final usability testing and stakeholder sign-off."
+                  isLast
+                />
+              </div>
+            </AnimatedSection>
+
+            {/* Process placeholder images */}
+            <AnimatedSection>
+              <div className="grid grid-cols-2 gap-4">
+                <PlaceholderBox aspectRatio="4/3" label="research" />
+                <PlaceholderBox aspectRatio="4/3" label="ideation" />
+              </div>
+            </AnimatedSection>
+          </section>
+
+          {/* Low-Fidelity Section */}
+          <section className="mb-24">
+            <AnimatedSection>
+              <div className="mb-8">
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">03</p>
+                <h2 className="font-display text-2xl md:text-3xl font-medium mb-6">low-fidelity</h2>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection>
+              <FidelitySection 
+                level="low"
+                title="paper prototypes & sketches"
+                description="started with rough sketches to explore layout options without committing to any specific direction. tested with 5 users to validate core concepts before investing in detailed design work."
+                tools={['pen & paper', 'whiteboard', 'sticky notes']}
+                deliverables={['concept sketches', 'user flow diagrams', 'initial feedback']}
+              />
+            </AnimatedSection>
+
+            <AnimatedSection>
+              <div className="grid grid-cols-3 gap-4 mt-8">
+                <PlaceholderBox aspectRatio="1/1" label="sketch 1" />
+                <PlaceholderBox aspectRatio="1/1" label="sketch 2" />
+                <PlaceholderBox aspectRatio="1/1" label="sketch 3" />
+              </div>
+            </AnimatedSection>
+
+            {/* Before/After for Low-Fi */}
+            <AnimatedSection>
+              <div className="mt-12">
+                <ComparisonGrid 
+                  beforeLabel="initial concept"
+                  afterLabel="after testing"
+                  beforeItems={[
+                    "complex multi-step wizard",
+                    "hidden navigation menu",
+                    "text-heavy instructions"
+                  ]}
+                  afterItems={[
+                    "simplified single-page flow",
+                    "visible persistent navigation",
+                    "visual guides and icons"
+                  ]}
+                />
+              </div>
+            </AnimatedSection>
+          </section>
+
+          {/* Mid-Fidelity Section */}
+          <section className="mb-24">
+            <AnimatedSection>
+              <div className="mb-8">
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">04</p>
+                <h2 className="font-display text-2xl md:text-3xl font-medium mb-6">mid-fidelity</h2>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection>
+              <FidelitySection 
+                level="mid"
+                title="wireframes & interaction patterns"
+                description="grayscale wireframes focused on layout, hierarchy, and interaction patterns. conducted 8 usability tests to refine navigation and validate information architecture decisions."
+                tools={['figma', 'whimsical', 'maze']}
+                deliverables={['clickable prototype', 'usability report', 'iteration notes']}
+              />
+            </AnimatedSection>
+
+            <AnimatedSection>
+              <div className="grid grid-cols-2 gap-4 mt-8">
+                <PlaceholderBox aspectRatio="3/4" label="wireframe a" />
+                <PlaceholderBox aspectRatio="3/4" label="wireframe b" />
+              </div>
+            </AnimatedSection>
+
+            {/* Before/After for Mid-Fi */}
+            <AnimatedSection>
+              <div className="mt-12">
+                <ComparisonGrid 
+                  beforeLabel="wireframe v1"
+                  afterLabel="wireframe v2"
+                  beforeItems={[
+                    "unclear call-to-action hierarchy",
+                    "inconsistent spacing system",
+                    "missing error states"
+                  ]}
+                  afterItems={[
+                    "clear primary and secondary actions",
+                    "8px grid system applied",
+                    "comprehensive error handling"
+                  ]}
+                />
+              </div>
+            </AnimatedSection>
+
+            {/* Usability findings */}
+            <AnimatedSection>
+              <div className="mt-12 p-6 bg-muted/30 rounded-[4px]">
+                <h4 className="font-display text-lg font-medium mb-4">key usability findings</h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
                   <div>
-                    <p className="font-display text-lg font-medium mb-2">Simplicity Matters</p>
-                    <p className="text-sm text-muted-foreground">Clear feedback over complex systems</p>
+                    <p className="text-2xl font-display font-medium text-foreground mb-1">73%</p>
+                    <p className="text-muted-foreground">task success rate (v1)</p>
                   </div>
                   <div>
-                    <p className="font-display text-lg font-medium mb-2">Iterative Design is Key</p>
-                    <p className="text-sm text-muted-foreground">Testing revealed nuance requirements</p>
+                    <p className="text-2xl font-display font-medium text-foreground mb-1">89%</p>
+                    <p className="text-muted-foreground">task success rate (v2)</p>
                   </div>
                   <div>
-                    <p className="font-display text-lg font-medium mb-2">Immediate Feedback is Crucial</p>
-                    <p className="text-sm text-muted-foreground">Closing the action-consequence loop</p>
+                    <p className="text-2xl font-display font-medium text-foreground mb-1">-42s</p>
+                    <p className="text-muted-foreground">avg. time on task</p>
                   </div>
                 </div>
               </div>
             </AnimatedSection>
+          </section>
 
-            {/* Looking Forward */}
+          {/* High-Fidelity Section */}
+          <section className="mb-24">
             <AnimatedSection>
-              <div className="space-y-8">
-                <div className="space-y-4 max-w-3xl">
-                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase">Scope: From Campus Game to Global Platform.</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Future vision includes expanding to younger audiences, gamifying the concept further into a digital companion app, and creating scalable educational tools for climate awareness.
+              <div className="mb-8">
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">05</p>
+                <h2 className="font-display text-2xl md:text-3xl font-medium mb-6">high-fidelity</h2>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection>
+              <FidelitySection 
+                level="high"
+                title="visual design & micro-interactions"
+                description="full visual treatment with brand colors, typography, and motion design. final round of testing ensured the visual layer didn't introduce new usability issues."
+                tools={['figma', 'principle', 'lottie']}
+                deliverables={['design system', 'animated prototype', 'dev handoff']}
+              />
+            </AnimatedSection>
+
+            <AnimatedSection>
+              <PlaceholderBox aspectRatio="16/9" label="final design" className="mt-8" />
+            </AnimatedSection>
+
+            {/* Final comparison */}
+            <AnimatedSection>
+              <div className="mt-12">
+                <ComparisonGrid 
+                  beforeLabel="before redesign"
+                  afterLabel="final design"
+                  beforeItems={[
+                    "generic visual treatment",
+                    "no motion or feedback",
+                    "accessibility issues",
+                    "inconsistent component usage"
+                  ]}
+                  afterItems={[
+                    "distinctive brand expression",
+                    "purposeful micro-interactions",
+                    "wcag aa compliant",
+                    "unified design system"
+                  ]}
+                />
+              </div>
+            </AnimatedSection>
+
+            {/* Final screens grid */}
+            <AnimatedSection>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+                <PlaceholderBox aspectRatio="9/16" label="screen 1" />
+                <PlaceholderBox aspectRatio="9/16" label="screen 2" />
+                <PlaceholderBox aspectRatio="9/16" label="screen 3" />
+                <PlaceholderBox aspectRatio="9/16" label="screen 4" />
+              </div>
+            </AnimatedSection>
+          </section>
+
+          {/* Results Section */}
+          <section className="mb-24">
+            <AnimatedSection>
+              <div className="mb-12">
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">06</p>
+                <h2 className="font-display text-2xl md:text-3xl font-medium mb-6">results & impact</h2>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                <div className="text-center p-6 bg-muted/30 rounded-[4px]">
+                  <p className="text-3xl font-display font-medium text-foreground mb-1">+47%</p>
+                  <p className="text-sm text-muted-foreground">task completion</p>
+                </div>
+                <div className="text-center p-6 bg-muted/30 rounded-[4px]">
+                  <p className="text-3xl font-display font-medium text-foreground mb-1">-58%</p>
+                  <p className="text-sm text-muted-foreground">user errors</p>
+                </div>
+                <div className="text-center p-6 bg-muted/30 rounded-[4px]">
+                  <p className="text-3xl font-display font-medium text-foreground mb-1">4.6</p>
+                  <p className="text-sm text-muted-foreground">satisfaction score</p>
+                </div>
+                <div className="text-center p-6 bg-muted/30 rounded-[4px]">
+                  <p className="text-3xl font-display font-medium text-foreground mb-1">3x</p>
+                  <p className="text-sm text-muted-foreground">faster onboarding</p>
+                </div>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection>
+              <div className="p-8 border border-border rounded-[4px]">
+                <blockquote className="font-display text-xl md:text-2xl font-medium text-center leading-relaxed mb-4">
+                  "the iterative approach helped us catch issues early and deliver a product that truly serves our users."
+                </blockquote>
+                <p className="text-center text-sm text-muted-foreground">— product manager</p>
+              </div>
+            </AnimatedSection>
+          </section>
+
+          {/* Learnings Section */}
+          <section className="mb-24">
+            <AnimatedSection>
+              <div className="mb-8">
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">07</p>
+                <h2 className="font-display text-2xl md:text-3xl font-medium mb-6">key learnings</h2>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                  <h4 className="font-display text-lg font-medium mb-2">test early, test often</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    low-fidelity testing revealed fundamental issues that would have been costly to fix later in the process.
                   </p>
                 </div>
-                
-                {/* 2 portrait top, 1 landscape bottom */}
-                <div className="flex flex-col gap-4">
-                  {/* Top row: 2 portrait images */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="relative aspect-[3/4] overflow-hidden rounded-[4px] group">
-                      <OptimizedImage 
-                        src={phantomScope1} 
-                        alt="Players engaging with Phantom Footprint game" 
-                        className="transition-transform duration-500 group-hover:scale-[1.02]"
-                      />
-                    </div>
-                    <div className="relative aspect-[3/4] overflow-hidden rounded-[4px] bg-[#c8c4c0] group">
-                      <OptimizedImage 
-                        src={phantomScope3} 
-                        alt="Final Phantom Footprint game board design" 
-                        className="transition-transform duration-500 group-hover:scale-[1.02]"
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Bottom: Landscape image */}
-                  <div className="relative aspect-[16/9] overflow-hidden rounded-[4px] bg-[#c8c4c0] group">
-                    <OptimizedImage 
-                      src={phantomScope2} 
-                      alt="Phantom Footprint product iterations and components" 
-                      className="transition-transform duration-500 group-hover:scale-[1.02]"
-                      objectFit="contain"
-                    />
-                  </div>
+                <div>
+                  <h4 className="font-display text-lg font-medium mb-2">embrace ambiguity</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    starting rough allows for more creative exploration before committing to specific solutions.
+                  </p>
                 </div>
-              </div>
-            </AnimatedSection>
-
-            {/* Thank You */}
-            <AnimatedSection>
-              <div className="mt-16 py-24 flex items-center justify-center">
-                <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-medium lowercase">thank you</h2>
+                <div>
+                  <h4 className="font-display text-lg font-medium mb-2">document decisions</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    tracking why decisions were made helps onboard new team members and prevents revisiting solved problems.
+                  </p>
+                </div>
               </div>
             </AnimatedSection>
           </section>
@@ -580,7 +596,7 @@ const CaseStudyDetail = () => {
                   <h3 className="font-display text-2xl md:text-3xl font-medium">explore more work</h3>
                 </div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-[4px] border border-border transition-all duration-300 group-hover:bg-foreground group-hover:border-foreground">
-                  <ArrowLeft className="h-5 w-5 rotate-180 transition-all duration-300 group-hover:text-background" />
+                  <ArrowRight className="h-5 w-5 transition-all duration-300 group-hover:text-background" />
                 </div>
               </Link>
             </div>
