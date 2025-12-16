@@ -146,8 +146,8 @@ const CaseStudyDetail = () => {
                 <span className="lowercase text-muted-foreground">closing the climate feedback loop</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-8">
-                Challenge: Making climate consequences tangible for college students.<br />
-                Solution: An IoT-enhanced, physical board game.
+                <span className="text-foreground font-medium">Challenge:</span> Making <span className="text-foreground font-medium">climate consequences</span> tangible for <span className="text-foreground font-medium">college students.</span><br />
+                <span className="text-foreground font-medium">Solution:</span> An <span className="text-foreground font-medium">IoT-enhanced,</span> physical <span className="text-foreground font-medium">board game.</span>
               </p>
               
               {/* Role & Tools */}
