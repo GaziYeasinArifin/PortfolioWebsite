@@ -398,9 +398,30 @@ const CaseStudyDetail = () => {
                     Simple, modular, and intentional. The code embodies the same design philosophy as the game itself: clarity over complexity.
                   </p>
                 </div>
-                <div className="relative overflow-hidden rounded-[4px] bg-[#1e1e1e] p-4 md:p-6 font-mono text-xs md:text-sm leading-relaxed">
-                  <div className="overflow-x-auto">
-                    <pre className="text-[#d4d4d4]">
+                <div className="relative overflow-hidden rounded-[4px] bg-[#1e1e1e] shadow-xl">
+                  {/* macOS Window Chrome */}
+                  <div className="flex items-center justify-between px-4 py-3 bg-[#2d2d2d] border-b border-[#3d3d3d]">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+                      <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                      <div className="w-3 h-3 rounded-full bg-[#27ca3f]"></div>
+                    </div>
+                    <span className="text-[#808080] text-xs font-mono">phantom_footprint.ino</span>
+                    <div className="w-16"></div>
+                  </div>
+                  
+                  {/* Code Content */}
+                  <div className="overflow-x-auto p-4 md:p-6">
+                    <div className="flex font-mono text-xs md:text-sm leading-relaxed">
+                      {/* Line Numbers */}
+                      <div className="select-none pr-4 md:pr-6 text-right text-[#6d6d6d] border-r border-[#3d3d3d] mr-4 md:mr-6">
+                        {Array.from({ length: 31 }, (_, i) => (
+                          <div key={i + 1}>{i + 1}</div>
+                        ))}
+                      </div>
+                      
+                      {/* Code */}
+                      <pre className="text-[#d4d4d4] flex-1">
 <span className="text-[#c586c0]">#include</span> <span className="text-[#ce9178]">&lt;SPI.h&gt;</span>
 <span className="text-[#c586c0]">#include</span> <span className="text-[#ce9178]">&lt;MFRC522.h&gt;</span>
 
@@ -413,18 +434,17 @@ const CaseStudyDetail = () => {
   Serial.<span className="text-[#dcdcaa]">begin</span>(<span className="text-[#b5cea8]">9600</span>);
   SPI.<span className="text-[#dcdcaa]">begin</span>();
   rfid.<span className="text-[#dcdcaa]">PCD_Init</span>();
-  Serial.<span className="text-[#dcdcaa]">println</span>(<span className="text-[#ce9178]">"Scan your RFID card to write data..."</span>);
+  Serial.<span className="text-[#dcdcaa]">println</span>(<span className="text-[#ce9178]">"Scan your RFID card..."</span>);
 {"}"}
 
 <span className="text-[#569cd6]">void</span> <span className="text-[#dcdcaa]">loop</span>() {"{"}
-  <span className="text-[#c586c0]">if</span> (!rfid.<span className="text-[#dcdcaa]">PICC_IsNewCardPresent</span>() || !rfid.<span className="text-[#dcdcaa]">PICC_ReadCardSerial</span>())
+  <span className="text-[#c586c0]">if</span> (!rfid.<span className="text-[#dcdcaa]">PICC_IsNewCardPresent</span>())
     <span className="text-[#c586c0]">return</span>;
     
   String cardType = <span className="text-[#ce9178]">"Positive"</span>;
   <span className="text-[#dcdcaa]">writeDataToCard</span>(cardType);
   
   rfid.<span className="text-[#dcdcaa]">PICC_HaltA</span>();
-  rfid.<span className="text-[#dcdcaa]">PCD_StopCrypto1</span>();
   <span className="text-[#dcdcaa]">delay</span>(<span className="text-[#b5cea8]">2000</span>);
 {"}"}
 
@@ -432,14 +452,8 @@ const CaseStudyDetail = () => {
   <span className="text-[#569cd6]">byte</span> block = <span className="text-[#b5cea8]">1</span>;
   <span className="text-[#569cd6]">byte</span> buffer[<span className="text-[#b5cea8]">16</span>] = {"{"}{"}"};
   data.<span className="text-[#dcdcaa]">getBytes</span>(buffer, <span className="text-[#b5cea8]">16</span>);
-  
-  MFRC522::StatusCode status = rfid.<span className="text-[#dcdcaa]">MIFARE_Write</span>(block, buffer, <span className="text-[#b5cea8]">16</span>);
-  <span className="text-[#c586c0]">if</span> (status == MFRC522::STATUS_OK) {"{"}
-    Serial.<span className="text-[#dcdcaa]">println</span>(<span className="text-[#ce9178]">"Write successful! Data written: "</span> + data);
-  {"}"} <span className="text-[#c586c0]">else</span> {"{"}
-    Serial.<span className="text-[#dcdcaa]">println</span>(<span className="text-[#ce9178]">"Write failed!"</span>);
-  {"}"}
 {"}"}</pre>
+                    </div>
                   </div>
                 </div>
               </div>
