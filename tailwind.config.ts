@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         display: ["Syne", "system-ui", "sans-serif"],
         sans: ["Inter", "system-ui", "sans-serif"],
+        poppins: ["Poppins", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
