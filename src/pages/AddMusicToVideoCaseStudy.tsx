@@ -343,6 +343,52 @@ const AddMusicToVideoCaseStudy = () => {
             </div>
           </AnimatedSection>
 
+          {/* Impact Section */}
+          <AnimatedSection delay={100}>
+            <div className="mb-24">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                {/* Left side - Text content */}
+                <div>
+                  <h2 className="font-display text-3xl md:text-4xl font-medium mb-4">impact</h2>
+                  <p className="text-lg text-muted-foreground mb-6">7 Years of Leadership</p>
+                  <p className="text-muted-foreground leading-relaxed mb-10">
+                    This project was just the beginning. It stayed on the Top Charts for years, and the success allowed me to scale the design team to 22 members, leading 16+ successful projects at Kite Games Studio.
+                  </p>
+                  
+                  {/* Results */}
+                  <div className="space-y-4">
+                    <p className="font-display text-2xl md:text-3xl font-bold text-foreground">
+                      Top Charts
+                    </p>
+                    <p className="text-muted-foreground text-sm -mt-2">App Store & Play Store</p>
+                    
+                    <p className="font-display text-2xl md:text-3xl font-bold text-foreground pt-2">
+                      16+ Projects
+                    </p>
+                    <p className="text-muted-foreground text-sm -mt-2">Shipped Successfully</p>
+                    
+                    <p className="font-display text-2xl md:text-3xl font-bold text-foreground pt-2">
+                      22 Designers
+                    </p>
+                    <p className="text-muted-foreground text-sm -mt-2">Team Led & Mentored</p>
+                  </div>
+                </div>
+                
+                {/* Right side - Placeholder */}
+                <div>
+                  <div 
+                    className="w-full bg-secondary/30 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center p-6"
+                    style={{ aspectRatio: '1/1' }}
+                  >
+                    <p className="text-muted-foreground text-sm text-center leading-relaxed">
+                      [INSERT: App Store Top Charts Badge or Growth Graph]
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+
           {/* Navigation to other projects */}
           <AnimatedSection delay={100}>
             <div className="pt-16 border-t border-border">
