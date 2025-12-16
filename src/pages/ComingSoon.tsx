@@ -45,13 +45,13 @@ const PlaceholderImage = ({ label, aspectRatio = '16/9' }: { label: string; aspe
     className="w-full bg-secondary border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center"
     style={{ aspectRatio }}
   >
-    <p className="text-muted-foreground text-sm text-center px-6 leading-relaxed font-poppins">{label}</p>
+    <p className="text-muted-foreground text-sm text-center px-6 leading-relaxed">{label}</p>
   </div>
 );
 
-// Badge component for meta tags - uses the Screenlife brand colors
+// Badge component for meta tags
 const MetaBadge = ({ children }: { children: React.ReactNode }) => (
-  <span className="inline-flex items-center px-4 py-2 bg-[#EEF2FF] text-[#4461F2] text-sm font-medium rounded-full font-poppins">
+  <span className="inline-flex items-center px-4 py-2 bg-[#EEF2FF] text-[#4461F2] text-sm font-medium rounded-full">
     {children}
   </span>
 );
@@ -84,10 +84,10 @@ const ComingSoon = () => {
           {/* ============================================ */}
           <AnimatedSection delay={100}>
             <div className="mb-16 md:mb-24">
-              <h1 className="font-poppins font-semibold leading-[1.05] tracking-tight text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] mb-6 text-foreground">
+              <h1 className="font-display font-medium leading-[1.05] tracking-tight text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] mb-6 text-foreground">
                 iterative design process
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-8 font-poppins">
+              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-8">
                 iterating from paper sketches to a verified ecosystem through rapid prototyping and user testing.
               </p>
               
@@ -104,7 +104,7 @@ const ComingSoon = () => {
           <AnimatedSection delay={200}>
             <div className="relative aspect-[21/9] overflow-hidden rounded-[4px] bg-secondary mb-24 md:mb-32">
               <div className="absolute inset-0 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center">
-                <p className="text-muted-foreground text-sm text-center px-6 leading-relaxed font-poppins">
+                <p className="text-muted-foreground text-sm text-center px-6 leading-relaxed">
                   [PLACEHOLDER: 3D Floating Screens - The Final Iteration Result]
                 </p>
               </div>
@@ -115,22 +115,22 @@ const ComingSoon = () => {
           <AnimatedSection delay={100}>
             <div className="mb-24 md:mb-32">
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4 font-poppins">overview</p>
-                <h2 className="font-poppins text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-4">
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">overview</p>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-foreground mb-4">
                   screenlife app
                 </h2>
-                <p className="text-lg md:text-xl text-muted-foreground max-w-2xl font-poppins">
+                <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
                   bridging the gap between talent and opportunity.
                 </p>
               </div>
               
               {/* Role & Tools Grid */}
               <div className="flex flex-wrap gap-4 md:gap-6">
-                <div className="flex items-center gap-2 text-sm font-poppins">
+                <div className="flex items-center gap-2 text-sm">
                   <span className="text-muted-foreground">role:</span>
                   <span className="text-foreground">UI/UX Designer</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm font-poppins">
+                <div className="flex items-center gap-2 text-sm">
                   <span className="text-muted-foreground">tools:</span>
                   <span className="text-foreground">Figma, Photoshop</span>
                 </div>
@@ -144,8 +144,8 @@ const ComingSoon = () => {
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4 font-poppins">context</p>
-                <h2 className="font-poppins text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground">the challenge</h2>
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">context</p>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-foreground">the challenge</h2>
               </div>
             </AnimatedSection>
 
@@ -153,16 +153,16 @@ const ComingSoon = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
                 {/* The Problem */}
                 <div className="space-y-4">
-                  <h3 className="font-poppins text-xl md:text-2xl font-semibold text-foreground uppercase">the problem</h3>
-                  <p className="text-muted-foreground leading-relaxed font-poppins">
+                  <h3 className="font-display text-xl md:text-2xl font-medium text-foreground uppercase">the problem</h3>
+                  <p className="text-muted-foreground leading-relaxed">
                     unemployment is a global issue. existing platforms are cluttered and unverified, making it difficult for job seekers to find legitimate opportunities and for recruiters to find qualified candidates.
                   </p>
                 </div>
                 
                 {/* The Solution */}
                 <div className="space-y-4">
-                  <h3 className="font-poppins text-xl md:text-2xl font-semibold text-foreground uppercase">the solution</h3>
-                  <p className="text-muted-foreground leading-relaxed font-poppins">
+                  <h3 className="font-display text-xl md:text-2xl font-medium text-foreground uppercase">the solution</h3>
+                  <p className="text-muted-foreground leading-relaxed">
                     a verified job marketplace that builds trust between employers and job seekers through verified profiles, transparent job listings, and a streamlined application process.
                   </p>
                 </div>
@@ -176,9 +176,9 @@ const ComingSoon = () => {
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4 font-poppins">methodology</p>
-                <h2 className="font-poppins text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground">the design process</h2>
-                <p className="text-lg text-muted-foreground mt-4 font-poppins">I followed a 5-step user-centered process.</p>
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">methodology</p>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-foreground">the design process</h2>
+                <p className="text-lg text-muted-foreground mt-4">I followed a 5-step user-centered process.</p>
               </div>
             </AnimatedSection>
             
@@ -196,9 +196,9 @@ const ComingSoon = () => {
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4 font-poppins">empathize</p>
-                <h2 className="font-poppins text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground">understanding the user</h2>
-                <p className="text-lg text-muted-foreground mt-4 font-poppins">target audience: job seekers & recruiters.</p>
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">empathize</p>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-foreground">understanding the user</h2>
+                <p className="text-lg text-muted-foreground mt-4">target audience: job seekers & recruiters.</p>
               </div>
             </AnimatedSection>
             
@@ -206,7 +206,7 @@ const ComingSoon = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
                 {/* User Persona */}
                 <div className="space-y-4">
-                  <h3 className="font-poppins text-sm text-muted-foreground uppercase tracking-wide">user persona</h3>
+                  <h3 className="text-sm text-muted-foreground uppercase tracking-wide">user persona</h3>
                   <PlaceholderImage 
                     label="[PLACEHOLDER: User Persona Card (Sarah - The Frustrated Job Seeker)]" 
                     aspectRatio="3/4" 
@@ -215,7 +215,7 @@ const ComingSoon = () => {
                 
                 {/* Empathy Map */}
                 <div className="space-y-4">
-                  <h3 className="font-poppins text-sm text-muted-foreground uppercase tracking-wide">empathy map</h3>
+                  <h3 className="text-sm text-muted-foreground uppercase tracking-wide">empathy map</h3>
                   <PlaceholderImage 
                     label="[PLACEHOLDER: Empathy Map Grid (Says / Thinks / Does / Feels)]" 
                     aspectRatio="1/1" 
@@ -231,9 +231,9 @@ const ComingSoon = () => {
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4 font-poppins">define & ideate</p>
-                <h2 className="font-poppins text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground">ideation & logic</h2>
-                <p className="text-lg text-muted-foreground mt-4 font-poppins">mapping the user journey to ensure a seamless flow.</p>
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">define & ideate</p>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-foreground">ideation & logic</h2>
+                <p className="text-lg text-muted-foreground mt-4">mapping the user journey to ensure a seamless flow.</p>
               </div>
             </AnimatedSection>
             
@@ -241,7 +241,7 @@ const ComingSoon = () => {
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8">
                 {/* User Flow - 60% */}
                 <div className="lg:col-span-3 space-y-4">
-                  <h3 className="font-poppins text-sm text-muted-foreground uppercase tracking-wide">information architecture</h3>
+                  <h3 className="text-sm text-muted-foreground uppercase tracking-wide">information architecture</h3>
                   <PlaceholderImage 
                     label="[PLACEHOLDER: User Flow Diagram]" 
                     aspectRatio="16/10" 
@@ -250,7 +250,7 @@ const ComingSoon = () => {
                 
                 {/* Sketches - 40% */}
                 <div className="lg:col-span-2 space-y-4">
-                  <h3 className="font-poppins text-sm text-muted-foreground uppercase tracking-wide">rapid paper prototyping</h3>
+                  <h3 className="text-sm text-muted-foreground uppercase tracking-wide">rapid paper prototyping</h3>
                   <PlaceholderImage 
                     label="[PLACEHOLDER: Photo of Hand-Drawn Paper Sketches]" 
                     aspectRatio="4/5" 
@@ -266,9 +266,9 @@ const ComingSoon = () => {
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4 font-poppins">prototype</p>
-                <h2 className="font-poppins text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground">wireframing</h2>
-                <p className="text-lg text-muted-foreground mt-4 font-poppins">translating sketches into digital structure to test placement and hierarchy.</p>
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">prototype</p>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-foreground">wireframing</h2>
+                <p className="text-lg text-muted-foreground mt-4">translating sketches into digital structure to test placement and hierarchy.</p>
               </div>
             </AnimatedSection>
             
@@ -286,9 +286,9 @@ const ComingSoon = () => {
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4 font-poppins">style guide</p>
-                <h2 className="font-poppins text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground">visual identity</h2>
-                <p className="text-lg text-muted-foreground mt-4 font-poppins">building trust with color and typography.</p>
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">style guide</p>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-foreground">visual identity</h2>
+                <p className="text-lg text-muted-foreground mt-4">building trust with color and typography.</p>
               </div>
             </AnimatedSection>
             
@@ -296,7 +296,7 @@ const ComingSoon = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
                 {/* Typography */}
                 <div className="space-y-4">
-                  <h3 className="font-poppins text-sm text-muted-foreground uppercase tracking-wide">typography: poppins (geometric, clean)</h3>
+                  <h3 className="text-sm text-muted-foreground uppercase tracking-wide">typography: poppins (geometric, clean)</h3>
                   <PlaceholderImage 
                     label="[PLACEHOLDER: Typography Specimen (Poppins)]" 
                     aspectRatio="4/3" 
@@ -305,7 +305,7 @@ const ComingSoon = () => {
                 
                 {/* Color Palette */}
                 <div className="space-y-4">
-                  <h3 className="font-poppins text-sm text-muted-foreground uppercase tracking-wide">color: royal blue (#4461F2)</h3>
+                  <h3 className="text-sm text-muted-foreground uppercase tracking-wide">color: royal blue (#4461F2)</h3>
                   <PlaceholderImage 
                     label="[PLACEHOLDER: Color Palette Swatches]" 
                     aspectRatio="4/3" 
@@ -321,9 +321,9 @@ const ComingSoon = () => {
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4 font-poppins">high-fidelity</p>
-                <h2 className="font-poppins text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground">onboarding experience</h2>
-                <p className="text-lg text-muted-foreground mt-4 font-poppins">engaging the user immediately with clear value propositions.</p>
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">high-fidelity</p>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-foreground">onboarding experience</h2>
+                <p className="text-lg text-muted-foreground mt-4">engaging the user immediately with clear value propositions.</p>
               </div>
             </AnimatedSection>
             
@@ -357,9 +357,9 @@ const ComingSoon = () => {
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4 font-poppins">core screens</p>
-                <h2 className="font-poppins text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground">core interface</h2>
-                <p className="text-lg text-muted-foreground mt-4 font-poppins">clean feeds and detailed job descriptions.</p>
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">core screens</p>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-foreground">core interface</h2>
+                <p className="text-lg text-muted-foreground mt-4">clean feeds and detailed job descriptions.</p>
               </div>
             </AnimatedSection>
             
@@ -391,9 +391,9 @@ const ComingSoon = () => {
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4 font-poppins">profile</p>
-                <h2 className="font-poppins text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground">user profile</h2>
-                <p className="text-lg text-muted-foreground mt-4 font-poppins">a professional dashboard for job seekers.</p>
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">profile</p>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-foreground">user profile</h2>
+                <p className="text-lg text-muted-foreground mt-4">a professional dashboard for job seekers.</p>
               </div>
             </AnimatedSection>
             
@@ -415,9 +415,9 @@ const ComingSoon = () => {
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4 font-poppins">outcome</p>
-                <h2 className="font-poppins text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground">interactive prototype</h2>
-                <p className="text-lg text-muted-foreground mt-4 font-poppins">a fully interactive application.</p>
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">outcome</p>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-foreground">interactive prototype</h2>
+                <p className="text-lg text-muted-foreground mt-4">a fully interactive application.</p>
               </div>
             </AnimatedSection>
             
@@ -427,7 +427,7 @@ const ComingSoon = () => {
                 <div className="w-full max-w-[300px] mb-10">
                   <div className="bg-foreground rounded-[32px] p-3">
                     <div className="bg-secondary border-2 border-dashed border-muted-foreground/30 rounded-[24px] flex items-center justify-center" style={{ aspectRatio: '9/19' }}>
-                      <p className="text-muted-foreground text-sm text-center px-6 leading-relaxed font-poppins">
+                      <p className="text-muted-foreground text-sm text-center px-6 leading-relaxed">
                         [PLACEHOLDER: GIF of App Interaction / Scrolling]
                       </p>
                     </div>
@@ -436,10 +436,10 @@ const ComingSoon = () => {
                 
                 {/* Outcome Text */}
                 <div className="text-center max-w-xl">
-                  <p className="font-poppins text-xl md:text-2xl font-semibold text-foreground mb-2">
+                  <p className="font-display text-xl md:text-2xl font-medium text-foreground mb-2">
                     successfully reduced application time by 40%
                   </p>
-                  <p className="text-muted-foreground font-poppins">
+                  <p className="text-muted-foreground">
                     streamlined user flow with verified trust signals
                   </p>
                 </div>
@@ -450,22 +450,22 @@ const ComingSoon = () => {
           {/* CTA Footer */}
           <AnimatedSection>
             <div className="text-center pt-16 border-t border-border">
-              <p className="font-poppins text-2xl md:text-3xl font-semibold mb-4 text-foreground">
+              <p className="font-display text-2xl md:text-3xl font-medium mb-4 text-foreground">
                 let's create something impactful
               </p>
-              <p className="text-muted-foreground text-lg mb-8 font-poppins">
+              <p className="text-muted-foreground text-lg mb-8">
                 interested in working together?
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4">
                 <a 
                   href="mailto:arifin.yeasin@gmail.com"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-[#4461F2] text-white font-medium rounded-[4px] hover:bg-[#3651E2] transition-colors duration-300 font-poppins"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-foreground text-background font-medium rounded-[4px] hover:bg-foreground/90 transition-colors duration-300"
                 >
                   get in touch
                 </a>
                 <Link 
                   to="/#case-studies"
-                  className="inline-flex items-center justify-center px-8 py-4 border border-border text-foreground font-medium rounded-[4px] hover:bg-secondary transition-colors duration-300 font-poppins"
+                  className="inline-flex items-center justify-center px-8 py-4 border border-border text-foreground font-medium rounded-[4px] hover:bg-secondary transition-colors duration-300"
                 >
                   view more work
                 </Link>
