@@ -130,12 +130,48 @@ const AddMusicToVideoCaseStudy = () => {
             </div>
           </AnimatedSection>
 
-          {/* Content sections will be added here */}
+          {/* The Challenge Section */}
           <AnimatedSection delay={100}>
-            <div className="py-24 text-center">
-              <p className="text-muted-foreground text-lg">
-                Case study content coming soon...
+            <div className="mb-24">
+              <h2 className="font-display text-3xl md:text-4xl font-medium mb-4">the challenge</h2>
+              <p className="text-lg text-muted-foreground mb-2">The 2016 Landscape</p>
+              <p className="text-muted-foreground leading-relaxed max-w-3xl mb-16">
+                The original experience was cluttered and technically rigid. Users struggled to sync audio, and the visual output felt "cheap." I needed to dismantle the existing flow and rebuild it based on how people feel music, not just how code handles it.
               </p>
+              
+              {/* Comparison Layout */}
+              <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8">
+                {/* Old Interface */}
+                <div className="w-full max-w-[220px]">
+                  <div 
+                    className="w-full bg-secondary/30 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center p-4"
+                    style={{ aspectRatio: '9/16' }}
+                  >
+                    <p className="text-muted-foreground text-xs text-center leading-relaxed">
+                      [INSERT: Old 2016 Cluttered Interface]
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Arrow */}
+                <div className="text-muted-foreground/50 rotate-90 md:rotate-0">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </div>
+                
+                {/* New Interface */}
+                <div className="w-full max-w-[220px]">
+                  <div 
+                    className="w-full bg-secondary/30 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center p-4"
+                    style={{ aspectRatio: '9/16' }}
+                  >
+                    <p className="text-muted-foreground text-xs text-center leading-relaxed">
+                      [INSERT: New 2017 Clean Interface]
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </AnimatedSection>
 
