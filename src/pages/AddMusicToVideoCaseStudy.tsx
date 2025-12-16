@@ -99,42 +99,33 @@ const AddMusicToVideoCaseStudy = () => {
             </div>
           </AnimatedSection>
 
-          {/* Project Overview */}
+          {/* Context & Role Section */}
           <AnimatedSection delay={100}>
-            <div className="grid md:grid-cols-2 gap-16 mb-24">
-              <div>
-                <h2 className="font-display text-2xl md:text-3xl font-medium mb-6">the challenge</h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  Challenge description will be added here.
-                </p>
-              </div>
-              <div>
-                <h2 className="font-display text-2xl md:text-3xl font-medium mb-6">the solution</h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  Solution description will be added here.
-                </p>
-              </div>
-            </div>
-          </AnimatedSection>
-
-          {/* Project Details */}
-          <AnimatedSection delay={100}>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-24 py-8 border-y border-border">
-              <div>
-                <p className="text-sm text-muted-foreground mb-2">role</p>
-                <p className="font-medium">TBD</p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground mb-2">tools</p>
-                <p className="font-medium">TBD</p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground mb-2">duration</p>
-                <p className="font-medium">TBD</p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground mb-2">team</p>
-                <p className="font-medium">TBD</p>
+            <div className="bg-secondary/30 rounded-[4px] py-10 px-8 mb-24">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
+                {/* Role */}
+                <div className="px-4 md:px-6 py-4">
+                  <p className="text-sm text-muted-foreground mb-2 tracking-wide">role</p>
+                  <p className="font-medium text-foreground">Lead UX Designer</p>
+                </div>
+                
+                {/* Growth */}
+                <div className="px-4 md:px-6 py-4 border-l border-border">
+                  <p className="text-sm text-muted-foreground mb-2 tracking-wide">growth</p>
+                  <p className="font-medium text-foreground">Scaled Team 4 → 22</p>
+                </div>
+                
+                {/* Location */}
+                <div className="px-4 md:px-6 py-4 md:border-l border-border">
+                  <p className="text-sm text-muted-foreground mb-2 tracking-wide">location</p>
+                  <p className="font-medium text-foreground">Kite Games Studio, Dhaka</p>
+                </div>
+                
+                {/* Collaboration */}
+                <div className="px-4 md:px-6 py-4 border-l border-border">
+                  <p className="text-sm text-muted-foreground mb-2 tracking-wide">collaboration</p>
+                  <p className="font-medium text-foreground">Dev & QA Integration</p>
+                </div>
               </div>
             </div>
           </AnimatedSection>
