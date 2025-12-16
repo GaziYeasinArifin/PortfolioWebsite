@@ -140,8 +140,10 @@ const CaseStudyDetail = () => {
           {/* Hero section - The Hook */}
           <AnimatedSection delay={100}>
             <div className="mb-16 md:mb-24">
-              <h1 className="font-display font-medium leading-[1.05] tracking-tight text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] mb-6 uppercase">
-                phantom footprint: closing the climate feedback loop
+              <h1 className="font-display font-medium leading-[1.05] tracking-tight text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] mb-6">
+                <span className="uppercase text-foreground">phantom footprint</span>
+                <br />
+                <span className="lowercase text-muted-foreground">closing the climate feedback loop</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-8">
                 Challenge: Making climate consequences tangible for college students.<br />
