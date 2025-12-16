@@ -7,7 +7,7 @@ import OptimizedImage from '@/components/OptimizedImage';
 import placeholderSvg from '@/assets/placeholder-image.svg';
 import phantomFootprintHero from '@/assets/phantom-footprint-hero.png';
 import phantomResearchCardSort from '@/assets/phantom-research-card-sort.jpg';
-import phantomPersonaInsight from '@/assets/phantom-persona-insight.png';
+import phantomPersonaInsight from '@/assets/phantom-persona-kartik.png';
 import phantomPaperPrototype from '@/assets/phantom-paper-prototype.jpg';
 import phantomScreenVsTactile from '@/assets/phantom-screen-vs-tactile.jpg';
 import phantomArduino1 from '@/assets/phantom-arduino-1.jpg';
