@@ -71,21 +71,31 @@ const AddMusicToVideoCaseStudy = () => {
 
           {/* Hero Section */}
           <AnimatedSection delay={100}>
-            <div className="mb-16">
-              <p className="text-sm text-muted-foreground mb-4 tracking-wide">iOS APP • UX DESIGN • 2024</p>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium leading-[1.05] tracking-tight mb-6">
-                Add Music to Video
-              </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl">
-                Simplifying video editing for content creators
-              </p>
-            </div>
-          </AnimatedSection>
-
-          {/* Hero Image Placeholder */}
-          <AnimatedSection delay={200}>
-            <div className="mb-24">
-              <PlaceholderImage label="Hero Image – App showcase or key screen" aspectRatio="16/9" />
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-24">
+              {/* Left side - Text content */}
+              <div>
+                <h1 className="font-display text-5xl md:text-6xl lg:text-[64px] font-bold leading-[1.1] tracking-tight text-foreground mb-6">
+                  Redefining Mobile Video Editing
+                </h1>
+                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
+                  Leading the UX for Add Music to Video—a top-charting app developed at Kite Games Studio that scaled from a simple utility to a creative powerhouse.
+                </p>
+                <p className="font-mono text-sm text-muted-foreground tracking-wide">
+                  2016 - 2023 • Lead UX Designer
+                </p>
+              </div>
+              
+              {/* Right side - Mobile screen placeholder */}
+              <div className="flex justify-center lg:justify-end">
+                <div 
+                  className="w-full max-w-[280px] bg-secondary/40 border-2 border-dashed border-muted-foreground/30 rounded-[40px] flex items-center justify-center p-6"
+                  style={{ aspectRatio: '9/19' }}
+                >
+                  <p className="text-muted-foreground text-sm text-center leading-relaxed">
+                    [INSERT: High-Fidelity App Home Screen - Dark Mode]
+                  </p>
+                </div>
+              </div>
             </div>
           </AnimatedSection>
 
