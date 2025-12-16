@@ -322,6 +322,28 @@ const AddMusicToVideoCaseStudy = () => {
             </div>
           </AnimatedSection>
 
+          {/* Execution Section */}
+          <AnimatedSection delay={100}>
+            <div className="mb-24 text-center">
+              <h2 className="font-display text-3xl md:text-4xl font-medium mb-4">execution</h2>
+              <p className="text-lg text-muted-foreground mb-6">Pixel-Perfect Execution</p>
+              <p className="text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-12">
+                The best design fails without implementation. I sat side-by-side with developers and QA engineers in countless meetings, fixing glitches and refining transition timings until the app felt indistinguishable from the After Effects prototype.
+              </p>
+              
+              {/* Panoramic Placeholder */}
+              <div 
+                className="w-full bg-secondary/30 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center p-6"
+                style={{ aspectRatio: '21/9' }}
+              >
+                <p className="text-muted-foreground text-sm text-center leading-relaxed">
+                  [INSERT: Photo of Team Collaboration or Code/Design Split Screen]
+                </p>
+              </div>
+            </div>
+          </AnimatedSection>
+
+          {/* Navigation to other projects */}
           <AnimatedSection delay={100}>
             <div className="pt-16 border-t border-border">
               <Link 
