@@ -1,8 +1,10 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, Cpu, Figma, Lightbulb, Users } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import OptimizedImage from '@/components/OptimizedImage';
+import placeholderSvg from '@/assets/placeholder-image.svg';
 import phantomFootprintHero from '@/assets/phantom-footprint-hero.png';
 import phantomResearchCardSort from '@/assets/phantom-research-card-sort.jpg';
 import phantomPersonaInsight from '@/assets/phantom-persona-insight.png';
@@ -18,6 +20,23 @@ import phantomScope2 from '@/assets/phantom-scope-2.png';
 import phantomScope3 from '@/assets/phantom-scope-3.jpg';
 import phantomIterationGraphic from '@/assets/phantom-iteration-graphic.svg';
 import phantomThankYou from '@/assets/phantom-thank-you.jpg';
+
+// Hook to preload images and track loading state
+const usePreloadImages = (images: string[]) => {
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+  
+  useEffect(() => {
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        setLoadedImages((prev) => new Set([...prev, src]));
+      };
+    });
+  }, [images]);
+  
+  return loadedImages.size === images.length;
+};
 
 // Custom hook for scroll-triggered animations
 const useScrollReveal = () => {
@@ -80,6 +99,9 @@ const CaseStudyDetail = () => {
   const [assemblyImageIndex, setAssemblyImageIndex] = useState(0);
   const arduinoImages = [phantomArduino1, phantomArduino2];
   const assemblyImages = [phantomAssembly1, phantomAssembly2];
+  
+  const arduinoImagesLoaded = usePreloadImages(arduinoImages);
+  const assemblyImagesLoaded = usePreloadImages(assemblyImages);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -154,11 +176,11 @@ const CaseStudyDetail = () => {
           {/* Hero image */}
           <AnimatedSection delay={200}>
             <div className="relative aspect-[16/9] overflow-hidden rounded-[4px] bg-secondary mb-24 md:mb-32 group">
-              <img 
+              <OptimizedImage 
                 src={phantomFootprintHero} 
                 alt="Phantom Footprint - IoT-enhanced board game for climate education" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                loading="eager"
+                className="transition-transform duration-700 group-hover:scale-[1.02]"
+                priority
               />
             </div>
           </AnimatedSection>
@@ -182,11 +204,10 @@ const CaseStudyDetail = () => {
                   </p>
                 </div>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary group">
-                  <img 
+                  <OptimizedImage 
                     src={phantomResearchCardSort} 
                     alt="Research & card sort session" 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                    loading="lazy"
+                    className="transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 </div>
               </div>
@@ -196,11 +217,10 @@ const CaseStudyDetail = () => {
             <AnimatedSection>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-16">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary order-2 lg:order-1 group">
-                  <img 
+                  <OptimizedImage 
                     src={phantomPersonaInsight} 
                     alt="Persona: The Digital Nomad Student - Alex, 22" 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                    loading="lazy"
+                    className="transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 </div>
                 <div className="space-y-4 order-1 lg:order-2">
@@ -236,11 +256,11 @@ const CaseStudyDetail = () => {
                   </p>
                 </div>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary group">
-                  <img 
+                  <OptimizedImage 
                     src={phantomScreenVsTactile} 
                     alt="Boring screen vs tactile game comparison" 
-                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-                    loading="lazy"
+                    className="transition-transform duration-500 group-hover:scale-[1.02]"
+                    objectPosition="top"
                   />
                 </div>
               </div>
@@ -266,11 +286,11 @@ const CaseStudyDetail = () => {
                   </p>
                 </div>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary group">
-                  <img 
+                  <OptimizedImage 
                     src={phantomPaperPrototype} 
                     alt="Initial paper prototype & game layout" 
-                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-                    loading="lazy"
+                    className="transition-transform duration-500 group-hover:scale-[1.02]"
+                    objectPosition="top"
                   />
                 </div>
               </div>
@@ -280,13 +300,23 @@ const CaseStudyDetail = () => {
             <AnimatedSection>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-16">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary order-2 lg:order-1">
+                  {/* Placeholder */}
+                  <img
+                    src={placeholderSvg}
+                    alt=""
+                    aria-hidden="true"
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                      arduinoImagesLoaded ? 'opacity-0' : 'opacity-100'
+                    }`}
+                  />
+                  {/* Cycling images */}
                   {arduinoImages.map((img, index) => (
                     <img 
                       key={index}
                       src={img} 
                       alt={`Arduino LED breadboard circuit ${index + 1}`} 
                       className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
-                        index === arduinoImageIndex ? 'opacity-100' : 'opacity-0'
+                        arduinoImagesLoaded && index === arduinoImageIndex ? 'opacity-100' : 'opacity-0'
                       }`}
                       loading="lazy"
                     />
@@ -311,13 +341,23 @@ const CaseStudyDetail = () => {
                   </p>
                 </div>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-secondary">
+                  {/* Placeholder */}
+                  <img
+                    src={placeholderSvg}
+                    alt=""
+                    aria-hidden="true"
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                      assemblyImagesLoaded ? 'opacity-0' : 'opacity-100'
+                    }`}
+                  />
+                  {/* Cycling images */}
                   {assemblyImages.map((img, index) => (
                     <img 
                       key={index}
                       src={img} 
                       alt={`Soldering, wiring & assembly demo ${index + 1}`} 
                       className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
-                        index === assemblyImageIndex ? 'opacity-100' : 'opacity-0'
+                        assemblyImagesLoaded && index === assemblyImageIndex ? 'opacity-100' : 'opacity-0'
                       }`}
                       loading="lazy"
                     />
@@ -330,11 +370,10 @@ const CaseStudyDetail = () => {
             <AnimatedSection>
               <div className="space-y-8">
                 <div className="relative aspect-[16/9] overflow-hidden rounded-[4px] bg-secondary group">
-                  <img 
+                  <OptimizedImage 
                     src={phantomAbTest} 
                     alt="A/B test comparison - game interface and feedback system iterations" 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                    loading="lazy"
+                    className="transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 </div>
                 <div className="space-y-4 max-w-3xl">
@@ -435,12 +474,13 @@ const CaseStudyDetail = () => {
             <AnimatedSection>
               <div className="mb-16 text-center py-12">
                 <div className="mb-[90px]">
-                  <img 
-                    src={phantomIterationGraphic} 
-                    alt="Iteration process graphic" 
-                    className="w-full max-w-4xl mx-auto mb-4"
-                    loading="lazy"
-                  />
+                  <div className="w-full max-w-4xl mx-auto mb-4 aspect-[16/6]">
+                    <OptimizedImage 
+                      src={phantomIterationGraphic} 
+                      alt="Iteration process graphic" 
+                      objectFit="contain"
+                    />
+                  </div>
                   <p className="text-sm text-muted-foreground">Double Diamond Framework</p>
                 </div>
                 <h3 className="font-display text-xl md:text-2xl font-medium uppercase mb-8">simplicity, iteration, and the power of physical ux.</h3>
@@ -476,30 +516,28 @@ const CaseStudyDetail = () => {
                   {/* Top row: 2 portrait images */}
                   <div className="grid grid-cols-2 gap-4">
                     <div className="relative aspect-[3/4] overflow-hidden rounded-[4px] group">
-                      <img 
+                      <OptimizedImage 
                         src={phantomScope1} 
                         alt="Players engaging with Phantom Footprint game" 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                        loading="lazy"
+                        className="transition-transform duration-500 group-hover:scale-[1.02]"
                       />
                     </div>
                     <div className="relative aspect-[3/4] overflow-hidden rounded-[4px] bg-[#c8c4c0] group">
-                      <img 
+                      <OptimizedImage 
                         src={phantomScope3} 
                         alt="Final Phantom Footprint game board design" 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                        loading="lazy"
+                        className="transition-transform duration-500 group-hover:scale-[1.02]"
                       />
                     </div>
                   </div>
                   
                   {/* Bottom: Landscape image */}
                   <div className="relative aspect-[16/9] overflow-hidden rounded-[4px] bg-[#c8c4c0] group">
-                    <img 
+                    <OptimizedImage 
                       src={phantomScope2} 
                       alt="Phantom Footprint product iterations and components" 
-                      className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
-                      loading="lazy"
+                      className="transition-transform duration-500 group-hover:scale-[1.02]"
+                      objectFit="contain"
                     />
                   </div>
                 </div>
@@ -510,11 +548,10 @@ const CaseStudyDetail = () => {
             <AnimatedSection>
               <div className="mt-16">
                 <div className="relative aspect-[16/5] overflow-hidden rounded-[4px] group">
-                  <img 
+                  <OptimizedImage 
                     src={phantomThankYou} 
                     alt="Thank you - hands holding Earth" 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                    loading="lazy"
+                    className="transition-transform duration-700 group-hover:scale-[1.02]"
                   />
                 </div>
               </div>
