@@ -234,6 +234,38 @@ const AddMusicToVideoCaseStudy = () => {
             </div>
           </AnimatedSection>
 
+          {/* The Bridge Section */}
+          <AnimatedSection delay={100}>
+            <div className="mb-24">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                {/* Left side - Text content */}
+                <div>
+                  <h2 className="font-display text-3xl md:text-4xl font-medium mb-4">the "bridge"</h2>
+                  <p className="text-lg text-muted-foreground mb-6">Bridging Design & Code</p>
+                  <p className="text-muted-foreground leading-relaxed mb-8">
+                    In 2016, tools like Figma weren't advanced enough for my vision. I used After Effects to demonstrate complex animations and wrote "Transition Grammar" on paper to explain the logic to developers.
+                  </p>
+                  <p className="text-lg md:text-xl italic text-foreground/80 leading-relaxed">
+                    "I didn't just hand off pixels; I defined the physics of the app."
+                  </p>
+                </div>
+                
+                {/* Right side - Placeholder */}
+                <div>
+                  <div 
+                    className="w-full bg-secondary/30 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center p-6"
+                    style={{ aspectRatio: '16/9' }}
+                  >
+                    <p className="text-muted-foreground text-sm text-center leading-relaxed">
+                      [INSERT: Photo of Handwritten Logic Paper or After Effects Timeline]
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+
+          {/* Navigation to other projects */}
           <AnimatedSection delay={100}>
             <div className="pt-16 border-t border-border">
               <Link 
