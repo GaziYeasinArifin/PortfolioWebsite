@@ -265,7 +265,63 @@ const AddMusicToVideoCaseStudy = () => {
             </div>
           </AnimatedSection>
 
-          {/* Navigation to other projects */}
+          {/* The Solution Section */}
+          <AnimatedSection delay={100}>
+            <div className="mb-24">
+              <h2 className="font-display text-3xl md:text-4xl font-medium mb-4">the solution</h2>
+              <p className="text-lg text-muted-foreground mb-6">The Reimagined Editor</p>
+              <p className="text-muted-foreground leading-relaxed max-w-3xl mb-12">
+                The final design featured a dark-mode interface that prioritized the content. We introduced a drag-and-drop timeline that felt tactile, allowing users to "touch" the music. The result was a seamless flow from import to export.
+              </p>
+              
+              {/* Solution Gallery */}
+              <div className="bg-[hsl(220,10%,15%)] rounded-[4px] p-8 md:p-12">
+                <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8">
+                  {/* Screen 1 */}
+                  <div className="w-full max-w-[180px]">
+                    <div 
+                      className="w-full bg-[hsl(220,10%,20%)] border-2 border-dashed border-[hsl(220,10%,30%)] rounded-[4px] flex items-center justify-center p-4"
+                      style={{ aspectRatio: '9/16' }}
+                    >
+                      <p className="text-[hsl(220,10%,50%)] text-xs text-center leading-relaxed">
+                        [INSERT: Music Selection Screen]
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Screen 2 */}
+                  <div className="w-full max-w-[180px]">
+                    <div 
+                      className="w-full bg-[hsl(220,10%,20%)] border-2 border-dashed border-[hsl(220,10%,30%)] rounded-[4px] flex items-center justify-center p-4"
+                      style={{ aspectRatio: '9/16' }}
+                    >
+                      <p className="text-[hsl(220,10%,50%)] text-xs text-center leading-relaxed">
+                        [INSERT: Main Editor Timeline]
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Screen 3 */}
+                  <div className="w-full max-w-[180px]">
+                    <div 
+                      className="w-full bg-[hsl(220,10%,20%)] border-2 border-dashed border-[hsl(220,10%,30%)] rounded-[4px] flex items-center justify-center p-4"
+                      style={{ aspectRatio: '9/16' }}
+                    >
+                      <p className="text-[hsl(220,10%,50%)] text-xs text-center leading-relaxed">
+                        [INSERT: Export & Share Screen]
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Caption */}
+                <p className="text-center text-[hsl(220,10%,50%)] text-sm mt-8">
+                  The 2017 Redesign
+                </p>
+              </div>
+            </div>
+          </AnimatedSection>
+
           <AnimatedSection delay={100}>
             <div className="pt-16 border-t border-border">
               <Link 
