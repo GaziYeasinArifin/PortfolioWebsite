@@ -389,6 +389,24 @@ const AddMusicToVideoCaseStudy = () => {
             </div>
           </AnimatedSection>
 
+          {/* CTA Footer Section */}
+          <AnimatedSection delay={100}>
+            <div className="py-24 text-center">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium mb-4">
+                Ready to build the next success story?
+              </h2>
+              <p className="text-xl text-muted-foreground mb-10">
+                Let's create something memorable.
+              </p>
+              <a 
+                href="mailto:arifin.yeasin@gmail.com"
+                className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-medium text-lg rounded-[4px] hover:bg-foreground/90 transition-colors duration-300"
+              >
+                Contact Me
+              </a>
+            </div>
+          </AnimatedSection>
+
           {/* Navigation to other projects */}
           <AnimatedSection delay={100}>
             <div className="pt-16 border-t border-border">
