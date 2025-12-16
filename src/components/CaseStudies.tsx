@@ -54,7 +54,7 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       category: 'Web Design',
       image: caseStudy3,
       year: '2023',
-      slug: 'coming-soon',
+      slug: 'analytics-dashboard',
     },
     {
       id: 4,
