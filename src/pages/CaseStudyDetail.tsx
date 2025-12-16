@@ -546,7 +546,7 @@ const CaseStudyDetail = () => {
             {/* Thank You */}
             <AnimatedSection>
               <div className="mt-16 py-24 flex items-center justify-center">
-                <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-medium lowercase">thank you</h2>
+                <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-medium lowercase">thank you</h2>
               </div>
             </AnimatedSection>
           </section>
