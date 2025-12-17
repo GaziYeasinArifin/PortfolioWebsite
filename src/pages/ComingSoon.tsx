@@ -277,12 +277,20 @@ const ComingSoon = () => {
               </div>
             </AnimatedSection>
 
-            {/* Two column: Playlist + Player Minimized */}
+            {/* Finding 2: Playlist Creation - gif left, text right */}
             <AnimatedSection>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-                {/* Playlist Creation */}
-                <div className="flex flex-col md:flex-row lg:flex-col gap-6 items-center">
-                  <div className="flex-1 space-y-4 text-center lg:text-left">
+              <div className="mb-16 md:mb-20">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                  <div className="lg:col-span-2 order-2 lg:order-1">
+                    <div className="relative w-full overflow-hidden rounded-[4px] group flex justify-center">
+                      <img 
+                        src={screenlifePlaylist} 
+                        alt="Playlist creation UI animation showing the new create button" 
+                        className="w-full max-w-md h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                      />
+                    </div>
+                  </div>
+                  <div className="lg:col-span-1 space-y-4 order-1 lg:order-2">
                     <div className="inline-block bg-secondary px-3 py-1 rounded-[4px]">
                       <span className="text-xs font-medium tracking-wider uppercase">finding #2</span>
                     </div>
@@ -295,20 +303,15 @@ const ComingSoon = () => {
                       <p className="text-foreground font-medium">Added prominent "Create" button to the playlist screen.</p>
                     </div>
                   </div>
-                  <div className="w-full max-w-[360px] mx-auto">
-                    <div className="relative overflow-hidden rounded-[4px] group">
-                      <img 
-                        src={screenlifePlaylist} 
-                        alt="Playlist creation UI animation showing the new create button" 
-                        className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
-                      />
-                    </div>
-                  </div>
                 </div>
+              </div>
+            </AnimatedSection>
 
-                {/* Player Behavior */}
-                <div className="flex flex-col md:flex-row lg:flex-col gap-6 items-center">
-                  <div className="flex-1 space-y-4 text-center lg:text-left">
+            {/* Finding 3: Player Behavior - text left, gif right */}
+            <AnimatedSection>
+              <div className="mb-16 md:mb-20">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                  <div className="lg:col-span-1 space-y-4">
                     <div className="inline-block bg-secondary px-3 py-1 rounded-[4px]">
                       <span className="text-xs font-medium tracking-wider uppercase">finding #3</span>
                     </div>
@@ -321,12 +324,12 @@ const ComingSoon = () => {
                       <p className="text-foreground font-medium">Added minimization logic with persistent mini-player.</p>
                     </div>
                   </div>
-                  <div className="w-full max-w-[360px] mx-auto">
-                    <div className="relative overflow-hidden rounded-[4px] group">
+                  <div className="lg:col-span-2">
+                    <div className="relative w-full overflow-hidden rounded-[4px] group flex justify-center">
                       <img 
                         src={screenlifePlayerMinimized} 
                         alt="Player minimization animation showing the mini-player feature" 
-                        className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                        className="w-full max-w-md h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
                       />
                     </div>
                   </div>
