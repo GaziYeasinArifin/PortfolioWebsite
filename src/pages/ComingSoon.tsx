@@ -10,6 +10,7 @@ import screenlifeHero from '@/assets/screenlife-hero.png';
 import screenlifeSearchUi from '@/assets/screenlife-search-ui.webp';
 import screenlifePlayerMinimized from '@/assets/screenlife-player-minimized.gif';
 import screenlifePlaylist from '@/assets/screenlife-playlist.gif';
+import screenlifeUxFlows from '@/assets/screenlife-ux-flows.webp';
 // Custom hook for scroll-triggered animations
 const useScrollReveal = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -184,11 +185,30 @@ const ComingSoon = () => {
               </div>
             </AnimatedSection>
 
+            {/* Initial Research */}
+            <AnimatedSection>
+              <div className="space-y-8 mb-16">
+                <div className="space-y-4 max-w-3xl">
+                  <p className="text-muted-foreground leading-relaxed">
+                    Initial research included <span className="text-foreground font-medium">competitive analysis</span>, review of Screenlife products, stakeholder interviews, and documenting all UX flows.
+                  </p>
+                </div>
+                <div className="relative w-full overflow-hidden rounded-[4px] group">
+                  <img 
+                    src={screenlifeUxFlows} 
+                    alt="UX flows documentation showing commenting flows on the Screenlife website" 
+                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                </div>
+              </div>
+            </AnimatedSection>
+
+            {/* Personas */}
             <AnimatedSection>
               <div className="space-y-8">
                 <div className="space-y-4 max-w-3xl">
                   <p className="text-muted-foreground leading-relaxed">
-                    Lacking access to real users initially, I created <span className="text-foreground font-medium">provisional personas</span> based on stakeholder interviews to guide the early design. We conducted competitor analysis and stakeholder interviews to understand the market landscape.
+                    Lacking access to real users initially, I created <span className="text-foreground font-medium">provisional personas</span> based on stakeholder interviews to guide the early design.
                   </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
