@@ -12,6 +12,11 @@ import screenlifePlayerMinimized from '@/assets/screenlife-player-minimized.gif'
 import screenlifeOnboarding from '@/assets/screenlife-onboarding-v2.gif';
 import screenlifePlaylist from '@/assets/screenlife-playlist.gif';
 import screenlifeUxFlows from '@/assets/screenlife-ux-flows.webp';
+import screenlifeAuthorization from '@/assets/screenlife-authorization.png';
+import screenlifeInteract from '@/assets/screenlife-interact.png';
+import screenlifeCreateContent from '@/assets/screenlife-create-content.png';
+import screenlifeProfile from '@/assets/screenlife-profile.png';
+import screenlifeSearchDiscover from '@/assets/screenlife-search-discover.png';
 // Custom hook for scroll-triggered animations
 const useScrollReveal = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -282,6 +287,121 @@ const ComingSoon = () => {
                       <img 
                         src={screenlifeOnboarding} 
                         alt="High-fidelity onboarding animation mockup" 
+                        className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </AnimatedSection>
+
+            {/* Authorization */}
+            <AnimatedSection>
+              <div className="mb-16 md:mb-20">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                  <div className="lg:col-span-1 space-y-4">
+                    <h4 className="font-display text-xl md:text-2xl font-medium uppercase">Authorization</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      I used Sketch to design the remaining iOS and Android mockups. To meet deadlines and reduce bugs, I prioritized <span className="text-foreground font-medium">native OS components over custom UI</span>, which significantly streamlined the development process.
+                    </p>
+                  </div>
+                  <div className="lg:col-span-2">
+                    <div className="relative w-full overflow-hidden rounded-[4px] group">
+                      <img 
+                        src={screenlifeAuthorization} 
+                        alt="Authorization screens showing password reset and sign in flows" 
+                        className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </AnimatedSection>
+
+            {/* Interact with Recordings */}
+            <AnimatedSection>
+              <div className="mb-16 md:mb-20">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                  <div className="lg:col-span-2 order-2 lg:order-1">
+                    <div className="relative w-full overflow-hidden rounded-[4px] group">
+                      <img 
+                        src={screenlifeInteract} 
+                        alt="Interactive video player showing clickable product elements" 
+                        className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                      />
+                    </div>
+                  </div>
+                  <div className="lg:col-span-1 space-y-4 order-1 lg:order-2">
+                    <h4 className="font-display text-xl md:text-2xl font-medium uppercase">Interact with Recordings</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Video elements are fully clickable. Users can <span className="text-foreground font-medium">add products to a cart or visit websites</span> directly from the player.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </AnimatedSection>
+
+            {/* Create Content */}
+            <AnimatedSection>
+              <div className="mb-16 md:mb-20">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                  <div className="lg:col-span-1 space-y-4">
+                    <h4 className="font-display text-xl md:text-2xl font-medium uppercase">Create Content</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Effortlessly record <span className="text-foreground font-medium">interactive tutorials, product tours, and immersive stories</span>.
+                    </p>
+                  </div>
+                  <div className="lg:col-span-2">
+                    <div className="relative w-full overflow-hidden rounded-[4px] group">
+                      <img 
+                        src={screenlifeCreateContent} 
+                        alt="Content creation screens showing recording and editing flows" 
+                        className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </AnimatedSection>
+
+            {/* Build Your Profile */}
+            <AnimatedSection>
+              <div className="mb-16 md:mb-20">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                  <div className="lg:col-span-2 order-2 lg:order-1">
+                    <div className="relative w-full overflow-hidden rounded-[4px] group">
+                      <img 
+                        src={screenlifeProfile} 
+                        alt="User profile and playlist management screens" 
+                        className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                      />
+                    </div>
+                  </div>
+                  <div className="lg:col-span-1 space-y-4 order-1 lg:order-2">
+                    <h4 className="font-display text-xl md:text-2xl font-medium uppercase">Build Your Profile</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Curate recordings into <span className="text-foreground font-medium">private or public playlists</span> to share with friends and the Screenlife community.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </AnimatedSection>
+
+            {/* Search & Discover */}
+            <AnimatedSection>
+              <div className="mb-16 md:mb-20">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                  <div className="lg:col-span-1 space-y-4">
+                    <h4 className="font-display text-xl md:text-2xl font-medium uppercase">Search & Discover</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Find content easily by searching <span className="text-foreground font-medium">hashtags, creators, or video titles</span>.
+                    </p>
+                  </div>
+                  <div className="lg:col-span-2">
+                    <div className="relative w-full overflow-hidden rounded-[4px] group">
+                      <img 
+                        src={screenlifeSearchDiscover} 
+                        alt="Search and discovery interface with hashtags and content filtering" 
                         className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
                       />
                     </div>
