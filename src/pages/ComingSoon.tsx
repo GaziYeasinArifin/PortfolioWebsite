@@ -23,6 +23,9 @@ import screenlifeDesignReviewAfter from '@/assets/screenlife-design-review-after
 import screenlifeRut1 from '@/assets/screenlife-rut-1.webp';
 import screenlifeRut2 from '@/assets/screenlife-rut-2.webp';
 import screenlifeRut3 from '@/assets/screenlife-rut-3.webp';
+import screenlifeRutCards1 from '@/assets/screenlife-rut-cards-1.webp';
+import screenlifeRutCards2 from '@/assets/screenlife-rut-cards-2.webp';
+import screenlifeRutCards3 from '@/assets/screenlife-rut-cards-3.webp';
 import screenlifePermission1 from '@/assets/screenlife-permission-1.webp';
 import screenlifePermission2 from '@/assets/screenlife-permission-2.webp';
 import screenlifePermission3 from '@/assets/screenlife-permission-3.webp';
@@ -666,7 +669,7 @@ const ComingSoon = () => {
                 <div className="flex justify-center">
                   <div className="relative w-full max-w-3xl overflow-hidden rounded-[4px] border border-foreground/10 group">
                     <img 
-                      src={screenlifeRut1} 
+                      src={screenlifeRutCards1}
                       alt="User feedback cards showing filter and sorting related issues" 
                       className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
                     />
@@ -688,7 +691,7 @@ const ComingSoon = () => {
                 <div className="flex justify-center">
                   <div className="relative w-full max-w-3xl overflow-hidden rounded-[4px] border border-foreground/10 group">
                     <img 
-                      src={screenlifeRut2} 
+                      src={screenlifeRutCards2}
                       alt="User feedback cards showing player control and navigation issues" 
                       className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
                     />
@@ -710,7 +713,7 @@ const ComingSoon = () => {
                 <div className="flex justify-center">
                   <div className="relative w-full max-w-3xl overflow-hidden rounded-[4px] border border-foreground/10 group">
                     <img 
-                      src={screenlifeRut3} 
+                      src={screenlifeRutCards3}
                       alt="Mixed user feedback showing both negative and positive reactions" 
                       className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
                     />
