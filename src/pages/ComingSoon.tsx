@@ -29,6 +29,9 @@ import screenlifePermission3 from '@/assets/screenlife-permission-3.webp';
 import screenlifeSigninBarrier from '@/assets/screenlife-signin-barrier.webp';
 import screenlifeFiltering from '@/assets/screenlife-filtering.webp';
 import screenlifeHashtagInput from '@/assets/screenlife-hashtag-input.webp';
+import screenlifeV2Tabs from '@/assets/screenlife-v2-tabs.webp';
+import screenlifeV2Social from '@/assets/screenlife-v2-social.webp';
+import screenlifeV2BeforeAfter from '@/assets/screenlife-v2-before-after.webp';
 // Custom hook for scroll-triggered animations
 const useScrollReveal = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -795,30 +798,43 @@ const ComingSoon = () => {
             </AnimatedSection>
 
             <AnimatedSection>
-              <div className="space-y-8">
-                <div className="space-y-4 max-w-3xl">
-                  <p className="text-muted-foreground leading-relaxed">
-                    Based on the 24 issues, we shipped a major redesign focusing on <span className="text-foreground font-medium">clarity and social features</span>. We added time/likes/views to thumbnails, sorting tabs (Popular/New/Following), and prioritized the Follow feature.
-                  </p>
-                </div>
-                {/* Horizontal scroll */}
-                <div className="flex gap-6 overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0 md:overflow-visible md:grid md:grid-cols-3">
-                  <PlaceholderImage 
-                    label="[INSERT: New Main Screen (Meta Data)]" 
-                    aspectRatio="9/16"
-                    className="min-w-[250px] md:min-w-0"
-                  />
-                  <PlaceholderImage 
-                    label="[INSERT: New Tabs Interface]" 
-                    aspectRatio="9/16"
-                    className="min-w-[250px] md:min-w-0"
-                  />
-                  <PlaceholderImage 
-                    label="[INSERT: Follow Feature UI]" 
-                    aspectRatio="9/16"
-                    className="min-w-[250px] md:min-w-0"
-                  />
-                </div>
+              <div className="space-y-4 max-w-3xl mb-12">
+                <p className="text-muted-foreground leading-relaxed">
+                  Based on the 24 issues, we shipped a major redesign focusing on <span className="text-foreground font-medium">clarity and social features</span>. We added time/likes/views to thumbnails, sorting tabs (Popular/New/Following), and prioritized the Follow feature.
+                </p>
+              </div>
+            </AnimatedSection>
+
+            {/* Image 1: Tabs */}
+            <AnimatedSection delay={100}>
+              <div className="flex justify-center mb-12">
+                <img 
+                  src={screenlifeV2Tabs} 
+                  alt="New tab bar and category slider interface" 
+                  className="h-auto border-0"
+                />
+              </div>
+            </AnimatedSection>
+
+            {/* Image 2: Social Features */}
+            <AnimatedSection delay={200}>
+              <div className="flex justify-center mb-12">
+                <img 
+                  src={screenlifeV2Social} 
+                  alt="Profile, screens list, and followers interface" 
+                  className="h-auto border-0"
+                />
+              </div>
+            </AnimatedSection>
+
+            {/* Image 3: Before/After */}
+            <AnimatedSection delay={300}>
+              <div className="flex justify-center">
+                <img 
+                  src={screenlifeV2BeforeAfter} 
+                  alt="Before and after comparison showing new metadata on video cards" 
+                  className="h-auto border-0"
+                />
               </div>
             </AnimatedSection>
           </section>
