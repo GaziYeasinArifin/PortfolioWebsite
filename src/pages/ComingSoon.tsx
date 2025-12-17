@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Users, Smartphone } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-
+import personaClaire from '@/assets/screenlife-persona-claire.webp';
+import personaSarah from '@/assets/screenlife-persona-sarah.webp';
 // Custom hook for scroll-triggered animations
 const useScrollReveal = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -184,14 +185,20 @@ const ComingSoon = () => {
                   </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <PlaceholderImage 
-                    label="[INSERT: Provisional Persona Card 1]" 
-                    aspectRatio="4/3"
-                  />
-                  <PlaceholderImage 
-                    label="[INSERT: Provisional Persona Card 2]" 
-                    aspectRatio="4/3"
-                  />
+                  <div className="relative w-full overflow-hidden rounded-[4px] group">
+                    <img 
+                      src={personaClaire} 
+                      alt="Provisional Persona: Claire - 25 year old blogger" 
+                      className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                    />
+                  </div>
+                  <div className="relative w-full overflow-hidden rounded-[4px] group">
+                    <img 
+                      src={personaSarah} 
+                      alt="Provisional Persona: Sarah - 23 year old student" 
+                      className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                    />
+                  </div>
                 </div>
               </div>
             </AnimatedSection>
