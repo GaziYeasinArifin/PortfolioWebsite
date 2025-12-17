@@ -100,11 +100,11 @@ const Hero = () => {
   return (
     <section ref={heroRef} className="relative min-h-screen overflow-hidden">
       {/* Background image with fade-in and x-axis parallax (desktop only) */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 bg-image">
         <img 
           src={heroBg} 
           alt="" 
-          className={`w-full object-contain object-top transition-all duration-1000 ease-out ${
+          className={`w-full object-contain object-top transition-all duration-1000 ease-out no-border ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           style={{

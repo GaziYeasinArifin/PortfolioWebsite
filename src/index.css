@@ -146,11 +146,27 @@
     @apply scale-105;
   }
 
-  /* Global image border */
+  /* Global image border and radius */
   img,
   video,
   .gif-asset {
     border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+
+  /* Exception for images that should have no border/radius */
+  img.no-border,
+  video.no-border,
+  .no-border img,
+  .no-border video {
+    border: none;
+    border-radius: 0;
+  }
+
+  /* Background images should have no border */
+  .bg-image img {
+    border: none;
+    border-radius: 0;
   }
 }
 
