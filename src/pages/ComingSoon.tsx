@@ -23,6 +23,9 @@ import screenlifeDesignReviewAfter from '@/assets/screenlife-design-review-after
 import screenlifeRut1 from '@/assets/screenlife-rut-1.webp';
 import screenlifeRut2 from '@/assets/screenlife-rut-2.webp';
 import screenlifeRut3 from '@/assets/screenlife-rut-3.webp';
+import screenlifePermission1 from '@/assets/screenlife-permission-1.webp';
+import screenlifePermission2 from '@/assets/screenlife-permission-2.webp';
+import screenlifePermission3 from '@/assets/screenlife-permission-3.webp';
 // Custom hook for scroll-triggered animations
 const useScrollReveal = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -700,49 +703,72 @@ const ComingSoon = () => {
               </div>
             </AnimatedSection>
 
-            {/* 2x2 grid */}
+            {/* Permission Dialogs */}
             <AnimatedSection>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <h4 className="font-display font-medium uppercase text-sm">Permission Dialogs</h4>
-                    <p className="text-sm text-muted-foreground">Users denied native prompts immediately. We moved to custom pre-permission primers.</p>
-                  </div>
-                  <PlaceholderImage 
-                    label="[INSERT: Permission Flow UI]" 
-                    aspectRatio="4/3"
+              <div className="mb-16 md:mb-20">
+                <div className="space-y-2 mb-8">
+                  <h4 className="font-display font-medium uppercase text-sm">Permission Dialogs</h4>
+                  <p className="text-sm text-muted-foreground">Users denied native prompts immediately. We moved to custom pre-permission primers.</p>
+                </div>
+                <div className="grid grid-cols-3 gap-4 md:gap-6">
+                  <img 
+                    src={screenlifePermission1} 
+                    alt="Permission dialog design showing notification prompt" 
+                    className="w-full h-auto object-contain"
+                  />
+                  <img 
+                    src={screenlifePermission2} 
+                    alt="Permission dialog design showing turn on notifications" 
+                    className="w-full h-auto object-contain"
+                  />
+                  <img 
+                    src={screenlifePermission3} 
+                    alt="Permission dialog design showing native iOS prompt" 
+                    className="w-full h-auto object-contain"
                   />
                 </div>
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <h4 className="font-display font-medium uppercase text-sm">Sign-in Barrier</h4>
-                    <p className="text-sm text-muted-foreground">Users missed the "Skip" button. We redesigned the header to make it prominent.</p>
-                  </div>
-                  <PlaceholderImage 
-                    label="[INSERT: Sign-in UI]" 
-                    aspectRatio="4/3"
-                  />
+              </div>
+            </AnimatedSection>
+
+            {/* Sign-in Barrier */}
+            <AnimatedSection>
+              <div className="mb-16 md:mb-20">
+                <div className="space-y-2 mb-8">
+                  <h4 className="font-display font-medium uppercase text-sm">Sign-in Barrier</h4>
+                  <p className="text-sm text-muted-foreground">Users missed the "Skip" button. We redesigned the header to make it prominent.</p>
                 </div>
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <h4 className="font-display font-medium uppercase text-sm">Filtering</h4>
-                    <p className="text-sm text-muted-foreground">Applied filter state was unclear to users. We added better active states.</p>
-                  </div>
-                  <PlaceholderImage 
-                    label="[INSERT: Filter UI]" 
-                    aspectRatio="4/3"
-                  />
+                <PlaceholderImage 
+                  label="[INSERT: Sign-in UI]" 
+                  aspectRatio="4/3"
+                />
+              </div>
+            </AnimatedSection>
+
+            {/* Filtering */}
+            <AnimatedSection>
+              <div className="mb-16 md:mb-20">
+                <div className="space-y-2 mb-8">
+                  <h4 className="font-display font-medium uppercase text-sm">Filtering</h4>
+                  <p className="text-sm text-muted-foreground">Applied filter state was unclear to users. We added better active states.</p>
                 </div>
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <h4 className="font-display font-medium uppercase text-sm">Hashtag Input</h4>
-                    <p className="text-sm text-muted-foreground">Users tried typing "#" manually. We added an auto-placeholder.</p>
-                  </div>
-                  <PlaceholderImage 
-                    label="[INSERT: Hashtag UI]" 
-                    aspectRatio="4/3"
-                  />
+                <PlaceholderImage 
+                  label="[INSERT: Filter UI]" 
+                  aspectRatio="4/3"
+                />
+              </div>
+            </AnimatedSection>
+
+            {/* Hashtag Input */}
+            <AnimatedSection>
+              <div className="mb-8">
+                <div className="space-y-2 mb-8">
+                  <h4 className="font-display font-medium uppercase text-sm">Hashtag Input</h4>
+                  <p className="text-sm text-muted-foreground">Users tried typing "#" manually. We added an auto-placeholder.</p>
                 </div>
+                <PlaceholderImage 
+                  label="[INSERT: Hashtag UI]" 
+                  aspectRatio="4/3"
+                />
               </div>
             </AnimatedSection>
           </section>
