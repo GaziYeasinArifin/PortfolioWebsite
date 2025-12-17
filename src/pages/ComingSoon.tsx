@@ -322,7 +322,13 @@ const ComingSoon = () => {
             <AnimatedSection>
               <div className="mb-16 md:mb-20">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-                  <div className="lg:col-span-2 order-2 lg:order-1">
+                  <div className="lg:col-span-1 space-y-4">
+                    <h4 className="font-display text-xl md:text-2xl font-medium uppercase">Interact with Recordings</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Video elements are fully clickable. Users can <span className="text-foreground font-medium">add products to a cart or visit websites</span> directly from the player.
+                    </p>
+                  </div>
+                  <div className="lg:col-span-2">
                     <div className="relative w-full overflow-hidden rounded-[4px] group">
                       <img 
                         src={screenlifeInteract} 
@@ -330,12 +336,6 @@ const ComingSoon = () => {
                         className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
                       />
                     </div>
-                  </div>
-                  <div className="lg:col-span-1 space-y-4 order-1 lg:order-2">
-                    <h4 className="font-display text-xl md:text-2xl font-medium uppercase">Interact with Recordings</h4>
-                    <p className="text-muted-foreground leading-relaxed">
-                      Video elements are fully clickable. Users can <span className="text-foreground font-medium">add products to a cart or visit websites</span> directly from the player.
-                    </p>
                   </div>
                 </div>
               </div>
@@ -368,7 +368,13 @@ const ComingSoon = () => {
             <AnimatedSection>
               <div className="mb-16 md:mb-20">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-                  <div className="lg:col-span-2 order-2 lg:order-1">
+                  <div className="lg:col-span-1 space-y-4">
+                    <h4 className="font-display text-xl md:text-2xl font-medium uppercase">Build Your Profile</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Curate recordings into <span className="text-foreground font-medium">private or public playlists</span> to share with friends and the Screenlife community.
+                    </p>
+                  </div>
+                  <div className="lg:col-span-2">
                     <div className="relative w-full overflow-hidden rounded-[4px] group">
                       <img 
                         src={screenlifeProfile} 
@@ -376,12 +382,6 @@ const ComingSoon = () => {
                         className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
                       />
                     </div>
-                  </div>
-                  <div className="lg:col-span-1 space-y-4 order-1 lg:order-2">
-                    <h4 className="font-display text-xl md:text-2xl font-medium uppercase">Build Your Profile</h4>
-                    <p className="text-muted-foreground leading-relaxed">
-                      Curate recordings into <span className="text-foreground font-medium">private or public playlists</span> to share with friends and the Screenlife community.
-                    </p>
                   </div>
                 </div>
               </div>
