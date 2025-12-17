@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import personaClaire from '@/assets/screenlife-persona-claire.webp';
 import personaSarah from '@/assets/screenlife-persona-sarah.webp';
-import paperSketches from '@/assets/screenlife-paper-sketches.webp';
+import screenlifeWireframes from '@/assets/screenlife-wireframes.png';
 import screenlifeHero from '@/assets/screenlife-hero.png';
 import screenlifeSearchUi from '@/assets/screenlife-search-ui.webp';
 import screenlifePlayerMinimized from '@/assets/screenlife-player-minimized.gif';
@@ -229,7 +229,7 @@ const ComingSoon = () => {
                 </div>
                 <div className="relative w-full overflow-hidden rounded-[4px] group">
                   <img 
-                    src={paperSketches} 
+                    src={screenlifeWireframes} 
                     alt="Hand-drawn paper prototypes showing mobile app wireframes" 
                     className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                   />
