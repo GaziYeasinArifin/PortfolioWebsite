@@ -295,7 +295,7 @@ const ComingSoon = () => {
                       <p className="text-foreground font-medium">Added prominent "Create" button to the playlist screen.</p>
                     </div>
                   </div>
-                  <div className="w-full max-w-[280px] mx-auto">
+                  <div className="w-full max-w-[360px] mx-auto">
                     <div className="relative overflow-hidden rounded-[4px] group">
                       <img 
                         src={screenlifePlaylist} 
@@ -321,7 +321,7 @@ const ComingSoon = () => {
                       <p className="text-foreground font-medium">Added minimization logic with persistent mini-player.</p>
                     </div>
                   </div>
-                  <div className="w-full max-w-[280px] mx-auto">
+                  <div className="w-full max-w-[360px] mx-auto">
                     <div className="relative overflow-hidden rounded-[4px] group">
                       <img 
                         src={screenlifePlayerMinimized} 
