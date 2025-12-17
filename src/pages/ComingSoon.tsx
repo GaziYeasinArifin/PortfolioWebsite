@@ -20,6 +20,9 @@ import screenlifeSearchDiscover from '@/assets/screenlife-search-discover.png';
 import screenlifeAndroidUi from '@/assets/screenlife-android-ui.png';
 import screenlifeDesignReviewBefore from '@/assets/screenlife-design-review-before.png';
 import screenlifeDesignReviewAfter from '@/assets/screenlife-design-review-after.png';
+import screenlifeRut1 from '@/assets/screenlife-rut-1.webp';
+import screenlifeRut2 from '@/assets/screenlife-rut-2.webp';
+import screenlifeRut3 from '@/assets/screenlife-rut-3.webp';
 // Custom hook for scroll-triggered animations
 const useScrollReveal = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -605,11 +608,93 @@ const ComingSoon = () => {
             </AnimatedSection>
           </section>
 
-          {/* Chapter VII: Phase 2 Testing */}
+          {/* Remote Usability Tests - Waterfall Section */}
+          <section className="mb-24 md:mb-32">
+            <AnimatedSection>
+              <div className="mb-16">
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter vii</p>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">Remote Usability Tests</h2>
+                <p className="text-muted-foreground mt-4 max-w-2xl">
+                  We validated core flows through remote unmoderated testing. While some feedback was subjective, the data successfully exposed critical friction points, specifically the need to refine our search filtration.
+                </p>
+              </div>
+            </AnimatedSection>
+
+            {/* Waterfall Layout */}
+            <div className="space-y-8">
+              {/* Image 1 */}
+              <AnimatedSection delay={100}>
+                <div className="md:ml-0">
+                  <div className="relative w-full overflow-hidden rounded-[4px] border border-foreground/10 group">
+                    <img 
+                      src={screenlifeRut1} 
+                      alt="User feedback cards showing filter and sorting related issues" 
+                      className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                    />
+                  </div>
+                </div>
+              </AnimatedSection>
+
+              {/* Text 1 - offset right */}
+              <AnimatedSection delay={200}>
+                <div className="md:ml-[15%] max-w-xl">
+                  <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                    Feedback highlighted friction with player controls and frustration with the forced landscape mode.
+                  </p>
+                </div>
+              </AnimatedSection>
+
+              {/* Image 2 - offset right */}
+              <AnimatedSection delay={100}>
+                <div className="md:ml-[10%]">
+                  <div className="relative w-full overflow-hidden rounded-[4px] border border-foreground/10 group">
+                    <img 
+                      src={screenlifeRut2} 
+                      alt="User feedback cards showing player control and navigation issues" 
+                      className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                    />
+                  </div>
+                </div>
+              </AnimatedSection>
+
+              {/* Text 2 - offset more right */}
+              <AnimatedSection delay={200}>
+                <div className="md:ml-[30%] max-w-xl">
+                  <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                    Some users hated our app, and some fell in love.
+                  </p>
+                </div>
+              </AnimatedSection>
+
+              {/* Image 3 - offset right */}
+              <AnimatedSection delay={100}>
+                <div className="md:ml-[20%]">
+                  <div className="relative w-full overflow-hidden rounded-[4px] border border-foreground/10 group">
+                    <img 
+                      src={screenlifeRut3} 
+                      alt="Mixed user feedback showing both negative and positive reactions" 
+                      className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                    />
+                  </div>
+                </div>
+              </AnimatedSection>
+
+              {/* Text 3 - offset more right */}
+              <AnimatedSection delay={200}>
+                <div className="md:ml-[45%] max-w-xl">
+                  <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                    The results made it clear that we needed to continue testing for more robust feedback.
+                  </p>
+                </div>
+              </AnimatedSection>
+            </div>
+          </section>
+
+          {/* Chapter VIII: Phase 2 Testing */}
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter vii</p>
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter viii</p>
                 <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">Phase 2: Onsite Testing</h2>
                 <p className="text-muted-foreground mt-4">24 Issues Found</p>
               </div>
@@ -662,11 +747,11 @@ const ComingSoon = () => {
             </AnimatedSection>
           </section>
 
-          {/* Chapter VIII: Refinement & V2 */}
+          {/* Chapter IX: Refinement & V2 */}
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter viii</p>
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter ix</p>
                 <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">Refinement & V2</h2>
               </div>
             </AnimatedSection>
@@ -700,11 +785,11 @@ const ComingSoon = () => {
             </AnimatedSection>
           </section>
 
-          {/* Chapter IX: Key Learnings */}
+          {/* Chapter X: Key Learnings */}
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter ix</p>
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter x</p>
                 <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">Key Learnings</h2>
               </div>
             </AnimatedSection>
