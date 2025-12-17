@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import personaClaire from '@/assets/screenlife-persona-claire.webp';
 import personaSarah from '@/assets/screenlife-persona-sarah.webp';
+import paperSketches from '@/assets/screenlife-paper-sketches.webp';
 // Custom hook for scroll-triggered animations
 const useScrollReveal = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -220,10 +221,13 @@ const ComingSoon = () => {
                     We used <span className="text-foreground font-medium">paper prototypes</span> to adapt web flows to mobile. This allowed developers to spot technical limitations before code was written. Low-fi prototypes allowed us to find the right ideas quickly.
                   </p>
                 </div>
-                <PlaceholderImage 
-                  label="[INSERT: Photo of Hand-Drawn Paper Sketches]" 
-                  aspectRatio="16/9"
-                />
+                <div className="relative w-full overflow-hidden rounded-[4px] group">
+                  <img 
+                    src={paperSketches} 
+                    alt="Hand-drawn paper prototypes showing mobile app wireframes" 
+                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                </div>
               </div>
             </AnimatedSection>
           </section>
