@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import caseStudy1 from '@/assets/case-study-1.jpg';
 import caseStudy2 from '@/assets/case-study-2.jpg';
 import caseStudy3 from '@/assets/case-study-3.jpg';
 import brandingCaseStudy1 from '@/assets/branding-case-study-1.png';
 import carepalWriting from '@/assets/carepal-writing.png';
 import phantomFootprintThumbnail from '@/assets/phantom-footprint-thumbnail.png';
+import screenlifeThumbnail from '@/assets/screenlife-thumbnail.png';
 import { ArrowUpRight } from 'lucide-react';
 
 interface CaseStudy {
@@ -31,10 +31,10 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
   'ux-projects': [
     {
       id: 1,
-      title: 'Fintech Mobile App',
-      description: 'Reimagining personal finance for the next generation',
+      title: 'Screenlife Mobile App',
+      description: 'Designing the first mobile interactive video recorder',
       category: 'Mobile Design',
-      image: caseStudy1,
+      image: screenlifeThumbnail,
       year: '2024',
       slug: 'coming-soon',
     },

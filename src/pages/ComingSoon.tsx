@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import personaClaire from '@/assets/screenlife-persona-claire.webp';
 import personaSarah from '@/assets/screenlife-persona-sarah.webp';
 import paperSketches from '@/assets/screenlife-paper-sketches.webp';
+import screenlifeHero from '@/assets/screenlife-hero.png';
 // Custom hook for scroll-triggered animations
 const useScrollReveal = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -121,13 +122,15 @@ const ComingSoon = () => {
             </div>
           </AnimatedSection>
 
-          {/* Hero image placeholder */}
+          {/* Hero image */}
           <AnimatedSection delay={200}>
-            <PlaceholderImage 
-              label="[INSERT: Hero Image - Screenlife App Interface]" 
-              aspectRatio="16/9"
-              className="mb-24 md:mb-32"
-            />
+            <div className="relative w-full overflow-hidden rounded-[4px] group mb-24 md:mb-32">
+              <img 
+                src={screenlifeHero} 
+                alt="Screenlife mobile app interface showcasing interactive video features" 
+                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+            </div>
           </AnimatedSection>
 
           {/* Chapter I: Context */}
