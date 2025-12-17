@@ -805,36 +805,39 @@ const ComingSoon = () => {
               </div>
             </AnimatedSection>
 
-            {/* Image 1: Tabs */}
+            {/* Image 1: Before/After */}
             <AnimatedSection delay={100}>
-              <div className="flex justify-center mb-12">
-                <img 
-                  src={screenlifeV2Tabs} 
-                  alt="New tab bar and category slider interface" 
-                  className="h-auto border-0"
-                />
-              </div>
-            </AnimatedSection>
-
-            {/* Image 2: Social Features */}
-            <AnimatedSection delay={200}>
-              <div className="flex justify-center mb-12">
-                <img 
-                  src={screenlifeV2Social} 
-                  alt="Profile, screens list, and followers interface" 
-                  className="h-auto border-0"
-                />
-              </div>
-            </AnimatedSection>
-
-            {/* Image 3: Before/After */}
-            <AnimatedSection delay={300}>
-              <div className="flex justify-center">
+              <div className="flex flex-col items-center mb-12">
                 <img 
                   src={screenlifeV2BeforeAfter} 
                   alt="Before and after comparison showing new metadata on video cards" 
-                  className="h-auto border-0"
+                  className="h-auto max-w-2xl border-0"
                 />
+                <p className="text-sm text-muted-foreground mt-4">Adding metadata (time, views, likes, device) to video cards</p>
+              </div>
+            </AnimatedSection>
+
+            {/* Image 2: Tabs */}
+            <AnimatedSection delay={200}>
+              <div className="flex flex-col items-center mb-12">
+                <img 
+                  src={screenlifeV2Tabs} 
+                  alt="New tab bar and category slider interface" 
+                  className="h-auto max-w-md border-0"
+                />
+                <p className="text-sm text-muted-foreground mt-4">New tab bar and category slider for content discovery</p>
+              </div>
+            </AnimatedSection>
+
+            {/* Image 3: Social Features */}
+            <AnimatedSection delay={300}>
+              <div className="flex flex-col items-center">
+                <img 
+                  src={screenlifeV2Social} 
+                  alt="Profile, screens list, and followers interface" 
+                  className="h-auto max-w-3xl border-0"
+                />
+                <p className="text-sm text-muted-foreground mt-4">Enhanced social features: profiles, screens, and followers</p>
               </div>
             </AnimatedSection>
           </section>
