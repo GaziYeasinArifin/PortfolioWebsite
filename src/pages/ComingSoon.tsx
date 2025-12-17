@@ -750,21 +750,21 @@ const ComingSoon = () => {
                   <h4 className="font-display font-medium uppercase text-sm">Permission Dialogs</h4>
                   <p className="text-sm text-muted-foreground">Users denied native prompts immediately. We moved to custom pre-permission primers.</p>
                 </div>
-                <div className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6">
+                <div className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6 no-border">
                   <img 
                     src={screenlifePermission1} 
                     alt="Permission dialog design showing notification prompt" 
-                    className="h-auto max-h-[300px] sm:max-h-[350px] md:max-h-[400px] border-0"
+                    className="h-auto max-h-[300px] sm:max-h-[350px] md:max-h-[400px] no-border"
                   />
                   <img 
                     src={screenlifePermission2} 
                     alt="Permission dialog design showing turn on notifications" 
-                    className="h-auto max-h-[300px] sm:max-h-[350px] md:max-h-[400px] border-0"
+                    className="h-auto max-h-[300px] sm:max-h-[350px] md:max-h-[400px] no-border"
                   />
                   <img 
                     src={screenlifePermission3} 
                     alt="Permission dialog design showing native iOS prompt" 
-                    className="h-auto max-h-[300px] sm:max-h-[350px] md:max-h-[400px] border-0"
+                    className="h-auto max-h-[300px] sm:max-h-[350px] md:max-h-[400px] no-border"
                   />
                 </div>
               </div>

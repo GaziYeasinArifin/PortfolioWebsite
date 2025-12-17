@@ -89,7 +89,7 @@ const OptimizedImage = memo(({
         src={placeholderSvg}
         alt=""
         aria-hidden="true"
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-out ${
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-out rounded-[4px] ${
           isLoaded ? 'opacity-0' : 'opacity-100'
         }`}
         style={{ 
@@ -107,7 +107,7 @@ const OptimizedImage = memo(({
           onError={handleError}
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
-          className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-out ${className} ${
+          className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-out rounded-[4px] ${className} ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           style={{
