@@ -282,11 +282,11 @@ const ComingSoon = () => {
               <div className="mb-16 md:mb-20">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                   <div className="lg:col-span-2 order-2 lg:order-1">
-                    <div className="relative w-full overflow-hidden rounded-[4px] group flex justify-center">
+                    <div className="relative w-full overflow-hidden rounded-[4px] group">
                       <img 
                         src={screenlifePlaylist} 
                         alt="Playlist creation UI animation showing the new create button" 
-                        className="w-full max-w-md h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                        className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
                       />
                     </div>
                   </div>
@@ -325,11 +325,11 @@ const ComingSoon = () => {
                     </div>
                   </div>
                   <div className="lg:col-span-2">
-                    <div className="relative w-full overflow-hidden rounded-[4px] group flex justify-center">
+                    <div className="relative w-full overflow-hidden rounded-[4px] group">
                       <img 
                         src={screenlifePlayerMinimized} 
                         alt="Player minimization animation showing the mini-player feature" 
-                        className="w-full max-w-md h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                        className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
                       />
                     </div>
                   </div>
