@@ -579,8 +579,8 @@ const ComingSoon = () => {
 
                   {/* Before and After Images - Right on desktop, bottom on mobile */}
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-3">
-                      <p className="text-xs font-medium tracking-wider uppercase text-muted-foreground">before</p>
+                    <div className="space-y-3 bg-muted p-4 rounded-[4px]">
+                      <p className="text-xs font-medium tracking-wider uppercase text-background">before</p>
                       <div className="relative w-full overflow-hidden rounded-[4px] group">
                         <img 
                           src={screenlifeDesignReviewBefore} 
