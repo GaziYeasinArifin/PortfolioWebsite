@@ -699,7 +699,7 @@ const ComingSoon = () => {
           {/* Chapter VIII: Phase 2 Testing */}
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
-              <div className="mb-12 text-center">
+              <div className="mb-12">
                 <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter viii</p>
                 <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">Phase 2: Onsite Testing</h2>
                 <p className="text-muted-foreground mt-4">24 Issues Found</p>
@@ -717,17 +717,17 @@ const ComingSoon = () => {
                   <img 
                     src={screenlifePermission1} 
                     alt="Permission dialog design showing notification prompt" 
-                    className="h-auto"
+                    className="h-auto max-h-[400px] border-0"
                   />
                   <img 
                     src={screenlifePermission2} 
                     alt="Permission dialog design showing turn on notifications" 
-                    className="h-auto"
+                    className="h-auto max-h-[400px] border-0"
                   />
                   <img 
                     src={screenlifePermission3} 
                     alt="Permission dialog design showing native iOS prompt" 
-                    className="h-auto"
+                    className="h-auto max-h-[400px] border-0"
                   />
                 </div>
               </div>
@@ -744,7 +744,7 @@ const ComingSoon = () => {
                   <img 
                     src={screenlifeSigninBarrier} 
                     alt="Sign-in screen showing skip button redesign" 
-                    className="h-auto"
+                    className="h-auto max-h-[500px]"
                   />
                 </div>
               </div>
@@ -761,7 +761,7 @@ const ComingSoon = () => {
                   <img 
                     src={screenlifeFiltering} 
                     alt="Filter UI with improved active state indicators" 
-                    className="h-auto"
+                    className="h-auto max-h-[500px]"
                   />
                 </div>
               </div>
@@ -778,7 +778,7 @@ const ComingSoon = () => {
                   <img 
                     src={screenlifeHashtagInput} 
                     alt="Before and after comparison of hashtag input with auto-placeholder" 
-                    className="h-auto"
+                    className="h-auto max-w-3xl"
                   />
                 </div>
               </div>
