@@ -17,6 +17,7 @@ import screenlifeInteract from '@/assets/screenlife-interact.png';
 import screenlifeCreateContent from '@/assets/screenlife-create-content.png';
 import screenlifeProfile from '@/assets/screenlife-profile.png';
 import screenlifeSearchDiscover from '@/assets/screenlife-search-discover.png';
+import screenlifeAndroidUi from '@/assets/screenlife-android-ui.png';
 // Custom hook for scroll-triggered animations
 const useScrollReveal = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -407,6 +408,23 @@ const ComingSoon = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+            </AnimatedSection>
+
+            {/* The Android App */}
+            <AnimatedSection>
+              <div className="text-center max-w-2xl mx-auto mb-8">
+                <h4 className="font-display text-xl md:text-2xl font-medium uppercase mb-4">The Android App</h4>
+                <p className="text-muted-foreground leading-relaxed">
+                  Additional work has been done to make sure that users with <span className="text-foreground font-medium">low-resolution Android phones</span> would have a nice user experience too.
+                </p>
+              </div>
+              <div className="relative w-full overflow-hidden rounded-[4px] group">
+                <img 
+                  src={screenlifeAndroidUi} 
+                  alt="Android app UI designs showing various screens optimized for low-resolution devices" 
+                  className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                />
               </div>
             </AnimatedSection>
           </section>
