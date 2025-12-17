@@ -589,8 +589,8 @@ const ComingSoon = () => {
                         />
                       </div>
                     </div>
-                    <div className="space-y-3 bg-foreground p-4 rounded-[4px]">
-                      <p className="text-xs font-medium tracking-wider uppercase text-background">after</p>
+                    <div className="space-y-3">
+                      <p className="text-xs font-medium tracking-wider uppercase bg-foreground text-background px-2 py-1 rounded-[4px] inline-block">after</p>
                       <div className="relative w-full overflow-hidden rounded-[4px] group">
                         <img 
                           src={screenlifeDesignReviewAfter} 
