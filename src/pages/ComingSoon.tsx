@@ -18,6 +18,8 @@ import screenlifeCreateContent from '@/assets/screenlife-create-content.png';
 import screenlifeProfile from '@/assets/screenlife-profile.png';
 import screenlifeSearchDiscover from '@/assets/screenlife-search-discover.png';
 import screenlifeAndroidUi from '@/assets/screenlife-android-ui.png';
+import screenlifeDesignReviewBefore from '@/assets/screenlife-design-review-before.png';
+import screenlifeDesignReviewAfter from '@/assets/screenlife-design-review-after.png';
 // Custom hook for scroll-triggered animations
 const useScrollReveal = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -545,10 +547,57 @@ const ComingSoon = () => {
                     With <span className="text-foreground font-medium">60+ screens</span> in development, I conducted design reviews to fix execution gaps in spacing and layout. Small details (margins, spacing) were missed during implementation, so I created design review docs to align code with design.
                   </p>
                 </div>
-                <PlaceholderImage 
-                  label="[INSERT: Design Review/QA Document Screenshot]" 
-                  aspectRatio="16/9"
-                />
+
+                {/* Before and After Images */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-3">
+                    <p className="text-xs font-medium tracking-wider uppercase text-muted-foreground">before</p>
+                    <div className="relative w-full overflow-hidden rounded-[4px] group">
+                      <img 
+                        src={screenlifeDesignReviewBefore} 
+                        alt="Sign in screen before design review showing issues with spacing and styling" 
+                        className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <p className="text-xs font-medium tracking-wider uppercase text-muted-foreground">after</p>
+                    <div className="relative w-full overflow-hidden rounded-[4px] group">
+                      <img 
+                        src={screenlifeDesignReviewAfter} 
+                        alt="Sign in screen after design review with corrected spacing and styling" 
+                        className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Comments */}
+                <div className="bg-secondary/50 p-6 md:p-8 rounded-[4px] max-w-2xl">
+                  <p className="text-xs font-medium tracking-wider uppercase text-muted-foreground mb-4">comments</p>
+                  <ol className="space-y-3 text-sm text-muted-foreground">
+                    <li className="flex gap-3">
+                      <span className="text-foreground font-medium">1.</span>
+                      <span>Change the status bar color from black to white #ffffff</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-foreground font-medium">2.</span>
+                      <span>Change the font weight from Regular to Medium</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-foreground font-medium">3.</span>
+                      <span>Change the cursor color from blue to white #ffffff</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-foreground font-medium">4.</span>
+                      <span>Decrease the margin between fields by 50%</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-foreground font-medium">5.</span>
+                      <span>Buttons should be disabled until the users enter their email and password</span>
+                    </li>
+                  </ol>
+                </div>
               </div>
             </AnimatedSection>
           </section>
