@@ -9,6 +9,7 @@ import screenlifeWireframes from '@/assets/screenlife-wireframes.png';
 import screenlifeHero from '@/assets/screenlife-hero.png';
 import screenlifeSearchUi from '@/assets/screenlife-search-ui.webp';
 import screenlifePlayerMinimized from '@/assets/screenlife-player-minimized.gif';
+import screenlifeOnboarding from '@/assets/screenlife-onboarding.gif';
 import screenlifePlaylist from '@/assets/screenlife-playlist.gif';
 import screenlifeUxFlows from '@/assets/screenlife-ux-flows.webp';
 // Custom hook for scroll-triggered animations
@@ -258,11 +259,42 @@ const ComingSoon = () => {
             </AnimatedSection>
           </section>
 
-          {/* Chapter IV: Phase 1 Testing */}
+          {/* Chapter IV: High-Fidelity Mockups */}
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
                 <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter iv</p>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">High-Fidelity Mockups and Animations</h2>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection>
+              <div className="mb-16 md:mb-20">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                  <div className="lg:col-span-1 space-y-4">
+                    <p className="text-muted-foreground leading-relaxed">
+                      Moving to high-fidelity, we prioritized <span className="text-foreground font-medium">onboarding to explain the technology</span>. While we initially planned heavy animations, scope constraints pushed them to later versions. This proved beneficial, as usability testing later revealed the onboarding flow was already a significant friction point.
+                    </p>
+                  </div>
+                  <div className="lg:col-span-2">
+                    <div className="relative w-full overflow-hidden rounded-[4px] group">
+                      <img 
+                        src={screenlifeOnboarding} 
+                        alt="High-fidelity onboarding animation mockup" 
+                        className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </AnimatedSection>
+          </section>
+
+          {/* Chapter V: Phase 1 Testing */}
+          <section className="mb-24 md:mb-32">
+            <AnimatedSection>
+              <div className="mb-12">
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter v</p>
                 <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">Phase 1: InVision Testing</h2>
               </div>
             </AnimatedSection>
@@ -358,11 +390,11 @@ const ComingSoon = () => {
             </AnimatedSection>
           </section>
 
-          {/* Chapter V: Design QA */}
+          {/* Chapter VI: Design QA */}
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter v</p>
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter vi</p>
                 <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">Design QA</h2>
               </div>
             </AnimatedSection>
@@ -382,11 +414,11 @@ const ComingSoon = () => {
             </AnimatedSection>
           </section>
 
-          {/* Chapter VI: Phase 2 Testing */}
+          {/* Chapter VII: Phase 2 Testing */}
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter vi</p>
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter vii</p>
                 <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">Phase 2: Onsite Testing</h2>
                 <p className="text-muted-foreground mt-4">24 Issues Found</p>
               </div>
@@ -439,11 +471,11 @@ const ComingSoon = () => {
             </AnimatedSection>
           </section>
 
-          {/* Chapter VII: Refinement & V2 */}
+          {/* Chapter VIII: Refinement & V2 */}
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter vii</p>
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter viii</p>
                 <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">Refinement & V2</h2>
               </div>
             </AnimatedSection>
@@ -477,11 +509,11 @@ const ComingSoon = () => {
             </AnimatedSection>
           </section>
 
-          {/* Chapter VIII: Key Learnings */}
+          {/* Chapter IX: Key Learnings */}
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
               <div className="mb-12">
-                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter viii</p>
+                <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter ix</p>
                 <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium">Key Learnings</h2>
               </div>
             </AnimatedSection>
