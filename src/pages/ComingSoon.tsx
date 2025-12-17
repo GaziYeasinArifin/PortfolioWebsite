@@ -26,6 +26,7 @@ import screenlifeRut3 from '@/assets/screenlife-rut-3.webp';
 import screenlifeRutCards1 from '@/assets/screenlife-rut-cards-1.webp';
 import screenlifeRutCards2 from '@/assets/screenlife-rut-cards-2.webp';
 import screenlifeRutCards3 from '@/assets/screenlife-rut-cards-3.webp';
+import screenlifeRemoteUsabilityTests from '@/assets/screenlife-remote-usability-tests.png';
 import screenlifePermission1 from '@/assets/screenlife-permission-1.webp';
 import screenlifePermission2 from '@/assets/screenlife-permission-2.webp';
 import screenlifePermission3 from '@/assets/screenlife-permission-3.webp';
