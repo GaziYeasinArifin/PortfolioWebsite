@@ -443,6 +443,36 @@ const ComingSoon = () => {
             </AnimatedSection>
           </section>
 
+          {/* Usability Testing Sessions - Not a chapter */}
+          <AnimatedSection>
+            <div className="mb-24 md:mb-32">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                <div className="relative w-full overflow-hidden rounded-[4px] group">
+                  <img 
+                    src={screenlifeRut1} 
+                    alt="Usability testing session showing user interacting with profile screen" 
+                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                </div>
+                <div className="relative w-full overflow-hidden rounded-[4px] group">
+                  <img 
+                    src={screenlifeRut2} 
+                    alt="Usability testing session showing user browsing screens list" 
+                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                </div>
+                <div className="relative w-full overflow-hidden rounded-[4px] group">
+                  <img 
+                    src={screenlifeRut3} 
+                    alt="Usability testing session showing user on sign in screen" 
+                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                </div>
+              </div>
+              <p className="text-center text-sm text-muted-foreground mt-6">First usability testing sessions</p>
+            </div>
+          </AnimatedSection>
+
           {/* Chapter V: Phase 1 Testing */}
           <section className="mb-24 md:mb-32">
             <AnimatedSection>
