@@ -624,8 +624,8 @@ const ComingSoon = () => {
             <div className="space-y-8">
               {/* Image 1 */}
               <AnimatedSection delay={100}>
-                <div className="md:ml-0">
-                  <div className="relative w-full overflow-hidden rounded-[4px] border border-foreground/10 group">
+                <div className="flex justify-center">
+                  <div className="relative w-full max-w-3xl overflow-hidden rounded-[4px] border border-foreground/10 group">
                     <img 
                       src={screenlifeRut1} 
                       alt="User feedback cards showing filter and sorting related issues" 
@@ -635,19 +635,19 @@ const ComingSoon = () => {
                 </div>
               </AnimatedSection>
 
-              {/* Text 1 - offset right */}
+              {/* Text 1 */}
               <AnimatedSection delay={200}>
-                <div className="md:ml-[15%] max-w-xl">
-                  <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                <div className="flex justify-center">
+                  <p className="text-lg md:text-xl text-muted-foreground leading-relaxed text-center max-w-2xl">
                     Feedback highlighted friction with player controls and frustration with the forced landscape mode.
                   </p>
                 </div>
               </AnimatedSection>
 
-              {/* Image 2 - offset right */}
+              {/* Image 2 */}
               <AnimatedSection delay={100}>
-                <div className="md:ml-[10%]">
-                  <div className="relative w-full overflow-hidden rounded-[4px] border border-foreground/10 group">
+                <div className="flex justify-center">
+                  <div className="relative w-full max-w-3xl overflow-hidden rounded-[4px] border border-foreground/10 group">
                     <img 
                       src={screenlifeRut2} 
                       alt="User feedback cards showing player control and navigation issues" 
@@ -657,19 +657,19 @@ const ComingSoon = () => {
                 </div>
               </AnimatedSection>
 
-              {/* Text 2 - offset more right */}
+              {/* Text 2 */}
               <AnimatedSection delay={200}>
-                <div className="md:ml-[30%] max-w-xl">
-                  <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                <div className="flex justify-center">
+                  <p className="text-lg md:text-xl text-muted-foreground leading-relaxed text-center max-w-2xl">
                     Some users hated our app, and some fell in love.
                   </p>
                 </div>
               </AnimatedSection>
 
-              {/* Image 3 - offset right */}
+              {/* Image 3 */}
               <AnimatedSection delay={100}>
-                <div className="md:ml-[20%]">
-                  <div className="relative w-full overflow-hidden rounded-[4px] border border-foreground/10 group">
+                <div className="flex justify-center">
+                  <div className="relative w-full max-w-3xl overflow-hidden rounded-[4px] border border-foreground/10 group">
                     <img 
                       src={screenlifeRut3} 
                       alt="Mixed user feedback showing both negative and positive reactions" 
@@ -679,10 +679,10 @@ const ComingSoon = () => {
                 </div>
               </AnimatedSection>
 
-              {/* Text 3 - offset more right */}
+              {/* Text 3 */}
               <AnimatedSection delay={200}>
-                <div className="md:ml-[45%] max-w-xl">
-                  <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                <div className="flex justify-center">
+                  <p className="text-lg md:text-xl text-muted-foreground leading-relaxed text-center max-w-2xl">
                     The results made it clear that we needed to continue testing for more robust feedback.
                   </p>
                 </div>
