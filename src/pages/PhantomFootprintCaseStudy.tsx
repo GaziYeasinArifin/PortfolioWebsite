@@ -92,7 +92,7 @@ const AnimatedSection = ({
   );
 };
 
-const CaseStudyDetail = () => {
+const PhantomFootprintCaseStudy = () => {
   const { slug } = useParams();
   const [arduinoImageIndex, setArduinoImageIndex] = useState(0);
   const [assemblyImageIndex, setAssemblyImageIndex] = useState(0);
@@ -103,6 +103,7 @@ const CaseStudyDetail = () => {
   const assemblyImagesLoaded = usePreloadImages(assemblyImages);
 
   useEffect(() => {
+    document.title = 'Phantom Footprint | Gazi Arifin';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
@@ -593,4 +594,4 @@ const CaseStudyDetail = () => {
   );
 };
 
-export default CaseStudyDetail;
+export default PhantomFootprintCaseStudy;

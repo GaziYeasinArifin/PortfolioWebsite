@@ -48,6 +48,7 @@ const PlaceholderImage = ({ label, aspectRatio = '16/9' }: { label: string; aspe
 
 const AddMusicToVideoCaseStudy = () => {
   useEffect(() => {
+    document.title = 'Add Music to Video | Gazi Arifin';
     window.scrollTo(0, 0);
   }, []);
 

@@ -5,7 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import CaseStudyDetail from "./pages/CaseStudyDetail";
+import ScreenlifeCaseStudy from "./pages/ScreenlifeCaseStudy";
+import PhantomFootprintCaseStudy from "./pages/PhantomFootprintCaseStudy";
 import AddMusicToVideoCaseStudy from "./pages/AddMusicToVideoCaseStudy";
 import ComingSoon from "./pages/ComingSoon";
 
@@ -19,8 +20,9 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/case-study/e-commerce-platform" element={<CaseStudyDetail />} />
-          <Route path="/case-study/analytics-dashboard" element={<AddMusicToVideoCaseStudy />} />
+          <Route path="/case-study/screenlife" element={<ScreenlifeCaseStudy />} />
+          <Route path="/case-study/phantom-footprint" element={<PhantomFootprintCaseStudy />} />
+          <Route path="/case-study/add-music-to-video" element={<AddMusicToVideoCaseStudy />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
