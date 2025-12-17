@@ -7,6 +7,9 @@ import personaClaire from '@/assets/screenlife-persona-claire.webp';
 import personaSarah from '@/assets/screenlife-persona-sarah.webp';
 import paperSketches from '@/assets/screenlife-paper-sketches.webp';
 import screenlifeHero from '@/assets/screenlife-hero.png';
+import screenlifeSearchUi from '@/assets/screenlife-search-ui.webp';
+import screenlifePlayerMinimized from '@/assets/screenlife-player-minimized.gif';
+import screenlifePlaylist from '@/assets/screenlife-playlist.gif';
 // Custom hook for scroll-triggered animations
 const useScrollReveal = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -244,41 +247,90 @@ const ComingSoon = () => {
               </div>
             </AnimatedSection>
 
-            {/* 3-column cards */}
+            {/* Search Clarity - Full Width */}
             <AnimatedSection>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <div className="bg-secondary rounded-[4px] p-6 space-y-3">
-                  <h4 className="font-display font-medium uppercase text-sm">Search Clarity</h4>
-                  <p className="text-sm text-muted-foreground">Issue: Users couldn't distinguish links from authors.</p>
-                  <p className="text-sm text-foreground font-medium">Solution: Added content icons.</p>
-                </div>
-                <div className="bg-secondary rounded-[4px] p-6 space-y-3">
-                  <h4 className="font-display font-medium uppercase text-sm">No Playlist Creation</h4>
-                  <p className="text-sm text-muted-foreground">Issue: Users couldn't find how to create a playlist.</p>
-                  <p className="text-sm text-foreground font-medium">Solution: Added "Create" button.</p>
-                </div>
-                <div className="bg-secondary rounded-[4px] p-6 space-y-3">
-                  <h4 className="font-display font-medium uppercase text-sm">Player Behavior</h4>
-                  <p className="text-sm text-muted-foreground">Issue: Users expected the player to minimize like YouTube.</p>
-                  <p className="text-sm text-foreground font-medium">Solution: Added minimization logic.</p>
+              <div className="mb-16 md:mb-20">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                  <div className="lg:col-span-1 space-y-4">
+                    <div className="inline-block bg-secondary px-3 py-1 rounded-[4px]">
+                      <span className="text-xs font-medium tracking-wider uppercase">finding #1</span>
+                    </div>
+                    <h4 className="font-display text-xl md:text-2xl font-medium uppercase">Search Clarity</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Users couldn't distinguish between <span className="text-foreground font-medium">links, authors, and hashtags</span> in search results.
+                    </p>
+                    <div className="pt-2">
+                      <p className="text-sm text-muted-foreground mb-1">solution:</p>
+                      <p className="text-foreground font-medium">Added content type icons to each search result for instant recognition.</p>
+                    </div>
+                  </div>
+                  <div className="lg:col-span-2">
+                    <div className="relative w-full overflow-hidden rounded-[4px] group">
+                      <img 
+                        src={screenlifeSearchUi} 
+                        alt="Before and after comparison of search UI showing content type indicators" 
+                        className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </AnimatedSection>
 
+            {/* Two column: Playlist + Player Minimized */}
             <AnimatedSection>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <PlaceholderImage 
-                  label="[INSERT: Search UI]" 
-                  aspectRatio="9/16"
-                />
-                <PlaceholderImage 
-                  label="[INSERT: Playlist UI]" 
-                  aspectRatio="9/16"
-                />
-                <PlaceholderImage 
-                  label="[INSERT: Player Minimized UI]" 
-                  aspectRatio="9/16"
-                />
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+                {/* Playlist Creation */}
+                <div className="flex flex-col md:flex-row lg:flex-col gap-6 items-center">
+                  <div className="flex-1 space-y-4 text-center lg:text-left">
+                    <div className="inline-block bg-secondary px-3 py-1 rounded-[4px]">
+                      <span className="text-xs font-medium tracking-wider uppercase">finding #2</span>
+                    </div>
+                    <h4 className="font-display text-xl md:text-2xl font-medium uppercase">No Playlist Creation</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Users couldn't find how to create a new playlist within the app.
+                    </p>
+                    <div className="pt-2">
+                      <p className="text-sm text-muted-foreground mb-1">solution:</p>
+                      <p className="text-foreground font-medium">Added prominent "Create" button to the playlist screen.</p>
+                    </div>
+                  </div>
+                  <div className="w-full max-w-[280px] mx-auto">
+                    <div className="relative overflow-hidden rounded-[4px] group">
+                      <img 
+                        src={screenlifePlaylist} 
+                        alt="Playlist creation UI animation showing the new create button" 
+                        className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Player Behavior */}
+                <div className="flex flex-col md:flex-row lg:flex-col gap-6 items-center">
+                  <div className="flex-1 space-y-4 text-center lg:text-left">
+                    <div className="inline-block bg-secondary px-3 py-1 rounded-[4px]">
+                      <span className="text-xs font-medium tracking-wider uppercase">finding #3</span>
+                    </div>
+                    <h4 className="font-display text-xl md:text-2xl font-medium uppercase">Player Behavior</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Users expected the player to <span className="text-foreground font-medium">minimize like YouTube</span> when navigating away.
+                    </p>
+                    <div className="pt-2">
+                      <p className="text-sm text-muted-foreground mb-1">solution:</p>
+                      <p className="text-foreground font-medium">Added minimization logic with persistent mini-player.</p>
+                    </div>
+                  </div>
+                  <div className="w-full max-w-[280px] mx-auto">
+                    <div className="relative overflow-hidden rounded-[4px] group">
+                      <img 
+                        src={screenlifePlayerMinimized} 
+                        alt="Player minimization animation showing the mini-player feature" 
+                        className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </AnimatedSection>
           </section>
