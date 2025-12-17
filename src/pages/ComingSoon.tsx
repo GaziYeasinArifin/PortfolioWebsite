@@ -125,7 +125,7 @@ const ComingSoon = () => {
           <AnimatedSection delay={100}>
             <div className="mb-16 md:mb-24">
               <h1 className="font-display font-medium leading-[1.05] tracking-tight text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] mb-6">
-                <span className="uppercase text-foreground">screenlife mobile app</span>
+                <span className="uppercase text-foreground">Iterative Design Process</span>
                 <br />
                 <span className="lowercase text-muted-foreground">designing the first mobile interactive video recorder</span>
               </h1>
@@ -137,7 +137,7 @@ const ComingSoon = () => {
               <div className="flex flex-wrap gap-4 md:gap-6 mb-6">
                 <div className="flex items-center gap-2 text-sm">
                   <Users className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-                  <span>Sole UI/UX Designer</span>
+                  <span>UI/UX Designer</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <Smartphone className="h-4 w-4 text-muted-foreground flex-shrink-0" />
@@ -711,26 +711,26 @@ const ComingSoon = () => {
 
             {/* Permission Dialogs */}
             <AnimatedSection>
-              <div className="mb-16 md:mb-20 text-center">
+              <div className="mb-16 md:mb-20">
                 <div className="space-y-2 mb-8">
                   <h4 className="font-display font-medium uppercase text-sm">Permission Dialogs</h4>
                   <p className="text-sm text-muted-foreground">Users denied native prompts immediately. We moved to custom pre-permission primers.</p>
                 </div>
-                <div className="flex justify-center gap-4 md:gap-6">
+                <div className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6">
                   <img 
                     src={screenlifePermission1} 
                     alt="Permission dialog design showing notification prompt" 
-                    className="h-auto max-h-[400px] border-0"
+                    className="h-auto max-h-[300px] sm:max-h-[350px] md:max-h-[400px] border-0"
                   />
                   <img 
                     src={screenlifePermission2} 
                     alt="Permission dialog design showing turn on notifications" 
-                    className="h-auto max-h-[400px] border-0"
+                    className="h-auto max-h-[300px] sm:max-h-[350px] md:max-h-[400px] border-0"
                   />
                   <img 
                     src={screenlifePermission3} 
                     alt="Permission dialog design showing native iOS prompt" 
-                    className="h-auto max-h-[400px] border-0"
+                    className="h-auto max-h-[300px] sm:max-h-[350px] md:max-h-[400px] border-0"
                   />
                 </div>
               </div>
@@ -738,7 +738,7 @@ const ComingSoon = () => {
 
             {/* Sign-in Barrier */}
             <AnimatedSection>
-              <div className="mb-16 md:mb-20 text-center">
+              <div className="mb-16 md:mb-20">
                 <div className="space-y-2 mb-8">
                   <h4 className="font-display font-medium uppercase text-sm">Sign-in Barrier</h4>
                   <p className="text-sm text-muted-foreground">Users missed the "Skip" button. We redesigned the header to make it prominent.</p>
@@ -747,7 +747,7 @@ const ComingSoon = () => {
                   <img 
                     src={screenlifeSigninBarrier} 
                     alt="Sign-in screen showing skip button redesign" 
-                    className="h-auto max-h-[500px]"
+                    className="h-auto max-h-[400px] md:max-h-[500px]"
                   />
                 </div>
               </div>
@@ -755,7 +755,7 @@ const ComingSoon = () => {
 
             {/* Filtering */}
             <AnimatedSection>
-              <div className="mb-16 md:mb-20 text-center">
+              <div className="mb-16 md:mb-20">
                 <div className="space-y-2 mb-8">
                   <h4 className="font-display font-medium uppercase text-sm">Filtering</h4>
                   <p className="text-sm text-muted-foreground">Applied filter state was unclear to users. We added better active states.</p>
@@ -764,7 +764,7 @@ const ComingSoon = () => {
                   <img 
                     src={screenlifeFiltering} 
                     alt="Filter UI with improved active state indicators" 
-                    className="h-auto max-h-[500px]"
+                    className="h-auto max-h-[400px] md:max-h-[500px]"
                   />
                 </div>
               </div>
@@ -772,7 +772,7 @@ const ComingSoon = () => {
 
             {/* Hashtag Input */}
             <AnimatedSection>
-              <div className="mb-8 text-center">
+              <div>
                 <div className="space-y-2 mb-8">
                   <h4 className="font-display font-medium uppercase text-sm">Hashtag Input</h4>
                   <p className="text-sm text-muted-foreground">Users tried typing "#" manually. We added an auto-placeholder.</p>
@@ -781,7 +781,7 @@ const ComingSoon = () => {
                   <img 
                     src={screenlifeHashtagInput} 
                     alt="Before and after comparison of hashtag input with auto-placeholder" 
-                    className="h-auto max-w-3xl"
+                    className="h-auto w-full max-w-3xl"
                   />
                 </div>
               </div>
@@ -811,7 +811,7 @@ const ComingSoon = () => {
                 <img 
                   src={screenlifeV2BeforeAfter} 
                   alt="Before and after comparison showing new metadata on video cards" 
-                  className="h-auto max-w-2xl border-0"
+                  className="h-auto w-full max-w-xl border-0"
                 />
                 <p className="text-sm text-muted-foreground mt-4">Adding metadata (time, views, likes, device) to video cards</p>
               </div>
@@ -823,7 +823,7 @@ const ComingSoon = () => {
                 <img 
                   src={screenlifeV2Tabs} 
                   alt="New tab bar and category slider interface" 
-                  className="h-auto max-w-md border-0"
+                  className="h-auto w-full max-w-xs border-0"
                 />
                 <p className="text-sm text-muted-foreground mt-4">New tab bar and category slider for content discovery</p>
               </div>
@@ -835,7 +835,7 @@ const ComingSoon = () => {
                 <img 
                   src={screenlifeV2Social} 
                   alt="Profile, screens list, and followers interface" 
-                  className="h-auto max-w-3xl border-0"
+                  className="h-auto w-full max-w-2xl border-0"
                 />
                 <p className="text-sm text-muted-foreground mt-4">Enhanced social features: profiles, screens, and followers</p>
               </div>
