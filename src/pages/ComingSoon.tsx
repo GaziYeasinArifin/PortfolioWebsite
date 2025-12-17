@@ -9,7 +9,7 @@ import screenlifeWireframes from '@/assets/screenlife-wireframes.png';
 import screenlifeHero from '@/assets/screenlife-hero.png';
 import screenlifeSearchUi from '@/assets/screenlife-search-ui.webp';
 import screenlifePlayerMinimized from '@/assets/screenlife-player-minimized.gif';
-import screenlifeOnboarding from '@/assets/screenlife-onboarding.gif';
+import screenlifeOnboarding from '@/assets/screenlife-onboarding-v2.gif';
 import screenlifePlaylist from '@/assets/screenlife-playlist.gif';
 import screenlifeUxFlows from '@/assets/screenlife-ux-flows.webp';
 // Custom hook for scroll-triggered animations
@@ -272,6 +272,7 @@ const ComingSoon = () => {
               <div className="mb-16 md:mb-20">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                   <div className="lg:col-span-1 space-y-4">
+                    <h4 className="font-display text-xl md:text-2xl font-medium uppercase">Onboarding</h4>
                     <p className="text-muted-foreground leading-relaxed">
                       Moving to high-fidelity, we prioritized <span className="text-foreground font-medium">onboarding to explain the technology</span>. While we initially planned heavy animations, scope constraints pushed them to later versions. This proved beneficial, as usability testing later revealed the onboarding flow was already a significant friction point.
                     </p>
