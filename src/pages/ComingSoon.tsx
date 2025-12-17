@@ -277,8 +277,8 @@ const ComingSoon = () => {
                       Moving to high-fidelity, we prioritized <span className="text-foreground font-medium">onboarding to explain the technology</span>. While we initially planned heavy animations, scope constraints pushed them to later versions. This proved beneficial, as usability testing later revealed the onboarding flow was already a significant friction point.
                     </p>
                   </div>
-                  <div className="lg:col-span-2">
-                    <div className="relative w-full overflow-hidden rounded-[4px] group">
+                  <div className="lg:col-span-2 flex justify-center">
+                    <div className="relative w-[60%] overflow-hidden rounded-[4px] group">
                       <img 
                         src={screenlifeOnboarding} 
                         alt="High-fidelity onboarding animation mockup" 
