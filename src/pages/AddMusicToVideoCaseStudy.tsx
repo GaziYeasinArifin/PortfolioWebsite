@@ -92,7 +92,7 @@ const AddMusicToVideoCaseStudy = () => {
                 <img 
                   src={amtvHero}
                   alt="Add Music to Video App"
-                  className="w-full max-w-[400px] h-[500px] object-contain no-border"
+                  className="w-full max-w-[400px] aspect-square object-contain no-border"
                 />
               </div>
             </div>
