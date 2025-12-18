@@ -80,7 +80,7 @@ const AddMusicToVideoCaseStudy = () => {
                   <span className="uppercase text-foreground">Redefining Mobile Video Editing</span>
                 </h1>
                 <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
-                  Leading the UX for Add Music to Video—a top-charting app developed at Kite Games Studio that scaled from a simple utility to a creative powerhouse.
+                  Leading the UX for Add Music to Video. A top-charting app developed at Kite Games Studio that scaled from a simple utility to a creative powerhouse.
                 </p>
                 <p className="font-mono text-sm text-muted-foreground tracking-wide">
                   2016 - 2023 • Lead UX Designer
