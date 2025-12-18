@@ -96,38 +96,35 @@ const AddMusicToVideoCaseStudy = () => {
 
           {/* Hero Section */}
           <AnimatedSection delay={100}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-24 md:mb-32">
-              {/* Left side - Text */}
-              <div>
-                <h1 className="font-display font-medium leading-[1.05] tracking-tight text-[2rem] sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl mb-6">
-                  <span className="uppercase text-foreground">Redefining Mobile Video Editing</span>
-                  <br />
-                  <span className="lowercase text-muted-foreground">leading the ux for a top-charting creative app</span>
-                </h1>
-                <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed">
-                  Add Music to Video scaled from a simple utility to a creative powerhouse at Kite Games Studio, staying on <span className="text-foreground font-medium">top charts for years</span> and enabling me to scale the design team from 4 to 22 members.
-                </p>
-                
-                {/* Role & Duration */}
-                <div className="flex flex-wrap gap-4 md:gap-6">
-                  <div className="flex items-center gap-2 text-sm">
-                    <span>Lead UX Designer</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <span>2016 - 2023</span>
-                  </div>
-                </div>
-              </div>
+            <div className="mb-16 md:mb-24">
+              <h1 className="font-display font-medium leading-[1.05] tracking-tight text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] mb-6">
+                <span className="uppercase text-foreground">Redefining Mobile Video Editing</span>
+                <br />
+                <span className="lowercase text-muted-foreground">leading the ux for a top-charting creative app</span>
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mb-8 leading-relaxed">
+                Add Music to Video scaled from a simple utility to a creative powerhouse at Kite Games Studio, staying on <span className="text-foreground font-medium">top charts for years</span> and enabling me to scale the design team from 4 to 22 members.
+              </p>
               
-              {/* Right side - Mobile UI Placeholder */}
-              <div className="flex justify-center lg:justify-end">
-                <div className="w-full max-w-[280px]">
-                  <PlaceholderImage 
-                    label="[INSERT: High-Fidelity App Home Screen - Dark Mode]" 
-                    aspectRatio="9/19.5" 
-                  />
+              {/* Role & Duration */}
+              <div className="flex flex-wrap gap-4 md:gap-6 mb-6">
+                <div className="flex items-center gap-2 text-sm">
+                  <span>Lead UX Designer</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <span>2016 - 2023</span>
                 </div>
               </div>
+            </div>
+          </AnimatedSection>
+
+          {/* Hero image placeholder */}
+          <AnimatedSection delay={200}>
+            <div className="relative w-full overflow-hidden rounded-[4px] group mb-24 md:mb-32">
+              <PlaceholderImage 
+                label="[INSERT: High-Fidelity App Home Screen - Dark Mode]" 
+                aspectRatio="16/9" 
+              />
             </div>
           </AnimatedSection>
 
