@@ -92,8 +92,7 @@ const AddMusicToVideoCaseStudy = () => {
                 <img 
                   src={amtvHero}
                   alt="Add Music to Video App"
-                  className="w-full max-w-[400px] object-contain no-border"
-                  style={{ aspectRatio: '400/500' }}
+                  className="w-full max-w-[400px] h-[500px] object-cover no-border"
                 />
               </div>
             </div>
