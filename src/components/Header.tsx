@@ -111,7 +111,7 @@ const Header = () => {
             <img 
               src={logo} 
               alt="Gazi Yeasin Arifin Logo" 
-              className={`h-[30px] w-auto rounded-[4px] transition-all duration-500 group-hover:scale-105 group-hover:opacity-80 ${
+              className={`no-border h-[30px] w-auto transition-all duration-500 group-hover:scale-105 group-hover:opacity-80 ${
                 showLogo ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
               }`}
             />
