@@ -31,11 +31,11 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
   'ux-projects': [
     {
       id: 1,
-      title: 'Screenlife Mobile App',
+      title: 'Iterative Design Process',
       description: 'Designing the first mobile interactive video recorder',
       category: 'Mobile Design',
       image: screenlifeThumbnail,
-      year: '2024',
+      year: '2018',
       slug: 'screenlife',
     },
     {
