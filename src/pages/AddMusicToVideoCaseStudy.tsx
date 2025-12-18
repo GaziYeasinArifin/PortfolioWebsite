@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
+import amtvHero from '@/assets/amtv-hero.png';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -86,16 +87,13 @@ const AddMusicToVideoCaseStudy = () => {
                 </p>
               </div>
               
-              {/* Right side - Mobile screen placeholder */}
+              {/* Right side - Square hero image */}
               <div className="flex justify-center lg:justify-end">
-                <div 
-                  className="w-full max-w-[280px] bg-secondary/40 border-2 border-dashed border-muted-foreground/30 rounded-[40px] flex items-center justify-center p-6"
-                  style={{ aspectRatio: '9/19' }}
-                >
-                  <p className="text-muted-foreground text-sm text-center leading-relaxed">
-                    [INSERT: High-Fidelity App Home Screen - Dark Mode]
-                  </p>
-                </div>
+                <img 
+                  src={amtvHero}
+                  alt="Add Music to Video App"
+                  className="w-full max-w-[400px] aspect-square object-contain no-border"
+                />
               </div>
             </div>
           </AnimatedSection>
