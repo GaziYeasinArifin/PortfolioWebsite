@@ -75,8 +75,8 @@ const AddMusicToVideoCaseStudy = () => {
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-24">
               {/* Left side - Text content */}
               <div>
-                <h1 className="font-display text-5xl md:text-6xl lg:text-[64px] font-bold leading-[1.1] tracking-tight text-foreground mb-6">
-                  Redefining Mobile Video Editing
+                <h1 className="font-display font-medium leading-[1.05] tracking-tight text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] mb-6">
+                  <span className="uppercase text-foreground">Redefining Mobile Video Editing</span>
                 </h1>
                 <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
                   Leading the UX for Add Music to Video—a top-charting app developed at Kite Games Studio that scaled from a simple utility to a creative powerhouse.
@@ -134,7 +134,8 @@ const AddMusicToVideoCaseStudy = () => {
           {/* The Challenge Section */}
           <AnimatedSection delay={100}>
             <div className="mb-24">
-              <h2 className="font-display text-3xl md:text-4xl font-medium mb-4">the challenge</h2>
+              <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter i</p>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium mb-4">the challenge</h2>
               <p className="text-lg text-muted-foreground mb-2">The 2016 Landscape</p>
               <p className="text-muted-foreground leading-relaxed max-w-3xl mb-16">
                 The original experience was cluttered and technically rigid. Users struggled to sync audio, and the visual output felt "cheap." I needed to dismantle the existing flow and rebuild it based on how people feel music, not just how code handles it.
@@ -179,7 +180,8 @@ const AddMusicToVideoCaseStudy = () => {
           {/* Research & Methodology Section */}
           <AnimatedSection delay={100}>
             <div className="mb-24">
-              <h2 className="font-display text-3xl md:text-4xl font-medium mb-4">research & methodology</h2>
+              <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter ii</p>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium mb-4">research & methodology</h2>
               <p className="text-lg text-muted-foreground mb-12">Unconventional Research Methods</p>
               
               {/* Bento Grid */}
@@ -194,7 +196,7 @@ const AddMusicToVideoCaseStudy = () => {
                       [INSERT: DJ/Audio Waveform visual]
                     </p>
                   </div>
-                  <h3 className="font-display text-xl font-medium mb-3">The DJ Study</h3>
+                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase mb-3">The DJ Study</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">
                     I analyzed DJ beat-matching to understand how non-musicians perceive audio structure.
                   </p>
@@ -210,7 +212,7 @@ const AddMusicToVideoCaseStudy = () => {
                       [INSERT: Movie Scene Breakdown]
                     </p>
                   </div>
-                  <h3 className="font-display text-xl font-medium mb-3">Cinematic Grammar</h3>
+                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase mb-3">Cinematic Grammar</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">
                     I studied movie transitions to create a "logic grammar" for video themes.
                   </p>
@@ -226,7 +228,7 @@ const AddMusicToVideoCaseStudy = () => {
                       [INSERT: Abstract Psychology/Persona Image]
                     </p>
                   </div>
-                  <h3 className="font-display text-xl font-medium mb-3">Psychology</h3>
+                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase mb-3">Psychology</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">
                     Analyzed psychology to understand how users (specifically female demographics) view self-image in editing.
                   </p>
@@ -241,7 +243,8 @@ const AddMusicToVideoCaseStudy = () => {
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 {/* Left side - Text content */}
                 <div>
-                  <h2 className="font-display text-3xl md:text-4xl font-medium mb-4">the "bridge"</h2>
+                  <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter iii</p>
+                  <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium mb-4">the "bridge"</h2>
                   <p className="text-lg text-muted-foreground mb-6">Bridging Design & Code</p>
                   <p className="text-muted-foreground leading-relaxed mb-8">
                     In 2016, tools like Figma weren't advanced enough for my vision. I used After Effects to demonstrate complex animations and wrote "Transition Grammar" on paper to explain the logic to developers.
@@ -269,7 +272,8 @@ const AddMusicToVideoCaseStudy = () => {
           {/* The Solution Section */}
           <AnimatedSection delay={100}>
             <div className="mb-24">
-              <h2 className="font-display text-3xl md:text-4xl font-medium mb-4">the solution</h2>
+              <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter iv</p>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium mb-4">the solution</h2>
               <p className="text-lg text-muted-foreground mb-6">The Reimagined Editor</p>
               <p className="text-muted-foreground leading-relaxed max-w-3xl mb-12">
                 The final design featured a dark-mode interface that prioritized the content. We introduced a drag-and-drop timeline that felt tactile, allowing users to "touch" the music. The result was a seamless flow from import to export.
@@ -326,7 +330,8 @@ const AddMusicToVideoCaseStudy = () => {
           {/* Execution Section */}
           <AnimatedSection delay={100}>
             <div className="mb-24 text-center">
-              <h2 className="font-display text-3xl md:text-4xl font-medium mb-4">execution</h2>
+              <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter v</p>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium mb-4">execution</h2>
               <p className="text-lg text-muted-foreground mb-6">Pixel-Perfect Execution</p>
               <p className="text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-12">
                 The best design fails without implementation. I sat side-by-side with developers and QA engineers in countless meetings, fixing glitches and refining transition timings until the app felt indistinguishable from the After Effects prototype.
@@ -350,7 +355,8 @@ const AddMusicToVideoCaseStudy = () => {
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 {/* Left side - Text content */}
                 <div>
-                  <h2 className="font-display text-3xl md:text-4xl font-medium mb-4">impact</h2>
+                  <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter vi</p>
+                  <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium mb-4">impact</h2>
                   <p className="text-lg text-muted-foreground mb-6">7 Years of Leadership</p>
                   <p className="text-muted-foreground leading-relaxed mb-10">
                     This project was just the beginning. It stayed on the Top Charts for years, and the success allowed me to scale the design team to 22 members, leading 16+ successful projects at Kite Games Studio.
