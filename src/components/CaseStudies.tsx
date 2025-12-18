@@ -6,6 +6,7 @@ import brandingCaseStudy1 from '@/assets/branding-case-study-1.png';
 import carepalWriting from '@/assets/carepal-writing.png';
 import phantomFootprintThumbnail from '@/assets/phantom-footprint-thumbnail.png';
 import screenlifeThumbnail from '@/assets/screenlife-thumbnail.png';
+import amtvThumbnail from '@/assets/amtv-thumbnail.png';
 import { ArrowUpRight } from 'lucide-react';
 
 interface CaseStudy {
@@ -52,7 +53,7 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       title: 'Add Music to Video',
       description: 'Redesigning a video editor for 50M+ users',
       category: 'Mobile Design',
-      image: caseStudy3,
+      image: amtvThumbnail,
       year: '2023',
       slug: 'add-music-to-video',
     },
