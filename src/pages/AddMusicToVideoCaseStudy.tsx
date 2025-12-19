@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, ArrowRight, ArrowDown } from 'lucide-react';
 import amtvHero from '@/assets/amtv-hero.png';
 import amtv2016Trim from '@/assets/amtv-2016-trim.png';
 import amtv2016Filters from '@/assets/amtv-2016-filters.png';
@@ -82,8 +82,9 @@ const ComparisonSlideshow = () => {
       <div className="relative flex items-center justify-center py-4 md:py-0">
         <div className="hidden md:block absolute left-1/2 -translate-x-1/2 h-44 w-px bg-border" />
         <div className="md:hidden absolute top-1/2 -translate-y-1/2 w-44 h-px bg-border" />
-        <div className="relative bg-background px-3">
-          <ArrowRight className="w-8 h-8 text-muted-foreground" />
+        <div className="relative bg-background px-3 py-2">
+          <ArrowDown className="md:hidden w-8 h-8 text-muted-foreground" />
+          <ArrowRight className="hidden md:block w-8 h-8 text-muted-foreground" />
         </div>
       </div>
       
