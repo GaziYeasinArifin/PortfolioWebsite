@@ -9,6 +9,8 @@ import amtv2019Slide1 from '@/assets/amtv-2019-slide-1.png';
 import amtv2019Slide2 from '@/assets/amtv-2019-slide-2.png';
 import amtv2019Slide3 from '@/assets/amtv-2019-slide-3.png';
 import amtv2019Slide4 from '@/assets/amtv-2019-slide-4.png';
+import amtvBridgeSketch from '@/assets/amtv-bridge-sketch.png';
+import amtvBridgeCurves from '@/assets/amtv-bridge-curves.png';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -105,6 +107,34 @@ const ComparisonSlideshow = () => {
         </div>
         <p className="text-muted-foreground text-sm text-center mt-4">2019 update</p>
       </div>
+    </div>
+  );
+};
+
+// Bridge section slideshow component
+const BridgeSlideshow = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = [amtvBridgeSketch, amtvBridgeCurves];
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
+  return (
+    <div className="relative w-full rounded-[4px] overflow-hidden">
+      {slides.map((slide, index) => (
+        <img 
+          key={index}
+          src={slide}
+          alt={`Bridge concept ${index + 1}`}
+          className={`no-border block w-full h-auto object-cover transition-opacity duration-500 ${
+            index === currentSlide ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
+          }`}
+        />
+      ))}
     </div>
   );
 };
@@ -284,17 +314,8 @@ const AddMusicToVideoCaseStudy = () => {
                   </p>
                 </div>
                 
-                {/* Right side - Placeholder */}
-                <div>
-                  <div 
-                    className="w-full bg-secondary/30 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center p-6"
-                    style={{ aspectRatio: '16/9' }}
-                  >
-                    <p className="text-muted-foreground text-sm text-center leading-relaxed">
-                      [INSERT: Photo of Handwritten Logic Paper or After Effects Timeline]
-                    </p>
-                  </div>
-                </div>
+                {/* Right side - Slideshow */}
+                <BridgeSlideshow />
               </div>
             </div>
           </AnimatedSection>
