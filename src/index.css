@@ -159,8 +159,7 @@
   video.no-border,
   .no-border img,
   .no-border video {
-    border: none;
-    border-radius: 0;
+    border: none !important;
   }
 
   /* Background images should have no border */
