@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, ArrowRight, ArrowDown } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
 import amtvHero from '@/assets/amtv-hero.png';
-import amtv2016Trim from '@/assets/amtv-2016-trim.png';
-import amtv2016Filters from '@/assets/amtv-2016-filters.png';
 import amtv2016Design from '@/assets/amtv-2016-design.png';
 import amtv2019Slide1 from '@/assets/amtv-2019-slide-1.png';
 import amtv2019Slide2 from '@/assets/amtv-2019-slide-2.png';
@@ -59,15 +57,6 @@ const AnimatedSection = ({ children, className = '', delay = 0 }: { children: Re
   );
 };
 
-// Placeholder image component
-const PlaceholderImage = ({ label, aspectRatio = '16/9' }: { label: string; aspectRatio?: string }) => (
-  <div 
-    className="w-full bg-secondary/30 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center"
-    style={{ aspectRatio }}
-  >
-    <p className="text-muted-foreground text-sm text-center px-4">{label}</p>
-  </div>
-);
 // Comparison slideshow component
 const ComparisonSlideshow = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -192,7 +181,7 @@ const SolutionCarousel = () => {
   }, []);
 
   return (
-    <div className="relative w-screen left-1/2 -translate-x-1/2">
+    <div className="relative w-screen left-1/2 -translate-x-1/2 py-12 md:py-16">
       {/* Left fade gradient */}
       <div className="absolute left-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
       
@@ -313,7 +302,6 @@ const AddMusicToVideoCaseStudy = () => {
               <p className="text-muted-foreground leading-relaxed max-w-3xl mb-16">
                 The original experience was cluttered and technically rigid. Users struggled to sync audio, and the visual output felt "cheap." I needed to dismantle the existing flow and rebuild it based on how people feel music, not just how code handles it.
               </p>
-              
               
               {/* Comparison Layout */}
               <ComparisonSlideshow />
