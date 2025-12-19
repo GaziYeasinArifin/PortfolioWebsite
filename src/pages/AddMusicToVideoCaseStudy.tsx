@@ -144,6 +144,10 @@ const BridgeSlideshow = () => {
 // Solution auto-scrolling carousel component
 const SolutionCarousel = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const speedRef = useRef(0.5);
+  const targetSpeedRef = useRef(0.5);
+  
   const solutionImages = [
     { src: amtvSolution1, alt: 'Video Editing Interface' },
     { src: amtvSolution2, alt: 'Timeline Editor' },
@@ -159,11 +163,16 @@ const SolutionCarousel = () => {
     if (!scrollContainer) return;
 
     let animationId: number;
-    let scrollPosition = 0;
-    const scrollSpeed = 0.5; // pixels per frame
+    let scrollPosition = scrollContainer.scrollLeft || 0;
+    const maxSpeed = 0.5;
+    const easeAmount = 0.02; // How fast it eases in/out
 
     const animate = () => {
-      scrollPosition += scrollSpeed;
+      // Ease speed toward target
+      targetSpeedRef.current = isHovered ? 0 : maxSpeed;
+      speedRef.current += (targetSpeedRef.current - speedRef.current) * easeAmount;
+      
+      scrollPosition += speedRef.current;
       
       // Reset when we've scrolled past half (the duplicated set)
       const halfWidth = scrollContainer.scrollWidth / 2;
@@ -178,10 +187,14 @@ const SolutionCarousel = () => {
     animationId = requestAnimationFrame(animate);
 
     return () => cancelAnimationFrame(animationId);
-  }, []);
+  }, [isHovered]);
 
   return (
-    <div className="relative w-screen left-1/2 -translate-x-1/2 py-12 md:py-16">
+    <div 
+      className="relative w-screen left-1/2 -translate-x-1/2 py-12 md:py-16"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       {/* Left fade gradient */}
       <div className="absolute left-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
       
@@ -197,12 +210,12 @@ const SolutionCarousel = () => {
         {[...solutionImages, ...solutionImages].map((image, index) => (
           <div 
             key={index} 
-            className="flex-shrink-0"
+            className="flex-shrink-0 group"
           >
             <img 
               src={image.src}
               alt={image.alt}
-              className="h-[500px] md:h-[600px] w-auto object-contain no-border"
+              className="h-[500px] md:h-[600px] w-auto object-contain no-border transition-transform duration-500 group-hover:scale-[1.02]"
             />
           </div>
         ))}
