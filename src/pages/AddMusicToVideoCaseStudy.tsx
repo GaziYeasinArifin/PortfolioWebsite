@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import amtvHero from '@/assets/amtv-hero.png';
+import amtv2016Trim from '@/assets/amtv-2016-trim.png';
+import amtv2016Filters from '@/assets/amtv-2016-filters.png';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -140,36 +142,25 @@ const AddMusicToVideoCaseStudy = () => {
               </p>
               
               {/* Comparison Layout */}
-              <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12">
                 {/* Old Interface */}
-                <div className="w-full max-w-[220px]">
-                  <div 
-                    className="w-full bg-secondary/30 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center p-4"
-                    style={{ aspectRatio: '9/16' }}
-                  >
-                    <p className="text-muted-foreground text-xs text-center leading-relaxed">
-                      [INSERT: Old 2016 Cluttered Interface]
-                    </p>
-                  </div>
-                </div>
-                
-                {/* Arrow */}
-                <div className="text-muted-foreground/50 rotate-90 md:rotate-0">
-                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                  </svg>
+                <div className="w-full max-w-[280px]">
+                  <img 
+                    src={amtv2016Trim}
+                    alt="2016 AMTV Trim Interface"
+                    className="w-full h-auto object-contain"
+                  />
+                  <p className="text-muted-foreground text-sm text-center mt-4">Basic trimming tools</p>
                 </div>
                 
                 {/* New Interface */}
-                <div className="w-full max-w-[220px]">
-                  <div 
-                    className="w-full bg-secondary/30 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center p-4"
-                    style={{ aspectRatio: '9/16' }}
-                  >
-                    <p className="text-muted-foreground text-xs text-center leading-relaxed">
-                      [INSERT: New 2017 Clean Interface]
-                    </p>
-                  </div>
+                <div className="w-full max-w-[280px]">
+                  <img 
+                    src={amtv2016Filters}
+                    alt="2016 AMTV Filters Interface"
+                    className="w-full h-auto object-contain"
+                  />
+                  <p className="text-muted-foreground text-sm text-center mt-4">Limited filter options</p>
                 </div>
               </div>
             </div>
