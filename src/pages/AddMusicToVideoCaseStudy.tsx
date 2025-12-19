@@ -17,6 +17,13 @@ import amtvResearchTimeline from '@/assets/amtv-research-timeline.png';
 import amtvResearchMiro from '@/assets/amtv-research-miro.png';
 import amtvCollab from '@/assets/amtv-collab.png';
 import amtvImpact from '@/assets/amtv-impact.png';
+import amtvSolution1 from '@/assets/amtv-solution-1.png';
+import amtvSolution2 from '@/assets/amtv-solution-2.png';
+import amtvSolution3 from '@/assets/amtv-solution-3.png';
+import amtvSolution4 from '@/assets/amtv-solution-4.png';
+import amtvSolution5 from '@/assets/amtv-solution-5.png';
+import amtvSolution6 from '@/assets/amtv-solution-6.png';
+import amtvSolution7 from '@/assets/amtv-solution-7.png';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -140,6 +147,68 @@ const BridgeSlideshow = () => {
             index === currentSlide ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
           }`}
         />
+      ))}
+    </div>
+  );
+};
+
+// Solution auto-scrolling carousel component
+const SolutionCarousel = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const solutionImages = [
+    { src: amtvSolution1, alt: 'Video Editing Interface' },
+    { src: amtvSolution2, alt: 'Timeline Editor' },
+    { src: amtvSolution3, alt: 'Audio Edit Panel' },
+    { src: amtvSolution4, alt: 'AI Filters' },
+    { src: amtvSolution5, alt: 'Audio Library' },
+    { src: amtvSolution6, alt: 'Projects View' },
+    { src: amtvSolution7, alt: 'Audio Add Screen' },
+  ];
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    let animationId: number;
+    let scrollPosition = 0;
+    const scrollSpeed = 0.5; // pixels per frame
+
+    const animate = () => {
+      scrollPosition += scrollSpeed;
+      
+      // Reset when we've scrolled past half (the duplicated set)
+      const halfWidth = scrollContainer.scrollWidth / 2;
+      if (scrollPosition >= halfWidth) {
+        scrollPosition = 0;
+      }
+      
+      scrollContainer.scrollLeft = scrollPosition;
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animationId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationId);
+  }, []);
+
+  return (
+    <div 
+      ref={scrollRef}
+      className="flex gap-6 overflow-x-hidden"
+      style={{ scrollBehavior: 'auto' }}
+    >
+      {/* Duplicate images for seamless loop */}
+      {[...solutionImages, ...solutionImages].map((image, index) => (
+        <div 
+          key={index} 
+          className="flex-shrink-0"
+        >
+          <img 
+            src={image.src}
+            alt={image.alt}
+            className="h-[500px] md:h-[600px] w-auto object-contain no-border"
+          />
+        </div>
       ))}
     </div>
   );
@@ -336,51 +405,8 @@ const AddMusicToVideoCaseStudy = () => {
                 The final design featured a dark-mode interface that prioritized the content. We introduced a drag-and-drop timeline that felt tactile, allowing users to "touch" the music. The result was a seamless flow from import to export.
               </p>
               
-              {/* Solution Gallery */}
-              <div className="bg-[hsl(220,10%,15%)] rounded-[4px] p-8 md:p-12">
-                <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8">
-                  {/* Screen 1 */}
-                  <div className="w-full max-w-[180px]">
-                    <div 
-                      className="w-full bg-[hsl(220,10%,20%)] border-2 border-dashed border-[hsl(220,10%,30%)] rounded-[4px] flex items-center justify-center p-4"
-                      style={{ aspectRatio: '9/16' }}
-                    >
-                      <p className="text-[hsl(220,10%,50%)] text-xs text-center leading-relaxed">
-                        [INSERT: Music Selection Screen]
-                      </p>
-                    </div>
-                  </div>
-                  
-                  {/* Screen 2 */}
-                  <div className="w-full max-w-[180px]">
-                    <div 
-                      className="w-full bg-[hsl(220,10%,20%)] border-2 border-dashed border-[hsl(220,10%,30%)] rounded-[4px] flex items-center justify-center p-4"
-                      style={{ aspectRatio: '9/16' }}
-                    >
-                      <p className="text-[hsl(220,10%,50%)] text-xs text-center leading-relaxed">
-                        [INSERT: Main Editor Timeline]
-                      </p>
-                    </div>
-                  </div>
-                  
-                  {/* Screen 3 */}
-                  <div className="w-full max-w-[180px]">
-                    <div 
-                      className="w-full bg-[hsl(220,10%,20%)] border-2 border-dashed border-[hsl(220,10%,30%)] rounded-[4px] flex items-center justify-center p-4"
-                      style={{ aspectRatio: '9/16' }}
-                    >
-                      <p className="text-[hsl(220,10%,50%)] text-xs text-center leading-relaxed">
-                        [INSERT: Export & Share Screen]
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Caption */}
-                <p className="text-center text-[hsl(220,10%,50%)] text-sm mt-8">
-                  The 2017 Redesign
-                </p>
-              </div>
+              {/* Solution Gallery - Auto-scrolling Carousel */}
+              <SolutionCarousel />
             </div>
           </AnimatedSection>
 
