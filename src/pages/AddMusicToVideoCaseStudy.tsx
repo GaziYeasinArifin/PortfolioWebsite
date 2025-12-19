@@ -411,7 +411,7 @@ const AddMusicToVideoCaseStudy = () => {
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium mb-4">The Solution</h2>
               <p className="text-lg text-muted-foreground mb-6">The Reimagined Editor</p>
               <p className="text-muted-foreground leading-relaxed max-w-3xl mb-12">
-                The final design featured a dark-mode interface that prioritized the content. We introduced a drag-and-drop timeline that felt tactile, allowing users to "touch" the music. The result was a seamless flow from import to export.
+                The final design featured a light and dark mode interface that prioritized the content. We introduced a drag-and-drop timeline that felt tactile, allowing users to "touch" the music. The result was a seamless flow from import to export.
               </p>
               
               {/* Solution Gallery - Auto-scrolling Carousel */}
