@@ -11,6 +11,9 @@ import amtv2019Slide3 from '@/assets/amtv-2019-slide-3.png';
 import amtv2019Slide4 from '@/assets/amtv-2019-slide-4.png';
 import amtvBridgeSketch from '@/assets/amtv-bridge-sketch.png';
 import amtvBridgeCurves from '@/assets/amtv-bridge-curves.png';
+import amtvResearchWaveform from '@/assets/amtv-research-waveform.png';
+import amtvResearchTimeline from '@/assets/amtv-research-timeline.png';
+import amtvResearchMiro from '@/assets/amtv-research-miro.png';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -242,56 +245,56 @@ const AddMusicToVideoCaseStudy = () => {
             <div className="mb-24">
               <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-4">chapter ii</p>
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium mb-4">Research & Methodology</h2>
-              <p className="text-lg text-muted-foreground mb-12">Unconventional Research Methods</p>
+              <p className="text-lg text-muted-foreground mb-16">Unconventional Research Methods</p>
               
-              {/* Bento Grid */}
-              <div className="grid md:grid-cols-3 gap-6">
-                {/* Card 1 - DJ Study */}
-                <div className="bg-secondary/20 rounded-[4px] p-6">
-                  <div 
-                    className="w-full bg-secondary/40 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center mb-6"
-                    style={{ aspectRatio: '1/1' }}
-                  >
-                    <p className="text-muted-foreground text-xs text-center px-4">
-                      [INSERT: DJ/Audio Waveform visual]
-                    </p>
-                  </div>
-                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase mb-3">The DJ Study</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    I analyzed DJ beat-matching to understand how non-musicians perceive audio structure.
+              {/* Row 1 - Text Left, Image Right */}
+              <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
+                <div>
+                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase mb-4">The DJ Study</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    I analyzed DJ beat-matching to understand how non-musicians perceive audio structure. By studying how DJs intuitively sync tracks, I discovered patterns that could be translated into visual cues for our video editor.
                   </p>
                 </div>
-                
-                {/* Card 2 - Cinematic Grammar */}
-                <div className="bg-secondary/20 rounded-[4px] p-6">
-                  <div 
-                    className="w-full bg-secondary/40 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center mb-6"
-                    style={{ aspectRatio: '1/1' }}
-                  >
-                    <p className="text-muted-foreground text-xs text-center px-4">
-                      [INSERT: Movie Scene Breakdown]
-                    </p>
-                  </div>
-                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase mb-3">Cinematic Grammar</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    I studied movie transitions to create a "logic grammar" for video themes.
+                <div className="rounded-[4px] overflow-hidden">
+                  <img 
+                    src={amtvResearchWaveform}
+                    alt="DJ audio waveform analysis"
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+              </div>
+              
+              {/* Row 2 - Image Left, Text Right */}
+              <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
+                <div className="rounded-[4px] overflow-hidden md:order-1 order-2">
+                  <img 
+                    src={amtvResearchTimeline}
+                    alt="Cinematic grammar timeline analysis"
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+                <div className="md:order-2 order-1">
+                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase mb-4">Cinematic Grammar</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    I studied movie transitions to create a "logic grammar" for video themes. By breaking down how professional editors use timing, cuts, and visual rhythm, I developed a systematic approach to automated video editing.
                   </p>
                 </div>
-                
-                {/* Card 3 - Psychology */}
-                <div className="bg-secondary/20 rounded-[4px] p-6">
-                  <div 
-                    className="w-full bg-secondary/40 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center mb-6"
-                    style={{ aspectRatio: '1/1' }}
-                  >
-                    <p className="text-muted-foreground text-xs text-center px-4">
-                      [INSERT: Abstract Psychology/Persona Image]
-                    </p>
-                  </div>
-                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase mb-3">Psychology</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    Analyzed psychology to understand how users (specifically female demographics) view self-image in editing.
+              </div>
+              
+              {/* Row 3 - Text Left, Image Right */}
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h3 className="font-display text-xl md:text-2xl font-medium uppercase mb-4">Psychology</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Analyzed psychology to understand how users (specifically female demographics) view self-image in editing. This research informed our approach to filters, effects, and the overall emotional tone of the editing experience.
                   </p>
+                </div>
+                <div className="rounded-[4px] overflow-hidden">
+                  <img 
+                    src={amtvResearchMiro}
+                    alt="User psychology research board"
+                    className="w-full h-auto object-cover"
+                  />
                 </div>
               </div>
             </div>
