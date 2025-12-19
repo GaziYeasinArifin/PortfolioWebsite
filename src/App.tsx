@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import ScreenlifeCaseStudy from "./pages/ScreenlifeCaseStudy";
 import PhantomFootprintCaseStudy from "./pages/PhantomFootprintCaseStudy";
 import AddMusicToVideoCaseStudy from "./pages/AddMusicToVideoCaseStudy";
+import SpotlightCaseStudy from "./pages/SpotlightCaseStudy";
 import ComingSoon from "./pages/ComingSoon";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/case-study/screenlife" element={<ScreenlifeCaseStudy />} />
           <Route path="/case-study/phantom-footprint" element={<PhantomFootprintCaseStudy />} />
           <Route path="/case-study/add-music-to-video" element={<AddMusicToVideoCaseStudy />} />
+          <Route path="/case-study/spotlight" element={<SpotlightCaseStudy />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
