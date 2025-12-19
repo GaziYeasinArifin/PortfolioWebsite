@@ -70,33 +70,41 @@ const ComparisonSlideshow = () => {
       {/* 2016 Design - Static */}
       <div className="w-full max-w-[280px]">
         <p className="text-muted-foreground text-sm text-center mb-4">Before</p>
-        <img 
-          src={amtv2016Design}
-          alt="2016 AMTV Design"
-          className="w-full h-auto object-contain"
-        />
+        <div className="relative overflow-hidden">
+          <img 
+            src={amtv2016Design}
+            alt="2016 AMTV Design"
+            className="no-border block w-full h-auto object-contain border-0 outline-none ring-0 shadow-none scale-[1.06]"
+          />
+        </div>
+        <p className="text-muted-foreground text-sm text-center mt-4">2016 design</p>
       </div>
       
-      {/* Arrow */}
-      <div className="flex items-center justify-center py-4 md:py-0">
-        <ArrowRight className="w-8 h-8 text-muted-foreground" />
+      {/* Divider + Arrow */}
+      <div className="relative flex items-center justify-center py-4 md:py-0">
+        <div className="hidden md:block absolute left-1/2 -translate-x-1/2 h-44 w-px bg-border" />
+        <div className="md:hidden absolute top-1/2 -translate-y-1/2 w-44 h-px bg-border" />
+        <div className="relative bg-background px-3">
+          <ArrowRight className="w-8 h-8 text-muted-foreground" />
+        </div>
       </div>
       
       {/* 2019 Update - Slideshow */}
       <div className="w-full max-w-[280px]">
         <p className="text-muted-foreground text-sm text-center mb-4">After</p>
-        <div className="relative">
+        <div className="relative overflow-hidden">
           {slides.map((slide, index) => (
             <img 
               key={index}
               src={slide}
               alt={`2019 AMTV Update ${index + 1}`}
-              className={`w-full h-auto object-contain transition-opacity duration-500 ${
+              className={`no-border block w-full h-auto object-contain border-0 outline-none ring-0 shadow-none scale-[1.06] transition-opacity duration-500 ${
                 index === currentSlide ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
               }`}
             />
           ))}
         </div>
+        <p className="text-muted-foreground text-sm text-center mt-4">2019 update</p>
       </div>
     </div>
   );
