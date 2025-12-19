@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, ArrowRight } from 'lucide-react';
 import amtvHero from '@/assets/amtv-hero.png';
+import amtv2016Trim from '@/assets/amtv-2016-trim.png';
+import amtv2016Filters from '@/assets/amtv-2016-filters.png';
 import amtv2016Design from '@/assets/amtv-2016-design.png';
 import amtv2019Slide1 from '@/assets/amtv-2019-slide-1.png';
 import amtv2019Slide2 from '@/assets/amtv-2019-slide-2.png';
@@ -186,6 +188,34 @@ const AddMusicToVideoCaseStudy = () => {
               <p className="text-muted-foreground leading-relaxed max-w-3xl mb-16">
                 The original experience was cluttered and technically rigid. Users struggled to sync audio, and the visual output felt "cheap." I needed to dismantle the existing flow and rebuild it based on how people feel music, not just how code handles it.
               </p>
+              
+              {/* Before/After 2016 Landscape Images */}
+              <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-16">
+                {/* Before */}
+                <div className="w-full max-w-[280px]">
+                  <img 
+                    src={amtv2016Trim}
+                    alt="2016 AMTV Trim Interface"
+                    className="w-full h-auto object-contain"
+                  />
+                  <p className="text-muted-foreground text-sm text-center mt-4">before</p>
+                </div>
+                
+                {/* Arrow */}
+                <div className="flex items-center justify-center py-4 md:py-0">
+                  <ArrowRight className="w-8 h-8 text-muted-foreground" />
+                </div>
+                
+                {/* After */}
+                <div className="w-full max-w-[280px]">
+                  <img 
+                    src={amtv2016Filters}
+                    alt="2016 AMTV Filters Interface"
+                    className="w-full h-auto object-contain"
+                  />
+                  <p className="text-muted-foreground text-sm text-center mt-4">after</p>
+                </div>
+              </div>
               
               {/* Comparison Layout */}
               <ComparisonSlideshow />
