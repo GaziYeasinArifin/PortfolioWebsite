@@ -192,24 +192,32 @@ const SolutionCarousel = () => {
   }, []);
 
   return (
-    <div 
-      ref={scrollRef}
-      className="flex gap-6 overflow-x-hidden"
-      style={{ scrollBehavior: 'auto' }}
-    >
-      {/* Duplicate images for seamless loop */}
-      {[...solutionImages, ...solutionImages].map((image, index) => (
-        <div 
-          key={index} 
-          className="flex-shrink-0"
-        >
-          <img 
-            src={image.src}
-            alt={image.alt}
-            className="h-[500px] md:h-[600px] w-auto object-contain no-border"
-          />
-        </div>
-      ))}
+    <div className="relative w-screen left-1/2 -translate-x-1/2">
+      {/* Left fade gradient */}
+      <div className="absolute left-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+      
+      {/* Right fade gradient */}
+      <div className="absolute right-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+      
+      <div 
+        ref={scrollRef}
+        className="flex gap-6 overflow-x-hidden"
+        style={{ scrollBehavior: 'auto' }}
+      >
+        {/* Duplicate images for seamless loop */}
+        {[...solutionImages, ...solutionImages].map((image, index) => (
+          <div 
+            key={index} 
+            className="flex-shrink-0"
+          >
+            <img 
+              src={image.src}
+              alt={image.alt}
+              className="h-[500px] md:h-[600px] w-auto object-contain no-border"
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
