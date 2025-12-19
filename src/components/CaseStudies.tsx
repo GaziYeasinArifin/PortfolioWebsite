@@ -7,6 +7,7 @@ import carepalWriting from '@/assets/carepal-writing.png';
 import phantomFootprintThumbnail from '@/assets/phantom-footprint-thumbnail.png';
 import screenlifeThumbnail from '@/assets/screenlife-thumbnail.png';
 import amtvThumbnail from '@/assets/amtv-thumbnail.png';
+import spotlightHero from '@/assets/spotlight-hero.png';
 import { ArrowUpRight } from 'lucide-react';
 
 interface CaseStudy {
@@ -59,12 +60,12 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
     },
     {
       id: 4,
-      title: 'Museum Experience',
-      description: 'Digital wayfinding for contemporary art spaces',
-      category: 'Spatial Design',
-      image: caseStudy2,
-      year: '2024',
-      slug: 'coming-soon',
+      title: 'Designing for the Spotlight',
+      description: 'How three apps revolutionized creativity and topped the charts',
+      category: 'Product Design',
+      image: spotlightHero,
+      year: '2016-2023',
+      slug: 'spotlight',
     },
   ],
   'branding': [
