@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight, Download } from 'lucide-react';
+import { ArrowLeft, Download } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import spotlightHero from '@/assets/spotlight-hero.png';
+
+// App icon imports - these would be replaced with actual app icons
+import colorPopIcon from '@/assets/case-study-2.jpg';
+import amtvIcon from '@/assets/amtv-thumbnail.png';
+import slideshowIcon from '@/assets/case-study-3.jpg';
 
 // Animated section component for scroll-triggered animations
 const AnimatedSection = ({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => {
@@ -58,160 +62,222 @@ const SpotlightCaseStudy = () => {
         </Link>
       </div>
 
-      {/* Hero Section */}
-      <section className="container py-16 md:py-24">
+      {/* Hero Section - Phone Mockups */}
+      <section className="container py-12 md:py-16">
         <AnimatedSection>
-          <div className="max-w-4xl">
-            {/* App Labels */}
-            <div className="flex flex-wrap gap-3 mb-8">
-              <span className="px-4 py-2 bg-muted rounded-full text-sm font-medium">Color Pop: AI Photo Editor</span>
-              <span className="px-4 py-2 bg-muted rounded-full text-sm font-medium">Add Music to Video Editor</span>
-              <span className="px-4 py-2 bg-muted rounded-full text-sm font-medium">Slideshow Maker w Music</span>
-            </div>
-            
-            {/* Main Title */}
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight mb-6">
-              Designing for the Spotlight
-            </h1>
-            
-            {/* Subtitle */}
-            <p className="text-xl md:text-2xl text-muted-foreground mb-12">
-              A case study on How Three Apps Revolutionized Creativity and Topped the Charts
-            </p>
+          {/* Three Phone Mockups */}
+          <div className="flex justify-center items-end gap-4 md:gap-8 mb-8">
+            {/* Left Phone - smaller */}
+            <div className="w-24 md:w-36 lg:w-44 aspect-[9/19] bg-muted rounded-2xl md:rounded-3xl" />
+            {/* Center Phone - larger with border */}
+            <div className="w-32 md:w-48 lg:w-56 aspect-[9/19] bg-muted rounded-2xl md:rounded-3xl ring-4 ring-foreground/10" />
+            {/* Right Phone - smaller */}
+            <div className="w-24 md:w-36 lg:w-44 aspect-[9/19] bg-muted rounded-2xl md:rounded-3xl" />
           </div>
-        </AnimatedSection>
 
-        {/* Stats Row */}
-        <AnimatedSection delay={100}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-            <div className="text-center md:text-left">
-              <p className="text-4xl md:text-5xl font-display font-medium mb-2">56%</p>
-              <p className="text-muted-foreground">increase in user engagement</p>
+          {/* App Icons Row */}
+          <div className="flex justify-center items-start gap-8 md:gap-16 lg:gap-24">
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl overflow-hidden bg-muted flex items-center justify-center">
+                <img src={colorPopIcon} alt="Color Pop" className="w-full h-full object-cover" />
+              </div>
+              <span className="text-xs text-muted-foreground text-center max-w-[80px] md:max-w-none">Color Pop: AI Photo Editor</span>
             </div>
-            <div className="text-center md:text-left">
-              <p className="text-4xl md:text-5xl font-display font-medium mb-2">22M+</p>
-              <p className="text-muted-foreground">Downloads</p>
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl overflow-hidden bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" className="w-6 h-6 text-white fill-current">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <span className="text-xs text-muted-foreground text-center max-w-[80px] md:max-w-none">Add Music to Video Editor</span>
             </div>
-            <div className="text-center md:text-left">
-              <p className="text-4xl md:text-5xl font-display font-medium mb-2">#1</p>
-              <p className="text-muted-foreground">Ranking on the App Store Top Charts for many years straight!</p>
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl overflow-hidden bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" className="w-6 h-6 text-white fill-current">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <span className="text-xs text-muted-foreground text-center max-w-[80px] md:max-w-none">Slideshow Maker w Music</span>
             </div>
           </div>
         </AnimatedSection>
       </section>
 
-      {/* Hero Image Section */}
-      <AnimatedSection delay={200}>
-        <section className="w-full bg-muted/30 py-16">
-          <div className="container">
-            <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-500/20 via-blue-500/20 to-pink-500/20 p-8">
-              <div className="text-center mb-8">
-                <p className="text-lg font-medium mb-2">iOS Top Charts</p>
-                <p className="text-muted-foreground max-w-2xl mx-auto">
-                  Three apps, millions of downloads, and years at the top — here's how thoughtful design and relentless iteration made it happen.
-                </p>
+      {/* Title Section */}
+      <section className="container pb-12 md:pb-16">
+        <AnimatedSection delay={100}>
+          <div className="text-center max-w-3xl mx-auto">
+            <p className="text-muted-foreground text-lg mb-2">Designing for the</p>
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight mb-6">
+              Spotlight
+            </h1>
+            <p className="text-muted-foreground mb-2">A case study on</p>
+            <h2 className="font-display text-xl md:text-2xl lg:text-3xl font-medium tracking-tight">
+              How Three Apps Revolutionized Creativity and Topped the Charts
+            </h2>
+          </div>
+        </AnimatedSection>
+      </section>
+
+      {/* Stats Cards Section */}
+      <section className="container pb-12 md:pb-16">
+        <AnimatedSection delay={200}>
+          <div className="flex flex-col md:flex-row justify-center items-stretch gap-4 md:gap-6">
+            {/* 56% Card */}
+            <div className="bg-muted/50 rounded-3xl p-6 md:p-8 text-center min-w-[160px]">
+              <p className="text-4xl md:text-5xl font-display font-medium mb-2">56%</p>
+              <p className="text-sm text-muted-foreground">increase in<br />user engagement</p>
+            </div>
+            
+            {/* 22M+ Card */}
+            <div className="bg-muted/50 rounded-3xl p-6 md:p-8 text-center min-w-[160px]">
+              <p className="text-4xl md:text-5xl font-display font-medium mb-2">22M+</p>
+              <p className="text-sm text-muted-foreground">Downloads<br />Worldwide</p>
+            </div>
+            
+            {/* Phone with iOS Top Charts */}
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-32 md:w-40 aspect-[9/19] bg-muted rounded-2xl md:rounded-3xl ring-2 ring-foreground/10" />
+              <p className="text-xs text-muted-foreground">iOS Top Charts</p>
+            </div>
+          </div>
+        </AnimatedSection>
+      </section>
+
+      {/* App Store Top Charts Card */}
+      <section className="container pb-12 md:pb-16">
+        <AnimatedSection delay={250}>
+          <div className="flex justify-center">
+            <div className="bg-muted/50 rounded-2xl p-4 md:p-6 flex items-center gap-4 max-w-md">
+              <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0">
+                <svg viewBox="0 0 24 24" className="w-7 h-7 text-white">
+                  <path fill="currentColor" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
               </div>
-              
-              {/* Phone Mockups */}
-              <div className="flex justify-center items-end gap-4">
-                <img 
-                  src={spotlightHero}
-                  alt="App Screenshots"
-                  className="w-full max-w-4xl h-auto object-contain"
-                />
+              <div>
+                <p className="font-medium text-lg">App Store Top Charts</p>
+                <p className="text-sm text-muted-foreground">Ranking on the App Store Top Charts for many years straight!</p>
               </div>
             </div>
           </div>
-        </section>
-      </AnimatedSection>
+        </AnimatedSection>
+      </section>
+
+      {/* Tagline Section */}
+      <section className="container pb-12 md:pb-16">
+        <AnimatedSection delay={300}>
+          <div className="text-center max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl font-medium">
+              Three apps, millions of downloads, and years at the top here's how thoughtful design and relentless iteration made it happen.
+            </p>
+          </div>
+        </AnimatedSection>
+      </section>
 
       {/* Download CTA */}
-      <AnimatedSection delay={300}>
-        <section className="container py-12">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <section className="container pb-12 md:pb-16">
+        <AnimatedSection delay={350}>
+          <div className="flex flex-col items-center gap-3">
             <a 
               href="/Gazi_Arifin_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background rounded-full font-medium hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background rounded-full font-medium hover:opacity-90 transition-opacity text-sm"
             >
-              <Download className="h-4 w-4" />
               Download full PDF
             </a>
-            <span className="text-muted-foreground">or explore my work</span>
+            <p className="text-muted-foreground text-sm">or</p>
+            <Link to="/#case-studies" className="text-sm font-medium hover:underline underline-offset-4">
+              explore my work
+            </Link>
           </div>
-        </section>
-      </AnimatedSection>
+        </AnimatedSection>
+      </section>
 
-      {/* Overview Section */}
-      <AnimatedSection delay={100}>
-        <section className="container py-16 md:py-24">
+      {/* Overview Text */}
+      <section className="container pb-12 md:pb-16">
+        <AnimatedSection delay={100}>
           <div className="max-w-4xl mx-auto">
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-12">
-              Three apps, over a decade of design, and millions of downloads later—what's the secret behind Color Pop, Add Music to Video, and Slideshow Maker w Music? From 2016 to 2023, I had the privilege of leading UX research, innovative design, and relentless iteration that turned ideas into tools that empowered users worldwide. These apps became household names, staying on the App Store top charts for years and helping users share their stories effortlessly.
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 text-sm text-muted-foreground leading-relaxed">
+              <p>
+                Three apps, over a decade of design, and millions of downloads later—what's the secret behind creating experiences that dominate the App Store charts for years? This is the story of how thoughtful research, innovative design, and relentless iteration turned ideas into tools that empowered users worldwide.
+              </p>
+              <p>
+                From 2016 to 2023, I had the privilege of leading UX design at Kite Games Studio, where I shaped the three flagship apps: Add Music to Video Editor, Color Pop, and Slideshow Maker w Music. These apps became household names, staying on the App Store top charts for years and share their stories effortlessly.
+              </p>
+            </div>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-6 max-w-4xl">
+              This case study shares the behind-the-scenes story of their success, from identifying user pain points to designing solutions that continue to delight millions.
             </p>
+          </div>
+        </AnimatedSection>
+      </section>
 
-            {/* Role & Impact Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* My Role */}
-              <div className="space-y-4">
-                <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">My Role</h3>
-                <p className="font-medium text-lg">Product Design Lead</p>
-                <div className="space-y-2 pt-4">
-                  <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Tools used</h3>
-                  <p className="text-muted-foreground">
-                    Figma, FigJam, Invision, Adobe Creative Suite, ClickUp, Firebase Analytics
+      {/* Role & Impact Cards */}
+      <section className="container pb-16 md:pb-24">
+        <AnimatedSection delay={200}>
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Left Column - My Role & Tools */}
+              <div className="space-y-6">
+                {/* My Role Card */}
+                <div className="bg-muted/30 rounded-2xl p-6 border border-border/50">
+                  <h3 className="text-lg font-medium mb-3">My Role</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Product Design Lead<br />
+                    Owned the entire design, process & product strategy of the suite.
+                  </p>
+                </div>
+                
+                {/* Tools Used Card */}
+                <div className="bg-muted/30 rounded-2xl p-6 border border-border/50">
+                  <h3 className="text-lg font-medium mb-3">Tools used</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Figma, FigJam, Invision, Adobe Creative suit.
+                  </p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    ClickUp, Firebase Analytics
                   </p>
                 </div>
               </div>
 
-              {/* Impact */}
-              <div className="space-y-4">
-                <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Impact</h3>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <span className="text-foreground">•</span>
-                    Over 10M downloads and consistent top-chart rankings.
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-foreground">•</span>
-                    Featured by Apple, with a 4.7/5 rating and millions of downloads.
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-foreground">•</span>
-                    5M+ downloads with high user retention.
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-foreground">•</span>
+              {/* Right Column - Impact Card (Dark) */}
+              <div className="bg-foreground text-background rounded-2xl p-6">
+                <h3 className="text-lg font-medium mb-4">Impact</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-background/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg viewBox="0 0 24 24" className="w-5 h-5">
+                        <path fill="currentColor" d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                    <p className="text-sm opacity-90">Over 10M downloads and consistent top-chart rankings.</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-background/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg viewBox="0 0 24 24" className="w-5 h-5">
+                        <path fill="currentColor" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                      </svg>
+                    </div>
+                    <p className="text-sm opacity-90">Featured by Apple, with a 4.7/5 rating and millions of downloads.</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-background/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg viewBox="0 0 24 24" className="w-5 h-5">
+                        <path fill="currentColor" d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                    <p className="text-sm opacity-90">5M+ downloads with high user retention.</p>
+                  </div>
+                  <p className="text-sm opacity-90 pt-2 border-t border-background/10">
                     Created design systems, resulting in a 15% improvement in development efficiency.
-                  </li>
-                </ul>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </section>
-      </AnimatedSection>
-
-      {/* CTA Section */}
-      <AnimatedSection>
-        <section className="container py-16 md:py-24 border-t">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-display text-3xl md:text-4xl font-medium mb-6">
-              Want to see more details?
-            </h2>
-            <p className="text-muted-foreground mb-8">
-              This case study is being expanded with more insights. Check back soon for the complete story.
-            </p>
-            <Link 
-              to="/#case-studies" 
-              className="inline-flex items-center gap-2 text-foreground font-medium hover:underline underline-offset-4"
-            >
-              View all case studies
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </section>
-      </AnimatedSection>
+        </AnimatedSection>
+      </section>
 
       <Footer />
     </div>
