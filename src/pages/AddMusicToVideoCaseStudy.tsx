@@ -2,8 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import amtvHero from '@/assets/amtv-hero.png';
-import amtv2016Trim from '@/assets/amtv-2016-trim.png';
-import amtv2016Filters from '@/assets/amtv-2016-filters.png';
+import amtv2016Design from '@/assets/amtv-2016-design.png';
+import amtv2019Slide1 from '@/assets/amtv-2019-slide-1.png';
+import amtv2019Slide2 from '@/assets/amtv-2019-slide-2.png';
+import amtv2019Slide3 from '@/assets/amtv-2019-slide-3.png';
+import amtv2019Slide4 from '@/assets/amtv-2019-slide-4.png';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -48,6 +51,49 @@ const PlaceholderImage = ({ label, aspectRatio = '16/9' }: { label: string; aspe
     <p className="text-muted-foreground text-sm text-center px-4">{label}</p>
   </div>
 );
+// Comparison slideshow component
+const ComparisonSlideshow = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = [amtv2019Slide1, amtv2019Slide2, amtv2019Slide3, amtv2019Slide4];
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
+  return (
+    <div className="flex flex-col md:flex-row items-start justify-center gap-6 md:gap-12">
+      {/* 2016 Design - Static */}
+      <div className="w-full max-w-[280px]">
+        <img 
+          src={amtv2016Design}
+          alt="2016 AMTV Design"
+          className="w-full h-auto object-contain"
+        />
+        <p className="text-muted-foreground text-sm text-center mt-4">2016 design</p>
+      </div>
+      
+      {/* 2019 Update - Slideshow */}
+      <div className="w-full max-w-[280px]">
+        <div className="relative">
+          {slides.map((slide, index) => (
+            <img 
+              key={index}
+              src={slide}
+              alt={`2019 AMTV Update ${index + 1}`}
+              className={`w-full h-auto object-contain transition-opacity duration-500 ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
+              }`}
+            />
+          ))}
+        </div>
+        <p className="text-muted-foreground text-sm text-center mt-4">2019 update</p>
+      </div>
+    </div>
+  );
+};
 
 const AddMusicToVideoCaseStudy = () => {
   useEffect(() => {
@@ -142,27 +188,7 @@ const AddMusicToVideoCaseStudy = () => {
               </p>
               
               {/* Comparison Layout */}
-              <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12">
-                {/* Old Interface */}
-                <div className="w-full max-w-[280px]">
-                  <img 
-                    src={amtv2016Trim}
-                    alt="2016 AMTV Trim Interface"
-                    className="w-full h-auto object-contain"
-                  />
-                  <p className="text-muted-foreground text-sm text-center mt-4">Basic trimming tools</p>
-                </div>
-                
-                {/* New Interface */}
-                <div className="w-full max-w-[280px]">
-                  <img 
-                    src={amtv2016Filters}
-                    alt="2016 AMTV Filters Interface"
-                    className="w-full h-auto object-contain"
-                  />
-                  <p className="text-muted-foreground text-sm text-center mt-4">Limited filter options</p>
-                </div>
-              </div>
+              <ComparisonSlideshow />
             </div>
           </AnimatedSection>
 
