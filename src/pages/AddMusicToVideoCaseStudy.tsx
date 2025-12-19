@@ -194,33 +194,6 @@ const AddMusicToVideoCaseStudy = () => {
                 The original experience was cluttered and technically rigid. Users struggled to sync audio, and the visual output felt "cheap." I needed to dismantle the existing flow and rebuild it based on how people feel music, not just how code handles it.
               </p>
               
-              {/* Before/After 2016 Landscape Images */}
-              <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-16">
-                {/* Before */}
-                <div className="w-full max-w-[280px]">
-                  <img 
-                    src={amtv2016Trim}
-                    alt="2016 AMTV Trim Interface"
-                    className="w-full h-auto object-contain"
-                  />
-                  <p className="text-muted-foreground text-sm text-center mt-4">before</p>
-                </div>
-                
-                {/* Arrow */}
-                <div className="flex items-center justify-center py-4 md:py-0">
-                  <ArrowRight className="w-8 h-8 text-muted-foreground" />
-                </div>
-                
-                {/* After */}
-                <div className="w-full max-w-[280px]">
-                  <img 
-                    src={amtv2016Filters}
-                    alt="2016 AMTV Filters Interface"
-                    className="w-full h-auto object-contain"
-                  />
-                  <p className="text-muted-foreground text-sm text-center mt-4">after</p>
-                </div>
-              </div>
               
               {/* Comparison Layout */}
               <ComparisonSlideshow />
