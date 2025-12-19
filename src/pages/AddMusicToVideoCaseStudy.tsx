@@ -445,7 +445,7 @@ const AddMusicToVideoCaseStudy = () => {
                   <img 
                     src={amtvImpact}
                     alt="Add Music to Video - Featured on App Store Top Charts"
-                    className="w-full h-auto rounded-[40px]"
+                    className="w-full h-auto rounded-[40px] no-border"
                   />
                 </div>
               </div>
