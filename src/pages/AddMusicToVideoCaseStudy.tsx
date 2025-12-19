@@ -66,19 +66,25 @@ const ComparisonSlideshow = () => {
   }, [slides.length]);
 
   return (
-    <div className="flex flex-col md:flex-row items-start justify-center gap-6 md:gap-12">
+    <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8">
       {/* 2016 Design - Static */}
       <div className="w-full max-w-[280px]">
+        <p className="text-muted-foreground text-sm text-center mb-4">Before</p>
         <img 
           src={amtv2016Design}
           alt="2016 AMTV Design"
           className="w-full h-auto object-contain"
         />
-        <p className="text-muted-foreground text-sm text-center mt-4">2016 design</p>
+      </div>
+      
+      {/* Arrow */}
+      <div className="flex items-center justify-center py-4 md:py-0">
+        <ArrowRight className="w-8 h-8 text-muted-foreground" />
       </div>
       
       {/* 2019 Update - Slideshow */}
       <div className="w-full max-w-[280px]">
+        <p className="text-muted-foreground text-sm text-center mb-4">After</p>
         <div className="relative">
           {slides.map((slide, index) => (
             <img 
@@ -91,7 +97,6 @@ const ComparisonSlideshow = () => {
             />
           ))}
         </div>
-        <p className="text-muted-foreground text-sm text-center mt-4">2019 update</p>
       </div>
     </div>
   );
