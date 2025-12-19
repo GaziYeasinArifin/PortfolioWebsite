@@ -16,6 +16,7 @@ import amtvResearchWaveform from '@/assets/amtv-research-waveform.png';
 import amtvResearchTimeline from '@/assets/amtv-research-timeline.png';
 import amtvResearchMiro from '@/assets/amtv-research-miro.png';
 import amtvCollab from '@/assets/amtv-collab.png';
+import amtvImpact from '@/assets/amtv-impact.png';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -439,16 +440,13 @@ const AddMusicToVideoCaseStudy = () => {
                   </div>
                 </div>
                 
-                {/* Right side - Placeholder */}
+                {/* Right side - Impact Image */}
                 <div>
-                  <div 
-                    className="w-full bg-secondary/30 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center p-6"
-                    style={{ aspectRatio: '1/1' }}
-                  >
-                    <p className="text-muted-foreground text-sm text-center leading-relaxed">
-                      [INSERT: App Store Top Charts Badge or Growth Graph]
-                    </p>
-                  </div>
+                  <img 
+                    src={amtvImpact}
+                    alt="Add Music to Video - Featured on App Store Top Charts"
+                    className="w-full h-auto"
+                  />
                 </div>
               </div>
             </div>
