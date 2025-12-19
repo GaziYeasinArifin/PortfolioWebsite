@@ -210,12 +210,12 @@ const SolutionCarousel = () => {
         {[...solutionImages, ...solutionImages].map((image, index) => (
           <div 
             key={index} 
-            className="flex-shrink-0 group"
+            className="flex-shrink-0"
           >
             <img 
               src={image.src}
               alt={image.alt}
-              className="h-[500px] md:h-[600px] w-auto object-contain no-border transition-transform duration-500 group-hover:scale-[1.02]"
+              className="h-[500px] md:h-[600px] w-auto object-contain no-border"
             />
           </div>
         ))}
