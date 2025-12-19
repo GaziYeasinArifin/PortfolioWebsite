@@ -70,13 +70,11 @@ const ComparisonSlideshow = () => {
       {/* 2016 Design - Static */}
       <div className="w-full max-w-[280px]">
         <p className="text-muted-foreground text-sm text-center mb-4">Before</p>
-        <div className="relative overflow-hidden">
-          <img 
-            src={amtv2016Design}
-            alt="2016 AMTV Design"
-            className="no-border block w-full h-auto object-contain border-0 outline-none ring-0 shadow-none scale-[1.06]"
-          />
-        </div>
+        <img 
+          src={amtv2016Design}
+          alt="2016 AMTV Design"
+          className="no-border block w-full h-auto object-contain"
+        />
         <p className="text-muted-foreground text-sm text-center mt-4">2016 design</p>
       </div>
       
@@ -92,13 +90,13 @@ const ComparisonSlideshow = () => {
       {/* 2019 Update - Slideshow */}
       <div className="w-full max-w-[280px]">
         <p className="text-muted-foreground text-sm text-center mb-4">After</p>
-        <div className="relative overflow-hidden">
+        <div className="relative">
           {slides.map((slide, index) => (
             <img 
               key={index}
               src={slide}
               alt={`2019 AMTV Update ${index + 1}`}
-              className={`no-border block w-full h-auto object-contain border-0 outline-none ring-0 shadow-none scale-[1.06] transition-opacity duration-500 ${
+              className={`no-border block w-full h-auto object-contain transition-opacity duration-500 ${
                 index === currentSlide ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
               }`}
             />
