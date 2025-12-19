@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, ArrowRight, ArrowDown } from 'lucide-react';
+import OptimizedImage from '@/components/OptimizedImage';
 import amtvHero from '@/assets/amtv-hero.png';
 import amtv2016Trim from '@/assets/amtv-2016-trim.png';
 import amtv2016Filters from '@/assets/amtv-2016-filters.png';
@@ -14,6 +15,7 @@ import amtvBridgeCurves from '@/assets/amtv-bridge-curves.png';
 import amtvResearchWaveform from '@/assets/amtv-research-waveform.png';
 import amtvResearchTimeline from '@/assets/amtv-research-timeline.png';
 import amtvResearchMiro from '@/assets/amtv-research-miro.png';
+import amtvCollab from '@/assets/amtv-collab.png';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -391,15 +393,17 @@ const AddMusicToVideoCaseStudy = () => {
                 The best design fails without implementation. I sat side-by-side with developers and QA engineers in countless meetings, fixing glitches and refining transition timings until the app felt indistinguishable from the After Effects prototype.
               </p>
               
-              {/* Panoramic Placeholder */}
-              <div 
-                className="w-full bg-secondary/30 border-2 border-dashed border-muted-foreground/30 rounded-[4px] flex items-center justify-center p-6"
-                style={{ aspectRatio: '21/9' }}
-              >
-                <p className="text-muted-foreground text-sm text-center leading-relaxed">
-                  [INSERT: Photo of Team Collaboration or Code/Design Split Screen]
-                </p>
-              </div>
+              {/* Collaboration Image */}
+              <figure className="w-full">
+                <OptimizedImage 
+                  src={amtvCollab} 
+                  alt="In-person team collaboration" 
+                  className="w-full rounded-[4px]"
+                />
+                <figcaption className="text-sm text-muted-foreground mt-4">
+                  In-person team collaboration.
+                </figcaption>
+              </figure>
             </div>
           </AnimatedSection>
 
