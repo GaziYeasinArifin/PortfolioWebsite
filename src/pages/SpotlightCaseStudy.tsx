@@ -711,6 +711,134 @@ const SpotlightCaseStudy = () => {
         </div>
       </section>
 
+      {/* Product Comparison Section */}
+      <section className="bg-secondary py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <AnimatedSection>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+              {/* Section Label */}
+              <div className="lg:col-span-3">
+                <p className="text-muted-foreground text-sm font-medium tracking-widest uppercase sticky top-32">
+                  Adaptation
+                </p>
+              </div>
+              
+              {/* Product Cards */}
+              <div className="lg:col-span-9">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {/* Slideshow Maker */}
+                  <div 
+                    className="bg-background rounded-2xl p-8 relative"
+                    style={{ boxShadow: 'var(--card-shadow)' }}
+                  >
+                    <div className="absolute top-8 right-8">
+                      <span className="text-4xl">🎬</span>
+                    </div>
+                    <h3 className="font-display text-xl md:text-2xl font-semibold text-foreground mb-6 pr-16">
+                      Slideshow Maker w Music
+                    </h3>
+                    <ul className="space-y-4">
+                      <li className="flex items-start gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground mt-2.5 flex-shrink-0" />
+                        <span className="text-foreground">Modular timeline editor</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground mt-2.5 flex-shrink-0" />
+                        <span className="text-foreground">Theme-based customization</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground mt-2.5 flex-shrink-0" />
+                        <span className="text-foreground">Advanced controls surfaced progressively</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  {/* Color Pop */}
+                  <div 
+                    className="bg-background rounded-2xl p-8 relative"
+                    style={{ boxShadow: 'var(--card-shadow)' }}
+                  >
+                    <div className="absolute top-8 right-8">
+                      <span className="text-4xl">✨</span>
+                    </div>
+                    <h3 className="font-display text-xl md:text-2xl font-semibold text-foreground mb-6 pr-16">
+                      Color Pop: AI Photo Editor
+                    </h3>
+                    <ul className="space-y-4">
+                      <li className="flex items-start gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground mt-2.5 flex-shrink-0" />
+                        <span className="text-foreground">One-tap AI effects</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground mt-2.5 flex-shrink-0" />
+                        <span className="text-foreground">Minimal UI with familiar components</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground mt-2.5 flex-shrink-0" />
+                        <span className="text-foreground">Refinement controls using shared patterns</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                
+                {/* Tagline */}
+                <div className="mt-16 text-center">
+                  <p className="font-display text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground leading-tight">
+                    Different products.<br />
+                    <span className="text-muted-foreground">Same system.</span><br />
+                    Zero relearning.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+          
+          {/* Visual Assets */}
+          <AnimatedSection delay={150}>
+            <div className="mt-20">
+              {/* Side-by-Side Comparison */}
+              <div 
+                className="bg-muted rounded-2xl overflow-hidden relative"
+                style={{ boxShadow: 'var(--image-shadow)' }}
+              >
+                <div className="aspect-[16/9] flex flex-col items-center justify-center p-8 bg-gradient-to-br from-muted to-muted/60">
+                  <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-2">Side-by-Side Screens</p>
+                  <p className="text-muted-foreground/70 text-xs text-center max-w-md mb-8">
+                    Slideshow Maker vs Color Pop showing shared UI patterns
+                  </p>
+                  
+                  {/* Mockup preview */}
+                  <div className="flex items-center gap-8">
+                    <div className="w-28 md:w-40 aspect-[9/19] bg-background rounded-2xl border border-border/50 flex items-center justify-center">
+                      <span className="text-xs text-muted-foreground">Slideshow</span>
+                    </div>
+                    <div className="w-28 md:w-40 aspect-[9/19] bg-background rounded-2xl border border-border/50 flex items-center justify-center">
+                      <span className="text-xs text-muted-foreground">Color Pop</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Shared Component Callouts */}
+                <div className="absolute bottom-6 left-6 right-6 flex flex-wrap justify-center gap-3">
+                  <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
+                    Shared Buttons
+                  </span>
+                  <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
+                    Unified Typography
+                  </span>
+                  <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
+                    Common Icons
+                  </span>
+                  <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
+                    Consistent Spacing
+                  </span>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Role & Details Section */}
       <section className="bg-background pb-24 md:pb-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
