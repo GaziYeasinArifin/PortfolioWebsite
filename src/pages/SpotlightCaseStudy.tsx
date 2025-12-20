@@ -1043,6 +1043,97 @@ const SpotlightCaseStudy = () => {
         </div>
       </section>
 
+      {/* Reflection Section */}
+      <section className="bg-secondary py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <AnimatedSection>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+              {/* Section Label */}
+              <div className="lg:col-span-3">
+                <p className="text-muted-foreground text-sm font-medium tracking-widest uppercase sticky top-32">
+                  Reflection
+                </p>
+              </div>
+              
+              {/* Content */}
+              <div className="lg:col-span-9">
+                <div className="max-w-3xl space-y-12">
+                  {/* Lead statement */}
+                  <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
+                    This project reinforced that:
+                  </p>
+                  
+                  {/* Key learnings */}
+                  <div className="space-y-6">
+                    <div className="p-6 bg-background rounded-2xl border-l-4 border-foreground" style={{ boxShadow: 'var(--card-shadow)' }}>
+                      <p className="text-lg md:text-xl text-foreground font-medium">
+                        Design systems are <span className="font-semibold">products</span>, not assets
+                      </p>
+                    </div>
+                    <div className="p-6 bg-background rounded-2xl border-l-4 border-foreground" style={{ boxShadow: 'var(--card-shadow)' }}>
+                      <p className="text-lg md:text-xl text-foreground font-medium">
+                        Consistency is earned through <span className="font-semibold">governance</span>
+                      </p>
+                    </div>
+                    <div className="p-6 bg-background rounded-2xl border-l-4 border-foreground" style={{ boxShadow: 'var(--card-shadow)' }}>
+                      <p className="text-lg md:text-xl text-foreground font-medium">
+                        Simplicity requires <span className="font-semibold">deep system thinking</span>
+                      </p>
+                    </div>
+                    <div className="p-6 bg-background rounded-2xl border-l-4 border-foreground" style={{ boxShadow: 'var(--card-shadow)' }}>
+                      <p className="text-lg md:text-xl text-foreground font-medium">
+                        Leadership is about <span className="font-semibold">alignment</span>, not control
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Closing statement */}
+                  <div className="pt-8">
+                    <p className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
+                      It changed how I design — <span className="text-muted-foreground">permanently.</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+          
+          {/* Visual Asset */}
+          <AnimatedSection delay={150}>
+            <div className="mt-20">
+              <div 
+                className="bg-foreground text-background rounded-2xl overflow-hidden"
+                style={{ boxShadow: 'var(--image-shadow)' }}
+              >
+                <div className="aspect-[21/9] flex flex-col items-center justify-center p-8 relative">
+                  <p className="text-background/60 text-sm font-medium tracking-wide uppercase mb-4">Reflection Visual</p>
+                  
+                  {/* Abstract system metaphor */}
+                  <div className="relative w-full max-w-md h-32 flex items-center justify-center">
+                    {/* Nodes */}
+                    <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-background/30" />
+                    <div className="absolute left-1/2 top-1/4 -translate-x-1/2 w-6 h-6 rounded-full bg-background/50" />
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-background/80" />
+                    <div className="absolute left-1/2 bottom-1/4 -translate-x-1/2 w-5 h-5 rounded-full bg-background/40" />
+                    <div className="absolute right-1/4 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-background/30" />
+                    
+                    {/* Connection lines */}
+                    <div className="absolute left-1/4 top-1/2 w-1/4 h-px bg-gradient-to-r from-background/30 to-background/60" />
+                    <div className="absolute right-1/4 top-1/2 w-1/4 h-px bg-gradient-to-l from-background/30 to-background/60" />
+                    <div className="absolute left-1/2 top-1/4 -translate-x-1/2 w-px h-1/4 bg-gradient-to-b from-background/40 to-background/70" />
+                    <div className="absolute left-1/2 bottom-1/4 -translate-x-1/2 w-px h-1/4 bg-gradient-to-t from-background/40 to-background/70" />
+                  </div>
+                  
+                  <p className="text-background/50 text-xs text-center mt-4">
+                    Systems thinking: nodes, connections, and emergent design
+                  </p>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Role & Details Section */}
       <section className="bg-background pb-24 md:pb-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
