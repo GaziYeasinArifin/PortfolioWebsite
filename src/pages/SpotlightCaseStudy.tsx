@@ -563,6 +563,154 @@ const SpotlightCaseStudy = () => {
         </div>
       </section>
 
+      {/* Design System Components Section */}
+      <section className="bg-background py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <AnimatedSection>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+              {/* Section Label */}
+              <div className="lg:col-span-3">
+                <p className="text-muted-foreground text-sm font-medium tracking-widest uppercase sticky top-32">
+                  The System
+                </p>
+              </div>
+              
+              {/* Content */}
+              <div className="lg:col-span-9">
+                <div className="max-w-3xl space-y-10">
+                  {/* Lead statement */}
+                  <p className="text-2xl md:text-3xl lg:text-4xl text-foreground leading-[1.3] font-normal">
+                    We built a comprehensive design system in <span className="font-semibold">Figma</span>, supported by Illustrator and After Effects for visual and motion consistency.
+                  </p>
+                  
+                  {/* Two columns: Elements + Support */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-4">
+                    {/* System Elements */}
+                    <div>
+                      <p className="text-muted-foreground text-sm font-medium uppercase tracking-widest mb-6">System Elements</p>
+                      <ul className="space-y-4">
+                        <li className="flex items-start gap-3">
+                          <span className="w-6 h-6 rounded-md bg-foreground/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span className="w-2 h-2 rounded-full bg-foreground" />
+                          </span>
+                          <span className="text-foreground">Design tokens (color, typography, spacing)</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="w-6 h-6 rounded-md bg-foreground/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span className="w-2 h-2 rounded-full bg-foreground" />
+                          </span>
+                          <span className="text-foreground">Reusable components with variants</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="w-6 h-6 rounded-md bg-foreground/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span className="w-2 h-2 rounded-full bg-foreground" />
+                          </span>
+                          <span className="text-foreground">Motion and interaction guidelines</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="w-6 h-6 rounded-md bg-foreground/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span className="w-2 h-2 rounded-full bg-foreground" />
+                          </span>
+                          <span className="text-foreground">Cross-app iconography</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="w-6 h-6 rounded-md bg-foreground/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span className="w-2 h-2 rounded-full bg-foreground" />
+                          </span>
+                          <span className="text-foreground">Responsive layout rules</span>
+                        </li>
+                      </ul>
+                    </div>
+                    
+                    {/* System Support */}
+                    <div>
+                      <p className="text-muted-foreground text-sm font-medium uppercase tracking-widest mb-6">System Support</p>
+                      <div className="space-y-6">
+                        <div className="p-5 bg-secondary rounded-xl">
+                          <p className="font-medium text-foreground mb-1">Slideshow Maker</p>
+                          <p className="text-muted-foreground text-sm">Feature-rich flows with deep customization</p>
+                        </div>
+                        <div className="p-5 bg-secondary rounded-xl">
+                          <p className="font-medium text-foreground mb-1">Color Pop</p>
+                          <p className="text-muted-foreground text-sm">One-tap AI interactions for instant results</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+          
+          {/* Visual Assets Grid */}
+          <AnimatedSection delay={150}>
+            <div className="mt-20 space-y-8">
+              {/* Main Component Library */}
+              <div 
+                className="bg-muted rounded-2xl overflow-hidden"
+                style={{ boxShadow: 'var(--image-shadow)' }}
+              >
+                <div className="aspect-[21/9] flex flex-col items-center justify-center p-8 bg-gradient-to-br from-muted to-muted/60">
+                  <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-2">Figma Component Library</p>
+                  <p className="text-muted-foreground/70 text-xs text-center max-w-md">
+                    Buttons, sliders, cards, navigation — all with multiple variants and states
+                  </p>
+                </div>
+              </div>
+              
+              {/* Two column: Tokens + Motion */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Design Tokens */}
+                <div 
+                  className="bg-muted rounded-2xl overflow-hidden"
+                  style={{ boxShadow: 'var(--image-shadow)' }}
+                >
+                  <div className="aspect-square flex flex-col items-center justify-center p-8 bg-gradient-to-br from-muted to-muted/60">
+                    <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-4">Design Tokens</p>
+                    {/* Token preview mockup */}
+                    <div className="space-y-3 w-full max-w-[200px]">
+                      <div className="flex gap-2">
+                        <div className="w-8 h-8 rounded-lg bg-foreground" />
+                        <div className="w-8 h-8 rounded-lg bg-foreground/80" />
+                        <div className="w-8 h-8 rounded-lg bg-foreground/60" />
+                        <div className="w-8 h-8 rounded-lg bg-foreground/40" />
+                        <div className="w-8 h-8 rounded-lg bg-foreground/20" />
+                      </div>
+                      <div className="space-y-1">
+                        <div className="h-3 bg-foreground/20 rounded w-full" />
+                        <div className="h-2 bg-foreground/10 rounded w-3/4" />
+                        <div className="h-2 bg-foreground/10 rounded w-1/2" />
+                      </div>
+                    </div>
+                    <p className="text-muted-foreground/70 text-xs text-center mt-4">
+                      Color & typography scales
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Motion Demo */}
+                <div 
+                  className="bg-foreground text-background rounded-2xl overflow-hidden"
+                  style={{ boxShadow: 'var(--image-shadow)' }}
+                >
+                  <div className="aspect-square flex flex-col items-center justify-center p-8">
+                    <p className="text-background/60 text-sm font-medium tracking-wide uppercase mb-4">Motion Guidelines</p>
+                    {/* Motion preview mockup */}
+                    <div className="relative w-24 h-24 mb-4">
+                      <div className="absolute inset-0 rounded-2xl border-2 border-dashed border-background/30" />
+                      <div className="absolute inset-2 rounded-xl bg-background/20 animate-pulse" />
+                    </div>
+                    <p className="text-background/70 text-xs text-center">
+                      Subtle transitions and feedback animations
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Role & Details Section */}
       <section className="bg-background pb-24 md:pb-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
