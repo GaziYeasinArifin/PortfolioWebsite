@@ -839,6 +839,126 @@ const SpotlightCaseStudy = () => {
         </div>
       </section>
 
+      {/* Collaboration Section */}
+      <section className="bg-background py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <AnimatedSection>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+              {/* Section Label */}
+              <div className="lg:col-span-3">
+                <p className="text-muted-foreground text-sm font-medium tracking-widest uppercase sticky top-32">
+                  Collaboration
+                </p>
+              </div>
+              
+              {/* Content */}
+              <div className="lg:col-span-9">
+                <div className="max-w-3xl space-y-12">
+                  {/* Lead statement */}
+                  <p className="text-2xl md:text-3xl lg:text-4xl text-foreground leading-[1.3] font-normal">
+                    The system only worked because it was <span className="font-semibold">shared.</span>
+                  </p>
+                  
+                  {/* Two columns: Led + Result */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    {/* I Led */}
+                    <div>
+                      <p className="text-muted-foreground text-sm font-medium uppercase tracking-widest mb-6">I Led</p>
+                      <ul className="space-y-4">
+                        <li className="flex items-start gap-3">
+                          <span className="w-6 h-6 rounded-full bg-foreground text-background flex items-center justify-center flex-shrink-0 text-xs font-semibold">1</span>
+                          <span className="text-foreground pt-0.5">Cross-functional design–engineering reviews</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="w-6 h-6 rounded-full bg-foreground text-background flex items-center justify-center flex-shrink-0 text-xs font-semibold">2</span>
+                          <span className="text-foreground pt-0.5">Component alignment sessions</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="w-6 h-6 rounded-full bg-foreground text-background flex items-center justify-center flex-shrink-0 text-xs font-semibold">3</span>
+                          <span className="text-foreground pt-0.5">Clear contribution and update workflows</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="w-6 h-6 rounded-full bg-foreground text-background flex items-center justify-center flex-shrink-0 text-xs font-semibold">4</span>
+                          <span className="text-foreground pt-0.5">Documentation for designers and developers</span>
+                        </li>
+                      </ul>
+                    </div>
+                    
+                    {/* The Result */}
+                    <div>
+                      <p className="text-muted-foreground text-sm font-medium uppercase tracking-widest mb-6">The Result</p>
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-4 p-4 bg-secondary rounded-xl">
+                          <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center">
+                            <ArrowUpRight className="w-5 h-5 text-foreground" />
+                          </div>
+                          <span className="text-foreground font-medium">Faster onboarding</span>
+                        </div>
+                        <div className="flex items-center gap-4 p-4 bg-secondary rounded-xl">
+                          <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center">
+                            <ArrowUpRight className="w-5 h-5 text-foreground" />
+                          </div>
+                          <span className="text-foreground font-medium">Fewer inconsistencies</span>
+                        </div>
+                        <div className="flex items-center gap-4 p-4 bg-secondary rounded-xl">
+                          <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center">
+                            <ArrowUpRight className="w-5 h-5 text-foreground" />
+                          </div>
+                          <span className="text-foreground font-medium">Less rework</span>
+                        </div>
+                        <div className="flex items-center gap-4 p-4 bg-secondary rounded-xl">
+                          <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center">
+                            <ArrowUpRight className="w-5 h-5 text-foreground" />
+                          </div>
+                          <span className="text-foreground font-medium">Higher trust between teams</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+          
+          {/* Visual Assets */}
+          <AnimatedSection delay={150}>
+            <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Team Workshop Photo */}
+              <div 
+                className="bg-muted rounded-2xl overflow-hidden"
+                style={{ boxShadow: 'var(--image-shadow)' }}
+              >
+                <div className="aspect-[4/3] flex flex-col items-center justify-center p-8 bg-gradient-to-br from-muted to-muted/60">
+                  <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-2">Team Workshop</p>
+                  <p className="text-muted-foreground/70 text-xs text-center max-w-xs">
+                    Designers & engineers collaborating on component reviews
+                  </p>
+                </div>
+              </div>
+              
+              {/* Handoff Flow Diagram */}
+              <div 
+                className="bg-foreground text-background rounded-2xl overflow-hidden"
+                style={{ boxShadow: 'var(--image-shadow)' }}
+              >
+                <div className="aspect-[4/3] flex flex-col items-center justify-center p-8">
+                  <p className="text-background/60 text-sm font-medium tracking-wide uppercase mb-6">Handoff Flow</p>
+                  {/* Flow diagram */}
+                  <div className="flex items-center gap-4 text-sm">
+                    <div className="px-5 py-3 bg-background/20 rounded-xl font-medium">Figma</div>
+                    <span className="text-background/50">→</span>
+                    <div className="px-5 py-3 bg-background/20 rounded-xl font-medium">Dev</div>
+                    <span className="text-background/50">→</span>
+                    <div className="px-5 py-3 bg-background/20 rounded-xl font-medium">Product</div>
+                  </div>
+                  <p className="text-background/50 text-xs mt-6">Clear ownership at every stage</p>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Role & Details Section */}
       <section className="bg-background pb-24 md:pb-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
