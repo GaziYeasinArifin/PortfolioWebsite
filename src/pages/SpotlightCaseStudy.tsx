@@ -460,6 +460,109 @@ const SpotlightCaseStudy = () => {
         </div>
       </section>
 
+      {/* Strategy Section */}
+      <section className="bg-secondary py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <AnimatedSection>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+              {/* Section Label */}
+              <div className="lg:col-span-3">
+                <p className="text-muted-foreground text-sm font-medium tracking-widest uppercase sticky top-32">
+                  Strategy
+                </p>
+              </div>
+              
+              {/* Content */}
+              <div className="lg:col-span-9">
+                <div className="max-w-3xl space-y-10">
+                  {/* Lead statement */}
+                  <p className="text-2xl md:text-3xl lg:text-4xl text-foreground leading-[1.3] font-normal">
+                    Instead of redesigning apps independently, I led the team to <span className="font-semibold">pause feature work</span> and invest in a shared design foundation.
+                  </p>
+                  
+                  {/* Strategy steps */}
+                  <div className="space-y-1">
+                    <p className="text-muted-foreground text-base md:text-lg mb-8">The strategy:</p>
+                    <div className="space-y-0">
+                      {[
+                        'Audit all existing UI patterns across apps',
+                        'Identify shared behaviors and components',
+                        'Define system principles (clarity, flexibility, speed)',
+                        'Build a modular, reusable component library',
+                        'Establish governance and contribution rules'
+                      ].map((step, index) => (
+                        <div key={index} className="flex items-start gap-6 py-4 border-b border-border last:border-0">
+                          <span className="font-display text-3xl md:text-4xl font-semibold text-muted-foreground/30 w-12 flex-shrink-0">
+                            {String(index + 1).padStart(2, '0')}
+                          </span>
+                          <span className="text-foreground text-lg md:text-xl pt-1">{step}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  {/* Outcome statement */}
+                  <div className="pt-8">
+                    <p className="text-lg md:text-xl text-foreground leading-relaxed">
+                      This approach ensured every future feature <span className="font-semibold">improved the system</span> — not fragmented it.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+          
+          {/* Visual Assets */}
+          <AnimatedSection delay={150}>
+            <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* System Architecture Diagram */}
+              <div 
+                className="bg-background rounded-2xl overflow-hidden"
+                style={{ boxShadow: 'var(--image-shadow)' }}
+              >
+                <div className="aspect-[4/3] flex flex-col items-center justify-center p-8">
+                  <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-4">System Architecture</p>
+                  {/* Architecture flow */}
+                  <div className="flex items-center gap-3 text-sm">
+                    <span className="px-4 py-2 bg-foreground text-background rounded-lg font-medium">Tokens</span>
+                    <span className="text-muted-foreground">→</span>
+                    <span className="px-4 py-2 bg-foreground text-background rounded-lg font-medium">Components</span>
+                    <span className="text-muted-foreground">→</span>
+                    <span className="px-4 py-2 bg-foreground text-background rounded-lg font-medium">Patterns</span>
+                    <span className="text-muted-foreground">→</span>
+                    <span className="px-4 py-2 bg-foreground text-background rounded-lg font-medium">Products</span>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Principles Board */}
+              <div 
+                className="bg-foreground text-background rounded-2xl overflow-hidden"
+                style={{ boxShadow: 'var(--image-shadow)' }}
+              >
+                <div className="aspect-[4/3] flex flex-col items-center justify-center p-8">
+                  <p className="text-background/60 text-sm font-medium tracking-wide uppercase mb-6">Design Principles</p>
+                  <div className="grid grid-cols-2 gap-4 w-full max-w-xs">
+                    <div className="text-center p-4 rounded-xl bg-background/10">
+                      <p className="font-display text-lg font-semibold">Clarity</p>
+                    </div>
+                    <div className="text-center p-4 rounded-xl bg-background/10">
+                      <p className="font-display text-lg font-semibold">Flexibility</p>
+                    </div>
+                    <div className="text-center p-4 rounded-xl bg-background/10">
+                      <p className="font-display text-lg font-semibold">Consistency</p>
+                    </div>
+                    <div className="text-center p-4 rounded-xl bg-background/10">
+                      <p className="font-display text-lg font-semibold">Speed</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Role & Details Section */}
       <section className="bg-background pb-24 md:pb-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
