@@ -1134,6 +1134,50 @@ const SpotlightCaseStudy = () => {
         </div>
       </section>
 
+      {/* Closing Section */}
+      <section className="bg-background py-32 md:py-40">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <AnimatedSection>
+            <div className="text-center max-w-4xl mx-auto">
+              {/* Statement */}
+              <p className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-foreground leading-[1.15] tracking-tight mb-8">
+                This case study isn't about apps.
+              </p>
+              <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground leading-relaxed mb-16">
+                It's about scaling design quality across products, teams, and millions of users.
+              </p>
+              
+              {/* Forward-looking statement */}
+              <div className="inline-block p-8 md:p-12 bg-foreground text-background rounded-3xl" style={{ boxShadow: 'var(--image-shadow)' }}>
+                <p className="font-display text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight">
+                  That's the kind of challenge<br />I'm excited to solve next.
+                </p>
+              </div>
+            </div>
+          </AnimatedSection>
+          
+          {/* Closing Visual */}
+          <AnimatedSection delay={150}>
+            <div className="mt-24 flex justify-center">
+              <div className="relative">
+                {/* System motif - minimal nodes */}
+                <div className="flex items-center gap-3">
+                  <div className="w-3 h-3 rounded-full bg-foreground/20" />
+                  <div className="w-8 h-px bg-foreground/20" />
+                  <div className="w-4 h-4 rounded-full bg-foreground/40" />
+                  <div className="w-12 h-px bg-foreground/30" />
+                  <div className="w-6 h-6 rounded-full bg-foreground" />
+                  <div className="w-12 h-px bg-foreground/30" />
+                  <div className="w-4 h-4 rounded-full bg-foreground/40" />
+                  <div className="w-8 h-px bg-foreground/20" />
+                  <div className="w-3 h-3 rounded-full bg-foreground/20" />
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Role & Details Section */}
       <section className="bg-background pb-24 md:pb-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
