@@ -63,7 +63,7 @@ const StatCard = ({ value, label }: { value: string; label: string }) => (
 
 const SpotlightCaseStudy = () => {
   useEffect(() => {
-    document.title = 'Unifying Creativity: A Scalable Design System | Gazi Arifin';
+    document.title = 'Designing One Scalable System | Gazi Arifin';
     window.scrollTo(0, 0);
   }, []);
 
@@ -82,52 +82,84 @@ const SpotlightCaseStudy = () => {
         </Link>
       </div>
 
-      {/* Hero Section - Full Screen Split */}
-      <section className="min-h-[90vh] flex items-center">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 md:py-24 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left Column - Text Content */}
-            <AnimatedSection className="order-2 lg:order-1">
-              <div className="space-y-8">
-                {/* Eyebrow */}
-                <p className="text-muted-foreground text-sm font-medium tracking-widest uppercase">
-                  Lead UX Case Study
-                </p>
+      {/* Hero Section */}
+      <section className="py-16 md:py-24 lg:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          {/* Hero Text Content */}
+          <AnimatedSection>
+            <div className="max-w-4xl mb-16">
+              {/* Role Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-foreground/5 rounded-full mb-8">
+                <span className="text-sm font-medium text-foreground">Design System Lead</span>
+                <span className="w-1 h-1 rounded-full bg-muted-foreground" />
+                <span className="text-sm text-muted-foreground">14 Designers & Engineers</span>
+              </div>
+              
+              {/* Headline */}
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-[1.05] tracking-tight text-foreground mb-8">
+                Designing One Scalable System Across Three Creative Apps
+              </h1>
+              
+              {/* Sub-headline */}
+              <p className="text-xl md:text-2xl text-muted-foreground font-normal leading-relaxed max-w-3xl">
+                How I led a 14-person team to unify Slideshow Maker w Music and Color Pop under a single design system used by millions worldwide.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          {/* Products */}
+          <AnimatedSection delay={100}>
+            <div className="flex flex-wrap items-center gap-3 mb-12">
+              <span className="text-sm text-muted-foreground font-medium uppercase tracking-widest">Products</span>
+              <span className="w-8 h-px bg-border" />
+              <div className="flex flex-wrap gap-2">
+                <span className="px-4 py-2 bg-background rounded-full text-sm font-medium text-foreground border border-border">
+                  Slideshow Maker w Music
+                </span>
+                <span className="px-4 py-2 bg-background rounded-full text-sm font-medium text-foreground border border-border">
+                  Color Pop: AI Photo Editor
+                </span>
+              </div>
+            </div>
+          </AnimatedSection>
+
+          {/* Hero Visual */}
+          <AnimatedSection delay={200}>
+            <div className="relative">
+              {/* Main Image Container */}
+              <div 
+                className="bg-muted rounded-2xl overflow-hidden relative"
+                style={{ boxShadow: 'var(--image-shadow)' }}
+              >
+                <div className="aspect-[16/9] flex items-center justify-center bg-gradient-to-br from-muted to-muted/60">
+                  <div className="text-center p-8">
+                    <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-2">Hero Visual</p>
+                    <p className="text-muted-foreground/70 text-xs max-w-md">
+                      Side-by-side UI previews of Slideshow Maker and Color Pop showing shared components (buttons, typography, layout grid)
+                    </p>
+                  </div>
+                </div>
                 
-                {/* Headline */}
-                <h1 className="font-display text-4xl md:text-5xl lg:text-[3.5rem] xl:text-6xl font-semibold leading-[1.1] tracking-tight text-foreground">
-                  Unifying Creativity: A Scalable Design System for 22M+ Users
-                </h1>
-                
-                {/* Sub-headline */}
-                <p className="text-xl md:text-2xl text-muted-foreground font-normal leading-relaxed">
-                  Slideshow Maker & Color Pop
-                </p>
-                
-                {/* Body Text */}
-                <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-xl">
-                  From 2016 to 2023, I led UX design at Kite Games Studio, shaping three flagship apps that became household names. Through thoughtful research, innovative design, and relentless iteration, we turned ideas into tools that empowered millions of users worldwide.
-                </p>
-                
-                {/* Stats Row */}
-                <div className="pt-8 border-t border-border">
-                  <div className="grid grid-cols-3 gap-6 md:gap-10">
-                    <StatCard value="56%" label="Engagement Increase" />
-                    <StatCard value="22M+" label="Total Downloads" />
-                    <StatCard value="#1" label="Chart Rankings" />
+                {/* Overlay Metrics */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                  <div className="flex flex-wrap justify-center md:justify-start gap-3">
+                    <div className="px-5 py-3 bg-foreground text-background rounded-full backdrop-blur-sm">
+                      <span className="font-semibold">22M+</span>
+                      <span className="text-background/70 ml-2 text-sm">Downloads</span>
+                    </div>
+                    <div className="px-5 py-3 bg-foreground text-background rounded-full backdrop-blur-sm">
+                      <span className="font-semibold">56%</span>
+                      <span className="text-background/70 ml-2 text-sm">Engagement Increase</span>
+                    </div>
+                    <div className="px-5 py-3 bg-foreground text-background rounded-full backdrop-blur-sm">
+                      <span className="font-semibold">15%</span>
+                      <span className="text-background/70 ml-2 text-sm">Dev Efficiency Gain</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </AnimatedSection>
-
-            {/* Right Column - Hero Image */}
-            <AnimatedSection delay={150} className="order-1 lg:order-2">
-              <ImagePlaceholder 
-                label="Hero_UI_Ecosystem" 
-                className="aspect-[4/3] lg:aspect-square w-full"
-              />
-            </AnimatedSection>
-          </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
