@@ -252,6 +252,105 @@ const SpotlightCaseStudy = () => {
         </div>
       </section>
 
+      {/* Problem Definition Section */}
+      <section className="bg-secondary py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <AnimatedSection>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+              {/* Section Label */}
+              <div className="lg:col-span-3">
+                <p className="text-muted-foreground text-sm font-medium tracking-widest uppercase sticky top-32">
+                  The Problem
+                </p>
+              </div>
+              
+              {/* Content */}
+              <div className="lg:col-span-9">
+                <div className="max-w-3xl space-y-10">
+                  {/* Lead statement */}
+                  <p className="text-2xl md:text-3xl lg:text-4xl text-foreground leading-[1.3] font-normal">
+                    Before the design system, each app evolved <span className="font-semibold">independently.</span>
+                  </p>
+                  
+                  {/* Problem list */}
+                  <div className="space-y-1">
+                    <p className="text-muted-foreground text-base md:text-lg mb-6">That resulted in:</p>
+                    <ul className="space-y-4">
+                      <li className="flex items-start gap-4">
+                        <span className="w-2 h-2 rounded-full bg-foreground mt-2.5 flex-shrink-0" />
+                        <span className="text-foreground text-lg md:text-xl">Multiple button styles solving the same problem</span>
+                      </li>
+                      <li className="flex items-start gap-4">
+                        <span className="w-2 h-2 rounded-full bg-foreground mt-2.5 flex-shrink-0" />
+                        <span className="text-foreground text-lg md:text-xl">Inconsistent navigation and iconography across apps</span>
+                      </li>
+                      <li className="flex items-start gap-4">
+                        <span className="w-2 h-2 rounded-full bg-foreground mt-2.5 flex-shrink-0" />
+                        <span className="text-foreground text-lg md:text-xl">Designers recreating components instead of improving experiences</span>
+                      </li>
+                      <li className="flex items-start gap-4">
+                        <span className="w-2 h-2 rounded-full bg-foreground mt-2.5 flex-shrink-0" />
+                        <span className="text-foreground text-lg md:text-xl">Developers rebuilding UI logic repeatedly</span>
+                      </li>
+                      <li className="flex items-start gap-4">
+                        <span className="w-2 h-2 rounded-full bg-foreground mt-2.5 flex-shrink-0" />
+                        <span className="text-foreground text-lg md:text-xl">Slow onboarding for new team members</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  {/* Impact statements */}
+                  <div className="pt-8 border-t border-border space-y-2">
+                    <p className="text-xl md:text-2xl text-foreground font-medium">
+                      Users noticed the inconsistency.
+                    </p>
+                    <p className="text-xl md:text-2xl text-foreground font-medium">
+                      Teams felt the inefficiency.
+                    </p>
+                  </div>
+                  
+                  {/* Solution direction */}
+                  <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
+                    We needed a <span className="text-foreground font-medium">single source of truth</span> — one that balanced flexibility for different products with consistency across the ecosystem.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+          
+          {/* Visual Assets */}
+          <AnimatedSection delay={150}>
+            <div className="mt-20">
+              {/* UI Audit Board */}
+              <div 
+                className="bg-muted rounded-2xl overflow-hidden relative"
+                style={{ boxShadow: 'var(--image-shadow)' }}
+              >
+                <div className="aspect-[16/9] flex flex-col items-center justify-center p-8 bg-gradient-to-br from-muted to-muted/60">
+                  <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-2">UI Audit Board</p>
+                  <p className="text-muted-foreground/70 text-xs text-center max-w-md">
+                    Screenshot or mock of UI audit with repeated components highlighted
+                  </p>
+                </div>
+                
+                {/* Pain Point Labels */}
+                <div className="absolute bottom-6 left-6 right-6 flex flex-wrap gap-3">
+                  <span className="px-4 py-2 bg-destructive/10 text-destructive rounded-full text-sm font-medium border border-destructive/20">
+                    Duplication
+                  </span>
+                  <span className="px-4 py-2 bg-destructive/10 text-destructive rounded-full text-sm font-medium border border-destructive/20">
+                    Inconsistency
+                  </span>
+                  <span className="px-4 py-2 bg-destructive/10 text-destructive rounded-full text-sm font-medium border border-destructive/20">
+                    Slow Iteration
+                  </span>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Role & Details Section */}
       <section className="bg-background pb-24 md:pb-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
