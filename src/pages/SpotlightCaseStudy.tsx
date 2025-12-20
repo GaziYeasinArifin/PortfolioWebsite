@@ -171,7 +171,7 @@ const SpotlightCaseStudy = () => {
         </div>
       </AnimatedSection>
 
-      {/* Overview Section */}
+      {/* Context & Scope Section */}
       <section className="bg-background py-24 md:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <AnimatedSection>
@@ -179,18 +179,71 @@ const SpotlightCaseStudy = () => {
               {/* Section Label */}
               <div className="lg:col-span-3">
                 <p className="text-muted-foreground text-sm font-medium tracking-widest uppercase sticky top-32">
-                  Overview
+                  Context & Scope
                 </p>
               </div>
               
               {/* Content */}
               <div className="lg:col-span-9">
-                <div className="max-w-3xl">
-                  <p className="text-xl md:text-2xl lg:text-3xl text-foreground leading-relaxed font-normal mb-8">
-                    Three apps, over a decade of design, and millions of downloads later—what's the secret behind creating experiences that dominate the App Store charts for years?
+                <div className="max-w-3xl space-y-8">
+                  {/* Lead paragraph */}
+                  <p className="text-2xl md:text-3xl lg:text-4xl text-foreground leading-[1.3] font-normal">
+                    This case study represents <span className="font-semibold">one design systems initiative</span> spanning three separate apps, each with different audiences, feature depth, and creative workflows.
                   </p>
+                  
+                  {/* Challenge intro */}
+                  <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                    While these products served different use cases — slideshows, photo editing, and video creation — they shared a growing challenge:
+                  </p>
+                  
+                  {/* Key problems - emphasized */}
+                  <div className="py-6 border-l-2 border-foreground pl-6">
+                    <p className="text-xl md:text-2xl text-foreground font-medium leading-relaxed">
+                      Inconsistent UI, duplicated effort, and poor scalability across teams.
+                    </p>
+                  </div>
+                  
+                  {/* Scale context */}
                   <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-                    This case study shares the behind-the-scenes story of their success, from identifying user pain points to designing solutions that continue to delight millions. It's a story of how thoughtful research, innovative design, and relentless iteration turned ideas into tools that empowered users worldwide.
+                    As usage grew into the <span className="text-foreground font-medium">tens of millions</span>, design decisions made in isolation began to slow development, confuse users, and dilute brand trust.
+                  </p>
+                  
+                  {/* Transformation statement */}
+                  <div className="pt-4">
+                    <p className="text-lg md:text-xl text-foreground leading-relaxed">
+                      This project became less about individual features — and more about <span className="font-semibold">building a system that could scale across products, teams, and time.</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+          
+          {/* Visual Assets */}
+          <AnimatedSection delay={150}>
+            <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Context Diagram */}
+              <div 
+                className="bg-muted rounded-2xl overflow-hidden"
+                style={{ boxShadow: 'var(--image-shadow)' }}
+              >
+                <div className="aspect-[4/3] flex flex-col items-center justify-center p-8 bg-gradient-to-br from-muted to-muted/60">
+                  <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-2">Context Diagram</p>
+                  <p className="text-muted-foreground/70 text-xs text-center max-w-xs">
+                    Visual showing three apps branching from one shared design system foundation
+                  </p>
+                </div>
+              </div>
+              
+              {/* Before Snapshot */}
+              <div 
+                className="bg-muted rounded-2xl overflow-hidden"
+                style={{ boxShadow: 'var(--image-shadow)' }}
+              >
+                <div className="aspect-[4/3] flex flex-col items-center justify-center p-8 bg-gradient-to-br from-muted to-muted/60">
+                  <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-2">Before Snapshot</p>
+                  <p className="text-muted-foreground/70 text-xs text-center max-w-xs">
+                    Mixed UI styles from different apps pre-system
                   </p>
                 </div>
               </div>
