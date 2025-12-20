@@ -351,6 +351,115 @@ const SpotlightCaseStudy = () => {
         </div>
       </section>
 
+      {/* Personas Section */}
+      <section className="bg-background py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <AnimatedSection>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+              {/* Section Label */}
+              <div className="lg:col-span-3">
+                <p className="text-muted-foreground text-sm font-medium tracking-widest uppercase sticky top-32">
+                  User Personas
+                </p>
+              </div>
+              
+              {/* Content */}
+              <div className="lg:col-span-9">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {/* Persona 1: The Passionate Editor */}
+                  <div 
+                    className="bg-secondary rounded-2xl p-8 relative overflow-hidden"
+                    style={{ boxShadow: 'var(--card-shadow)' }}
+                  >
+                    {/* Avatar placeholder */}
+                    <div className="w-16 h-16 rounded-full bg-muted mb-6 flex items-center justify-center">
+                      <span className="text-2xl">🎬</span>
+                    </div>
+                    
+                    <h3 className="font-display text-xl md:text-2xl font-semibold text-foreground mb-2">
+                      The Passionate Editor
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-6">
+                      Advanced creator using Slideshow Maker for professional or semi-professional content.
+                    </p>
+                    
+                    {/* Needs */}
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
+                        <span className="text-foreground text-sm">Needs deep customization</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
+                        <span className="text-foreground text-sm">Uses editing tools frequently</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
+                        <span className="text-foreground text-sm">Values efficiency and precision</span>
+                      </div>
+                    </div>
+                    
+                    {/* Frustration */}
+                    <div className="mt-6 pt-6 border-t border-border">
+                      <p className="text-xs text-muted-foreground uppercase tracking-widest mb-2">Frustration</p>
+                      <p className="text-foreground text-sm italic">"Frustrated by shallow or rigid tools"</p>
+                    </div>
+                  </div>
+                  
+                  {/* Persona 2: The Casual Creator */}
+                  <div 
+                    className="bg-secondary rounded-2xl p-8 relative overflow-hidden"
+                    style={{ boxShadow: 'var(--card-shadow)' }}
+                  >
+                    {/* Avatar placeholder */}
+                    <div className="w-16 h-16 rounded-full bg-muted mb-6 flex items-center justify-center">
+                      <span className="text-2xl">✨</span>
+                    </div>
+                    
+                    <h3 className="font-display text-xl md:text-2xl font-semibold text-foreground mb-2">
+                      The Casual Creator
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-6">
+                      Social-first user using Color Pop for quick, shareable results.
+                    </p>
+                    
+                    {/* Behaviors */}
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
+                        <span className="text-foreground text-sm">Wants instant results</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
+                        <span className="text-foreground text-sm">Avoids complex interfaces</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
+                        <span className="text-foreground text-sm">Learns by doing, not reading</span>
+                      </div>
+                    </div>
+                    
+                    {/* Behavior note */}
+                    <div className="mt-6 pt-6 border-t border-border">
+                      <p className="text-xs text-muted-foreground uppercase tracking-widest mb-2">Behavior</p>
+                      <p className="text-foreground text-sm italic">"Leaves quickly if confused"</p>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Design System Implication */}
+                <div className="mt-12 p-8 bg-foreground text-background rounded-2xl">
+                  <p className="text-xs uppercase tracking-widest opacity-60 mb-3">Design System Implication</p>
+                  <p className="text-xl md:text-2xl font-medium leading-relaxed">
+                    We designed components that scale in complexity — <span className="opacity-70">simple by default, powerful when expanded.</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Role & Details Section */}
       <section className="bg-background pb-24 md:pb-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
