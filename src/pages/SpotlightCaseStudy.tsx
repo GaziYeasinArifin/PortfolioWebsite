@@ -959,6 +959,90 @@ const SpotlightCaseStudy = () => {
         </div>
       </section>
 
+      {/* Impact Metrics Section */}
+      <section className="bg-foreground text-background py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <AnimatedSection>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+              {/* Section Label */}
+              <div className="lg:col-span-3">
+                <p className="text-background/60 text-sm font-medium tracking-widest uppercase sticky top-32">
+                  Impact
+                </p>
+              </div>
+              
+              {/* Content */}
+              <div className="lg:col-span-9">
+                {/* Metrics Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                  {/* 22M+ Downloads */}
+                  <div className="p-8 bg-background/5 rounded-2xl border border-background/10">
+                    <p className="font-display text-5xl md:text-6xl font-semibold mb-3">22M+</p>
+                    <p className="text-background/70">total downloads across the product suite</p>
+                  </div>
+                  
+                  {/* 56% Engagement */}
+                  <div className="p-8 bg-background/5 rounded-2xl border border-background/10">
+                    <p className="font-display text-5xl md:text-6xl font-semibold mb-3">56%</p>
+                    <p className="text-background/70">increase in user engagement</p>
+                  </div>
+                  
+                  {/* 15% Efficiency */}
+                  <div className="p-8 bg-background/5 rounded-2xl border border-background/10">
+                    <p className="font-display text-5xl md:text-6xl font-semibold mb-3">15%</p>
+                    <p className="text-background/70">improvement in development efficiency</p>
+                  </div>
+                  
+                  {/* 4.7 Rating */}
+                  <div className="p-8 bg-background/5 rounded-2xl border border-background/10">
+                    <p className="font-display text-5xl md:text-6xl font-semibold mb-3">4.7★</p>
+                    <p className="text-background/70">average rating, featured by Apple</p>
+                  </div>
+                  
+                  {/* Top Rankings */}
+                  <div className="p-8 bg-background/5 rounded-2xl border border-background/10 sm:col-span-2">
+                    <div className="flex items-center gap-4">
+                      <div className="w-14 h-14 rounded-xl bg-background/10 flex items-center justify-center flex-shrink-0">
+                        <svg viewBox="0 0 24 24" className="w-7 h-7">
+                          <path fill="currentColor" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-display text-2xl md:text-3xl font-semibold">Top App Store Rankings</p>
+                        <p className="text-background/70 mt-1">Sustained chart performance for years</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Closing statement */}
+                <div className="pt-8 border-t border-background/20">
+                  <p className="text-2xl md:text-3xl font-normal leading-relaxed">
+                    The design system scaled with the product — <span className="text-background/60">and paid for itself.</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+          
+          {/* App Store Proof */}
+          <AnimatedSection delay={150}>
+            <div className="mt-20">
+              <div 
+                className="bg-background/10 rounded-2xl overflow-hidden border border-background/10"
+              >
+                <div className="aspect-[21/9] flex flex-col items-center justify-center p-8">
+                  <p className="text-background/60 text-sm font-medium tracking-wide uppercase mb-2">App Store Proof</p>
+                  <p className="text-background/50 text-xs text-center max-w-md">
+                    Rankings and ratings screenshots demonstrating sustained performance
+                  </p>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Role & Details Section */}
       <section className="bg-background pb-24 md:pb-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
