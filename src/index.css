@@ -234,8 +234,10 @@
 }
 
 .carousel-track {
+  display: flex;
+  width: max-content;
+  animation: carousel-scroll 30s linear infinite;
   will-change: transform;
-  transition: animation-play-state 0.5s ease;
 }
 
 .carousel-track:hover {
