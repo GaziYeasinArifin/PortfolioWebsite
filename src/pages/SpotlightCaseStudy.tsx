@@ -20,6 +20,7 @@ import spotlightSlideshow4 from '@/assets/spotlight-slideshow-4.png';
 import spotlightSlideshow5 from '@/assets/spotlight-slideshow-5.png';
 import spotlightStrategyArchitecture from '@/assets/spotlight-strategy-architecture.png';
 import spotlightDesignPrinciples from '@/assets/spotlight-design-principles.png';
+import spotlightAppStoreProof from '@/assets/spotlight-app-store-proof.png';
 // Animated section component for scroll-triggered animations
 const AnimatedSection = ({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -1092,14 +1093,14 @@ const SpotlightCaseStudy = () => {
           <AnimatedSection delay={150}>
             <div className="mt-20">
               <div 
-                className="bg-background/10 rounded-2xl overflow-hidden border border-background/10"
+                className="rounded-2xl overflow-hidden"
+                style={{ boxShadow: 'var(--image-shadow)' }}
               >
-                <div className="aspect-[21/9] flex flex-col items-center justify-center p-8">
-                  <p className="text-background/60 text-sm font-medium tracking-wide uppercase mb-2">App Store Proof</p>
-                  <p className="text-background/50 text-xs text-center max-w-md">
-                    Rankings and ratings screenshots demonstrating sustained performance
-                  </p>
-                </div>
+                <img 
+                  src={spotlightAppStoreProof} 
+                  alt="App Store Proof - Rankings and ratings screenshots demonstrating sustained performance" 
+                  className="w-full h-auto"
+                />
               </div>
             </div>
           </AnimatedSection>
