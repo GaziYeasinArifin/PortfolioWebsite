@@ -144,14 +144,17 @@ const SpotlightCaseStudy = () => {
                 
                 {/* Top Right Badges - Vertical Flow */}
                 <div className="absolute top-4 right-4 md:top-6 md:right-6 flex flex-col gap-2">
-                  <div className="px-4 py-2 bg-background/90 backdrop-blur-sm rounded-full text-sm font-medium text-foreground shadow-lg">
-                    22M+ Downloads
+                  <div className="px-4 py-2 bg-foreground backdrop-blur-sm rounded-full shadow-lg flex items-baseline gap-1.5">
+                    <span className="text-base md:text-lg font-bold text-background">22M+</span>
+                    <span className="text-xs font-light text-background/80">Downloads</span>
                   </div>
-                  <div className="px-4 py-2 bg-background/90 backdrop-blur-sm rounded-full text-sm font-medium text-foreground shadow-lg">
-                    56% Engagement ↑
+                  <div className="px-4 py-2 bg-foreground backdrop-blur-sm rounded-full shadow-lg flex items-baseline gap-1.5">
+                    <span className="text-base md:text-lg font-bold text-background">56%</span>
+                    <span className="text-xs font-light text-background/80">Engagement ↑</span>
                   </div>
-                  <div className="px-4 py-2 bg-background/90 backdrop-blur-sm rounded-full text-sm font-medium text-foreground shadow-lg">
-                    15% Dev Efficiency ↑
+                  <div className="px-4 py-2 bg-foreground backdrop-blur-sm rounded-full shadow-lg flex items-baseline gap-1.5">
+                    <span className="text-base md:text-lg font-bold text-background">15%</span>
+                    <span className="text-xs font-light text-background/80">Dev Efficiency ↑</span>
                   </div>
                 </div>
               </div>
