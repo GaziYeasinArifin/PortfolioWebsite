@@ -18,7 +18,8 @@ import spotlightSlideshow2 from '@/assets/spotlight-slideshow-2.png';
 import spotlightSlideshow3 from '@/assets/spotlight-slideshow-3.png';
 import spotlightSlideshow4 from '@/assets/spotlight-slideshow-4.png';
 import spotlightSlideshow5 from '@/assets/spotlight-slideshow-5.png';
-import designStrategyImg from '@/assets/design_strategy.png';
+import spotlightStrategyArchitecture from '@/assets/spotlight-strategy-architecture.png';
+import spotlightDesignPrinciples from '@/assets/spotlight-design-principles.png';
 // Animated section component for scroll-triggered animations
 const AnimatedSection = ({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -549,34 +550,22 @@ const SpotlightCaseStudy = () => {
                 style={{ boxShadow: 'var(--image-shadow)' }}
               >
                 <img 
-                  src={designStrategyImg} 
+                  src={spotlightStrategyArchitecture} 
                   alt="Design System Architecture - Tokens, Components, Patterns, Products hierarchy"
                   className="w-full h-full object-cover"
                 />
               </div>
               
-              {/* Principles Board */}
+              {/* Design Principles */}
               <div 
-                className="bg-foreground text-background rounded-2xl overflow-hidden"
+                className="rounded-2xl overflow-hidden"
                 style={{ boxShadow: 'var(--image-shadow)' }}
               >
-                <div className="aspect-[4/3] flex flex-col items-center justify-center p-8">
-                  <p className="text-background/60 text-sm font-medium tracking-wide uppercase mb-6">Design Principles</p>
-                  <div className="grid grid-cols-2 gap-4 w-full max-w-xs">
-                    <div className="text-center p-4 rounded-xl bg-background/10">
-                      <p className="font-display text-lg font-semibold">Clarity</p>
-                    </div>
-                    <div className="text-center p-4 rounded-xl bg-background/10">
-                      <p className="font-display text-lg font-semibold">Flexibility</p>
-                    </div>
-                    <div className="text-center p-4 rounded-xl bg-background/10">
-                      <p className="font-display text-lg font-semibold">Consistency</p>
-                    </div>
-                    <div className="text-center p-4 rounded-xl bg-background/10">
-                      <p className="font-display text-lg font-semibold">Speed</p>
-                    </div>
-                  </div>
-                </div>
+                <img 
+                  src={spotlightDesignPrinciples} 
+                  alt="Design Principles - Clarity, Flexibility, Consistency, Speed"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </AnimatedSection>
