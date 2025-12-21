@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Download, ArrowUpRight } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import spotlightHeroPhones from '@/assets/spotlight-hero-phones.png';
+import spotlightContextDiagram from '@/assets/spotlight-context-diagram.png';
+import spotlightBeforeSnapshot from '@/assets/spotlight-before-snapshot.png';
+import spotlightAuditBoard from '@/assets/spotlight-audit-board.png';
+import spotlightThumbnail from '@/assets/spotlight-thumbnail.png';
 
 // Animated section component for scroll-triggered animations
 const AnimatedSection = ({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => {
@@ -128,20 +133,17 @@ const SpotlightCaseStudy = () => {
             <div className="relative">
               {/* Main Image Container */}
               <div 
-                className="bg-muted rounded-2xl overflow-hidden relative"
+                className="rounded-2xl overflow-hidden relative"
                 style={{ boxShadow: 'var(--image-shadow)' }}
               >
-                <div className="aspect-[16/9] flex items-center justify-center bg-gradient-to-br from-muted to-muted/60">
-                  <div className="text-center p-8">
-                    <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-2">Hero Visual</p>
-                    <p className="text-muted-foreground/70 text-xs max-w-md">
-                      Side-by-side UI previews of Slideshow Maker and Color Pop showing shared components (buttons, typography, layout grid)
-                    </p>
-                  </div>
-                </div>
+                <img 
+                  src={spotlightHeroPhones} 
+                  alt="Slideshow Maker and Color Pop apps showing unified design system with shared components"
+                  className="w-full h-auto"
+                />
                 
                 {/* Overlay Metrics */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 bg-gradient-to-t from-black/60 to-transparent">
                   <div className="flex flex-wrap justify-center md:justify-start gap-3">
                     <div className="px-5 py-3 bg-foreground text-background rounded-full backdrop-blur-sm">
                       <span className="font-semibold">22M+</span>
@@ -224,28 +226,26 @@ const SpotlightCaseStudy = () => {
             <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Context Diagram */}
               <div 
-                className="bg-muted rounded-2xl overflow-hidden"
+                className="rounded-2xl overflow-hidden"
                 style={{ boxShadow: 'var(--image-shadow)' }}
               >
-                <div className="aspect-[4/3] flex flex-col items-center justify-center p-8 bg-gradient-to-br from-muted to-muted/60">
-                  <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-2">Context Diagram</p>
-                  <p className="text-muted-foreground/70 text-xs text-center max-w-xs">
-                    Visual showing three apps branching from one shared design system foundation
-                  </p>
-                </div>
+                <img 
+                  src={spotlightContextDiagram} 
+                  alt="Design system connecting Slideshow Maker and Color Pop with shared tokens, components, and patterns"
+                  className="w-full h-auto"
+                />
               </div>
               
               {/* Before Snapshot */}
               <div 
-                className="bg-muted rounded-2xl overflow-hidden"
+                className="rounded-2xl overflow-hidden"
                 style={{ boxShadow: 'var(--image-shadow)' }}
               >
-                <div className="aspect-[4/3] flex flex-col items-center justify-center p-8 bg-gradient-to-br from-muted to-muted/60">
-                  <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-2">Before Snapshot</p>
-                  <p className="text-muted-foreground/70 text-xs text-center max-w-xs">
-                    Mixed UI styles from different apps pre-system
-                  </p>
-                </div>
+                <img 
+                  src={spotlightBeforeSnapshot} 
+                  alt="Before: Fragmented UI styles across apps showing button mismatches, broken type ramps, and inconsistent padding"
+                  className="w-full h-auto"
+                />
               </div>
             </div>
           </AnimatedSection>
@@ -323,25 +323,24 @@ const SpotlightCaseStudy = () => {
             <div className="mt-20">
               {/* UI Audit Board */}
               <div 
-                className="bg-muted rounded-2xl overflow-hidden relative"
+                className="rounded-2xl overflow-hidden relative"
                 style={{ boxShadow: 'var(--image-shadow)' }}
               >
-                <div className="aspect-[16/9] flex flex-col items-center justify-center p-8 bg-gradient-to-br from-muted to-muted/60">
-                  <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-2">UI Audit Board</p>
-                  <p className="text-muted-foreground/70 text-xs text-center max-w-md">
-                    Screenshot or mock of UI audit with repeated components highlighted
-                  </p>
-                </div>
+                <img 
+                  src={spotlightAuditBoard} 
+                  alt="UI Audit board showing fragmented styles with button mismatches, duplicated search bars, and inconsistent icon weights"
+                  className="w-full h-auto"
+                />
                 
                 {/* Pain Point Labels */}
                 <div className="absolute bottom-6 left-6 right-6 flex flex-wrap gap-3">
-                  <span className="px-4 py-2 bg-destructive/10 text-destructive rounded-full text-sm font-medium border border-destructive/20">
+                  <span className="px-4 py-2 bg-destructive/10 text-destructive rounded-full text-sm font-medium border border-destructive/20 backdrop-blur-sm">
                     Duplication
                   </span>
-                  <span className="px-4 py-2 bg-destructive/10 text-destructive rounded-full text-sm font-medium border border-destructive/20">
+                  <span className="px-4 py-2 bg-destructive/10 text-destructive rounded-full text-sm font-medium border border-destructive/20 backdrop-blur-sm">
                     Inconsistency
                   </span>
-                  <span className="px-4 py-2 bg-destructive/10 text-destructive rounded-full text-sm font-medium border border-destructive/20">
+                  <span className="px-4 py-2 bg-destructive/10 text-destructive rounded-full text-sm font-medium border border-destructive/20 backdrop-blur-sm">
                     Slow Iteration
                   </span>
                 </div>
