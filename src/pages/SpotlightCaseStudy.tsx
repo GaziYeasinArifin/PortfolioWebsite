@@ -172,6 +172,34 @@ const SpotlightCaseStudy = () => {
         </div>
       </section>
 
+      {/* Project Details */}
+      <AnimatedSection delay={300}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 pt-12 border-t border-border">
+            {/* Role */}
+            <div>
+              <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-3">Role</p>
+              <p className="text-lg font-medium text-foreground">Product Design Lead</p>
+              <p className="text-sm text-muted-foreground mt-1">Owned the entire design process & product strategy</p>
+            </div>
+            
+            {/* Timeline */}
+            <div>
+              <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-3">Timeline</p>
+              <p className="text-lg font-medium text-foreground">2016 – 2023</p>
+              <p className="text-sm text-muted-foreground mt-1">7 years of continuous iteration</p>
+            </div>
+            
+            {/* Tools */}
+            <div>
+              <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-3">Tools</p>
+              <p className="text-lg font-medium text-foreground">Figma, FigJam, Adobe Suite</p>
+              <p className="text-sm text-muted-foreground mt-1">Firebase Analytics, ClickUp</p>
+            </div>
+          </div>
+        </div>
+      </AnimatedSection>
+
       {/* Scroll Indicator */}
       <AnimatedSection delay={400} className="flex justify-center pb-16">
         <div className="flex flex-col items-center gap-3 text-muted-foreground">
