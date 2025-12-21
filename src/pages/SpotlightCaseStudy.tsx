@@ -838,15 +838,8 @@ const SpotlightCaseStudy = () => {
         {/* Full-width Carousel Container */}
         <AnimatedSection delay={200}>
           <div className="relative w-full overflow-hidden">
-            {/* Edge fade overlays */}
-            <div className="absolute left-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
-            
             <div 
               className="flex gap-5 py-8 carousel-track"
-              style={{
-                animation: 'carousel-scroll 25s linear infinite',
-              }}
             >
               {/* First set of images */}
               {[
