@@ -200,13 +200,6 @@ const SpotlightCaseStudy = () => {
         </div>
       </AnimatedSection>
 
-      {/* Scroll Indicator */}
-      <AnimatedSection delay={400} className="flex justify-center pb-16">
-        <div className="flex flex-col items-center gap-3 text-muted-foreground">
-          <span className="text-xs font-medium tracking-widest uppercase">Scroll to explore</span>
-          <div className="w-px h-12 bg-gradient-to-b from-border to-transparent" />
-        </div>
-      </AnimatedSection>
 
       {/* Context & Scope Section */}
       <section className="bg-background py-24 md:py-32">
@@ -832,98 +825,105 @@ const SpotlightCaseStudy = () => {
           {/* Visual Assets - Side-by-Side Carousel */}
           <AnimatedSection delay={150}>
             <div className="mt-20">
-              <div className="text-center mb-8">
+              <div className="text-center mb-8 px-6">
                 <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-2">Side-by-Side Screens</p>
                 <p className="text-muted-foreground/70 text-base max-w-md mx-auto">
                   Slideshow Maker vs Color Pop showing shared UI patterns
                 </p>
               </div>
-              
-              {/* Carousel Container */}
-              <div 
-                className="rounded-2xl overflow-hidden relative group"
-                style={{ boxShadow: 'var(--image-shadow)' }}
-              >
-                <div 
-                  className="flex gap-6 py-8 px-6 bg-muted/50 overflow-x-auto scrollbar-hide animate-carousel group-hover:[animation-play-state:paused]"
-                  style={{
-                    animation: 'carousel-scroll 40s linear infinite',
-                  }}
-                >
-                  {/* First set of images */}
-                  {[
-                    { src: spotlightSlideshow1, label: 'Slideshow Maker' },
-                    { src: spotlightColorpop1, label: 'Color Pop' },
-                    { src: spotlightSlideshow2, label: 'Slideshow Maker' },
-                    { src: spotlightColorpop2, label: 'Color Pop' },
-                    { src: spotlightSlideshow3, label: 'Slideshow Maker' },
-                    { src: spotlightColorpop3, label: 'Color Pop' },
-                    { src: spotlightSlideshow4, label: 'Slideshow Maker' },
-                    { src: spotlightColorpop4, label: 'Color Pop' },
-                    { src: spotlightSlideshow5, label: 'Slideshow Maker' },
-                    { src: spotlightColorpop5, label: 'Color Pop' },
-                  ].map((item, index) => (
-                    <div 
-                      key={index}
-                      className="flex-shrink-0 w-48 md:w-56 transition-transform duration-500 hover:scale-105"
-                    >
-                      <div className="rounded-2xl overflow-hidden shadow-lg bg-background">
-                        <img 
-                          src={item.src} 
-                          alt={`${item.label} screen ${Math.floor(index / 2) + 1}`}
-                          className="w-full h-auto"
-                        />
-                      </div>
-                      <p className="text-center text-xs text-muted-foreground mt-3 font-medium">{item.label}</p>
-                    </div>
-                  ))}
-                  {/* Duplicate for seamless loop */}
-                  {[
-                    { src: spotlightSlideshow1, label: 'Slideshow Maker' },
-                    { src: spotlightColorpop1, label: 'Color Pop' },
-                    { src: spotlightSlideshow2, label: 'Slideshow Maker' },
-                    { src: spotlightColorpop2, label: 'Color Pop' },
-                    { src: spotlightSlideshow3, label: 'Slideshow Maker' },
-                    { src: spotlightColorpop3, label: 'Color Pop' },
-                    { src: spotlightSlideshow4, label: 'Slideshow Maker' },
-                    { src: spotlightColorpop4, label: 'Color Pop' },
-                    { src: spotlightSlideshow5, label: 'Slideshow Maker' },
-                    { src: spotlightColorpop5, label: 'Color Pop' },
-                  ].map((item, index) => (
-                    <div 
-                      key={`dup-${index}`}
-                      className="flex-shrink-0 w-48 md:w-56 transition-transform duration-500 hover:scale-105"
-                    >
-                      <div className="rounded-2xl overflow-hidden shadow-lg bg-background">
-                        <img 
-                          src={item.src} 
-                          alt={`${item.label} screen ${Math.floor(index / 2) + 1}`}
-                          className="w-full h-auto"
-                        />
-                      </div>
-                      <p className="text-center text-xs text-muted-foreground mt-3 font-medium">{item.label}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Shared Component Callouts */}
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
-                  Shared Buttons
-                </span>
-                <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
-                  Unified Typography
-                </span>
-                <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
-                  Common Icons
-                </span>
-                <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
-                  Consistent Spacing
-                </span>
-              </div>
             </div>
           </AnimatedSection>
+        </div>
+        
+        {/* Full-width Carousel Container */}
+        <AnimatedSection delay={200}>
+          <div className="relative w-full overflow-hidden">
+            {/* Edge fade overlays */}
+            <div className="absolute left-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
+            
+            <div 
+              className="flex gap-5 py-8 carousel-track"
+              style={{
+                animation: 'carousel-scroll 25s linear infinite',
+              }}
+            >
+              {/* First set of images */}
+              {[
+                { src: spotlightSlideshow1, label: 'Slideshow Maker' },
+                { src: spotlightColorpop1, label: 'Color Pop' },
+                { src: spotlightSlideshow2, label: 'Slideshow Maker' },
+                { src: spotlightColorpop2, label: 'Color Pop' },
+                { src: spotlightSlideshow3, label: 'Slideshow Maker' },
+                { src: spotlightColorpop3, label: 'Color Pop' },
+                { src: spotlightSlideshow4, label: 'Slideshow Maker' },
+                { src: spotlightColorpop4, label: 'Color Pop' },
+                { src: spotlightSlideshow5, label: 'Slideshow Maker' },
+                { src: spotlightColorpop5, label: 'Color Pop' },
+              ].map((item, index) => (
+                <div 
+                  key={index}
+                  className="flex-shrink-0 w-44 md:w-52"
+                >
+                  <div className="rounded-[2.5rem] overflow-hidden">
+                    <img 
+                      src={item.src} 
+                      alt={`${item.label} screen ${Math.floor(index / 2) + 1}`}
+                      className="w-full h-auto no-border"
+                      style={{ border: 'none', borderRadius: 0 }}
+                    />
+                  </div>
+                  <p className="text-center text-xs text-muted-foreground mt-3 font-medium">{item.label}</p>
+                </div>
+              ))}
+              {/* Duplicate for seamless loop */}
+              {[
+                { src: spotlightSlideshow1, label: 'Slideshow Maker' },
+                { src: spotlightColorpop1, label: 'Color Pop' },
+                { src: spotlightSlideshow2, label: 'Slideshow Maker' },
+                { src: spotlightColorpop2, label: 'Color Pop' },
+                { src: spotlightSlideshow3, label: 'Slideshow Maker' },
+                { src: spotlightColorpop3, label: 'Color Pop' },
+                { src: spotlightSlideshow4, label: 'Slideshow Maker' },
+                { src: spotlightColorpop4, label: 'Color Pop' },
+                { src: spotlightSlideshow5, label: 'Slideshow Maker' },
+                { src: spotlightColorpop5, label: 'Color Pop' },
+              ].map((item, index) => (
+                <div 
+                  key={`dup-${index}`}
+                  className="flex-shrink-0 w-44 md:w-52"
+                >
+                  <div className="rounded-[2.5rem] overflow-hidden">
+                    <img 
+                      src={item.src} 
+                      alt={`${item.label} screen ${Math.floor(index / 2) + 1}`}
+                      className="w-full h-auto no-border"
+                      style={{ border: 'none', borderRadius: 0 }}
+                    />
+                  </div>
+                  <p className="text-center text-xs text-muted-foreground mt-3 font-medium">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </AnimatedSection>
+        
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          {/* Shared Component Callouts */}
+          <div className="mt-8 mb-8 flex flex-wrap justify-center gap-3">
+            <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
+              Shared Buttons
+            </span>
+            <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
+              Unified Typography
+            </span>
+            <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
+              Common Icons
+            </span>
+            <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
+              Consistent Spacing
+            </span>
+          </div>
         </div>
       </section>
 
