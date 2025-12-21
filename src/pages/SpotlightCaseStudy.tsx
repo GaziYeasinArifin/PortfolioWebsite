@@ -142,21 +142,16 @@ const SpotlightCaseStudy = () => {
                   className="w-full h-auto"
                 />
                 
-                {/* Overlay Metrics */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 bg-gradient-to-t from-black/60 to-transparent">
-                  <div className="flex flex-wrap justify-center md:justify-start gap-3">
-                    <div className="px-5 py-3 bg-foreground text-background rounded-full backdrop-blur-sm">
-                      <span className="font-semibold">22M+</span>
-                      <span className="text-background/70 ml-2 text-sm">Downloads</span>
-                    </div>
-                    <div className="px-5 py-3 bg-foreground text-background rounded-full backdrop-blur-sm">
-                      <span className="font-semibold">56%</span>
-                      <span className="text-background/70 ml-2 text-sm">Engagement Increase</span>
-                    </div>
-                    <div className="px-5 py-3 bg-foreground text-background rounded-full backdrop-blur-sm">
-                      <span className="font-semibold">15%</span>
-                      <span className="text-background/70 ml-2 text-sm">Dev Efficiency Gain</span>
-                    </div>
+                {/* Top Right Badges - Vertical Flow */}
+                <div className="absolute top-4 right-4 md:top-6 md:right-6 flex flex-col gap-2">
+                  <div className="px-4 py-2 bg-background/90 backdrop-blur-sm rounded-full text-sm font-medium text-foreground shadow-lg">
+                    22M+ Downloads
+                  </div>
+                  <div className="px-4 py-2 bg-background/90 backdrop-blur-sm rounded-full text-sm font-medium text-foreground shadow-lg">
+                    56% Engagement ↑
+                  </div>
+                  <div className="px-4 py-2 bg-background/90 backdrop-blur-sm rounded-full text-sm font-medium text-foreground shadow-lg">
+                    15% Dev Efficiency ↑
                   </div>
                 </div>
               </div>
