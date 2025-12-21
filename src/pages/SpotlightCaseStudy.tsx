@@ -66,7 +66,7 @@ const ImagePlaceholder = ({ label, className = '' }: { label: string; className?
 // Stat card component
 const StatCard = ({ value, label }: { value: string; label: string }) => (
   <div className="text-center md:text-left">
-    <p className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground mb-2">
+    <p className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground mb-2">
       {value}
     </p>
     <p className="text-muted-foreground text-sm md:text-base font-medium">
@@ -110,7 +110,7 @@ const SpotlightCaseStudy = () => {
               </div>
               
               {/* Headline */}
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-[1.05] tracking-tight text-foreground mb-8">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-[1.05] tracking-tight text-foreground mb-8">
                 Designing One Scalable System Across Three Creative Apps
               </h1>
               
@@ -403,7 +403,7 @@ const SpotlightCaseStudy = () => {
                       <span className="text-2xl">🎬</span>
                     </div>
                     
-                    <h3 className="font-display text-xl md:text-2xl font-semibold text-foreground mb-2">
+                    <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-2">
                       The Passionate Editor
                     </h3>
                     <p className="text-muted-foreground text-sm mb-6">
@@ -443,7 +443,7 @@ const SpotlightCaseStudy = () => {
                       <span className="text-2xl">✨</span>
                     </div>
                     
-                    <h3 className="font-display text-xl md:text-2xl font-semibold text-foreground mb-2">
+                    <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-2">
                       The Casual Creator
                     </h3>
                     <p className="text-muted-foreground text-sm mb-6">
@@ -519,7 +519,7 @@ const SpotlightCaseStudy = () => {
                         'Establish governance and contribution rules'
                       ].map((step, index) => (
                         <div key={index} className="flex items-start gap-6 py-4 border-b border-border last:border-0">
-                          <span className="font-display text-3xl md:text-4xl font-semibold text-muted-foreground/30 w-12 flex-shrink-0">
+                          <span className="text-3xl md:text-4xl font-semibold text-muted-foreground/30 w-12 flex-shrink-0">
                             {String(index + 1).padStart(2, '0')}
                           </span>
                           <span className="text-foreground text-lg md:text-xl pt-1">{step}</span>
@@ -571,16 +571,16 @@ const SpotlightCaseStudy = () => {
                   <p className="text-background/60 text-sm font-medium tracking-wide uppercase mb-6">Design Principles</p>
                   <div className="grid grid-cols-2 gap-4 w-full max-w-xs">
                     <div className="text-center p-4 rounded-xl bg-background/10">
-                      <p className="font-display text-lg font-semibold">Clarity</p>
+                      <p className="text-lg font-semibold">Clarity</p>
                     </div>
                     <div className="text-center p-4 rounded-xl bg-background/10">
-                      <p className="font-display text-lg font-semibold">Flexibility</p>
+                      <p className="text-lg font-semibold">Flexibility</p>
                     </div>
                     <div className="text-center p-4 rounded-xl bg-background/10">
-                      <p className="font-display text-lg font-semibold">Consistency</p>
+                      <p className="text-lg font-semibold">Consistency</p>
                     </div>
                     <div className="text-center p-4 rounded-xl bg-background/10">
-                      <p className="font-display text-lg font-semibold">Speed</p>
+                      <p className="text-lg font-semibold">Speed</p>
                     </div>
                   </div>
                 </div>
@@ -761,7 +761,7 @@ const SpotlightCaseStudy = () => {
                     <div className="absolute top-8 right-8">
                       <span className="text-4xl">🎬</span>
                     </div>
-                    <h3 className="font-display text-xl md:text-2xl font-semibold text-foreground mb-6 pr-16">
+                    <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 pr-16">
                       Slideshow Maker w Music
                     </h3>
                     <ul className="space-y-4">
@@ -788,7 +788,7 @@ const SpotlightCaseStudy = () => {
                     <div className="absolute top-8 right-8">
                       <span className="text-4xl">✨</span>
                     </div>
-                    <h3 className="font-display text-xl md:text-2xl font-semibold text-foreground mb-6 pr-16">
+                    <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 pr-16">
                       Color Pop: AI Photo Editor
                     </h3>
                     <ul className="space-y-4">
@@ -810,7 +810,7 @@ const SpotlightCaseStudy = () => {
                 
                 {/* Tagline */}
                 <div className="mt-16 text-center">
-                  <p className="font-display text-xl md:text-2xl lg:text-3xl font-semibold leading-tight">
+                  <p className="text-xl md:text-2xl lg:text-3xl font-semibold leading-tight">
                     <span className="text-foreground">Different products.</span>
                     <span className="mx-3 text-muted-foreground/30">·</span>
                     <span className="text-muted-foreground">Same system.</span>
@@ -1058,25 +1058,25 @@ const SpotlightCaseStudy = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
                   {/* 22M+ Downloads */}
                   <div className="p-8 bg-background/5 rounded-2xl border border-background/10">
-                    <p className="font-display text-5xl md:text-6xl font-semibold mb-3">22M+</p>
+                    <p className="text-5xl md:text-6xl font-semibold mb-3">22M+</p>
                     <p className="text-background/70">total downloads across the product suite</p>
                   </div>
                   
                   {/* 56% Engagement */}
                   <div className="p-8 bg-background/5 rounded-2xl border border-background/10">
-                    <p className="font-display text-5xl md:text-6xl font-semibold mb-3">56%</p>
+                    <p className="text-5xl md:text-6xl font-semibold mb-3">56%</p>
                     <p className="text-background/70">increase in user engagement</p>
                   </div>
                   
                   {/* 15% Efficiency */}
                   <div className="p-8 bg-background/5 rounded-2xl border border-background/10">
-                    <p className="font-display text-5xl md:text-6xl font-semibold mb-3">15%</p>
+                    <p className="text-5xl md:text-6xl font-semibold mb-3">15%</p>
                     <p className="text-background/70">improvement in development efficiency</p>
                   </div>
                   
                   {/* 4.7 Rating */}
                   <div className="p-8 bg-background/5 rounded-2xl border border-background/10">
-                    <p className="font-display text-5xl md:text-6xl font-semibold mb-3">4.7★</p>
+                    <p className="text-5xl md:text-6xl font-semibold mb-3">4.7★</p>
                     <p className="text-background/70">average rating, featured by Apple</p>
                   </div>
                   
@@ -1089,7 +1089,7 @@ const SpotlightCaseStudy = () => {
                         </svg>
                       </div>
                       <div>
-                        <p className="font-display text-2xl md:text-3xl font-semibold">Top App Store Rankings</p>
+                        <p className="text-2xl md:text-3xl font-semibold">Top App Store Rankings</p>
                         <p className="text-background/70 mt-1">Sustained chart performance for years</p>
                       </div>
                     </div>
@@ -1170,7 +1170,7 @@ const SpotlightCaseStudy = () => {
                   
                   {/* Closing statement */}
                   <div className="pt-8">
-                    <p className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
+                    <p className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
                       It changed how I design — <span className="text-muted-foreground">permanently.</span>
                     </p>
                   </div>
@@ -1221,7 +1221,7 @@ const SpotlightCaseStudy = () => {
           <AnimatedSection>
             <div className="text-center max-w-4xl mx-auto">
               {/* Statement */}
-              <p className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-foreground leading-[1.15] tracking-tight mb-8">
+              <p className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-foreground leading-[1.15] tracking-tight mb-8">
                 This case study isn't about apps.
               </p>
               <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground leading-relaxed mb-16">
@@ -1230,7 +1230,7 @@ const SpotlightCaseStudy = () => {
               
               {/* Forward-looking statement */}
               <div className="inline-block p-8 md:p-12 bg-foreground text-background rounded-3xl" style={{ boxShadow: 'var(--image-shadow)' }}>
-                <p className="font-display text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight">
+                <p className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight">
                   That's the kind of challenge<br />I'm excited to solve next.
                 </p>
               </div>
@@ -1394,7 +1394,7 @@ const SpotlightCaseStudy = () => {
               <p className="text-muted-foreground text-sm font-medium tracking-widest uppercase mb-6">
                 Full Case Study
               </p>
-              <h2 className="font-display text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-8">
+              <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-8">
                 Download the complete PDF for detailed insights
               </h2>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
