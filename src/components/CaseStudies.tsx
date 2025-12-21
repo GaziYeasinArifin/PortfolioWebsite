@@ -5,7 +5,7 @@ import caseStudy3 from '@/assets/case-study-3.jpg';
 import brandingCaseStudy1 from '@/assets/branding-case-study-1.png';
 import carepalWriting from '@/assets/carepal-writing.png';
 import phantomFootprintThumbnail from '@/assets/phantom-footprint-thumbnail.png';
-import screenlifeThumbnail from '@/assets/screenlife-thumbnail.png';
+import screenlifeThumbnail from '@/assets/screenlife-thumb.png';
 import amtvThumbnail from '@/assets/amtv-thumbnail.png';
 import spotlightThumb from '@/assets/spotlight-thumb.png';
 import { ArrowUpRight } from 'lucide-react';
