@@ -551,7 +551,7 @@ const SpotlightCaseStudy = () => {
                 <img 
                   src={designStrategyImg} 
                   alt="Design System Architecture - Tokens, Components, Patterns, Products hierarchy"
-                  className="w-full h-auto"
+                  className="w-full h-full object-cover"
                 />
               </div>
               
