@@ -7,7 +7,7 @@ import carepalWriting from '@/assets/carepal-writing.png';
 import phantomFootprintThumbnail from '@/assets/phantom-footprint-thumbnail.png';
 import screenlifeThumbnail from '@/assets/screenlife-thumbnail.png';
 import amtvThumbnail from '@/assets/amtv-thumbnail.png';
-import spotlightHero from '@/assets/spotlight-hero.png';
+import spotlightThumb from '@/assets/spotlight-thumb.png';
 import { ArrowUpRight } from 'lucide-react';
 
 interface CaseStudy {
@@ -63,7 +63,7 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       title: 'Designing for the Spotlight',
       description: 'How three apps revolutionized creativity and topped the charts',
       category: 'Product Design',
-      image: spotlightHero,
+      image: spotlightThumb,
       year: '2016-2023',
       slug: 'spotlight',
     },
