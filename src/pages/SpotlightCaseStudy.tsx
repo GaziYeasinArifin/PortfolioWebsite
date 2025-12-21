@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Download, ArrowUpRight } from 'lucide-react';
+import { ArrowLeft, Download, ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import spotlightHeroPhones from '@/assets/spotlight-hero-phones.png';
@@ -8,7 +8,16 @@ import spotlightContextDiagram from '@/assets/spotlight-context-diagram.png';
 import spotlightBeforeSnapshot from '@/assets/spotlight-before-snapshot.png';
 import spotlightAuditBoard from '@/assets/spotlight-audit-board.png';
 import spotlightThumbnail from '@/assets/spotlight-thumbnail.png';
-
+import spotlightColorpop1 from '@/assets/spotlight-colorpop-1.png';
+import spotlightColorpop2 from '@/assets/spotlight-colorpop-2.png';
+import spotlightColorpop3 from '@/assets/spotlight-colorpop-3.png';
+import spotlightColorpop4 from '@/assets/spotlight-colorpop-4.png';
+import spotlightColorpop5 from '@/assets/spotlight-colorpop-5.png';
+import spotlightSlideshow1 from '@/assets/spotlight-slideshow-1.png';
+import spotlightSlideshow2 from '@/assets/spotlight-slideshow-2.png';
+import spotlightSlideshow3 from '@/assets/spotlight-slideshow-3.png';
+import spotlightSlideshow4 from '@/assets/spotlight-slideshow-4.png';
+import spotlightSlideshow5 from '@/assets/spotlight-slideshow-5.png';
 // Animated section component for scroll-triggered animations
 const AnimatedSection = ({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -792,46 +801,98 @@ const SpotlightCaseStudy = () => {
             </div>
           </AnimatedSection>
           
-          {/* Visual Assets */}
+          {/* Visual Assets - Side-by-Side Carousel */}
           <AnimatedSection delay={150}>
             <div className="mt-20">
-              {/* Side-by-Side Comparison */}
+              <div className="text-center mb-8">
+                <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-2">Side-by-Side Screens</p>
+                <p className="text-muted-foreground/70 text-base max-w-md mx-auto">
+                  Slideshow Maker vs Color Pop showing shared UI patterns
+                </p>
+              </div>
+              
+              {/* Carousel Container */}
               <div 
-                className="bg-muted rounded-2xl overflow-hidden relative"
+                className="rounded-2xl overflow-hidden relative group"
                 style={{ boxShadow: 'var(--image-shadow)' }}
               >
-                <div className="aspect-[16/9] flex flex-col items-center justify-center p-8 bg-gradient-to-br from-muted to-muted/60">
-                  <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-2">Side-by-Side Screens</p>
-                  <p className="text-muted-foreground/70 text-xs text-center max-w-md mb-8">
-                    Slideshow Maker vs Color Pop showing shared UI patterns
-                  </p>
-                  
-                  {/* Mockup preview */}
-                  <div className="flex items-center gap-8">
-                    <div className="w-28 md:w-40 aspect-[9/19] bg-background rounded-2xl border border-border/50 flex items-center justify-center">
-                      <span className="text-xs text-muted-foreground">Slideshow</span>
+                <div 
+                  className="flex gap-6 py-8 px-6 bg-muted/50 overflow-x-auto scrollbar-hide animate-carousel group-hover:[animation-play-state:paused]"
+                  style={{
+                    animation: 'carousel-scroll 40s linear infinite',
+                  }}
+                >
+                  {/* First set of images */}
+                  {[
+                    { src: spotlightSlideshow1, label: 'Slideshow Maker' },
+                    { src: spotlightColorpop1, label: 'Color Pop' },
+                    { src: spotlightSlideshow2, label: 'Slideshow Maker' },
+                    { src: spotlightColorpop2, label: 'Color Pop' },
+                    { src: spotlightSlideshow3, label: 'Slideshow Maker' },
+                    { src: spotlightColorpop3, label: 'Color Pop' },
+                    { src: spotlightSlideshow4, label: 'Slideshow Maker' },
+                    { src: spotlightColorpop4, label: 'Color Pop' },
+                    { src: spotlightSlideshow5, label: 'Slideshow Maker' },
+                    { src: spotlightColorpop5, label: 'Color Pop' },
+                  ].map((item, index) => (
+                    <div 
+                      key={index}
+                      className="flex-shrink-0 w-48 md:w-56 transition-transform duration-500 hover:scale-105"
+                    >
+                      <div className="rounded-2xl overflow-hidden shadow-lg bg-background">
+                        <img 
+                          src={item.src} 
+                          alt={`${item.label} screen ${Math.floor(index / 2) + 1}`}
+                          className="w-full h-auto"
+                        />
+                      </div>
+                      <p className="text-center text-xs text-muted-foreground mt-3 font-medium">{item.label}</p>
                     </div>
-                    <div className="w-28 md:w-40 aspect-[9/19] bg-background rounded-2xl border border-border/50 flex items-center justify-center">
-                      <span className="text-xs text-muted-foreground">Color Pop</span>
+                  ))}
+                  {/* Duplicate for seamless loop */}
+                  {[
+                    { src: spotlightSlideshow1, label: 'Slideshow Maker' },
+                    { src: spotlightColorpop1, label: 'Color Pop' },
+                    { src: spotlightSlideshow2, label: 'Slideshow Maker' },
+                    { src: spotlightColorpop2, label: 'Color Pop' },
+                    { src: spotlightSlideshow3, label: 'Slideshow Maker' },
+                    { src: spotlightColorpop3, label: 'Color Pop' },
+                    { src: spotlightSlideshow4, label: 'Slideshow Maker' },
+                    { src: spotlightColorpop4, label: 'Color Pop' },
+                    { src: spotlightSlideshow5, label: 'Slideshow Maker' },
+                    { src: spotlightColorpop5, label: 'Color Pop' },
+                  ].map((item, index) => (
+                    <div 
+                      key={`dup-${index}`}
+                      className="flex-shrink-0 w-48 md:w-56 transition-transform duration-500 hover:scale-105"
+                    >
+                      <div className="rounded-2xl overflow-hidden shadow-lg bg-background">
+                        <img 
+                          src={item.src} 
+                          alt={`${item.label} screen ${Math.floor(index / 2) + 1}`}
+                          className="w-full h-auto"
+                        />
+                      </div>
+                      <p className="text-center text-xs text-muted-foreground mt-3 font-medium">{item.label}</p>
                     </div>
-                  </div>
+                  ))}
                 </div>
-                
-                {/* Shared Component Callouts */}
-                <div className="absolute bottom-6 left-6 right-6 flex flex-wrap justify-center gap-3">
-                  <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
-                    Shared Buttons
-                  </span>
-                  <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
-                    Unified Typography
-                  </span>
-                  <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
-                    Common Icons
-                  </span>
-                  <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
-                    Consistent Spacing
-                  </span>
-                </div>
+              </div>
+              
+              {/* Shared Component Callouts */}
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
+                  Shared Buttons
+                </span>
+                <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
+                  Unified Typography
+                </span>
+                <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
+                  Common Icons
+                </span>
+                <span className="px-4 py-2 bg-background text-foreground rounded-full text-sm font-medium border border-border shadow-sm">
+                  Consistent Spacing
+                </span>
               </div>
             </div>
           </AnimatedSection>
