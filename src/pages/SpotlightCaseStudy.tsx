@@ -865,7 +865,7 @@ const SpotlightCaseStudy = () => {
                   key={index}
                   className="flex-shrink-0 w-44 md:w-52"
                 >
-                  <div className="rounded-[2.5rem] overflow-hidden">
+                  <div className="rounded-lg overflow-hidden">
                     <img 
                       src={item.src} 
                       alt={`${item.label} screen ${Math.floor(index / 2) + 1}`}
@@ -893,7 +893,7 @@ const SpotlightCaseStudy = () => {
                   key={`dup-${index}`}
                   className="flex-shrink-0 w-44 md:w-52"
                 >
-                  <div className="rounded-[2.5rem] overflow-hidden">
+                  <div className="rounded-lg overflow-hidden">
                     <img 
                       src={item.src} 
                       alt={`${item.label} screen ${Math.floor(index / 2) + 1}`}

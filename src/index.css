@@ -235,10 +235,11 @@
 
 .carousel-track {
   will-change: transform;
+  transition: animation-play-state 0.5s ease;
 }
 
 .carousel-track:hover {
-  animation-duration: 60s !important;
+  animation-play-state: paused;
 }
 
 .scrollbar-hide {
