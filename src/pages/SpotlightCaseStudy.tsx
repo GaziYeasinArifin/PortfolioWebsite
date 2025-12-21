@@ -18,6 +18,7 @@ import spotlightSlideshow2 from '@/assets/spotlight-slideshow-2.png';
 import spotlightSlideshow3 from '@/assets/spotlight-slideshow-3.png';
 import spotlightSlideshow4 from '@/assets/spotlight-slideshow-4.png';
 import spotlightSlideshow5 from '@/assets/spotlight-slideshow-5.png';
+import designStrategyImg from '@/assets/design_strategy.png';
 // Animated section component for scroll-triggered animations
 const AnimatedSection = ({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -362,13 +363,13 @@ const SpotlightCaseStudy = () => {
                 
                 {/* Pain Point Labels */}
                 <div className="absolute bottom-6 left-6 right-6 flex flex-wrap gap-3">
-                  <span className="px-4 py-2 bg-destructive/10 text-destructive rounded-full text-sm font-medium border border-destructive/20 backdrop-blur-sm">
+                  <span className="px-4 py-2 bg-foreground text-destructive rounded-full text-sm font-medium">
                     Duplication
                   </span>
-                  <span className="px-4 py-2 bg-destructive/10 text-destructive rounded-full text-sm font-medium border border-destructive/20 backdrop-blur-sm">
+                  <span className="px-4 py-2 bg-foreground text-destructive rounded-full text-sm font-medium">
                     Inconsistency
                   </span>
-                  <span className="px-4 py-2 bg-destructive/10 text-destructive rounded-full text-sm font-medium border border-destructive/20 backdrop-blur-sm">
+                  <span className="px-4 py-2 bg-foreground text-destructive rounded-full text-sm font-medium">
                     Slow Iteration
                   </span>
                 </div>
@@ -544,22 +545,14 @@ const SpotlightCaseStudy = () => {
             <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* System Architecture Diagram */}
               <div 
-                className="bg-background rounded-2xl overflow-hidden"
+                className="rounded-2xl overflow-hidden"
                 style={{ boxShadow: 'var(--image-shadow)' }}
               >
-                <div className="aspect-[4/3] flex flex-col items-center justify-center p-8">
-                  <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-4">System Architecture</p>
-                  {/* Architecture flow */}
-                  <div className="flex items-center gap-3 text-sm">
-                    <span className="px-4 py-2 bg-foreground text-background rounded-lg font-medium">Tokens</span>
-                    <span className="text-muted-foreground">→</span>
-                    <span className="px-4 py-2 bg-foreground text-background rounded-lg font-medium">Components</span>
-                    <span className="text-muted-foreground">→</span>
-                    <span className="px-4 py-2 bg-foreground text-background rounded-lg font-medium">Patterns</span>
-                    <span className="text-muted-foreground">→</span>
-                    <span className="px-4 py-2 bg-foreground text-background rounded-lg font-medium">Products</span>
-                  </div>
-                </div>
+                <img 
+                  src={designStrategyImg} 
+                  alt="Design System Architecture - Tokens, Components, Patterns, Products hierarchy"
+                  className="w-full h-auto"
+                />
               </div>
               
               {/* Principles Board */}
