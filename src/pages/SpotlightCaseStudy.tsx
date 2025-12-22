@@ -27,6 +27,7 @@ import spotlightFigmaLibrary2 from '@/assets/spotlight-figma-library-2.png';
 import spotlightDesignTokens from '@/assets/spotlight-design-tokens.png';
 import spotlightMotionGuidelines from '@/assets/spotlight-motion-guidelines.png';
 import spotlightTeamWorkshop from '@/assets/spotlight-team-workshop.png';
+import spotlightHandoffFlow from '@/assets/spotlight-handoff-flow.png';
 // Animated section component for scroll-triggered animations
 const AnimatedSection = ({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -1017,22 +1018,18 @@ const SpotlightCaseStudy = () => {
               </div>
               
               {/* Handoff Flow Diagram */}
-              <div 
-                className="bg-foreground text-background rounded-2xl overflow-hidden"
-                style={{ boxShadow: 'var(--image-shadow)' }}
-              >
-                <div className="aspect-[4/3] flex flex-col items-center justify-center p-8">
-                  <p className="text-background/60 text-sm font-medium tracking-wide uppercase mb-6">Handoff Flow</p>
-                  {/* Flow diagram */}
-                  <div className="flex items-center gap-4 text-sm">
-                    <div className="px-5 py-3 bg-background/20 rounded-xl font-medium">Figma</div>
-                    <span className="text-background/50">→</span>
-                    <div className="px-5 py-3 bg-background/20 rounded-xl font-medium">Dev</div>
-                    <span className="text-background/50">→</span>
-                    <div className="px-5 py-3 bg-background/20 rounded-xl font-medium">Product</div>
-                  </div>
-                  <p className="text-background/50 text-xs mt-6">Clear ownership at every stage</p>
+              <div className="space-y-3">
+                <div 
+                  className="rounded-2xl overflow-hidden"
+                  style={{ boxShadow: 'var(--image-shadow)' }}
+                >
+                  <img 
+                    src={spotlightHandoffFlow} 
+                    alt="Handoff Flow - Clear ownership at every stage"
+                    className="w-full h-auto"
+                  />
                 </div>
+                <p className="text-sm text-muted-foreground text-center">Handoff Flow</p>
               </div>
             </div>
           </AnimatedSection>
