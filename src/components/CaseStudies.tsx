@@ -24,12 +24,13 @@ interface CaseStudy {
   externalUrl?: string;
 }
 
-type TabType = 'ux-projects' | 'branding' | 'writing';
+type TabType = 'ux-projects' | 'branding' | 'writing' | 'academic';
 
 const tabConfig: { key: TabType; label: string; title: string }[] = [
   { key: 'ux-projects', label: 'UX PROJECTS', title: 'Case Studies' },
   { key: 'branding', label: 'BRANDING', title: 'Gallery' },
   { key: 'writing', label: 'WRITING', title: 'Articles' },
+  { key: 'academic', label: 'ACADEMIC', title: 'Research' },
 ];
 
 const caseStudiesData: Record<TabType, CaseStudy[]> = {
@@ -124,6 +125,17 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       title: 'UX Research Methods',
       description: 'Exploring modern user research techniques',
       category: 'Article',
+      image: caseStudy3,
+      year: '2024',
+      slug: 'coming-soon',
+    },
+  ],
+  'academic': [
+    {
+      id: 1,
+      title: 'Academic Research',
+      description: 'Coming soon',
+      category: 'Research',
       image: caseStudy3,
       year: '2024',
       slug: 'coming-soon',
