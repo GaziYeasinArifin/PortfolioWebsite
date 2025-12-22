@@ -8,9 +8,9 @@ import brandingF1Design from '@/assets/branding-f1-design.webp';
 import brandingHamburgerIcons from '@/assets/branding-hamburger-icons.webp';
 import carepalWriting from '@/assets/carepal-writing.png';
 import phantomFootprintThumbnail from '@/assets/phantom-footprint-thumbnail.png';
-import screenlifeThumbnail from '@/assets/screenlife-thumb.png';
+import screenlifeThumbnail from '@/assets/screenlife-thumbnail.png';
 import amtvThumbnail from '@/assets/amtv-thumbnail.png';
-import spotlightThumb from '@/assets/spotlight-thumb.png';
+import spotlightThumbnail from '@/assets/spotlight-thumbnail.png';
 import { ArrowUpRight } from 'lucide-react';
 
 interface CaseStudy {
@@ -57,7 +57,7 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       title: 'Designing for the Spotlight',
       description: 'How three apps revolutionized creativity and topped the charts',
       category: 'Product Design',
-      image: spotlightThumb,
+      image: spotlightThumbnail,
       year: '2016-2023',
       slug: 'spotlight',
     },
