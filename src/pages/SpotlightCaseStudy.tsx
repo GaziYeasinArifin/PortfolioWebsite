@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Download, ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import spotlightHeroPhones from '@/assets/spotlight-hero-phones.png';
+import spotlightHero from '@/assets/spotlight-hero.png';
 import spotlightContextDiagram from '@/assets/spotlight-context-diagram.png';
 import spotlightBeforeSnapshot from '@/assets/spotlight-before-snapshot.png';
 import spotlightAuditBoard from '@/assets/spotlight-audit-board.png';
@@ -145,30 +145,14 @@ const SpotlightCaseStudy = () => {
             <div className="relative">
               {/* Main Image Container */}
               <div 
-                className="rounded-2xl overflow-hidden relative"
+                className="rounded-2xl overflow-hidden"
                 style={{ boxShadow: 'var(--image-shadow)' }}
               >
                 <img 
-                  src={spotlightHeroPhones} 
+                  src={spotlightHero} 
                   alt="Slideshow Maker and Color Pop apps showing unified design system with shared components"
                   className="w-full h-auto"
                 />
-                
-                {/* Top Right Badges - Vertical Flow */}
-                <div className="absolute top-4 right-4 md:top-6 md:right-6 flex flex-col gap-2">
-                  <div className="px-4 py-2 bg-foreground backdrop-blur-sm rounded-full shadow-lg flex items-baseline gap-1.5">
-                    <span className="text-base md:text-lg font-bold text-background">22M+</span>
-                    <span className="text-xs font-light text-background/80">Downloads</span>
-                  </div>
-                  <div className="px-4 py-2 bg-foreground backdrop-blur-sm rounded-full shadow-lg flex items-baseline gap-1.5">
-                    <span className="text-base md:text-lg font-bold text-background">56%</span>
-                    <span className="text-xs font-light text-background/80">Engagement ↑</span>
-                  </div>
-                  <div className="px-4 py-2 bg-foreground backdrop-blur-sm rounded-full shadow-lg flex items-baseline gap-1.5">
-                    <span className="text-base md:text-lg font-bold text-background">15%</span>
-                    <span className="text-xs font-light text-background/80">Dev Efficiency ↑</span>
-                  </div>
-                </div>
               </div>
             </div>
           </AnimatedSection>
