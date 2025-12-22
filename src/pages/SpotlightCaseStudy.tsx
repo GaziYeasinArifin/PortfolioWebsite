@@ -81,10 +81,18 @@ const StatCard = ({ value, label }: { value: string; label: string }) => (
   </div>
 );
 
-// Figma Library Slideshow component
+// Figma Library Slideshow component with auto-loop and crossfade
 const FigmaLibrarySlideshow = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [spotlightFigmaLibrary1, spotlightFigmaLibrary2];
+  
+  // Auto-loop every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
   
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
@@ -92,28 +100,34 @@ const FigmaLibrarySlideshow = () => {
   return (
     <div className="relative rounded-2xl overflow-hidden" style={{ boxShadow: 'var(--image-shadow)' }}>
       <div className="relative">
-        <img 
-          src={slides[currentSlide]} 
-          alt={`Figma Component Library - Slide ${currentSlide + 1}`}
-          className="w-full h-auto"
-        />
+        {/* Crossfade images */}
+        {slides.map((slide, index) => (
+          <img 
+            key={index}
+            src={slide} 
+            alt={`Figma Component Library - Slide ${index + 1}`}
+            className={`w-full h-auto transition-opacity duration-700 ease-in-out ${
+              index === 0 ? '' : 'absolute inset-0'
+            } ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+          />
+        ))}
         
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-background/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-background transition-colors"
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-background/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-background transition-colors z-10"
         >
           <ChevronLeft className="w-5 h-5 text-foreground" />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-background/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-background transition-colors"
+          className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-background/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-background transition-colors z-10"
         >
           <ChevronRight className="w-5 h-5 text-foreground" />
         </button>
         
         {/* Slide Indicators */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
           {slides.map((_, index) => (
             <button
               key={index}
@@ -127,7 +141,7 @@ const FigmaLibrarySlideshow = () => {
       </div>
       
       {/* Caption */}
-      <div className="absolute top-4 left-4 px-3 py-1.5 bg-background/90 backdrop-blur-sm rounded-full">
+      <div className="absolute top-4 left-4 px-3 py-1.5 bg-background/90 backdrop-blur-sm rounded-full z-10">
         <p className="text-foreground text-xs font-medium">Figma Component Library</p>
       </div>
     </div>
