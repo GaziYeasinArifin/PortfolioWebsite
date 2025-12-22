@@ -113,15 +113,6 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
   'writing': [
     {
       id: 1,
-      title: 'CarePal',
-      description: 'Designing a wellness companion for everyday care',
-      category: 'Article',
-      image: carepalWriting,
-      year: '2024',
-      externalUrl: 'https://www.canva.com/design/DAGkpwN0h1k/xyIfEievf8rfQnLJM6ccvw/view?utm_content=DAGkpwN0h1k&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h30849d3be1',
-    },
-    {
-      id: 2,
       title: 'UX Research Methods',
       description: 'Exploring modern user research techniques',
       category: 'Article',
@@ -133,12 +124,12 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
   'academic': [
     {
       id: 1,
-      title: 'Academic Research',
-      description: 'Coming soon',
+      title: 'CarePal',
+      description: 'Designing a wellness companion for everyday care',
       category: 'Research',
-      image: caseStudy3,
+      image: carepalWriting,
       year: '2024',
-      slug: 'coming-soon',
+      externalUrl: 'https://www.canva.com/design/DAGkpwN0h1k/xyIfEievf8rfQnLJM6ccvw/view?utm_content=DAGkpwN0h1k&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h30849d3be1',
     },
   ],
 };
