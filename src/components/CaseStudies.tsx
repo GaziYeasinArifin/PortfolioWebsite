@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import caseStudy2 from '@/assets/case-study-2.jpg';
 import caseStudy3 from '@/assets/case-study-3.jpg';
 import brandingCaseStudy1 from '@/assets/branding-case-study-1.png';
+import brandingIosIcons from '@/assets/branding-ios-icons.webp';
 import carepalWriting from '@/assets/carepal-writing.png';
 import phantomFootprintThumbnail from '@/assets/phantom-footprint-thumbnail.png';
 import screenlifeThumbnail from '@/assets/screenlife-thumb.png';
@@ -80,12 +81,12 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
     },
     {
       id: 2,
-      title: 'Restaurant Rebrand',
-      description: 'Modern refresh for a beloved local eatery',
+      title: 'iOS App Icon Design',
+      description: 'Crafting distinctive app icons for iOS',
       category: 'Visual Design',
-      image: caseStudy3,
-      year: '2023',
-      slug: 'coming-soon',
+      image: brandingIosIcons,
+      year: '2020',
+      externalUrl: 'https://dribbble.com/shots/12017945-iOS-App-Icon-Design',
     },
   ],
   'writing': [
