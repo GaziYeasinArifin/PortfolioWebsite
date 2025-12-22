@@ -22,6 +22,8 @@ import spotlightSlideshow5 from '@/assets/spotlight-slideshow-5.png';
 import spotlightStrategyArchitecture from '@/assets/spotlight-strategy-architecture.png';
 import spotlightDesignPrinciples from '@/assets/spotlight-design-principles.png';
 import spotlightAppStoreProof from '@/assets/spotlight-app-store-proof.png';
+import spotlightFigmaLibrary1 from '@/assets/spotlight-figma-library-1.png';
+import spotlightFigmaLibrary2 from '@/assets/spotlight-figma-library-2.png';
 // Animated section component for scroll-triggered animations
 const AnimatedSection = ({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -78,6 +80,59 @@ const StatCard = ({ value, label }: { value: string; label: string }) => (
     </p>
   </div>
 );
+
+// Figma Library Slideshow component
+const FigmaLibrarySlideshow = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = [spotlightFigmaLibrary1, spotlightFigmaLibrary2];
+  
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+
+  return (
+    <div className="relative rounded-2xl overflow-hidden" style={{ boxShadow: 'var(--image-shadow)' }}>
+      <div className="relative">
+        <img 
+          src={slides[currentSlide]} 
+          alt={`Figma Component Library - Slide ${currentSlide + 1}`}
+          className="w-full h-auto"
+        />
+        
+        {/* Navigation Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-background/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-background transition-colors"
+        >
+          <ChevronLeft className="w-5 h-5 text-foreground" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-background/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-background transition-colors"
+        >
+          <ChevronRight className="w-5 h-5 text-foreground" />
+        </button>
+        
+        {/* Slide Indicators */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-2 h-2 rounded-full transition-colors ${
+                index === currentSlide ? 'bg-foreground' : 'bg-foreground/30'
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+      
+      {/* Caption */}
+      <div className="absolute top-4 left-4 px-3 py-1.5 bg-background/90 backdrop-blur-sm rounded-full">
+        <p className="text-foreground text-xs font-medium">Figma Component Library</p>
+      </div>
+    </div>
+  );
+};
 
 const SpotlightCaseStudy = () => {
   useEffect(() => {
@@ -640,18 +695,8 @@ const SpotlightCaseStudy = () => {
           {/* Visual Assets Grid */}
           <AnimatedSection delay={150}>
             <div className="mt-20 space-y-8">
-              {/* Main Component Library */}
-              <div 
-                className="bg-muted rounded-2xl overflow-hidden"
-                style={{ boxShadow: 'var(--image-shadow)' }}
-              >
-                <div className="aspect-[21/9] flex flex-col items-center justify-center p-8 bg-gradient-to-br from-muted to-muted/60">
-                  <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-2">Figma Component Library</p>
-                  <p className="text-muted-foreground/70 text-xs text-center max-w-md">
-                    Buttons, sliders, cards, navigation — all with multiple variants and states
-                  </p>
-                </div>
-              </div>
+              {/* Main Component Library - Slideshow */}
+              <FigmaLibrarySlideshow />
               
               {/* Two column: Tokens + Motion */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
