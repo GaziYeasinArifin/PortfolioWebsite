@@ -4,6 +4,7 @@ import { ArrowLeft, Download, ArrowUpRight, ChevronLeft, ChevronRight } from 'lu
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import spotlightHero from '@/assets/spotlight-hero.png';
+import spotlightReflection from '@/assets/spotlight-reflection.png';
 import spotlightContextDiagram from '@/assets/spotlight-context-diagram.png';
 import spotlightBeforeSnapshot from '@/assets/spotlight-before-snapshot.png';
 import spotlightAuditBoard from '@/assets/spotlight-audit-board.png';
@@ -1154,7 +1155,7 @@ const SpotlightCaseStudy = () => {
                 style={{ boxShadow: 'var(--image-shadow)' }}
               >
                 <img 
-                  src={spotlightHero} 
+                  src={spotlightReflection} 
                   alt="Systems thinking: nodes, connections, and emergent design"
                   className="w-full h-auto"
                 />
