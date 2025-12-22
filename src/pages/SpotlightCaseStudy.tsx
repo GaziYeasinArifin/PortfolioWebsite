@@ -700,27 +700,33 @@ const SpotlightCaseStudy = () => {
               {/* Two column: Tokens + Motion */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Design Tokens */}
-                <div 
-                  className="rounded-2xl overflow-hidden"
-                  style={{ boxShadow: 'var(--image-shadow)' }}
-                >
-                  <img 
-                    src={spotlightDesignTokens} 
-                    alt="Design Tokens - Button system, typography scale, and iconography set"
-                    className="w-full h-auto"
-                  />
+                <div className="space-y-3">
+                  <div 
+                    className="rounded-2xl overflow-hidden"
+                    style={{ boxShadow: 'var(--image-shadow)' }}
+                  >
+                    <img 
+                      src={spotlightDesignTokens} 
+                      alt="Design Tokens - Button system, typography scale, and iconography set"
+                      className="w-full h-auto"
+                    />
+                  </div>
+                  <p className="text-sm text-muted-foreground text-center">Design Tokens</p>
                 </div>
                 
                 {/* Motion Guidelines */}
-                <div 
-                  className="rounded-2xl overflow-hidden"
-                  style={{ boxShadow: 'var(--image-shadow)' }}
-                >
-                  <img 
-                    src={spotlightMotionGuidelines} 
-                    alt="Motion Guidelines - Button feedback, page transitions, and loading states"
-                    className="w-full h-auto"
-                  />
+                <div className="space-y-3">
+                  <div 
+                    className="rounded-2xl overflow-hidden"
+                    style={{ boxShadow: 'var(--image-shadow)' }}
+                  >
+                    <img 
+                      src={spotlightMotionGuidelines} 
+                      alt="Motion Guidelines - Button feedback, page transitions, and loading states"
+                      className="w-full h-auto"
+                    />
+                  </div>
+                  <p className="text-sm text-muted-foreground text-center">Motion Guidelines</p>
                 </div>
               </div>
             </div>
