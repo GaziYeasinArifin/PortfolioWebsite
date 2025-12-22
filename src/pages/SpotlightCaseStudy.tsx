@@ -1174,8 +1174,8 @@ const SpotlightCaseStudy = () => {
                   
                   {/* Closing statement */}
                   <div className="pt-8">
-                    <p className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
-                      It changed how I design — <span className="text-muted-foreground">permanently.</span>
+                    <p className="text-foreground text-xl md:text-2xl italic leading-relaxed">
+                      "It changed how I design — permanently."
                     </p>
                   </div>
                 </div>
