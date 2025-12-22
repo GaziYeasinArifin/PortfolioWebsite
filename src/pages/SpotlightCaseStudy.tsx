@@ -26,6 +26,7 @@ import spotlightFigmaLibrary1 from '@/assets/spotlight-figma-library-1.png';
 import spotlightFigmaLibrary2 from '@/assets/spotlight-figma-library-2.png';
 import spotlightDesignTokens from '@/assets/spotlight-design-tokens.png';
 import spotlightMotionGuidelines from '@/assets/spotlight-motion-guidelines.png';
+import spotlightTeamWorkshop from '@/assets/spotlight-team-workshop.png';
 // Animated section component for scroll-triggered animations
 const AnimatedSection = ({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -1001,16 +1002,18 @@ const SpotlightCaseStudy = () => {
           <AnimatedSection delay={150}>
             <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Team Workshop Photo */}
-              <div 
-                className="bg-muted rounded-2xl overflow-hidden"
-                style={{ boxShadow: 'var(--image-shadow)' }}
-              >
-                <div className="aspect-[4/3] flex flex-col items-center justify-center p-8 bg-gradient-to-br from-muted to-muted/60">
-                  <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-2">Team Workshop</p>
-                  <p className="text-muted-foreground/70 text-xs text-center max-w-xs">
-                    Designers & engineers collaborating on component reviews
-                  </p>
+              <div className="space-y-3">
+                <div 
+                  className="rounded-2xl overflow-hidden"
+                  style={{ boxShadow: 'var(--image-shadow)' }}
+                >
+                  <img 
+                    src={spotlightTeamWorkshop} 
+                    alt="Team Workshop - Designers & engineers collaborating on component reviews"
+                    className="w-full h-auto"
+                  />
                 </div>
+                <p className="text-sm text-muted-foreground text-center">Team Workshop</p>
               </div>
               
               {/* Handoff Flow Diagram */}
