@@ -808,12 +808,8 @@ const SpotlightCaseStudy = () => {
                 
                 {/* Tagline */}
                 <div className="mt-16 text-center">
-                  <p className="font-display text-xl md:text-2xl lg:text-3xl font-semibold leading-tight">
-                    <span className="text-foreground">Different products.</span>
-                    <span className="mx-3 text-muted-foreground/30">·</span>
-                    <span className="text-muted-foreground">Same system.</span>
-                    <span className="mx-3 text-muted-foreground/30">·</span>
-                    <span className="text-foreground">Zero relearning.</span>
+                  <p className="text-2xl md:text-3xl lg:text-4xl text-foreground leading-[1.3] font-normal">
+                    Different products. Same system. <span className="font-semibold">Zero relearning.</span>
                   </p>
                 </div>
               </div>
