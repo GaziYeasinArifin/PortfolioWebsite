@@ -24,6 +24,8 @@ import spotlightDesignPrinciples from '@/assets/spotlight-design-principles.png'
 import spotlightAppStoreProof from '@/assets/spotlight-app-store-proof.png';
 import spotlightFigmaLibrary1 from '@/assets/spotlight-figma-library-1.png';
 import spotlightFigmaLibrary2 from '@/assets/spotlight-figma-library-2.png';
+import spotlightDesignTokens from '@/assets/spotlight-design-tokens.png';
+import spotlightMotionGuidelines from '@/assets/spotlight-motion-guidelines.png';
 // Animated section component for scroll-triggered animations
 const AnimatedSection = ({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -699,48 +701,26 @@ const SpotlightCaseStudy = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Design Tokens */}
                 <div 
-                  className="bg-muted rounded-2xl overflow-hidden"
+                  className="rounded-2xl overflow-hidden"
                   style={{ boxShadow: 'var(--image-shadow)' }}
                 >
-                  <div className="aspect-square flex flex-col items-center justify-center p-8 bg-gradient-to-br from-muted to-muted/60">
-                    <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-4">Design Tokens</p>
-                    {/* Token preview mockup */}
-                    <div className="space-y-3 w-full max-w-[200px]">
-                      <div className="flex gap-2">
-                        <div className="w-8 h-8 rounded-lg bg-foreground" />
-                        <div className="w-8 h-8 rounded-lg bg-foreground/80" />
-                        <div className="w-8 h-8 rounded-lg bg-foreground/60" />
-                        <div className="w-8 h-8 rounded-lg bg-foreground/40" />
-                        <div className="w-8 h-8 rounded-lg bg-foreground/20" />
-                      </div>
-                      <div className="space-y-1">
-                        <div className="h-3 bg-foreground/20 rounded w-full" />
-                        <div className="h-2 bg-foreground/10 rounded w-3/4" />
-                        <div className="h-2 bg-foreground/10 rounded w-1/2" />
-                      </div>
-                    </div>
-                    <p className="text-muted-foreground/70 text-xs text-center mt-4">
-                      Color & typography scales
-                    </p>
-                  </div>
+                  <img 
+                    src={spotlightDesignTokens} 
+                    alt="Design Tokens - Button system, typography scale, and iconography set"
+                    className="w-full h-auto"
+                  />
                 </div>
                 
-                {/* Motion Demo */}
+                {/* Motion Guidelines */}
                 <div 
-                  className="bg-foreground text-background rounded-2xl overflow-hidden"
+                  className="rounded-2xl overflow-hidden"
                   style={{ boxShadow: 'var(--image-shadow)' }}
                 >
-                  <div className="aspect-square flex flex-col items-center justify-center p-8">
-                    <p className="text-background/60 text-sm font-medium tracking-wide uppercase mb-4">Motion Guidelines</p>
-                    {/* Motion preview mockup */}
-                    <div className="relative w-24 h-24 mb-4">
-                      <div className="absolute inset-0 rounded-2xl border-2 border-dashed border-background/30" />
-                      <div className="absolute inset-2 rounded-xl bg-background/20 animate-pulse" />
-                    </div>
-                    <p className="text-background/70 text-xs text-center">
-                      Subtle transitions and feedback animations
-                    </p>
-                  </div>
+                  <img 
+                    src={spotlightMotionGuidelines} 
+                    alt="Motion Guidelines - Button feedback, page transitions, and loading states"
+                    className="w-full h-auto"
+                  />
                 </div>
               </div>
             </div>
