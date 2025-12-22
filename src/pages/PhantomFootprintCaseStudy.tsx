@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Cpu, Figma, Lightbulb, Users } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -94,6 +94,7 @@ const AnimatedSection = ({
 
 const PhantomFootprintCaseStudy = () => {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const [arduinoImageIndex, setArduinoImageIndex] = useState(0);
   const [assemblyImageIndex, setAssemblyImageIndex] = useState(0);
   const arduinoImages = [phantomArduino1, phantomArduino2];
@@ -101,6 +102,16 @@ const PhantomFootprintCaseStudy = () => {
   
   const arduinoImagesLoaded = usePreloadImages(arduinoImages);
   const assemblyImagesLoaded = usePreloadImages(assemblyImages);
+
+  const handleNavToProjects = () => {
+    navigate('/');
+    setTimeout(() => {
+      const element = document.getElementById('case-studies');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
 
   useEffect(() => {
     document.title = 'Phantom Footprint | Gazi Arifin';
@@ -129,13 +140,13 @@ const PhantomFootprintCaseStudy = () => {
         <div className="container">
           {/* Back link */}
           <AnimatedSection>
-            <Link 
-              to="/#case-studies" 
+            <button 
+              onClick={handleNavToProjects}
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 mb-12 group"
             >
               <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
               back to work
-            </Link>
+            </button>
           </AnimatedSection>
 
           {/* Hero section - The Hook */}
@@ -572,9 +583,9 @@ const PhantomFootprintCaseStudy = () => {
           {/* Next project */}
           <AnimatedSection>
             <div className="pt-16 border-t border-border">
-              <Link 
-                to="/#case-studies" 
-                className="group flex items-center justify-between"
+              <button 
+                onClick={handleNavToProjects}
+                className="group flex items-center justify-between w-full"
               >
                 <div>
                   <p className="text-sm text-muted-foreground mb-2">next project</p>
@@ -583,7 +594,7 @@ const PhantomFootprintCaseStudy = () => {
                 <div className="flex h-12 w-12 items-center justify-center rounded-[4px] border border-border transition-all duration-300 group-hover:bg-foreground group-hover:border-foreground">
                   <ArrowLeft className="h-5 w-5 rotate-180 transition-all duration-300 group-hover:text-background" />
                 </div>
-              </Link>
+              </button>
             </div>
           </AnimatedSection>
         </div>

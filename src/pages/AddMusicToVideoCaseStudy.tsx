@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, ArrowRight, ArrowDown } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
 import amtvHero from '@/assets/amtv-hero.png';
@@ -225,6 +225,18 @@ const SolutionCarousel = () => {
 };
 
 const AddMusicToVideoCaseStudy = () => {
+  const navigate = useNavigate();
+
+  const handleNavToProjects = () => {
+    navigate('/');
+    setTimeout(() => {
+      const element = document.getElementById('case-studies');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
   useEffect(() => {
     document.title = 'Add Music to Video | Gazi Arifin';
     window.scrollTo(0, 0);
@@ -239,13 +251,13 @@ const AddMusicToVideoCaseStudy = () => {
           
           {/* Back navigation */}
           <AnimatedSection>
-            <Link 
-              to="/#case-studies" 
+            <button 
+              onClick={handleNavToProjects}
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 mb-12 group"
             >
               <ArrowLeft className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" />
               back to work
-            </Link>
+            </button>
           </AnimatedSection>
 
           {/* Hero Section */}
@@ -508,9 +520,9 @@ const AddMusicToVideoCaseStudy = () => {
           {/* Navigation to other projects */}
           <AnimatedSection delay={100}>
             <div className="pt-16 border-t border-border">
-              <Link 
-                to="/#case-studies" 
-                className="group flex items-center justify-between"
+              <button 
+                onClick={handleNavToProjects}
+                className="group flex items-center justify-between w-full"
               >
                 <div>
                   <p className="text-sm text-muted-foreground mb-2">back to</p>
@@ -519,7 +531,7 @@ const AddMusicToVideoCaseStudy = () => {
                   </p>
                 </div>
                 <ArrowUpRight className="w-8 h-8 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </Link>
+              </button>
             </div>
           </AnimatedSection>
 
