@@ -178,10 +178,10 @@ const CaseStudies = () => {
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`text-xs font-medium tracking-[0.2em] transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:w-0 after:bg-foreground after:transition-all after:duration-300 hover:after:w-full ${
+                className={`text-xs tracking-[0.2em] transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:bg-foreground after:transition-all after:duration-300 ${
                   activeTab === tab.key
-                    ? 'text-foreground'
-                    : 'text-muted-foreground hover:text-foreground'
+                    ? 'text-foreground font-bold after:w-full'
+                    : 'text-muted-foreground font-medium after:w-0 hover:text-foreground hover:after:w-full'
                 }`}
               >
                 {tab.label}
