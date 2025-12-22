@@ -4,6 +4,8 @@ import caseStudy2 from '@/assets/case-study-2.jpg';
 import caseStudy3 from '@/assets/case-study-3.jpg';
 import brandingCaseStudy1 from '@/assets/branding-case-study-1.png';
 import brandingIosIcons from '@/assets/branding-ios-icons.webp';
+import brandingF1Design from '@/assets/branding-f1-design.webp';
+import brandingHamburgerIcons from '@/assets/branding-hamburger-icons.webp';
 import carepalWriting from '@/assets/carepal-writing.png';
 import phantomFootprintThumbnail from '@/assets/phantom-footprint-thumbnail.png';
 import screenlifeThumbnail from '@/assets/screenlife-thumb.png';
@@ -87,6 +89,24 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       image: brandingIosIcons,
       year: '2020',
       externalUrl: 'https://dribbble.com/shots/12017945-iOS-App-Icon-Design',
+    },
+    {
+      id: 3,
+      title: 'F1 Game Design Concept',
+      description: 'Formula One Grand Prix Monaco mobile app concept',
+      category: 'UI Design',
+      image: brandingF1Design,
+      year: '2020',
+      externalUrl: 'https://dribbble.com/shots/14884595-F1-Formula-One-Game-Design-Concept-Grand-Prix-Monaco',
+    },
+    {
+      id: 4,
+      title: 'Hamburger Menu Icons',
+      description: 'Exploring delicious alternatives to the hamburger icon',
+      category: 'Icon Design',
+      image: brandingHamburgerIcons,
+      year: '2020',
+      externalUrl: 'https://dribbble.com/shots/14880132-There-are-other-delicious-foods-rather-than-the-Hamburger-icon',
     },
   ],
   'writing': [
