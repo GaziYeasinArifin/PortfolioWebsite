@@ -1209,162 +1209,21 @@ const SpotlightCaseStudy = () => {
         </div>
       </section>
 
-      {/* Role & Details Section */}
-      <section className="bg-background pb-24 md:pb-32">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <AnimatedSection>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-              {/* Section Label */}
-              <div className="lg:col-span-3">
-                <p className="text-muted-foreground text-sm font-medium tracking-widest uppercase sticky top-32">
-                  Details
-                </p>
-              </div>
-              
-              {/* Content */}
-              <div className="lg:col-span-9">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                  {/* Role */}
-                  <div>
-                    <h3 className="text-foreground font-semibold text-sm uppercase tracking-widest mb-4">Role</h3>
-                    <p className="text-muted-foreground text-base leading-relaxed">
-                      Product Design Lead
-                    </p>
-                    <p className="text-muted-foreground text-sm mt-2">
-                      Owned the entire design process & product strategy
-                    </p>
-                  </div>
-                  
-                  {/* Timeline */}
-                  <div>
-                    <h3 className="text-foreground font-semibold text-sm uppercase tracking-widest mb-4">Timeline</h3>
-                    <p className="text-muted-foreground text-base leading-relaxed">
-                      2016 – 2023
-                    </p>
-                    <p className="text-muted-foreground text-sm mt-2">
-                      7 years of continuous iteration
-                    </p>
-                  </div>
-                  
-                  {/* Tools */}
-                  <div>
-                    <h3 className="text-foreground font-semibold text-sm uppercase tracking-widest mb-4">Tools</h3>
-                    <p className="text-muted-foreground text-base leading-relaxed">
-                      Figma, FigJam, Adobe Suite
-                    </p>
-                    <p className="text-muted-foreground text-sm mt-2">
-                      Firebase Analytics, ClickUp
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Impact Section */}
-      <section className="bg-foreground text-background py-24 md:py-32">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <AnimatedSection>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-              {/* Section Label */}
-              <div className="lg:col-span-3">
-                <p className="text-background/60 text-sm font-medium tracking-widest uppercase sticky top-32">
-                  Impact
-                </p>
-              </div>
-              
-              {/* Content */}
-              <div className="lg:col-span-9">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                  <div className="space-y-6">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-background/10 flex items-center justify-center flex-shrink-0 mt-1">
-                        <ArrowUpRight className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-lg mb-1">10M+ Downloads</p>
-                        <p className="text-background/70 text-sm leading-relaxed">
-                          Consistent top-chart rankings across all three apps
-                        </p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-background/10 flex items-center justify-center flex-shrink-0 mt-1">
-                        <ArrowUpRight className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-lg mb-1">4.7/5 Rating</p>
-                        <p className="text-background/70 text-sm leading-relaxed">
-                          Featured by Apple with millions of positive reviews
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-6">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-background/10 flex items-center justify-center flex-shrink-0 mt-1">
-                        <ArrowUpRight className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-lg mb-1">15% Efficiency Gain</p>
-                        <p className="text-background/70 text-sm leading-relaxed">
-                          Design systems improved development efficiency
-                        </p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-background/10 flex items-center justify-center flex-shrink-0 mt-1">
-                        <ArrowUpRight className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-lg mb-1">High Retention</p>
-                        <p className="text-background/70 text-sm leading-relaxed">
-                          5M+ downloads with industry-leading user retention
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* CTA Section */}
+      {/* Thank You Section */}
       <section className="bg-background py-24 md:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <AnimatedSection>
             <div className="text-center max-w-2xl mx-auto">
-              <p className="text-muted-foreground text-sm font-medium tracking-widest uppercase mb-6">
-                Full Case Study
-              </p>
-              <h2 className="font-display text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-8">
-                Download the complete PDF for detailed insights
+              <h2 className="font-display text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-8">
+                Thank you
               </h2>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a 
-                  href="/Gazi_Arifin_Resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-foreground text-background rounded-full font-medium hover:opacity-90 transition-all hover:scale-[1.02]"
-                >
-                  <Download className="w-4 h-4" />
-                  Download PDF
-                </a>
-                <Link 
-                  to="/#case-studies" 
-                  className="inline-flex items-center gap-2 px-8 py-4 text-foreground font-medium hover:underline underline-offset-4 transition-all"
-                >
-                  View all projects
-                  <ArrowUpRight className="w-4 h-4" />
-                </Link>
-              </div>
+              <Link 
+                to="/#case-studies" 
+                className="inline-flex items-center gap-3 px-8 py-4 bg-foreground text-background rounded-full font-medium hover:opacity-90 transition-all hover:scale-[1.02]"
+              >
+                Explore all projects
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
             </div>
           </AnimatedSection>
         </div>
