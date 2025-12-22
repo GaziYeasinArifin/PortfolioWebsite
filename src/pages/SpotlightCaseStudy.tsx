@@ -1005,13 +1005,13 @@ const SpotlightCaseStudy = () => {
               {/* Team Workshop Photo */}
               <div className="space-y-3">
                 <div 
-                  className="rounded-2xl overflow-hidden"
+                  className="aspect-[4/3] rounded-2xl overflow-hidden"
                   style={{ boxShadow: 'var(--image-shadow)' }}
                 >
                   <img 
                     src={spotlightTeamWorkshop} 
                     alt="Team Workshop - Designers & engineers collaborating on component reviews"
-                    className="w-full h-auto"
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <p className="text-sm text-muted-foreground text-center">Team Workshop</p>
@@ -1020,13 +1020,13 @@ const SpotlightCaseStudy = () => {
               {/* Handoff Flow Diagram */}
               <div className="space-y-3">
                 <div 
-                  className="rounded-2xl overflow-hidden"
+                  className="aspect-[4/3] rounded-2xl overflow-hidden"
                   style={{ boxShadow: 'var(--image-shadow)' }}
                 >
                   <img 
                     src={spotlightHandoffFlow} 
                     alt="Handoff Flow - Clear ownership at every stage"
-                    className="w-full h-auto"
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <p className="text-sm text-muted-foreground text-center">Handoff Flow</p>
