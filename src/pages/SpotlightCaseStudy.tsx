@@ -1150,32 +1150,14 @@ const SpotlightCaseStudy = () => {
           <AnimatedSection delay={150}>
             <div className="mt-20">
               <div 
-                className="bg-foreground text-background rounded-2xl overflow-hidden"
+                className="rounded-2xl overflow-hidden"
                 style={{ boxShadow: 'var(--image-shadow)' }}
               >
-                <div className="aspect-[21/9] flex flex-col items-center justify-center p-8 relative">
-                  <p className="text-background/60 text-sm font-medium tracking-wide uppercase mb-4">Reflection Visual</p>
-                  
-                  {/* Abstract system metaphor */}
-                  <div className="relative w-full max-w-md h-32 flex items-center justify-center">
-                    {/* Nodes */}
-                    <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-background/30" />
-                    <div className="absolute left-1/2 top-1/4 -translate-x-1/2 w-6 h-6 rounded-full bg-background/50" />
-                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-background/80" />
-                    <div className="absolute left-1/2 bottom-1/4 -translate-x-1/2 w-5 h-5 rounded-full bg-background/40" />
-                    <div className="absolute right-1/4 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-background/30" />
-                    
-                    {/* Connection lines */}
-                    <div className="absolute left-1/4 top-1/2 w-1/4 h-px bg-gradient-to-r from-background/30 to-background/60" />
-                    <div className="absolute right-1/4 top-1/2 w-1/4 h-px bg-gradient-to-l from-background/30 to-background/60" />
-                    <div className="absolute left-1/2 top-1/4 -translate-x-1/2 w-px h-1/4 bg-gradient-to-b from-background/40 to-background/70" />
-                    <div className="absolute left-1/2 bottom-1/4 -translate-x-1/2 w-px h-1/4 bg-gradient-to-t from-background/40 to-background/70" />
-                  </div>
-                  
-                  <p className="text-background/50 text-xs text-center mt-4">
-                    Systems thinking: nodes, connections, and emergent design
-                  </p>
-                </div>
+                <img 
+                  src={spotlightHero} 
+                  alt="Systems thinking: nodes, connections, and emergent design"
+                  className="w-full h-auto"
+                />
               </div>
             </div>
           </AnimatedSection>
