@@ -93,9 +93,6 @@ const FigmaLibrarySlideshow = () => {
     }, 3000);
     return () => clearInterval(interval);
   }, [slides.length]);
-  
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
     <div className="relative rounded-2xl overflow-hidden" style={{ boxShadow: 'var(--image-shadow)' }}>
@@ -111,20 +108,6 @@ const FigmaLibrarySlideshow = () => {
             } ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
           />
         ))}
-        
-        {/* Navigation Arrows */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-background/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-background transition-colors z-10"
-        >
-          <ChevronLeft className="w-5 h-5 text-foreground" />
-        </button>
-        <button
-          onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-background/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-background transition-colors z-10"
-        >
-          <ChevronRight className="w-5 h-5 text-foreground" />
-        </button>
         
         {/* Slide Indicators */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
