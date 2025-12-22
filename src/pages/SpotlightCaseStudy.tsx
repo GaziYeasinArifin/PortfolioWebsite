@@ -808,8 +808,12 @@ const SpotlightCaseStudy = () => {
                 
                 {/* Tagline */}
                 <div className="mt-16 text-center">
-                  <p className="font-display text-xl md:text-2xl lg:text-3xl font-semibold leading-tight text-foreground">
-                    Different products. Same system. Zero relearning.
+                  <p className="font-display text-xl md:text-2xl lg:text-3xl font-semibold leading-tight">
+                    <span className="text-foreground">Different products.</span>
+                    <span className="mx-3 text-muted-foreground/30">·</span>
+                    <span className="text-muted-foreground">Same system.</span>
+                    <span className="mx-3 text-muted-foreground/30">·</span>
+                    <span className="text-foreground">Zero relearning.</span>
                   </p>
                 </div>
               </div>
@@ -997,43 +1001,35 @@ const SpotlightCaseStudy = () => {
           
           {/* Visual Assets */}
           <AnimatedSection delay={150}>
-            <div className="mt-20 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-              {/* Empty left column for alignment */}
-              <div className="lg:col-span-3" />
-              
-              {/* Content aligned with Collaboration section */}
-              <div className="lg:col-span-9">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {/* Team Workshop Photo */}
-                  <div className="space-y-3">
-                    <div 
-                      className="aspect-[4/3] rounded-2xl overflow-hidden"
-                      style={{ boxShadow: 'var(--image-shadow)' }}
-                    >
-                      <img 
-                        src={spotlightTeamWorkshop} 
-                        alt="Team Workshop - Designers & engineers collaborating on component reviews"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <p className="text-sm text-muted-foreground text-center">Team Workshop</p>
-                  </div>
-                  
-                  {/* Handoff Flow Diagram */}
-                  <div className="space-y-3">
-                    <div 
-                      className="aspect-[4/3] rounded-2xl overflow-hidden"
-                      style={{ boxShadow: 'var(--image-shadow)' }}
-                    >
-                      <img 
-                        src={spotlightHandoffFlow} 
-                        alt="Handoff Flow - Clear ownership at every stage"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <p className="text-sm text-muted-foreground text-center">Handoff Flow</p>
-                  </div>
+            <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Team Workshop Photo */}
+              <div className="space-y-3">
+                <div 
+                  className="aspect-[4/3] rounded-2xl overflow-hidden"
+                  style={{ boxShadow: 'var(--image-shadow)' }}
+                >
+                  <img 
+                    src={spotlightTeamWorkshop} 
+                    alt="Team Workshop - Designers & engineers collaborating on component reviews"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
+                <p className="text-sm text-muted-foreground text-center">Team Workshop</p>
+              </div>
+              
+              {/* Handoff Flow Diagram */}
+              <div className="space-y-3">
+                <div 
+                  className="aspect-[4/3] rounded-2xl overflow-hidden"
+                  style={{ boxShadow: 'var(--image-shadow)' }}
+                >
+                  <img 
+                    src={spotlightHandoffFlow} 
+                    alt="Handoff Flow - Clear ownership at every stage"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="text-sm text-muted-foreground text-center">Handoff Flow</p>
               </div>
             </div>
           </AnimatedSection>
