@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Users, Smartphone } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -104,6 +104,18 @@ const PlaceholderImage = ({ label, aspectRatio = '4/3', className = '' }: { labe
 );
 
 const ScreenlifeCaseStudy = () => {
+  const navigate = useNavigate();
+
+  const handleNavToProjects = () => {
+    navigate('/');
+    setTimeout(() => {
+      const element = document.getElementById('case-studies');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
   useEffect(() => {
     document.title = 'Screenlife Mobile App | Gazi Arifin';
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -117,13 +129,13 @@ const ScreenlifeCaseStudy = () => {
         <div className="container">
           {/* Back link */}
           <AnimatedSection>
-            <Link 
-              to="/#case-studies" 
+            <button
+              onClick={handleNavToProjects}
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 mb-12 group"
             >
               <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
               back to work
-            </Link>
+            </button>
           </AnimatedSection>
 
           {/* Hero Section */}
@@ -917,13 +929,13 @@ const ScreenlifeCaseStudy = () => {
           <AnimatedSection>
             <div className="text-center py-16 md:py-24">
               <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase mb-6">thank you for reading</p>
-              <Link 
-                to="/#case-studies" 
+              <button 
+                onClick={handleNavToProjects}
                 className="inline-flex items-center gap-2 text-foreground hover:text-muted-foreground transition-colors duration-300 group"
               >
                 <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
                 <span className="font-display text-lg">back to all projects</span>
-              </Link>
+              </button>
             </div>
           </AnimatedSection>
         </div>

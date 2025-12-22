@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Download, ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -136,6 +136,18 @@ const FigmaLibrarySlideshow = () => {
 };
 
 const SpotlightCaseStudy = () => {
+  const navigate = useNavigate();
+
+  const handleNavToProjects = () => {
+    navigate('/');
+    setTimeout(() => {
+      const element = document.getElementById('case-studies');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
   useEffect(() => {
     document.title = 'Designing One Scalable System | Gazi Arifin';
     window.scrollTo(0, 0);
@@ -147,13 +159,13 @@ const SpotlightCaseStudy = () => {
       
       {/* Back Navigation */}
       <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-24 md:pt-28">
-        <Link 
-          to="/#case-studies" 
+        <button 
+          onClick={handleNavToProjects}
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
         >
           <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
           Back to projects
-        </Link>
+        </button>
       </div>
 
       {/* Hero Section */}
@@ -1216,13 +1228,13 @@ const SpotlightCaseStudy = () => {
                 <p className="text-lg text-muted-foreground font-light tracking-wide">
                   Thank you
                 </p>
-                <Link 
-                  to="/#case-studies" 
+                <button 
+                  onClick={handleNavToProjects}
                   className="group inline-flex items-center gap-2 text-foreground hover:text-muted-foreground transition-colors"
                 >
                   <span className="text-sm font-medium tracking-wide">Explore all projects</span>
                   <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </Link>
+                </button>
               </div>
             </div>
           </AnimatedSection>
