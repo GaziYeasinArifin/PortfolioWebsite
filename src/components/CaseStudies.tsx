@@ -15,6 +15,8 @@ import articleStorytelling from '@/assets/article-storytelling.png';
 import articleUserInterviews from '@/assets/article-user-interviews.png';
 import articleNeuralNetwork from '@/assets/article-neural-network.png';
 import articleProblemSolving from '@/assets/article-problem-solving.png';
+import articleAiUx from '@/assets/article-ai-ux.png';
+import articleTeslaPyramids from '@/assets/article-tesla-pyramids.png';
 import { ArrowUpRight } from 'lucide-react';
 
 interface CaseStudy {
@@ -121,7 +123,7 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       description: 'Exploring the power of narrative in user experience',
       category: 'Article',
       image: articleStorytelling,
-      year: '2024',
+      year: '2023',
       externalUrl: 'https://medium.com/@yeasinarifin/the-story-of-storytelling-in-ux-design-b2570fd29c14',
     },
     {
@@ -130,7 +132,7 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       description: 'The secret weapon of UX practitioners',
       category: 'Article',
       image: articleUserInterviews,
-      year: '2024',
+      year: '2022',
       externalUrl: 'https://medium.com/@yeasinarifin/user-interviews-the-secret-weapon-of-ux-practitioners-a792146e70f6',
     },
     {
@@ -148,8 +150,26 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       description: 'A deep dive into UX problem-solving methodologies',
       category: 'Article',
       image: articleProblemSolving,
-      year: '2024',
+      year: '2023',
       externalUrl: 'https://medium.com/@yeasinarifin/the-science-and-art-of-ux-problem-solving-180450a86f19',
+    },
+    {
+      id: 5,
+      title: 'The Power of AI in UX Design',
+      description: 'Generating innovative ideas with artificial intelligence',
+      category: 'Article',
+      image: articleAiUx,
+      year: '2024',
+      externalUrl: 'https://medium.com/@yeasinarifin/unleashing-the-power-of-ai-in-ux-design-generating-innovative-ideas-71002f3e2ef6',
+    },
+    {
+      id: 6,
+      title: "Nikola Tesla's Research on Pyramids",
+      description: 'Separating fact from fiction',
+      category: 'Article',
+      image: articleTeslaPyramids,
+      year: '2021',
+      externalUrl: 'https://medium.com/@yeasinarifin/nikola-teslas-research-on-pyramids-separating-fact-from-fiction-ec3e546bb33',
     },
   ],
   'academic': [
