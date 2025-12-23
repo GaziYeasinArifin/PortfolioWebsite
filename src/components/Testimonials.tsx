@@ -4,30 +4,44 @@ const testimonials = [
   {
     id: 1,
     quote:
-      "Working with this designer transformed our product. The attention to detail and user-centric approach resulted in a 40% increase in engagement.",
-    author: 'Sarah Chen',
-    role: 'CEO, TechStart',
+      "Yeasin Arifin consistently brings strong systems thinking to complex UX problems. He excels at solving challenging interaction scenarios and has deep knowledge of iOS and Android UI guidelines. He stays current with emerging technologies and has successfully led UI/UX teams with confidence and clarity.",
+    author: 'Mahfuzur Rahman',
+    role: 'CTO, KGS',
   },
   {
     id: 2,
     quote:
-      "An exceptional collaborator who truly understands how to balance business goals with user needs. Our conversion rate doubled.",
-    author: 'Marcus Johnson',
-    role: 'Head of Product, FinanceApp',
+      "Yeasin Arifin is a highly skilled UI/UX professional with strong leadership and integrity. He approaches problems analytically, resolves conflicts transparently, and delivers results through collaboration. His attention to detail and commitment to high standards make him an asset to any product team.",
+    author: 'Md. Rofiqul Islam',
+    role: 'Creative Lead (UI/UX)',
   },
   {
     id: 3,
     quote:
-      "The design system delivered was not just beautiful but incredibly scalable. It's been the foundation of our product for three years.",
-    author: 'Elena Rodriguez',
-    role: 'CTO, DataViz Inc',
+      "Gazi Arifin produces consistently high-quality UI/UX work grounded in best practices and emerging trends. He is a supportive team member with a strong eye for detail and a deep understanding of user-centered design. He is one of the strongest UX designers I have worked with.",
+    author: 'Rafat Ahmed',
+    role: 'Senior Software Engineer',
   },
   {
     id: 4,
     quote:
-      "A rare talent who combines strategic thinking with flawless execution. Every interaction was thoughtful and purposeful.",
-    author: 'David Park',
-    role: 'Founder, StartupXYZ',
+      "Gazi brings a research-driven approach to designing AI-powered user experiences. He treats AI agents as end-to-end systems, ensuring usability, scalability, and long-term product value. His leadership fosters critical thinking and high design standards across teams.",
+    author: 'Tanvir Hossain',
+    role: 'Head of Product',
+  },
+  {
+    id: 5,
+    quote:
+      "Gazi Arifin excels at designing intuitive AI-driven experiences grounded in research and user insights. He understands both the capabilities and limitations of AI, enabling responsible and effective design decisions. As a leader, he is thoughtful, reliable, and focused on impact.",
+    author: 'Nusrat Jahan',
+    role: 'Product Manager',
+  },
+  {
+    id: 6,
+    quote:
+      "Arifin leads the design of AI agent experiences with a strong emphasis on research, validation, and iteration. He aligns advanced technology with real user needs and mentors teams to deliver practical, high-quality solutions. He is well-suited for complex, large-scale product environments.",
+    author: 'Shahriar Kabir',
+    role: 'Engineering Manager',
   },
 ];
 
