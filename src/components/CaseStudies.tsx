@@ -17,6 +17,7 @@ import articleNeuralNetwork from '@/assets/article-neural-network.png';
 import articleProblemSolving from '@/assets/article-problem-solving.png';
 import articleAiUx from '@/assets/article-ai-ux.png';
 import articleTeslaPyramids from '@/assets/article-tesla-pyramids.png';
+import academicThesis from '@/assets/academic-thesis.png';
 import { ArrowUpRight } from 'lucide-react';
 
 interface CaseStudy {
@@ -181,6 +182,15 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
       image: carepalWriting,
       year: '2024',
       externalUrl: 'https://www.canva.com/design/DAGkpwN0h1k/xyIfEievf8rfQnLJM6ccvw/view?utm_content=DAGkpwN0h1k&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h30849d3be1',
+    },
+    {
+      id: 2,
+      title: 'CarePal Thesis Document',
+      description: 'Master\'s thesis research paper from CSU East Bay',
+      category: 'Thesis',
+      image: academicThesis,
+      year: '2024',
+      externalUrl: 'https://drive.google.com/file/d/1Be1mJV8ZjIJNeOyu6F4-KR-MvskellIJ/view?usp=sharing',
     },
   ],
 };
