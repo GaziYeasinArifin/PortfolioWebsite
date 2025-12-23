@@ -229,7 +229,7 @@ const CaseStudies = () => {
           </h2>
         </div>
 
-        <div className="grid gap-8 grid-cols-1 md:grid-cols-2">
+        <div className={`grid gap-8 grid-cols-1 ${activeTab === 'writing' ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
         {studies.map((study, index) => {
             const isExternal = !!study.externalUrl;
             const isInternal = !!study.slug;
