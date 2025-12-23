@@ -1,6 +1,15 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Sparkles, CheckCircle } from 'lucide-react';
 
+// Step images
+import processStep1 from '@/assets/process-step-1.png';
+import processStep2 from '@/assets/process-step-2.png';
+import processStep3 from '@/assets/process-step-3.png';
+import processStep4 from '@/assets/process-step-4.png';
+import processStep5 from '@/assets/process-step-5.png';
+
+const stepImages = [processStep1, processStep2, processStep3, processStep4, processStep5];
+
 const tealColors = [
   'hsl(175, 70%, 45%)', // Teal dark
   'hsl(175, 65%, 52%)', // Teal medium-dark
@@ -306,8 +315,23 @@ const Process = () => {
         </div>
 
         {/* Step Content */}
-        <div className="container px-4 sm:px-6 flex-1 flex items-center">
+        <div className="container px-4 sm:px-6 flex-1 flex flex-col justify-center">
           <div className="max-w-5xl mx-auto w-full">
+            {/* Crossfade Step Images */}
+            <div className="relative w-full h-12 sm:h-14 md:h-16 lg:h-20 mb-4 sm:mb-5 md:mb-6 flex items-center justify-center">
+              {stepImages.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Step ${index + 1} tools`}
+                  className="absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ease-in-out"
+                  style={{
+                    opacity: index === activeStep ? 1 : 0,
+                  }}
+                />
+              ))}
+            </div>
+            
             <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-4 sm:p-6 md:p-8 lg:p-10 border border-background/10">
               <StepContent step={processSteps[activeStep]} color={tealColors[activeStep]} />
             </div>
