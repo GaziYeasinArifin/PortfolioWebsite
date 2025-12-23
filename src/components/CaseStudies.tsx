@@ -11,6 +11,10 @@ import phantomFootprintThumbnail from '@/assets/phantom-footprint-thumbnail.png'
 import screenlifeThumbnail from '@/assets/screenlife-thumbnail.png';
 import amtvThumbnail from '@/assets/amtv-thumbnail.png';
 import spotlightThumbnail from '@/assets/spotlight-thumbnail.png';
+import articleStorytelling from '@/assets/article-storytelling.png';
+import articleUserInterviews from '@/assets/article-user-interviews.png';
+import articleNeuralNetwork from '@/assets/article-neural-network.png';
+import articleProblemSolving from '@/assets/article-problem-solving.png';
 import { ArrowUpRight } from 'lucide-react';
 
 interface CaseStudy {
@@ -113,12 +117,39 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
   'writing': [
     {
       id: 1,
-      title: 'UX Research Methods',
-      description: 'Exploring modern user research techniques',
+      title: 'The Story of Storytelling in UX Design',
+      description: 'Exploring the power of narrative in user experience',
       category: 'Article',
-      image: caseStudy3,
+      image: articleStorytelling,
       year: '2024',
-      slug: 'coming-soon',
+      externalUrl: 'https://medium.com/@yeasinarifin/the-story-of-storytelling-in-ux-design-b2570fd29c14',
+    },
+    {
+      id: 2,
+      title: 'User Interviews: The Secret Weapon',
+      description: 'The secret weapon of UX practitioners',
+      category: 'Article',
+      image: articleUserInterviews,
+      year: '2024',
+      externalUrl: 'https://medium.com/@yeasinarifin/user-interviews-the-secret-weapon-of-ux-practitioners-a792146e70f6',
+    },
+    {
+      id: 3,
+      title: 'Neural Network: The Brainy World of AI',
+      description: 'The brainy world of artificial intelligence',
+      category: 'Article',
+      image: articleNeuralNetwork,
+      year: '2024',
+      externalUrl: 'https://medium.com/@yeasinarifin/neural-network-the-brainy-world-of-artificial-intelligence-daa7970807a4',
+    },
+    {
+      id: 4,
+      title: 'The Science and Art of UX Problem-Solving',
+      description: 'A deep dive into UX problem-solving methodologies',
+      category: 'Article',
+      image: articleProblemSolving,
+      year: '2024',
+      externalUrl: 'https://medium.com/@yeasinarifin/the-science-and-art-of-ux-problem-solving-180450a86f19',
     },
   ],
   'academic': [
