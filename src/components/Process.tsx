@@ -228,9 +228,9 @@ const Process = () => {
       className="relative bg-foreground text-background"
       style={{ height: `${100 + (processSteps.length * 120)}vh` }}
     >
-      <div className="sticky top-14 sm:top-16 md:top-20 h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] flex flex-col justify-between py-6 sm:py-10 md:py-14 lg:py-16 overflow-hidden">
+      <div className="sticky top-14 sm:top-16 md:top-20 h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] flex flex-col py-4 sm:py-6 md:py-8 lg:py-10 overflow-hidden">
         {/* Title */}
-        <div className="container px-4 sm:px-6">
+        <div className="container px-4 sm:px-6 flex-shrink-0">
           <h2 
             className="font-display font-medium text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[2.25rem]"
             style={{ color: 'hsl(var(--background) / 0.7)' }}
@@ -240,7 +240,7 @@ const Process = () => {
         </div>
 
         {/* Steps Timeline Area */}
-        <div className="relative h-[120px] sm:h-[150px] md:h-[180px] lg:h-[200px] flex items-start mt-4 sm:mt-6 md:mt-8">
+        <div className="relative h-[100px] sm:h-[120px] md:h-[140px] lg:h-[160px] flex items-start mt-3 sm:mt-4 md:mt-6 flex-shrink-0">
           {/* Left Edge Overlay */}
           <div 
             className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 z-20 pointer-events-none"
@@ -315,10 +315,10 @@ const Process = () => {
         </div>
 
         {/* Step Content */}
-        <div className="container px-4 sm:px-6 flex-1 flex flex-col justify-center">
+        <div className="container px-4 sm:px-6 flex-1 flex flex-col justify-center min-h-0 mt-3 sm:mt-4 md:mt-6">
           <div className="max-w-5xl mx-auto w-full">
             {/* Crossfade Step Images */}
-            <div className="relative w-full h-12 sm:h-14 md:h-16 lg:h-20 mb-4 sm:mb-5 md:mb-6 flex items-center justify-center">
+            <div className="relative w-full h-10 sm:h-12 md:h-14 lg:h-16 mb-3 sm:mb-4 md:mb-5 flex items-center justify-center">
               {stepImages.map((image, index) => (
                 <img
                   key={index}
@@ -332,14 +332,14 @@ const Process = () => {
               ))}
             </div>
             
-            <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-4 sm:p-6 md:p-8 lg:p-10 border border-background/10">
+            <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-3 sm:p-5 md:p-6 lg:p-8 border border-background/10">
               <StepContent step={processSteps[activeStep]} color={tealColors[activeStep]} />
             </div>
           </div>
         </div>
 
         {/* Step indicators */}
-        <div className="container px-4 sm:px-6 pt-4 sm:pt-6">
+        <div className="container px-4 sm:px-6 pt-3 sm:pt-4 flex-shrink-0">
           <div className="flex justify-center gap-1.5 sm:gap-2">
             {processSteps.map((_, index) => (
               <button
