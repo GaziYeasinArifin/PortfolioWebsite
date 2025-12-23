@@ -12,50 +12,50 @@ const tealColors = [
 const processSteps = [
   {
     number: 1,
-    shortTitle: 'Research & Analysis',
-    title: 'User Research & Data Analysis with AI',
-    goal: 'Gain deep insights into user needs and market dynamics.',
-    aiAction: 'I use AI to rapidly analyze user data, uncover critical patterns, summarize key findings, and perform comprehensive competitive analysis.',
-    outcome: 'This provides quick, actionable insights, ensuring your project starts with a strong, data-driven foundation with lean UX.',
+    shortTitle: 'Research Synthesis',
+    title: 'Research Synthesis & Opportunity Framing',
+    goal: 'Understand user needs, behaviors, and market constraints.',
+    aiAction: 'I lead user research and discovery, using AI tools such as ChatGPT, Claude, and Dovetail AI to accelerate synthesis by summarizing qualitative data, identifying behavioral patterns, and supporting competitive analysis. Key insights and priorities are validated through design judgment and stakeholder alignment.',
+    outcome: 'Clear, evidence-based user opportunities and constraints aligned with product and business goals.',
   },
   {
     number: 2,
-    shortTitle: 'Hypothesis Formulation',
-    title: 'Problem Definition, Hypothesis with AI',
-    goal: 'Clearly define user-centric problems and create testable hypotheses.',
-    aiAction: 'I use AI to synthesize research into precise, data-backed problem statements and to generate innovative hypotheses based on user needs.',
-    outcome: 'This ensures a sharp focus on solving the most impactful user problems with creative and well-founded solution strategies.',
+    shortTitle: 'Problem Definition',
+    title: 'Problem Definition & Hypothesis Design',
+    goal: 'Define the right user problems and success metrics.',
+    aiAction: 'I translate research insights into clear problem statements, JTBD frameworks, and measurable hypotheses. AI supports exploration of alternative framings and assumption checks, while prioritization and scope remain human-driven.',
+    outcome: 'Focused, high-impact problem definitions that guide effective solution design.',
   },
   {
     number: 3,
-    shortTitle: 'Creative Design',
-    title: 'AI-Assisted Creative Design',
-    goal: 'Generate a wide range of innovative design solutions and rapidly visualize concepts.',
-    aiAction: 'I use AI for accelerated ideation, exploring creative concepts, and quickly generating wireframes and visuals. It also helps me maintain a consistent, scalable design system.',
-    outcome: 'This boosts creative output, significantly speeds up design cycles, and ensures visual consistency across the entire user interface.',
+    shortTitle: 'Concept Exploration',
+    title: 'Concept Exploration & Design Execution',
+    goal: 'Explore solution spaces efficiently while ensuring scalability and quality.',
+    aiAction: 'I use Figma AI, ChatGPT, and generative tools to accelerate ideation, visualize early concepts, and maintain design system consistency. When relevant, I design AI-assisted or agent-based interactions with clearly defined roles, boundaries, and fallback behaviors.',
+    outcome: 'Well-rationalized design directions that balance innovation, usability, and technical feasibility.',
   },
   {
     number: 4,
-    shortTitle: 'User Testing',
-    title: 'AI-Enhanced User Testing & Iteration',
-    goal: 'Efficiently validate designs and iterate effectively based on user feedback.',
-    aiAction: 'I use AI to streamline the analysis of user testing sessions—transcribing feedback, identifying key themes and sentiment from qualitative data, and rapidly pinpointing usability issues.',
-    outcome: 'This leads to quicker, data-informed design refinements, ensuring the final solution is closely aligned with user expectations and needs.',
+    shortTitle: 'Validation & Testing',
+    title: 'Validation, Testing & Iteration',
+    goal: 'Reduce product risk through continuous validation.',
+    aiAction: 'I conduct usability testing and feedback sessions using tools like Maze, UserTesting, and Dovetail AI to synthesize insights, detect usability issues, and understand user sentiment. For AI-assisted experiences, I validate clarity, trust, and failure states alongside core UI flows.',
+    outcome: 'Refined, user-validated designs grounded in real feedback and measurable improvements.',
   },
   {
     number: 5,
-    shortTitle: 'Evaluation & Improvement',
-    title: 'AI-Driven Evaluation & Improvement',
-    goal: 'Proactively monitor product performance and continuously improve the user experience based on real-world data.',
-    aiAction: 'Post-launch, I use AI to analyze real-time performance metrics and user feedback from all channels. I optimize opportunities and informs a data-driven improvement cycle.',
-    outcome: 'My products evolve intelligently through proactive optimization, ensuring they consistently meet and exceed user needs over time.',
+    shortTitle: 'Measurement & Learning',
+    title: 'Measurement, Learning & Continuous Improvement',
+    goal: 'Ensure the experience improves over time based on real usage.',
+    aiAction: 'Post-launch, I analyze behavioral metrics and feedback using Amplitude, Mixpanel, and AI-assisted analytics to identify friction points and optimization opportunities. Learnings feed directly into the next iteration cycle.',
+    outcome: 'Products that evolve thoughtfully over time, driven by data, usability insights, and clear success metrics.',
   },
 ];
 
 const TypewriterTitle = () => {
   const [displayText, setDisplayText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
-  const fullText = "My AI-Powered Process";
+  const fullText = "My UX Process (AI-Augmented, Human-Led)";
 
   useEffect(() => {
     setDisplayText('');
@@ -117,7 +117,7 @@ const StepContent = ({ step, color }: { step: typeof processSteps[0]; color: str
             style={{ color }}
           />
           <div>
-            <p className="text-xs md:text-sm font-medium text-background mb-1">AI In Action:</p>
+            <p className="text-xs md:text-sm font-medium text-background mb-1">How I Work:</p>
             <p className="text-xs md:text-sm text-background/70 leading-relaxed">
               {step.aiAction}
             </p>
