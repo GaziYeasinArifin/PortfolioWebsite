@@ -332,7 +332,7 @@ const Process = () => {
               ))}
             </div>
             
-            <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-3 sm:p-5 md:p-6 lg:p-8 border border-background/10">
+            <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-3 sm:p-5 md:p-6 lg:p-8 border border-background/10 h-[280px] sm:h-[260px] md:h-[240px] lg:h-[220px] overflow-y-auto">
               <StepContent step={processSteps[activeStep]} color={tealColors[activeStep]} />
             </div>
           </div>
