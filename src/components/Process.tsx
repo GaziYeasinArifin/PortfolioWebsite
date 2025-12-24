@@ -228,7 +228,7 @@ const Process = () => {
       className="relative bg-foreground text-background"
       style={{ height: `${100 + (processSteps.length * 120)}vh` }}
     >
-      <div className="sticky top-14 sm:top-16 md:top-20 h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] flex flex-col justify-between py-3 sm:py-4 md:py-5 lg:py-6 pb-2 sm:pb-3 md:pb-4 overflow-hidden">
+      <div className="sticky top-14 sm:top-16 md:top-20 h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] grid grid-rows-[auto_auto_1fr_auto] gap-y-3 sm:gap-y-4 md:gap-y-5 lg:gap-y-6 py-3 sm:py-4 md:py-5 lg:py-6 overflow-hidden">
         {/* Title */}
         <div className="container px-4 sm:px-6 flex-shrink-0">
           <h2 
@@ -240,7 +240,7 @@ const Process = () => {
         </div>
 
         {/* Steps Timeline Area */}
-        <div className="relative h-[90px] sm:h-[110px] md:h-[130px] lg:h-[150px] flex items-start mt-2 sm:mt-3 md:mt-4 flex-shrink-0">
+        <div className="relative h-[90px] sm:h-[110px] md:h-[130px] lg:h-[150px] flex items-start flex-shrink-0">
           {/* Left Edge Overlay */}
           <div 
             className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 z-20 pointer-events-none"
@@ -315,7 +315,7 @@ const Process = () => {
         </div>
 
         {/* Step Content */}
-        <div className="container px-4 sm:px-6 flex-1 flex flex-col justify-center min-h-0 mt-2 sm:mt-3 md:mt-4">
+        <div className="container px-4 sm:px-6 flex-1 flex items-center min-h-0">
           <div className="max-w-5xl mx-auto w-full">
             {/* Crossfade Step Images */}
             <div className="relative w-full h-8 sm:h-10 md:h-12 lg:h-14 mb-2 sm:mb-3 md:mb-4 flex items-center justify-center">
@@ -332,14 +332,14 @@ const Process = () => {
               ))}
             </div>
             
-            <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-3 sm:p-4 md:p-5 lg:p-6 border border-background/10 min-h-[200px] sm:min-h-[180px] md:min-h-[170px] lg:min-h-[160px]">
+            <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-3 sm:p-4 md:p-5 lg:p-6 border border-background/10 h-[320px] sm:h-[300px] md:h-[260px] lg:h-[240px] overflow-hidden">
               <StepContent step={processSteps[activeStep]} color={tealColors[activeStep]} />
             </div>
           </div>
         </div>
 
         {/* Step indicators */}
-        <div className="container px-4 sm:px-6 pt-1.5 sm:pt-2 pb-0 flex-shrink-0">
+        <div className="container px-4 sm:px-6 flex-shrink-0">
           <div className="flex justify-center gap-1.5 sm:gap-2">
             {processSteps.map((_, index) => (
               <button
