@@ -82,8 +82,8 @@ const caseStudiesData: Record<TabType, CaseStudy[]> = {
   'branding': [
     {
       id: 1,
-      title: 'Tech Startup Identity',
-      description: 'Bold visual language for emerging tech brand',
+      title: 'Cal State EB Branding for ASI',
+      description: 'Bold visual language for student govt.',
       category: 'Brand Identity',
       image: brandingCaseStudy1,
       year: '2024',
