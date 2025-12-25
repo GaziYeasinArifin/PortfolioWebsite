@@ -3,7 +3,7 @@ import { ArrowDown } from 'lucide-react';
 import heroBg from '@/assets/hero-bg.png';
 
 const designerTypes = ['Interaction', 'UX', 'Product'];
-const subtitleText = 'Shaping Next-Gen iOS, SaaS, & Intelligent Apps.';
+const subtitleText = 'Designing scalable iOS, SaaS, and intelligent products end-to-end.';
 
 const stats = [
   { value: '11+', label: 'years of experience' },
@@ -127,10 +127,10 @@ const Hero = () => {
           {/* Main headline */}
           <h1 className="font-display font-medium leading-[1.05] tracking-tight">
             <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-200">
-              AI-First Product &
+              Product Design Leader
             </span>
             <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-250">
-              Design Leader
+              for AI-Powered Systems
             </span>
             <span className="block text-muted-foreground/70 text-xl sm:text-2xl md:text-3xl lg:text-[2rem] xl:text-[2.25rem] mt-2 sm:mt-3 min-h-[1.5em]">
               {renderSubtitle()}
@@ -139,7 +139,7 @@ const Hero = () => {
 
           {/* Description */}
           <p className="animate-fade-up max-w-2xl text-base sm:text-lg md:text-lg lg:text-xl leading-relaxed text-muted-foreground opacity-0 delay-300">
-            I create AI-driven UX and Vibe prototypes, backed by engineering and design experience.
+            I lead <span className="text-foreground font-medium">research</span>, <span className="text-foreground font-medium">design</span>, and <span className="text-foreground font-medium">execution</span> for complex, <span className="text-foreground font-medium">AI-driven</span> user experiences.
           </p>
 
           {/* Stats - Modern inline layout */}
