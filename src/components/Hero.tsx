@@ -3,7 +3,7 @@ import { ArrowDown } from 'lucide-react';
 import heroBg from '@/assets/hero-bg.png';
 
 const designerTypes = ['Interaction', 'UX', 'Product'];
-const subtitleText = 'Designing scalable iOS, SaaS, and intelligent products end-to-end.';
+const subtitleText = 'Designing scalable iOS, SaaS, and\nintelligent products end-to-end.';
 
 const stats = [
   { value: '11+', label: 'years of experience' },
@@ -92,9 +92,25 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, [subtitleDisplayed, subtitleStarted]);
 
-  // Render subtitle (no italic styling)
+  // Render subtitle with emphasized keywords and line break
   const renderSubtitle = () => {
-    return subtitleDisplayed;
+    const parts = subtitleDisplayed.split('\n');
+    const renderPart = (text: string) => {
+      const keywords = ['iOS', 'SaaS', 'intelligent products', 'end-to-end'];
+      let result = text;
+      keywords.forEach(keyword => {
+        result = result.replace(keyword, `<strong class="text-foreground font-medium">${keyword}</strong>`);
+      });
+      return <span dangerouslySetInnerHTML={{ __html: result }} />;
+    };
+    
+    return (
+      <>
+        {renderPart(parts[0])}
+        {parts[1] && <br />}
+        {parts[1] && renderPart(parts[1])}
+      </>
+    );
   };
 
   return (
@@ -127,7 +143,7 @@ const Hero = () => {
           {/* Main headline */}
           <h1 className="font-display font-medium leading-[1.05] tracking-tight">
             <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-200">
-              Product Design Leader
+              Product Design Leader 🧑🏽‍💻
             </span>
             <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-250">
               for AI-Powered Systems
