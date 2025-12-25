@@ -96,7 +96,7 @@ const Hero = () => {
   const renderSubtitle = () => {
     const parts = subtitleDisplayed.split('\n');
     const renderPart = (text: string) => {
-      const keywords = ['iOS', 'SaaS', 'intelligent products', 'end-to-end'];
+      const keywords = ['iOS', 'SaaS', 'intelligent'];
       let result = text;
       keywords.forEach(keyword => {
         result = result.replace(keyword, `<strong class="text-foreground font-medium">${keyword}</strong>`);
