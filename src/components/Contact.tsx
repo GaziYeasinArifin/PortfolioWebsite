@@ -10,10 +10,10 @@ const Contact = () => {
             Get in Touch
           </p>
           <h2 className="font-display text-4xl font-medium tracking-tight md:text-5xl lg:text-6xl">
-            Let's build <span className="italic text-primary-foreground/60">meaningful</span> products together.
+            Let's build <span className="italic text-accent">meaningful</span> products together.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-primary-foreground/70">
-            If you're exploring a role, collaboration, or a complex design challenge, I'd be happy to connect.
+            If you're exploring a role, collaboration, or a complex design challenge, I'd be happy to connect. I'm based in San Francisco, USA, and open to opportunities across the US.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a
