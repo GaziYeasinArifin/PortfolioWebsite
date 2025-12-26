@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 import { Link } from 'react-router-dom';
 import caseStudy2 from '@/assets/case-study-2.jpg';
 import caseStudy3 from '@/assets/case-study-3.jpg';
@@ -18,7 +18,42 @@ import articleProblemSolving from '@/assets/article-problem-solving.png';
 import articleAiUx from '@/assets/article-ai-ux.png';
 import articleTeslaPyramids from '@/assets/article-tesla-pyramids.png';
 import academicThesis from '@/assets/academic-thesis.png';
+import placeholderSvg from '@/assets/placeholder-image.svg';
 import { ArrowUpRight } from 'lucide-react';
+
+// Optimized image component with placeholder and fade-in
+const CaseStudyImage = memo(({ src, alt }: { src: string; alt: string }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const handleLoad = useCallback(() => {
+    setIsLoaded(true);
+  }, []);
+
+  return (
+    <div className="relative h-full w-full">
+      {/* Placeholder */}
+      <img
+        src={placeholderSvg}
+        alt=""
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+          isLoaded ? 'opacity-0' : 'opacity-100'
+        }`}
+      />
+      {/* Actual image with fade-in */}
+      <img
+        src={src}
+        alt={alt}
+        onLoad={handleLoad}
+        loading="lazy"
+        className={`h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:grayscale ${
+          isLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
+    </div>
+  );
+});
+
+CaseStudyImage.displayName = 'CaseStudyImage';
 
 interface CaseStudy {
   id: number;
@@ -280,11 +315,7 @@ const CaseStudies = () => {
               >
                 <article>
                   <div className="relative aspect-[4/5] overflow-hidden rounded-[4px] bg-secondary mb-6">
-                    <img
-                      src={study.image}
-                      alt={study.title}
-                      className="h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:grayscale"
-                    />
+                    <CaseStudyImage src={study.image} alt={study.title} />
                     {/* Overlay with gradient */}
                     <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/0 to-foreground/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                     {/* Floating action button - top right on hover */}
