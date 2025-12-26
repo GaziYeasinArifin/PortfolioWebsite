@@ -271,9 +271,37 @@ const AddMusicToVideoCaseStudy = () => {
                 <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
                   Leading the UX for Add Music to Video. A top-charting app developed at Kite Games Studio that scaled from a simple utility to a creative powerhouse.
                 </p>
-                <p className="font-mono text-sm text-muted-foreground tracking-wide">
+                <p className="font-mono text-sm text-muted-foreground tracking-wide mb-6">
                   2016 - 2023 • Lead UX Designer
                 </p>
+                
+                {/* App Store Badges */}
+                <div className="flex flex-wrap gap-3">
+                  <a 
+                    href="https://apps.apple.com/us/app/add-music-to-video-editor/id947792997" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="transition-opacity hover:opacity-80"
+                  >
+                    <img 
+                      src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" 
+                      alt="Download on the App Store" 
+                      className="h-10"
+                    />
+                  </a>
+                  <a 
+                    href="https://play.google.com/store/apps/details?id=kgs.com.addmusictovideos&hl=en_US" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="transition-opacity hover:opacity-80"
+                  >
+                    <img 
+                      src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" 
+                      alt="Get it on Google Play" 
+                      className="h-10"
+                    />
+                  </a>
+                </div>
               </div>
               
               {/* Right side - Square hero image */}
