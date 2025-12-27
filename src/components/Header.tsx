@@ -146,12 +146,12 @@ const Header = () => {
             >
               resume
             </a>
-            <button
-              onClick={() => handleNavClick('/#contact')}
+            <a
+              href="mailto:arifin.yeasin@gmail.com"
               className="group rounded-[4px] border border-foreground bg-foreground px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground hover:scale-[1.02] active:scale-[0.98]"
             >
               say hi <span className="inline-block group-hover:animate-[wave_0.5s_ease-in-out]">👋</span>
-            </button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -202,12 +202,12 @@ const Header = () => {
             >
               resume
             </a>
-            <button
-              onClick={() => handleNavClick('/#contact')}
+            <a
+              href="mailto:arifin.yeasin@gmail.com"
               className="group rounded-[4px] border border-foreground bg-foreground px-6 py-4 text-center text-base font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground active:scale-[0.98]"
             >
               say hi <span className="inline-block group-hover:animate-[wave_0.5s_ease-in-out]">👋</span>
-            </button>
+            </a>
           </div>
         </nav>
       </div>
