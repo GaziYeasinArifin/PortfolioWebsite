@@ -11,11 +11,11 @@ import processStep5 from '@/assets/process-step-5.png';
 const stepImages = [processStep1, processStep2, processStep3, processStep4, processStep5];
 
 const tealColors = [
-  'hsl(175, 70%, 45%)', // Teal dark
-  'hsl(175, 65%, 52%)', // Teal medium-dark
-  'hsl(175, 60%, 58%)', // Teal medium
-  'hsl(175, 55%, 65%)', // Teal light
-  'hsl(175, 50%, 72%)', // Teal lightest
+  'hsl(175, 70%, 35%)', // Teal dark
+  'hsl(175, 65%, 40%)', // Teal medium-dark
+  'hsl(175, 60%, 45%)', // Teal medium
+  'hsl(175, 55%, 50%)', // Teal light
+  'hsl(175, 50%, 55%)', // Teal lightest
 ];
 
 const processSteps = [
@@ -88,7 +88,7 @@ const TypewriterTitle = () => {
     <span className="inline-flex items-center">
       {displayText}
       <span 
-        className={`inline-block w-[3px] h-[1em] bg-background ml-1 ${isTyping ? 'animate-pulse' : 'opacity-0'}`}
+        className={`inline-block w-[3px] h-[1em] bg-foreground ml-1 ${isTyping ? 'animate-pulse' : 'opacity-0'}`}
       />
     </span>
   );
@@ -106,15 +106,15 @@ const StepContent = ({ step, color }: { step: typeof processSteps[0]; color: str
         >
           Step {step.number}
         </p>
-        <h3 className="font-display text-sm sm:text-base md:text-lg lg:text-xl font-medium text-background leading-snug">
+        <h3 className="font-display text-sm sm:text-base md:text-lg lg:text-xl font-medium text-foreground leading-snug">
           {step.title}
         </h3>
         <div 
-          className="bg-background/10 rounded-[4px] p-2.5 md:p-3 border-l-2"
+          className="bg-foreground/5 rounded-[4px] p-2.5 md:p-3 border-l-2"
           style={{ borderColor: color }}
         >
-          <p className="text-[10px] font-medium text-background/60 mb-0.5">Goal:</p>
-          <p className="text-[11px] md:text-xs text-background/90 leading-relaxed">{step.goal}</p>
+          <p className="text-[10px] font-medium text-foreground/60 mb-0.5">Goal:</p>
+          <p className="text-[11px] md:text-xs text-foreground/90 leading-relaxed">{step.goal}</p>
         </div>
       </div>
 
@@ -126,18 +126,18 @@ const StepContent = ({ step, color }: { step: typeof processSteps[0]; color: str
             style={{ color }}
           />
           <div>
-            <p className="text-[10px] md:text-xs font-medium text-background mb-0.5">How I Work:</p>
-            <p className="text-[11px] md:text-xs text-background/70 leading-relaxed">
+            <p className="text-[10px] md:text-xs font-medium text-foreground mb-0.5">How I Work:</p>
+            <p className="text-[11px] md:text-xs text-foreground/70 leading-relaxed">
               {step.aiAction}
             </p>
           </div>
         </div>
         
         <div className="flex items-start gap-2">
-          <CheckCircle className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-400 flex-shrink-0 mt-0.5" />
+          <CheckCircle className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
           <div>
-            <p className="text-[10px] md:text-xs font-medium text-background mb-0.5">Outcome:</p>
-            <p className="text-[11px] md:text-xs text-background/70 leading-relaxed">
+            <p className="text-[10px] md:text-xs font-medium text-foreground mb-0.5">Outcome:</p>
+            <p className="text-[11px] md:text-xs text-foreground/70 leading-relaxed">
               {step.outcome}
             </p>
           </div>
@@ -225,7 +225,7 @@ const Process = () => {
     <section 
       ref={sectionRef}
       id="process" 
-      className="relative bg-foreground text-background"
+      className="relative bg-background text-foreground"
       style={{ height: `${100 + (processSteps.length * 120)}vh` }}
     >
       <div className="sticky top-14 sm:top-16 md:top-20 h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] grid grid-rows-[auto_auto_1fr_auto] gap-y-3 sm:gap-y-4 md:gap-y-5 lg:gap-y-6 py-3 sm:py-4 md:py-5 lg:py-6 overflow-hidden">
@@ -233,7 +233,7 @@ const Process = () => {
         <div className="container px-4 sm:px-6 flex-shrink-0">
           <h2 
             className="font-display font-medium text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[2.25rem]"
-            style={{ color: 'hsl(var(--background) / 0.7)' }}
+            style={{ color: 'hsl(var(--foreground) / 0.7)' }}
           >
             <TypewriterTitle />
           </h2>
@@ -245,7 +245,7 @@ const Process = () => {
           <div 
             className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 z-20 pointer-events-none"
             style={{
-              background: 'linear-gradient(to right, hsl(var(--foreground)) 0%, hsl(var(--foreground)) 30%, transparent 100%)',
+              background: 'linear-gradient(to right, hsl(var(--background)) 0%, hsl(var(--background)) 30%, transparent 100%)',
             }}
           />
           
@@ -253,7 +253,7 @@ const Process = () => {
           <div 
             className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 z-20 pointer-events-none"
             style={{
-              background: 'linear-gradient(to left, hsl(var(--foreground)) 0%, hsl(var(--foreground)) 30%, transparent 100%)',
+              background: 'linear-gradient(to left, hsl(var(--background)) 0%, hsl(var(--background)) 30%, transparent 100%)',
             }}
           />
 
@@ -280,20 +280,20 @@ const Process = () => {
                       window.scrollTo({ top: targetScroll, behavior: 'smooth' });
                     }
                   }}
-                  className="flex-shrink-0 rounded-[4px] text-left border-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-background/50"
+                  className="flex-shrink-0 rounded-[4px] text-left border-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground/50"
                   style={{
                     width: `${stepWidth}px`,
                     padding: viewportWidth < 640 ? '12px 14px' : '16px 20px',
                     marginTop: `${verticalOffset}px`,
                     backgroundColor: isActive ? tealColors[index] : 'transparent',
-                    borderColor: isActive ? tealColors[index] : 'hsl(var(--background) / 0.3)',
+                    borderColor: isActive ? tealColors[index] : 'hsl(var(--foreground) / 0.2)',
                     transition: 'background-color 0.4s ease, border-color 0.4s ease',
                   }}
                 >
                   <span 
                     className="block text-[10px] sm:text-xs font-medium mb-0.5 sm:mb-1"
                     style={{ 
-                      color: isActive ? 'hsl(var(--foreground))' : 'hsl(var(--background) / 0.5)',
+                      color: isActive ? 'hsl(var(--background))' : 'hsl(var(--foreground) / 0.5)',
                       transition: 'color 0.4s ease',
                     }}
                   >
@@ -302,7 +302,7 @@ const Process = () => {
                   <span 
                     className="block text-xs sm:text-sm font-medium whitespace-nowrap"
                     style={{ 
-                      color: isActive ? 'hsl(var(--foreground))' : 'hsl(var(--background) / 0.8)',
+                      color: isActive ? 'hsl(var(--background))' : 'hsl(var(--foreground) / 0.8)',
                       transition: 'color 0.4s ease',
                     }}
                   >
@@ -332,7 +332,7 @@ const Process = () => {
               ))}
             </div>
             
-            <div className="bg-background/5 backdrop-blur-sm rounded-[4px] p-3 sm:p-4 md:p-5 lg:p-6 border border-background/10 h-[320px] sm:h-[300px] md:h-[260px] lg:h-[240px] overflow-hidden">
+            <div className="bg-foreground/5 backdrop-blur-sm rounded-[4px] p-3 sm:p-4 md:p-5 lg:p-6 border border-foreground/10 h-[320px] sm:h-[300px] md:h-[260px] lg:h-[240px] overflow-hidden">
               <StepContent step={processSteps[activeStep]} color={tealColors[activeStep]} />
             </div>
           </div>
@@ -356,8 +356,8 @@ const Process = () => {
                 style={{
                   width: index === activeStep ? (viewportWidth < 640 ? '18px' : '24px') : '6px',
                   backgroundColor: index === activeStep 
-                    ? 'hsl(var(--background) / 0.5)' 
-                    : 'hsl(var(--background) / 0.2)',
+                    ? 'hsl(var(--foreground) / 0.5)' 
+                    : 'hsl(var(--foreground) / 0.2)',
                 }}
                 aria-label={`Go to Step ${index + 1}`}
               />
