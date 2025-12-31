@@ -147,8 +147,8 @@ const Hero = () => {
 
           {/* Description */}
           <p className="animate-fade-up max-w-4xl text-base sm:text-lg md:text-lg lg:text-xl leading-relaxed text-muted-foreground opacity-0 delay-300">
-            I lead <span className="text-foreground font-medium">research</span>, <span className="text-foreground font-medium">interaction design</span>, and <span className="text-foreground font-medium">execution</span> for data-dense, technically complex products,<br />
-            partnering closely with <span className="text-foreground font-medium">engineering</span> and <span className="text-foreground font-medium">ML teams</span> from concept to scale.
+            I lead <span className="text-foreground font-medium">research</span>, <span className="text-foreground font-medium">interaction design</span>, and <span className="text-foreground font-medium">execution</span> for data-dense, technically complex<br />
+            products, partnering closely with <span className="text-foreground font-medium">engineering</span> and <span className="text-foreground font-medium">ML teams</span> from concept to scale.
           </p>
 
           {/* Stats - Modern inline layout */}
