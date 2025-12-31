@@ -61,6 +61,7 @@ const Header = () => {
   }, []);
 
   const navLinks = [
+    { label: 'about', href: '/about' },
     { label: 'works', href: '/#case-studies' },
     { label: 'process', href: '/#process' },
     { label: 'contact', href: '/#contact' },
@@ -69,24 +70,30 @@ const Header = () => {
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
     
-    if (href.startsWith('/#')) {
-      const sectionId = href.substring(2);
-      if (isHomePage) {
-        // On home page, scroll to section
+    // Handle direct page routes (like /about)
+    if (!href.startsWith('/#')) {
+      navigate(href);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    
+    // Handle hash links
+    const sectionId = href.substring(2);
+    if (isHomePage) {
+      // On home page, scroll to section
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // On other pages, navigate to home then scroll
+      navigate('/');
+      setTimeout(() => {
         const element = document.getElementById(sectionId);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
-      } else {
-        // On other pages, navigate to home then scroll
-        navigate('/');
-        setTimeout(() => {
-          const element = document.getElementById(sectionId);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 100);
-      }
+      }, 100);
     }
   };
 
