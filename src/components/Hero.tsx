@@ -2,20 +2,16 @@ import { useState, useEffect, useRef } from 'react';
 import { ArrowDown } from 'lucide-react';
 import heroBg from '@/assets/hero-bg.png';
 
-const designerTypes = ['Interaction', 'UX', 'Product'];
-const subtitleText = 'Designing scalable iOS, SaaS, and\nintelligent products end-to-end.';
+const subtitleText = 'I design and scale AI-driven iOS and SaaS products used by 850K+ monthly users, delivering $1.5M+ in annual cost savings and 35%+ adoption gains across complex systems.';
 
 const stats = [
-  { value: '11+', label: 'years of experience' },
-  { value: '29+', label: 'projects delivered' },
-  { value: '4', label: 'apps on the App Store top charts' },
-  { value: '3', label: 'awards' },
+  { value: '10+', label: 'years designing production systems' },
+  { value: '29+', label: 'shipped products across mobile & SaaS' },
+  { value: '4', label: 'App Store Top-10 apps with multi-year rankings' },
+  { value: '3', label: 'industry awards' },
 ];
 
 const Hero = () => {
-  const [currentTypeIndex, setCurrentTypeIndex] = useState(0);
-  const [displayText, setDisplayText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
   const [subtitleDisplayed, setSubtitleDisplayed] = useState('');
   const [subtitleStarted, setSubtitleStarted] = useState(false);
   const [mouseX, setMouseX] = useState(0);
@@ -49,30 +45,6 @@ const Hero = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [isDesktop]);
 
-  // Designer type typewriter effect
-  useEffect(() => {
-    const currentWord = designerTypes[currentTypeIndex];
-    
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        if (displayText.length < currentWord.length) {
-          setDisplayText(currentWord.slice(0, displayText.length + 1));
-        } else {
-          setTimeout(() => setIsDeleting(true), 2000);
-        }
-      } else {
-        if (displayText.length > 0) {
-          setDisplayText(displayText.slice(0, -1));
-        } else {
-          setIsDeleting(false);
-          setCurrentTypeIndex((prev) => (prev + 1) % designerTypes.length);
-        }
-      }
-    }, isDeleting ? 50 : 100);
-
-    return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentTypeIndex]);
-
   // Subtitle typewriter effect - starts after delay
   useEffect(() => {
     const startDelay = setTimeout(() => {
@@ -87,30 +59,19 @@ const Hero = () => {
 
     const timeout = setTimeout(() => {
       setSubtitleDisplayed(subtitleText.slice(0, subtitleDisplayed.length + 1));
-    }, 30);
+    }, 20);
 
     return () => clearTimeout(timeout);
   }, [subtitleDisplayed, subtitleStarted]);
 
-  // Render subtitle with emphasized keywords and line break
+  // Render subtitle with emphasized metrics
   const renderSubtitle = () => {
-    const parts = subtitleDisplayed.split('\n');
-    const renderPart = (text: string) => {
-      const keywords = ['iOS', 'SaaS', 'intelligent'];
-      let result = text;
-      keywords.forEach(keyword => {
-        result = result.replace(keyword, `<strong class="text-foreground font-medium">${keyword}</strong>`);
-      });
-      return <span dangerouslySetInnerHTML={{ __html: result }} />;
-    };
-    
-    return (
-      <>
-        {renderPart(parts[0])}
-        {parts[1] && <br />}
-        {parts[1] && renderPart(parts[1])}
-      </>
-    );
+    const metrics = ['850K+', '$1.5M+', '35%+'];
+    let result = subtitleDisplayed;
+    metrics.forEach(metric => {
+      result = result.replace(metric, `<strong class="text-foreground font-medium">${metric}</strong>`);
+    });
+    return <span dangerouslySetInnerHTML={{ __html: result }} />;
   };
 
   return (
@@ -135,18 +96,18 @@ const Hero = () => {
 
       <div className="container relative z-10 flex min-h-screen flex-col justify-center px-6 sm:px-8 lg:px-12 py-24 sm:py-28 md:py-32 lg:py-40">
         <div className="max-w-5xl flex flex-col gap-6 sm:gap-7 md:gap-8">
-          {/* Label with typewriter effect */}
+          {/* Label */}
           <p className="animate-fade-up text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground opacity-0 delay-100">
-            {displayText} Designer
+            Product Design Leader
           </p>
 
           {/* Main headline */}
           <h1 className="font-display font-medium leading-[1.05] tracking-tight">
             <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-200">
-              Product Design Leader 🧑🏽‍💻
+              Product Design Leader for AI-Powered Systems
             </span>
             <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-250">
-              for AI-Powered Systems
+              Driving adoption, efficiency, and measurable business impact
             </span>
             <span className="block text-muted-foreground/70 text-xl sm:text-2xl md:text-3xl lg:text-[2rem] xl:text-[2.25rem] mt-2 sm:mt-3 min-h-[1.5em]">
               {renderSubtitle()}
@@ -155,7 +116,7 @@ const Hero = () => {
 
           {/* Description */}
           <p className="animate-fade-up max-w-2xl text-base sm:text-lg md:text-lg lg:text-xl leading-relaxed text-muted-foreground opacity-0 delay-300">
-            I lead <span className="text-foreground font-medium">research</span>, <span className="text-foreground font-medium">design</span>, and <span className="text-foreground font-medium">execution</span> for complex, <span className="text-foreground font-medium">AI-driven</span> user experiences.
+            I lead <span className="text-foreground font-medium">research</span>, <span className="text-foreground font-medium">interaction design</span>, and <span className="text-foreground font-medium">execution</span> for data-dense, technically complex products—partnering closely with <span className="text-foreground font-medium">engineering</span> and <span className="text-foreground font-medium">ML teams</span> from concept to scale.
           </p>
 
           {/* Stats - Modern inline layout */}
@@ -181,14 +142,14 @@ const Hero = () => {
               href="#case-studies"
               className="group inline-flex items-center gap-3 rounded-[4px] border border-foreground bg-foreground px-5 sm:px-6 py-3 sm:py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground hover:scale-[1.02] active:scale-[0.98]"
             >
-              view my work
+              View Case Studies
               <ArrowDown className="w-4 h-4 transition-transform duration-300 -rotate-90 group-hover:rotate-0" />
             </a>
             <a
               href="#process"
               className="relative text-sm font-medium text-muted-foreground transition-all duration-300 hover:text-foreground after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:w-0 after:bg-foreground after:transition-all after:duration-300 hover:after:w-full"
             >
-              learn my process
+              See Measurable Impact
             </a>
             
             {/* Scroll indicator - desktop only */}
