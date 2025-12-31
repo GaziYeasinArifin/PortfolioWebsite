@@ -232,8 +232,7 @@ const Process = () => {
         {/* Title */}
         <div className="container px-4 sm:px-6 flex-shrink-0">
           <h2 
-            className="font-display font-medium text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[2.25rem]"
-            style={{ color: 'hsl(var(--foreground) / 0.7)' }}
+            className="font-display font-medium text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[2.25rem] text-foreground"
           >
             <TypewriterTitle />
           </h2>
