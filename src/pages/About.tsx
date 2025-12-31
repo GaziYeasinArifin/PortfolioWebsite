@@ -2,9 +2,9 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Process from '@/components/Process';
 import { Link } from 'react-router-dom';
-import designStrategyImg from '@/assets/design_strategy.png';
-import contactImg from '@/assets/contact-image.png';
-import academicThesisImg from '@/assets/academic-thesis.png';
+import aboutImg1 from '@/assets/about-1.png';
+import aboutVideo from '@/assets/about-2.mov';
+import aboutImg3 from '@/assets/about-3.webp';
 
 const About = () => {
   return (
@@ -40,8 +40,8 @@ const About = () => {
               <div className="lg:col-span-5 relative animate-fade-up opacity-0 delay-300">
                 <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-muted/50">
                   <img 
-                    src={designStrategyImg} 
-                    alt="Design strategy and thinking" 
+                    src={aboutImg1} 
+                    alt="Gazi Arifin at Big Sur" 
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
@@ -62,9 +62,12 @@ const About = () => {
               <div className="lg:col-span-4 order-2 lg:order-1">
                 <div className="sticky top-32">
                   <div className="relative aspect-square rounded-2xl overflow-hidden bg-muted/50 rotate-[-2deg] hover:rotate-0 transition-transform duration-500">
-                    <img 
-                      src={contactImg} 
-                      alt="Creative process visualization" 
+                    <video 
+                      src={aboutVideo} 
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -159,8 +162,8 @@ const About = () => {
                 <div className="relative">
                   <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-muted/50">
                     <img 
-                      src={academicThesisImg} 
-                      alt="Research and academic work" 
+                      src={aboutImg3} 
+                      alt="Design system components" 
                       className="w-full h-full object-cover"
                     />
                   </div>
