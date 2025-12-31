@@ -38,13 +38,12 @@ const About = () => {
               
               {/* Visual Element */}
               <div className="lg:col-span-5 relative animate-fade-up opacity-0 delay-300">
-                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-muted/50">
+                <div className="relative aspect-[3/5] rounded-2xl overflow-hidden bg-muted/50">
                   <img 
                     src={aboutImg1} 
                     alt="Gazi Arifin at Big Sur" 
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
                 </div>
                 {/* Decorative element */}
                 <div className="absolute -bottom-4 -left-4 w-24 h-24 border-2 border-foreground/10 rounded-xl -z-10" />
