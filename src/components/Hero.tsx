@@ -4,8 +4,6 @@ import heroBg from '@/assets/hero-bg.png';
 
 const designerTypes = ['Interaction Designer', 'UX Designer', 'Product Designer'];
 
-const taglineText = 'Driving adoption, efficiency, and measurable business impact.';
-
 const subtitleText = 'I design and scale AI-driven iOS and SaaS products used by 850K+ monthly users, delivering $1.5M+ in annual cost savings and 35%+ adoption gains across complex systems.';
 
 const stats = [
@@ -19,8 +17,6 @@ const Hero = () => {
   const [currentDesignerIndex, setCurrentDesignerIndex] = useState(0);
   const [displayedDesigner, setDisplayedDesigner] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [taglineDisplayed, setTaglineDisplayed] = useState('');
-  const [taglineStarted, setTaglineStarted] = useState(false);
   const [statsDisplayed, setStatsDisplayed] = useState<string[]>(['', '', '', '']);
   const [statsStarted, setStatsStarted] = useState(false);
   const [mouseX, setMouseX] = useState(0);
@@ -78,28 +74,13 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, [displayedDesigner, isDeleting, currentDesignerIndex]);
 
-  // Tagline typewriter effect - starts after delay
+  // Start stats animation after a delay
   useEffect(() => {
     const startDelay = setTimeout(() => {
-      setTaglineStarted(true);
-    }, 800);
+      setStatsStarted(true);
+    }, 1100);
     return () => clearTimeout(startDelay);
   }, []);
-
-  useEffect(() => {
-    if (!taglineStarted) return;
-    if (taglineDisplayed.length >= taglineText.length) {
-      // Start stats animation after tagline completes
-      setTimeout(() => setStatsStarted(true), 300);
-      return;
-    }
-
-    const timeout = setTimeout(() => {
-      setTaglineDisplayed(taglineText.slice(0, taglineDisplayed.length + 1));
-    }, 25);
-
-    return () => clearTimeout(timeout);
-  }, [taglineDisplayed, taglineStarted]);
 
   // Stats typewriter effect
   useEffect(() => {
@@ -170,18 +151,17 @@ const Hero = () => {
             <span className="animate-pulse">|</span>
           </p>
 
-          {/* Main headline - ALL CAPS, justified full width */}
+          {/* Main headline - ALL CAPS */}
           <h1 className="font-display font-medium leading-[1.05] tracking-tight w-full">
-            <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-200 uppercase text-justify" style={{ textAlignLast: 'justify' }}>
-              Product Design Leader
+            <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-200 uppercase">
+              PRODUCT DESIGN LEADER
             </span>
-            <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-250 uppercase text-justify" style={{ textAlignLast: 'justify' }}>
-              for AI-Powered Systems.
+            <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-250 uppercase">
+              FOR AI-POWERED SYSTEMS.
             </span>
-            {/* Tagline with typewriter animation */}
-            <span className="block text-muted-foreground/70 text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl mt-2 sm:mt-3 min-h-[1.5em]">
-              {taglineDisplayed}
-              {taglineDisplayed.length < taglineText.length && <span className="animate-pulse">|</span>}
+            {/* Subheading - black color, sentence case */}
+            <span className="block text-foreground text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl mt-2 sm:mt-3">
+              Driving adoption, efficiency, and measurable business impact.
             </span>
             {/* Subtitle - no typewriter */}
             <span className="block text-muted-foreground/70 text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl mt-2">
@@ -189,9 +169,9 @@ const Hero = () => {
             </span>
           </h1>
 
-          {/* Description - 30% wider */}
-          <p className="animate-fade-up max-w-3xl text-base sm:text-lg md:text-lg lg:text-xl leading-relaxed text-muted-foreground opacity-0 delay-300">
-            I lead <span className="text-foreground font-medium">research</span>, <span className="text-foreground font-medium">interaction design</span>, and <span className="text-foreground font-medium">execution</span> for data-dense, technically complex products—partnering closely with <span className="text-foreground font-medium">engineering</span> and <span className="text-foreground font-medium">ML teams</span> from concept to scale.
+          {/* Description */}
+          <p className="animate-fade-up max-w-2xl text-base sm:text-lg md:text-lg lg:text-xl leading-relaxed text-muted-foreground opacity-0 delay-300">
+            I lead research, interaction design, and execution for data-dense, technically complex products, partnering closely with engineering and ML teams from concept to scale.
           </p>
 
           {/* Stats with typewriter animation */}
