@@ -23,7 +23,7 @@ const About = () => {
                 
                 <div className="space-y-6 sm:space-y-8 text-base sm:text-lg leading-relaxed text-muted-foreground animate-fade-up opacity-0 delay-200">
                   <p>
-                    I'm a Product & Interaction Designer with over a decade of experience building digital products people actually use. My work spans iOS applications, SaaS platforms, and AI-driven systems — products that have reached hundreds of thousands of users across different industries and contexts.
+                    I'm a Product & Interaction Designer with over a decade of experience building digital products people actually use. My work spans iOS applications, SaaS platforms, and AI-driven systems, products that have reached hundreds of thousands of users across different industries and contexts.
                   </p>
                   
                   <p>
@@ -31,7 +31,7 @@ const About = () => {
                   </p>
                   
                   <p>
-                    Today, I think less about what I can produce and more about what I can enable. Tools evolve constantly — they always have, and they always will. But <span className="text-foreground">judgment</span>, <span className="text-foreground">empathy</span>, and <span className="text-foreground">clarity</span> remain the most valuable skills a designer can develop. Those don't become obsolete.
+                    Today, I think less about what I can produce and more about what I can enable. Tools evolve constantly, they always have, and they always will. But <span className="text-foreground">judgment</span>, <span className="text-foreground">empathy</span>, and <span className="text-foreground">clarity</span> remain the most valuable skills a designer can develop. Those don't become obsolete.
                   </p>
                 </div>
               </div>
@@ -95,7 +95,7 @@ const About = () => {
                       </h3>
                     </div>
                     <p className="text-base sm:text-lg leading-relaxed text-muted-foreground pl-12">
-                      I've learned to measure my work by what changed in the product, not by what was produced during the process. Wireframes, prototypes, and documentation are means to an end — they're not the end itself.
+                      I've learned to measure my work by what changed in the product, not by what was produced during the process. Wireframes, prototypes, and documentation are means to an end, they're not the end itself.
                     </p>
                   </div>
 
@@ -110,7 +110,7 @@ const About = () => {
                       </h3>
                     </div>
                     <p className="text-base sm:text-lg leading-relaxed text-muted-foreground pl-12">
-                      Senior designers don't choreograph experiences — they reduce complexity. The best work I've done has made decisions easier for teams, not harder. The goal is to make the right path obvious, not to control every step along it.
+                      Senior designers don't choreograph experiences, they reduce complexity. The best work I've done has made decisions easier for teams, not harder. The goal is to make the right path obvious, not to control every step along it.
                     </p>
                   </div>
 
@@ -125,14 +125,14 @@ const About = () => {
                       </h3>
                     </div>
                     <p className="text-base sm:text-lg leading-relaxed text-muted-foreground pl-12">
-                      I use AI tools extensively — for synthesis, exploration, and iteration. They help me move faster and consider more possibilities. But I treat them as accelerators, never as substitutes for human judgment, responsibility, or ethical decision-making.
+                      I use AI tools extensively, for synthesis, exploration, and iteration. They help me move faster and consider more possibilities. But I treat them as accelerators, never as substitutes for human judgment, responsibility, or ethical decision-making.
                     </p>
                   </div>
                 </div>
 
                 <div className="mt-12 sm:mt-16 p-6 bg-background/50 rounded-xl border-l-2 border-foreground/20">
                   <p className="text-base sm:text-lg leading-relaxed text-muted-foreground">
-                    These aren't theoretical opinions. They're lessons I've absorbed through years of real product work — through projects that succeeded, projects that failed, and everything in between.
+                    These aren't theoretical opinions. They're lessons I've absorbed through years of real product work, through projects that succeeded, projects that failed, and everything in between.
                   </p>
                 </div>
               </div>
@@ -144,7 +144,7 @@ const About = () => {
         <section className="relative">
           <div className="container px-4 sm:px-6 py-16 sm:py-20 md:py-24">
             <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground italic">
-              "Over the years, my process evolved — not into something rigid, but into something adaptable."
+              "Over the years, my process evolved, not into something rigid, but into something adaptable."
             </p>
           </div>
           <Process />
@@ -176,7 +176,7 @@ const About = () => {
               <div className="lg:col-span-7 order-1 lg:order-2">
                 <div className="space-y-6 sm:space-y-8 text-base sm:text-lg leading-relaxed text-muted-foreground">
                   <p>
-                    I'm drawn to <span className="text-foreground">complex systems</span> and <span className="text-foreground">ambiguous challenges</span> — the kind of problems where there's no obvious answer, where design decisions have real consequences, and where getting it right requires genuine understanding rather than pattern matching.
+                    I'm drawn to <span className="text-foreground">complex systems</span> and <span className="text-foreground">ambiguous challenges</span>, the kind of problems where there's no obvious answer, where design decisions have real consequences, and where getting it right requires genuine understanding rather than pattern matching.
                   </p>
                   
                   <p>
