@@ -2,23 +2,22 @@ import { useState, useEffect, useRef } from 'react';
 import { ArrowDown } from 'lucide-react';
 import heroBg from '@/assets/hero-bg.png';
 
-const designerTypes = ['Interaction Designer', 'UX Designer', 'Product Designer'];
-
-const subtitleText = 'I design and scale AI-driven iOS and SaaS products used by 850K+ monthly users, delivering $1.5M+ in annual cost savings and 35%+ adoption gains across complex systems.';
+const designerTypes = ['Interaction', 'UX', 'Product'];
+const subtitleText = 'Designing scalable iOS, SaaS, and\nintelligent products end-to-end.';
 
 const stats = [
-  { value: '10+', label: 'years designing production systems' },
-  { value: '29+', label: 'shipped products across mobile & SaaS' },
-  { value: '4', label: 'App Store Top-10 apps with multi-year rankings' },
-  { value: '3', label: 'industry awards' },
+  { value: '11+', label: 'years of experience' },
+  { value: '29+', label: 'projects delivered' },
+  { value: '4', label: 'apps on the App Store top charts' },
+  { value: '3', label: 'awards' },
 ];
 
 const Hero = () => {
-  const [currentDesignerIndex, setCurrentDesignerIndex] = useState(0);
-  const [displayedDesigner, setDisplayedDesigner] = useState('');
+  const [currentTypeIndex, setCurrentTypeIndex] = useState(0);
+  const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [statsDisplayed, setStatsDisplayed] = useState<string[]>(['', '', '', '']);
-  const [statsStarted, setStatsStarted] = useState(false);
+  const [subtitleDisplayed, setSubtitleDisplayed] = useState('');
+  const [subtitleStarted, setSubtitleStarted] = useState(false);
   const [mouseX, setMouseX] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
@@ -43,7 +42,7 @@ const Hero = () => {
       const rect = heroRef.current.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const offsetX = (e.clientX - centerX) / rect.width;
-      setMouseX(offsetX * 25);
+      setMouseX(offsetX * 25); // Max 25px movement
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -52,75 +51,66 @@ const Hero = () => {
 
   // Designer type typewriter effect
   useEffect(() => {
-    const currentWord = designerTypes[currentDesignerIndex];
+    const currentWord = designerTypes[currentTypeIndex];
     
     const timeout = setTimeout(() => {
       if (!isDeleting) {
-        if (displayedDesigner.length < currentWord.length) {
-          setDisplayedDesigner(currentWord.slice(0, displayedDesigner.length + 1));
+        if (displayText.length < currentWord.length) {
+          setDisplayText(currentWord.slice(0, displayText.length + 1));
         } else {
           setTimeout(() => setIsDeleting(true), 2000);
         }
       } else {
-        if (displayedDesigner.length > 0) {
-          setDisplayedDesigner(displayedDesigner.slice(0, -1));
+        if (displayText.length > 0) {
+          setDisplayText(displayText.slice(0, -1));
         } else {
           setIsDeleting(false);
-          setCurrentDesignerIndex((prev) => (prev + 1) % designerTypes.length);
+          setCurrentTypeIndex((prev) => (prev + 1) % designerTypes.length);
         }
       }
     }, isDeleting ? 50 : 100);
 
     return () => clearTimeout(timeout);
-  }, [displayedDesigner, isDeleting, currentDesignerIndex]);
+  }, [displayText, isDeleting, currentTypeIndex]);
 
-  // Start stats animation after a delay
+  // Subtitle typewriter effect - starts after delay
   useEffect(() => {
     const startDelay = setTimeout(() => {
-      setStatsStarted(true);
-    }, 1100);
+      setSubtitleStarted(true);
+    }, 800);
     return () => clearTimeout(startDelay);
   }, []);
 
-  // Stats typewriter effect
   useEffect(() => {
-    if (!statsStarted) return;
-    
-    const allComplete = statsDisplayed.every((s, i) => s === `${stats[i].value}${stats[i].label}`);
-    if (allComplete) return;
+    if (!subtitleStarted) return;
+    if (subtitleDisplayed.length >= subtitleText.length) return;
 
     const timeout = setTimeout(() => {
-      setStatsDisplayed(prev => {
-        return prev.map((current, i) => {
-          const full = `${stats[i].value}${stats[i].label}`;
-          if (current.length < full.length) {
-            return full.slice(0, current.length + 1);
-          }
-          return current;
-        });
-      });
-    }, 15);
+      setSubtitleDisplayed(subtitleText.slice(0, subtitleDisplayed.length + 1));
+    }, 30);
 
     return () => clearTimeout(timeout);
-  }, [statsDisplayed, statsStarted]);
+  }, [subtitleDisplayed, subtitleStarted]);
 
-  // Render subtitle with emphasized metrics (no typewriter)
+  // Render subtitle with emphasized keywords and line break
   const renderSubtitle = () => {
-    const metrics = ['850K+', '$1.5M+', '35%+'];
-    let result = subtitleText;
-    metrics.forEach(metric => {
-      result = result.replace(metric, `<strong class="text-foreground font-medium">${metric}</strong>`);
-    });
-    return <span dangerouslySetInnerHTML={{ __html: result }} />;
-  };
-
-  // Parse stat display to separate value and label
-  const parseStatDisplay = (display: string, statIndex: number) => {
-    const stat = stats[statIndex];
-    const valueLength = stat.value.length;
-    const displayedValue = display.slice(0, Math.min(display.length, valueLength));
-    const displayedLabel = display.slice(valueLength);
-    return { displayedValue, displayedLabel };
+    const parts = subtitleDisplayed.split('\n');
+    const renderPart = (text: string) => {
+      const keywords = ['iOS', 'SaaS', 'intelligent'];
+      let result = text;
+      keywords.forEach(keyword => {
+        result = result.replace(keyword, `<strong class="text-foreground font-medium">${keyword}</strong>`);
+      });
+      return <span dangerouslySetInnerHTML={{ __html: result }} />;
+    };
+    
+    return (
+      <>
+        {renderPart(parts[0])}
+        {parts[1] && <br />}
+        {parts[1] && renderPart(parts[1])}
+      </>
+    );
   };
 
   return (
@@ -144,54 +134,45 @@ const Hero = () => {
       </div>
 
       <div className="container relative z-10 flex min-h-screen flex-col justify-center px-6 sm:px-8 lg:px-12 py-24 sm:py-28 md:py-32 lg:py-40">
-        <div className="w-full flex flex-col gap-6 sm:gap-7 md:gap-8">
-          {/* Label with typewriter animation */}
-          <p className="animate-fade-up text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground opacity-0 delay-100 min-h-[1.5em]">
-            {displayedDesigner}
-            <span className="animate-pulse">|</span>
+        <div className="max-w-5xl flex flex-col gap-6 sm:gap-7 md:gap-8">
+          {/* Label with typewriter effect */}
+          <p className="animate-fade-up text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground opacity-0 delay-100">
+            {displayText} Designer
           </p>
 
-          {/* Main headline - ALL CAPS */}
-          <h1 className="font-display font-medium leading-[1.05] tracking-tight w-full">
-            <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-200 uppercase">
-              PRODUCT DESIGN LEADER
+          {/* Main headline */}
+          <h1 className="font-display font-medium leading-[1.05] tracking-tight">
+            <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-200">
+              Product Design Leader 🧑🏽‍💻
             </span>
-            <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-250 uppercase">
-              FOR AI-POWERED SYSTEMS.
+            <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-250">
+              for AI-Powered Systems
             </span>
-            {/* Subheading - black color, sentence case */}
-            <span className="block text-foreground text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl mt-2 sm:mt-3">
-              Driving adoption, efficiency, and measurable business impact.
-            </span>
-            {/* Subtitle - no typewriter */}
-            <span className="block text-muted-foreground/70 text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl mt-2">
+            <span className="block text-muted-foreground/70 text-xl sm:text-2xl md:text-3xl lg:text-[2rem] xl:text-[2.25rem] mt-2 sm:mt-3 min-h-[1.5em]">
               {renderSubtitle()}
             </span>
           </h1>
 
           {/* Description */}
           <p className="animate-fade-up max-w-2xl text-base sm:text-lg md:text-lg lg:text-xl leading-relaxed text-muted-foreground opacity-0 delay-300">
-            I lead research, interaction design, and execution for data-dense, technically complex products, partnering closely with engineering and ML teams from concept to scale.
+            I lead <span className="text-foreground font-medium">research</span>, <span className="text-foreground font-medium">design</span>, and <span className="text-foreground font-medium">execution</span> for complex, <span className="text-foreground font-medium">AI-driven</span> user experiences.
           </p>
 
-          {/* Stats with typewriter animation */}
+          {/* Stats - Modern inline layout */}
           <div className="animate-fade-up flex flex-wrap items-center gap-4 sm:gap-6 md:gap-8 opacity-0 delay-350">
-            {stats.map((stat, index) => {
-              const { displayedValue, displayedLabel } = parseStatDisplay(statsDisplayed[index], index);
-              return (
-                <div key={stat.label} className="flex items-baseline gap-0">
-                  <span className="font-display text-xl sm:text-2xl md:text-3xl font-medium text-foreground">
-                    {displayedValue}
-                  </span>
-                  <span className="text-xs sm:text-sm text-muted-foreground">
-                    {displayedLabel}
-                  </span>
-                  {index < stats.length - 1 && (
-                    <span className="hidden sm:block ml-4 sm:ml-6 md:ml-8 w-px h-4 bg-border" />
-                  )}
-                </div>
-              );
-            })}
+            {stats.map((stat, index) => (
+              <div key={stat.label} className="flex items-baseline gap-1.5 sm:gap-2">
+                <span className="font-display text-xl sm:text-2xl md:text-3xl font-medium text-foreground">
+                  {stat.value}
+                </span>
+                <span className="text-xs sm:text-sm text-muted-foreground">
+                  {stat.label}
+                </span>
+                {index < stats.length - 1 && (
+                  <span className="hidden sm:block ml-4 sm:ml-6 md:ml-8 w-px h-4 bg-border" />
+                )}
+              </div>
+            ))}
           </div>
 
           {/* CTAs + Scroll indicator */}
@@ -200,14 +181,14 @@ const Hero = () => {
               href="#case-studies"
               className="group inline-flex items-center gap-3 rounded-[4px] border border-foreground bg-foreground px-5 sm:px-6 py-3 sm:py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground hover:scale-[1.02] active:scale-[0.98]"
             >
-              View Case Studies
+              view my work
               <ArrowDown className="w-4 h-4 transition-transform duration-300 -rotate-90 group-hover:rotate-0" />
             </a>
             <a
               href="#process"
               className="relative text-sm font-medium text-muted-foreground transition-all duration-300 hover:text-foreground after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:w-0 after:bg-foreground after:transition-all after:duration-300 hover:after:w-full"
             >
-              Measurable Impact
+              learn my process
             </a>
             
             {/* Scroll indicator - desktop only */}
