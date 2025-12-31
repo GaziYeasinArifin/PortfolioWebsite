@@ -3,7 +3,7 @@ import { ArrowDown } from 'lucide-react';
 import heroBg from '@/assets/hero-bg.png';
 
 const designerTypes = ['Interaction', 'UX', 'Product'];
-const subtitleText = 'Designing scalable iOS, SaaS, and\nintelligent products end-to-end.';
+const subtitleText = 'I design and scale AI-driven iOS and SaaS products used by 850K+ monthly users, delivering $1.5M+ in annual cost savings and 35%+ adoption gains across complex systems.';
 
 const stats = [
   { value: '11+', label: 'years of experience' },
@@ -92,25 +92,14 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, [subtitleDisplayed, subtitleStarted]);
 
-  // Render subtitle with emphasized keywords and line break
+  // Render subtitle with emphasized keywords
   const renderSubtitle = () => {
-    const parts = subtitleDisplayed.split('\n');
-    const renderPart = (text: string) => {
-      const keywords = ['iOS', 'SaaS', 'intelligent'];
-      let result = text;
-      keywords.forEach(keyword => {
-        result = result.replace(keyword, `<strong class="text-foreground font-medium">${keyword}</strong>`);
-      });
-      return <span dangerouslySetInnerHTML={{ __html: result }} />;
-    };
-    
-    return (
-      <>
-        {renderPart(parts[0])}
-        {parts[1] && <br />}
-        {parts[1] && renderPart(parts[1])}
-      </>
-    );
+    const keywords = ['850K+', '$1.5M+', '35%+'];
+    let result = subtitleDisplayed;
+    keywords.forEach(keyword => {
+      result = result.replace(keyword, `<strong class="text-foreground font-medium">${keyword}</strong>`);
+    });
+    return <span dangerouslySetInnerHTML={{ __html: result }} />;
   };
 
   return (
@@ -142,20 +131,23 @@ const Hero = () => {
 
           {/* Main headline */}
           <h1 className="font-display font-medium leading-[1.05] tracking-tight">
-            <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-200">
-              Product Design Leader 🧑🏽‍💻
+            <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-200 uppercase">
+              PRODUCT DESIGN LEADER
             </span>
-            <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-250">
-              for AI-Powered Systems
+            <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-250 uppercase">
+              FOR AI-POWERED SYSTEMS
             </span>
-            <span className="block text-muted-foreground/70 text-xl sm:text-2xl md:text-3xl lg:text-[2rem] xl:text-[2.25rem] mt-2 sm:mt-3 min-h-[1.5em]">
+            <span className="animate-fade-up block text-foreground text-lg sm:text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] mt-2 sm:mt-3 opacity-0 delay-275">
+              Driving adoption, efficiency, and measurable business impact
+            </span>
+            <span className="block text-muted-foreground/70 text-base sm:text-lg md:text-xl lg:text-[1.25rem] xl:text-[1.5rem] mt-2 sm:mt-3 min-h-[1.5em]">
               {renderSubtitle()}
             </span>
           </h1>
 
           {/* Description */}
           <p className="animate-fade-up max-w-2xl text-base sm:text-lg md:text-lg lg:text-xl leading-relaxed text-muted-foreground opacity-0 delay-300">
-            I lead <span className="text-foreground font-medium">research</span>, <span className="text-foreground font-medium">design</span>, and <span className="text-foreground font-medium">execution</span> for complex, <span className="text-foreground font-medium">AI-driven</span> user experiences.
+            I lead <span className="text-foreground font-medium">research</span>, <span className="text-foreground font-medium">interaction design</span>, and <span className="text-foreground font-medium">execution</span> for data-dense, technically complex products, partnering closely with <span className="text-foreground font-medium">engineering</span> and <span className="text-foreground font-medium">ML teams</span> from concept to scale.
           </p>
 
           {/* Stats - Modern inline layout */}
