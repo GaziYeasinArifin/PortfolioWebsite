@@ -34,11 +34,11 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="border-t border-border py-16 md:py-24">
+    <footer className="border-t border-border bg-background py-16 md:py-24">
       <div className="container">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
-            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.1]">
+            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.1] text-foreground">
               gazi arifin
             </h2>
             <p className="mt-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-muted-foreground font-display">PST</p>
@@ -54,7 +54,7 @@ const Footer = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="relative text-foreground transition-colors hover:text-foreground after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-foreground after:transition-all after:duration-300 hover:after:w-full"
+                    className="relative text-foreground transition-colors hover:text-accent after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
                   >
                     {link.label}
                   </a>
@@ -72,7 +72,7 @@ const Footer = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="relative text-foreground transition-colors hover:text-foreground after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-foreground after:transition-all after:duration-300 hover:after:w-full"
+                    className="relative text-foreground transition-colors hover:text-accent after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
                   >
                     {link.label}
                   </a>
