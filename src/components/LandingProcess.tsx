@@ -2,7 +2,7 @@ import processBackground from '@/assets/process-background.svg';
 
 const LandingProcess = () => {
   return (
-    <section className="bg-background relative overflow-hidden">
+    <section className="relative overflow-hidden">
       <img 
         src={processBackground} 
         alt="My UX Process - AI-Augmented, Human-Led"
