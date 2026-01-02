@@ -10,10 +10,10 @@ const Contact = () => {
             Get in Touch
           </p>
           <h2 className="font-display text-4xl font-medium tracking-tight md:text-5xl lg:text-6xl text-white">
-            Let's build <span className="bg-gradient-to-r from-pink-500 via-purple-500 via-blue-500 via-cyan-400 to-green-400 bg-clip-text text-transparent animate-[gradient_3s_ease-in-out_infinite] bg-[length:200%_auto]">meaningful</span> products together.
+            Open to Senior Product Designer (IC) and <span className="bg-gradient-to-r from-pink-500 via-purple-500 via-blue-500 via-cyan-400 to-green-400 bg-clip-text text-transparent animate-[gradient_3s_ease-in-out_infinite] bg-[length:200%_auto]">Lead</span> roles.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
-            If you're exploring a role, collaboration, or a complex design challenge, I'd be happy to connect.
+            Also available for advisory work and complex design challenges. If you're hiring or need an experienced design partner to move things forward, let's connect.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a
