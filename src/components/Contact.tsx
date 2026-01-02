@@ -10,7 +10,7 @@ const Contact = () => {
             Get in Touch
           </p>
           <h2 className="font-display text-4xl font-medium tracking-tight md:text-5xl lg:text-6xl text-white">
-            Open to Senior Product Designer<br />(IC) and Lead roles.
+            Open to Senior Product Designer (IC) and Lead roles.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
             Also available for advisory work and complex design challenges. If you're hiring or need an experienced design partner to move things forward, let's connect.
