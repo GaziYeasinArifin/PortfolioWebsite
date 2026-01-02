@@ -28,9 +28,9 @@ const Footer = () => {
   ];
 
   const navLinks = [
-    { label: 'work', href: '#case-studies' },
-    { label: 'process', href: '#process' },
-    { label: 'contact', href: '#contact' },
+    { label: 'works', href: '/#case-studies' },
+    { label: 'about', href: '/about' },
+    { label: 'contact', href: '/#contact' },
   ];
 
   return (
