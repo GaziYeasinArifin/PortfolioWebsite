@@ -85,9 +85,13 @@ const OptimizedImage = memo(({
       className="relative w-full overflow-hidden"
     >
       {/* Placeholder - show while loading */}
-      {!isLoaded && (
-        <div className="w-full aspect-video bg-secondary/30 animate-pulse rounded-[4px]" />
-      )}
+      <img
+        src={placeholderSvg}
+        alt=""
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 rounded-[4px] ${
+          isLoaded ? 'opacity-0' : 'opacity-100'
+        }`}
+      />
 
       {/* Actual image - only render when in view */}
       {isInView && !hasError && (
