@@ -15,14 +15,13 @@ const LandingProcess = () => {
   }, []);
 
   return (
-    <section className="relative w-full -my-px overflow-hidden" style={{ margin: 0, padding: 0, border: 'none', outline: 'none' }}>
+    <section className="relative w-full -my-px overflow-hidden">
       {images.map((src, index) => (
         <img
           key={index}
           src={src}
           alt="My UX Process - AI-Augmented, Human-Led"
-          style={{ border: 'none', outline: 'none', boxShadow: 'none' }}
-          className={`w-full h-auto block transition-opacity duration-1000 ease-in-out border-0 outline-0 ${
+          className={`no-border w-full h-auto block transition-opacity duration-1000 ease-in-out ${
             index === 0 ? 'relative' : 'absolute inset-0'
           } ${currentIndex === index ? 'opacity-100' : 'opacity-0'}`}
         />

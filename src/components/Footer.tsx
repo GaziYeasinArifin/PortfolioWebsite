@@ -1,6 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const Footer = () => {
+const Footer = forwardRef<HTMLElement>((_, ref) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
   const [currentTime, setCurrentTime] = useState('');
 
   useEffect(() => {
@@ -21,6 +25,30 @@ const Footer = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const handleNavClick = (href: string) => {
+    if (!href.startsWith('/#')) {
+      navigate(href);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    
+    const sectionId = href.substring(2);
+    if (isHomePage) {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  };
+
   const socialLinks = [
     { label: 'linkedin', href: 'https://www.linkedin.com/in/yeasin-arifin/' },
     { label: 'behance', href: 'https://www.behance.net/arifinyeasin1/projects' },
@@ -34,7 +62,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="border-t border-white/10 bg-black py-16 md:py-24">
+    <footer ref={ref} className="border-t border-white/10 bg-black py-16 md:py-24">
       <div className="container">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
@@ -52,12 +80,12 @@ const Footer = () => {
             <ul className="space-y-3">
               {navLinks.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
+                  <button
+                    onClick={() => handleNavClick(link.href)}
                     className="relative text-white/80 transition-colors hover:text-accent after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
                   >
                     {link.label}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -72,6 +100,8 @@ const Footer = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="relative text-white/80 transition-colors hover:text-accent after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
                   >
                     {link.label}
@@ -89,6 +119,8 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = 'Footer';
 
 export default Footer;

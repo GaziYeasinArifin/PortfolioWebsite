@@ -37,7 +37,7 @@ const Contact = () => {
         <img 
           src={contactImage} 
           alt="Contact visual" 
-          className="w-full h-auto block object-cover object-bottom"
+          className="no-border w-full h-auto block object-cover object-bottom"
         />
       </div>
     </section>
