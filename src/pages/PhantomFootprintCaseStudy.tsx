@@ -543,14 +543,14 @@ const PhantomFootprintCaseStudy = () => {
                 <div className="flex flex-col gap-4">
                   {/* Top row: 2 portrait images with matching heights */}
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="relative aspect-[4/5] overflow-hidden rounded-[4px] bg-secondary group">
+                    <div className="relative h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-[4px] bg-secondary group">
                       <OptimizedImage 
                         src={phantomScope1} 
                         alt="Players engaging with Phantom Footprint game" 
                         className="transition-transform duration-500 group-hover:scale-[1.02]"
                       />
                     </div>
-                    <div className="relative aspect-[4/5] overflow-hidden rounded-[4px] bg-secondary group">
+                    <div className="relative h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-[4px] bg-secondary group">
                       <OptimizedImage 
                         src={phantomScope3} 
                         alt="Final Phantom Footprint game board design" 
