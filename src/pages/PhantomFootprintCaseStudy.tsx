@@ -318,8 +318,8 @@ const PhantomFootprintCaseStudy = () => {
                     src={placeholderSvg}
                     alt=""
                     aria-hidden="true"
-                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-                      arduinoImagesLoaded ? 'opacity-0' : 'opacity-100'
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-out rounded-[4px] ${
+                      arduinoImagesLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'
                     }`}
                   />
                   {/* Cycling images */}
@@ -328,7 +328,7 @@ const PhantomFootprintCaseStudy = () => {
                       key={index}
                       src={img} 
                       alt={`Arduino LED breadboard circuit ${index + 1}`} 
-                      className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
+                      className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ease-out rounded-[4px] ${
                         arduinoImagesLoaded && index === arduinoImageIndex ? 'opacity-100' : 'opacity-0'
                       }`}
                       loading="lazy"
@@ -359,8 +359,8 @@ const PhantomFootprintCaseStudy = () => {
                     src={placeholderSvg}
                     alt=""
                     aria-hidden="true"
-                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-                      assemblyImagesLoaded ? 'opacity-0' : 'opacity-100'
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-out rounded-[4px] ${
+                      assemblyImagesLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'
                     }`}
                   />
                   {/* Cycling images */}
@@ -369,7 +369,7 @@ const PhantomFootprintCaseStudy = () => {
                       key={index}
                       src={img} 
                       alt={`Soldering, wiring & assembly demo ${index + 1}`} 
-                      className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
+                      className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ease-out rounded-[4px] ${
                         assemblyImagesLoaded && index === assemblyImageIndex ? 'opacity-100' : 'opacity-0'
                       }`}
                       loading="lazy"
@@ -541,16 +541,16 @@ const PhantomFootprintCaseStudy = () => {
                 
                 {/* 2 portrait top, 1 landscape bottom */}
                 <div className="flex flex-col gap-4">
-                  {/* Top row: 2 portrait images */}
+                  {/* Top row: 2 portrait images with matching heights */}
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="relative aspect-[3/4] overflow-hidden rounded-[4px] group">
+                    <div className="relative aspect-[4/5] overflow-hidden rounded-[4px] bg-secondary group">
                       <OptimizedImage 
                         src={phantomScope1} 
                         alt="Players engaging with Phantom Footprint game" 
                         className="transition-transform duration-500 group-hover:scale-[1.02]"
                       />
                     </div>
-                    <div className="relative aspect-[3/4] overflow-hidden rounded-[4px] bg-[#c8c4c0] group">
+                    <div className="relative aspect-[4/5] overflow-hidden rounded-[4px] bg-secondary group">
                       <OptimizedImage 
                         src={phantomScope3} 
                         alt="Final Phantom Footprint game board design" 
@@ -560,7 +560,7 @@ const PhantomFootprintCaseStudy = () => {
                   </div>
                   
                   {/* Bottom: Landscape image */}
-                  <div className="relative aspect-[16/9] overflow-hidden rounded-[4px] bg-[#c8c4c0] group">
+                  <div className="relative aspect-[16/9] overflow-hidden rounded-[4px] bg-secondary group">
                     <OptimizedImage 
                       src={phantomScope2} 
                       alt="Phantom Footprint product iterations and components" 

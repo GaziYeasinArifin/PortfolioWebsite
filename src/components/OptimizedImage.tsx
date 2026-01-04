@@ -82,14 +82,14 @@ const OptimizedImage = memo(({
   return (
     <div 
       ref={containerRef} 
-      className="relative w-full overflow-hidden"
+      className="absolute inset-0 w-full h-full overflow-hidden"
     >
-      {/* Placeholder - show while loading */}
+      {/* Placeholder - show at full container height while loading */}
       <img
         src={placeholderSvg}
         alt=""
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 rounded-[4px] ${
-          isLoaded ? 'opacity-0' : 'opacity-100'
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-out rounded-[4px] ${
+          isLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       />
 
@@ -103,7 +103,7 @@ const OptimizedImage = memo(({
           onError={handleError}
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
-          className={`w-full transition-opacity duration-700 ease-out rounded-[4px] ${className} ${
+          className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-out rounded-[4px] ${className} ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           style={{
