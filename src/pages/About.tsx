@@ -18,7 +18,7 @@ const About = () => {
               {/* Text Content */}
               <div className="lg:col-span-7">
                 <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-foreground mb-8 sm:mb-10 md:mb-12 leading-[1.1] tracking-tight animate-fade-up opacity-0">
-                  Designing With Intent, Not Ego
+                  Designing with intent, not ego
                 </h1>
                 
                 <div className="space-y-6 sm:space-y-8 text-base sm:text-lg leading-relaxed text-muted-foreground animate-fade-up opacity-0 delay-200">
