@@ -1,58 +1,58 @@
-import { useState, useEffect, useRef } from 'react';
-import { ArrowDown } from 'lucide-react';
-import heroBg from '@/assets/hero-bg.png';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { ArrowDown, ArrowRight, MapPin } from 'lucide-react';
 
 const designerTypes = ['Interaction', 'UX', 'Product'];
-const subtitleText = 'I design and scale AI-driven iOS and SaaS products used by 850K+ monthly users, delivering $1.5M+ in annual cost savings and 35%+ adoption gains across complex systems.';
 
 const stats = [
-  { value: '11+', label: 'years of experience' },
-  { value: '29+', label: 'projects delivered' },
-  { value: '4', label: 'apps on the App Store top charts' },
-  { value: '3', label: 'awards' },
+  { value: '850K+', label: 'Monthly Users' },
+  { value: '$1.5M+', label: 'Savings Generated' },
+  { value: '35%+', label: 'Adoption Gains' },
 ];
 
 const Hero = () => {
   const [currentTypeIndex, setCurrentTypeIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [subtitleDisplayed, setSubtitleDisplayed] = useState('');
-  const [subtitleStarted, setSubtitleStarted] = useState(false);
-  const [mouseX, setMouseX] = useState(0);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isDesktop, setIsDesktop] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
+  const rafRef = useRef<number>();
 
   // Check if desktop
   useEffect(() => {
-    const checkDesktop = () => {
-      setIsDesktop(window.innerWidth >= 1024);
-    };
+    const checkDesktop = () => setIsDesktop(window.innerWidth >= 1024);
     checkDesktop();
     window.addEventListener('resize', checkDesktop);
     return () => window.removeEventListener('resize', checkDesktop);
   }, []);
 
-  // Mouse tracking for parallax (desktop only)
+  // Mouse tracking for mesh background + cursor light
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (!heroRef.current) return;
+    const rect = heroRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      setMousePos({ x, y });
+      setCursorPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    });
+  }, []);
+
   useEffect(() => {
     if (!isDesktop) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!heroRef.current) return;
-      const rect = heroRef.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const offsetX = (e.clientX - centerX) / rect.width;
-      setMouseX(offsetX * 25); // Max 25px movement
-    };
-
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [isDesktop]);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [isDesktop, handleMouseMove]);
 
-  // Designer type typewriter effect
+  // Typewriter effect
   useEffect(() => {
     const currentWord = designerTypes[currentTypeIndex];
-    
     const timeout = setTimeout(() => {
       if (!isDeleting) {
         if (displayText.length < currentWord.length) {
@@ -69,132 +69,151 @@ const Hero = () => {
         }
       }
     }, isDeleting ? 50 : 100);
-
     return () => clearTimeout(timeout);
   }, [displayText, isDeleting, currentTypeIndex]);
 
-  // Subtitle typewriter effect - starts after delay
-  useEffect(() => {
-    const startDelay = setTimeout(() => {
-      setSubtitleStarted(true);
-    }, 800);
-    return () => clearTimeout(startDelay);
-  }, []);
-
-  useEffect(() => {
-    if (!subtitleStarted) return;
-    if (subtitleDisplayed.length >= subtitleText.length) return;
-
-    const timeout = setTimeout(() => {
-      setSubtitleDisplayed(subtitleText.slice(0, subtitleDisplayed.length + 1));
-    }, 30);
-
-    return () => clearTimeout(timeout);
-  }, [subtitleDisplayed, subtitleStarted]);
-
-  // Render subtitle with emphasized keywords
-  const renderSubtitle = () => {
-    const keywords = ['850K+', '$1.5M+', '35%+'];
-    let result = subtitleDisplayed;
-    keywords.forEach(keyword => {
-      result = result.replace(keyword, `<strong class="text-foreground font-medium">${keyword}</strong>`);
-    });
-    return <span dangerouslySetInnerHTML={{ __html: result }} />;
+  // Generative mesh background style
+  const meshStyle = isDesktop ? {
+    background: `
+      radial-gradient(ellipse 600px 400px at ${mousePos.x}% ${mousePos.y}%, rgba(0,102,255,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 500px 500px at ${100 - mousePos.x}% ${100 - mousePos.y}%, rgba(0,212,255,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 400px 300px at ${mousePos.x * 0.5 + 25}% ${mousePos.y * 0.5 + 25}%, rgba(0,102,255,0.04) 0%, transparent 70%),
+      linear-gradient(180deg, #050505 0%, #0a0a0a 100%)
+    `,
+    transition: 'background 0.3s ease-out',
+  } : {
+    background: `
+      radial-gradient(ellipse 600px 400px at 30% 40%, rgba(0,102,255,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 500px 500px at 70% 60%, rgba(0,212,255,0.04) 0%, transparent 70%),
+      linear-gradient(180deg, #050505 0%, #0a0a0a 100%)
+    `,
   };
 
   return (
-    <section ref={heroRef} className="relative min-h-screen overflow-hidden">
-      {/* Background image with fade-in and x-axis parallax (desktop only) */}
-      <div className="absolute inset-0 z-0 bg-image">
-        <img 
-          src={heroBg} 
-          alt="" 
-          className={`w-full object-contain object-top transition-all duration-1000 ease-out no-border ${
-            imageLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
+    <section
+      ref={heroRef}
+      className="relative min-h-screen overflow-hidden"
+      style={meshStyle}
+    >
+      {/* AI Cursor trailing light - desktop only */}
+      {isDesktop && (
+        <div
+          className="pointer-events-none absolute z-10 rounded-full opacity-30"
           style={{
-            transform: isDesktop ? `translateX(${mouseX}px)` : 'none',
-            transitionProperty: 'opacity, transform',
-            transitionDuration: imageLoaded ? '300ms, 150ms' : '1000ms, 150ms',
+            width: 250,
+            height: 250,
+            left: cursorPos.x - 125,
+            top: cursorPos.y - 125,
+            background: 'radial-gradient(circle, rgba(0,102,255,0.15) 0%, transparent 70%)',
+            transition: 'left 0.15s ease-out, top 0.15s ease-out',
+            willChange: 'left, top',
           }}
-          onLoad={() => setImageLoaded(true)}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background/60" />
-      </div>
+      )}
 
-      <div className="container relative z-10 flex min-h-screen flex-col justify-center px-6 sm:px-8 lg:px-12 py-24 sm:py-28 md:py-32 lg:py-40">
-        <div className="max-w-5xl flex flex-col gap-6 sm:gap-7 md:gap-8">
+      {/* Content */}
+      <div className="container relative z-20 flex min-h-screen flex-col items-center justify-center px-6 sm:px-8 lg:px-12 py-24 sm:py-28 md:py-32 lg:py-40 text-center">
+        <div className="flex flex-col items-center gap-6 sm:gap-7 md:gap-8 max-w-4xl">
+          
           {/* Label with typewriter effect */}
-          <p className="animate-fade-up text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground opacity-0 delay-100">
-            {displayText} Designer
+          <p className="animate-fade-up text-xs font-medium uppercase tracking-[0.3em] opacity-0 delay-100"
+             style={{ color: '#888' }}>
+            {displayText}<span className="animate-pulse">|</span> Designer
           </p>
 
           {/* Main headline */}
-          <h1 className="font-display font-medium leading-[1.05] tracking-tight">
-            <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-200 uppercase">
-              PRODUCT DESIGN LEADER
+          <h1 className="font-display font-bold leading-[1.05] tracking-tight">
+            <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-200 uppercase"
+                  style={{ color: '#FAFAFA' }}>
+              Product Design Leader
             </span>
-            <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-250 uppercase">
-              FOR AI-POWERED SYSTEMS
-            </span>
-            <span className="animate-fade-up block text-foreground text-lg sm:text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] mt-2 sm:mt-3 opacity-0 delay-275">
-              Driving adoption, efficiency, and measurable business impact
-            </span>
-            <span className="block text-muted-foreground/70 text-base sm:text-lg md:text-xl lg:text-[1.25rem] xl:text-[1.5rem] mt-2 sm:mt-3 min-h-[1.5em]">
-              {renderSubtitle()}
+            <span className="animate-fade-up block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] opacity-0 delay-250 uppercase"
+                  style={{ color: '#FAFAFA' }}>
+              For <span className="hero-gradient-text">AI-Powered</span> Systems
             </span>
           </h1>
 
-          {/* Description */}
-          <p className="animate-fade-up max-w-4xl text-base sm:text-lg md:text-lg lg:text-xl leading-relaxed text-muted-foreground opacity-0 delay-300">
-            I lead <span className="text-foreground font-medium">research</span>, <span className="text-foreground font-medium">interaction design</span>, and <span className="text-foreground font-medium">execution</span> for data-dense, technically complex<br />
-            products, partnering closely with <span className="text-foreground font-medium">engineering</span> and <span className="text-foreground font-medium">ML teams</span> from concept to scale.
+          {/* Sub-headline */}
+          <p className="animate-fade-up max-w-2xl text-base sm:text-lg md:text-xl leading-relaxed opacity-0 delay-300"
+             style={{ color: '#888' }}>
+            Driving adoption and <span style={{ color: '#FAFAFA' }} className="font-medium">$1.5M+</span> in measurable impact through high-scale iOS and SaaS systems.
           </p>
 
-          {/* Stats - Modern inline layout */}
-          <div className="animate-fade-up flex flex-wrap items-center gap-4 sm:gap-6 md:gap-8 opacity-0 delay-350">
-            {stats.map((stat, index) => (
-              <div key={stat.label} className="flex items-baseline gap-1.5 sm:gap-2">
-                <span className="font-display text-xl sm:text-2xl md:text-3xl font-medium text-foreground">
+          {/* Bento Grid Stats */}
+          <div className="animate-fade-up grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 w-full max-w-xl opacity-0 delay-350">
+            {stats.map((stat) => (
+              <div key={stat.label} className="hero-glass-card rounded-lg px-5 py-4 text-center">
+                <div className="font-display text-2xl sm:text-3xl font-bold" style={{ color: '#FAFAFA' }}>
                   {stat.value}
-                </span>
-                <span className="text-xs sm:text-sm text-muted-foreground">
+                </div>
+                <div className="text-xs sm:text-sm mt-1" style={{ color: '#666' }}>
                   {stat.label}
-                </span>
-                {index < stats.length - 1 && (
-                  <span className="hidden sm:block ml-4 sm:ml-6 md:ml-8 w-px h-4 bg-border" />
-                )}
+                </div>
               </div>
             ))}
           </div>
 
-          {/* CTAs + Scroll indicator */}
-          <div className="animate-fade-up flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 opacity-0 delay-400 mt-2 sm:mt-3 md:mt-4">
+          {/* CTAs */}
+          <div className="animate-fade-up flex flex-col sm:flex-row items-center gap-4 sm:gap-6 opacity-0 delay-400 mt-2">
             <a
               href="#case-studies"
-              className="group inline-flex items-center gap-3 rounded-[4px] border border-foreground bg-foreground px-5 sm:px-6 py-3 sm:py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-transparent hover:text-foreground hover:scale-[1.02] active:scale-[0.98]"
+              className="group inline-flex items-center gap-3 rounded-[4px] px-6 py-3.5 text-sm font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              style={{
+                backgroundColor: '#0066FF',
+                color: '#FAFAFA',
+                boxShadow: '0 0 20px rgba(0,102,255,0.2)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = '0 0 30px rgba(0,102,255,0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = '0 0 20px rgba(0,102,255,0.2)';
+              }}
             >
-              view my work
-              <ArrowDown className="w-4 h-4 transition-transform duration-300 -rotate-90 group-hover:rotate-0" />
+              View Case Studies
+              <ArrowDown className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5" />
             </a>
             <a
               href="#process"
-              className="relative text-sm font-medium text-muted-foreground transition-all duration-300 hover:text-foreground after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:w-0 after:bg-foreground after:transition-all after:duration-300 hover:after:w-full"
+              className="group inline-flex items-center gap-2 rounded-[4px] px-6 py-3.5 text-sm font-medium transition-all duration-300 hover:scale-[1.02]"
+              style={{
+                border: '1px solid rgba(255,255,255,0.15)',
+                color: '#FAFAFA',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
+              }}
             >
-              learn my process
-            </a>
-            
-            {/* Scroll indicator - desktop only */}
-            <a 
-              href="#case-studies"
-              className="hidden lg:flex items-center gap-3 ml-auto mr-0 text-muted-foreground transition-colors hover:text-foreground group"
-            >
-              <span className="text-[10px] font-medium tracking-[0.2em] uppercase">Scroll</span>
-              <div className="relative w-6 h-10 rounded-full border-2 border-current flex justify-center">
-                <div className="absolute top-2 w-1 h-2 rounded-full bg-current animate-bounce" style={{ animationDuration: '1.5s' }} />
-              </div>
+              Learn My Process
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
           </div>
+
+          {/* Location Badge */}
+          <div className="animate-fade-up flex items-center gap-2 opacity-0 delay-500 mt-2">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" style={{ animation: 'hero-dot-pulse 2s ease-in-out infinite' }} />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+            </span>
+            <span className="text-xs tracking-wider uppercase" style={{ color: '#555' }}>
+              Now in San Francisco
+            </span>
+          </div>
+
+          {/* Scroll indicator */}
+          <a
+            href="#case-studies"
+            className="hidden lg:flex items-center gap-3 mt-8 group transition-opacity hover:opacity-80 animate-fade-up opacity-0 delay-600"
+            style={{ color: '#555' }}
+          >
+            <span className="text-[10px] font-medium tracking-[0.2em] uppercase">Scroll</span>
+            <div className="relative w-5 h-8 rounded-full border border-current flex justify-center">
+              <div className="absolute top-1.5 w-0.5 h-1.5 rounded-full bg-current animate-bounce" style={{ animationDuration: '1.5s' }} />
+            </div>
+          </a>
         </div>
       </div>
     </section>
