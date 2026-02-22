@@ -47,6 +47,14 @@
     --card-shadow-hover: 0 10px 40px -12px rgba(0, 0, 0, 0.08);
     --image-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.08);
 
+    /* Works card tokens — Light */
+    --works-card-bg: 0 0% 100%;           /* #FFFFFF */
+    --works-card-border: 0 0% 90%;        /* #E5E5E7 */
+    --works-card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px -4px rgba(0,0,0,0.06);
+    --works-card-shadow-hover: 0 8px 40px -8px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.04);
+    --works-glow-ai: 225 100% 50%;        /* Blue glow for AI */
+    --works-glow-award: 45 100% 50%;      /* Gold glow for Awards */
+
     /* Hero system-aware tokens — Light (Paper White) */
     --hero-bg: 240 20% 99%;          /* #FBFBFD */
     --hero-text: 0 0% 11%;           /* #1D1D1F */
@@ -101,6 +109,14 @@
     --hero-glass-border: 0 0% 100% / 0.08;
     --hero-card-shadow: 0 2px 12px -2px rgba(0,212,255,0.06);
     --hero-card-shadow-hover: 0 8px 30px -8px rgba(0,212,255,0.15);
+
+    /* Works card tokens — Dark */
+    --works-card-bg: 0 0% 9%;            /* #161617 */
+    --works-card-border: 0 0% 17%;       /* #2C2C2E */
+    --works-card-shadow: none;
+    --works-card-shadow-hover: none;
+    --works-glow-ai: 187 100% 50%;       /* Cyan glow for AI */
+    --works-glow-award: 45 100% 60%;     /* Gold glow for Awards */
   }
 }
 

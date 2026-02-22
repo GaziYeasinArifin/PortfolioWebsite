@@ -1,5 +1,7 @@
-import { useState, useCallback, memo } from 'react';
+import { useState, useCallback, memo, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 import screenlifeThumbnail from '@/assets/screenlife-thumbnail.png';
 import amtvThumbnail from '@/assets/amtv-thumbnail.png';
 import spotlightThumbnail from '@/assets/spotlight-thumbnail.png';
@@ -17,7 +19,6 @@ import articleProblemSolving from '@/assets/article-problem-solving.png';
 import articleAiUx from '@/assets/article-ai-ux.png';
 import articleTeslaPyramids from '@/assets/article-tesla-pyramids.png';
 import placeholderSvg from '@/assets/placeholder-image.svg';
-import { ArrowUpRight } from 'lucide-react';
 
 // ── Types ──────────────────────────────────────────────
 interface CaseStudy {
@@ -34,15 +35,16 @@ interface CaseStudy {
   challengeResult?: string;
   filterTags: string[];
   featured?: boolean;
+  glowType?: 'ai' | 'award';
 }
 
-type FilterKey = 'all' | 'mobile' | 'ai-systems' | 'saas' | 'design-systems' | 'writing' | 'branding' | 'academic';
+type FilterKey = 'all' | 'ai-systems' | 'mobile' | 'saas' | 'design-systems' | 'writing' | 'branding' | 'academic';
 
 const filters: { key: FilterKey; label: string }[] = [
   { key: 'all', label: 'All' },
-  { key: 'mobile', label: 'Mobile' },
   { key: 'ai-systems', label: 'AI Systems' },
-  { key: 'saas', label: 'SaaS' },
+  { key: 'mobile', label: 'iOS / Mobile' },
+  { key: 'saas', label: 'Enterprise SaaS' },
   { key: 'design-systems', label: 'Design Systems' },
   { key: 'branding', label: 'Branding' },
   { key: 'writing', label: 'Writing' },
@@ -54,16 +56,17 @@ const allStudies: CaseStudy[] = [
   {
     id: 'amtv',
     title: 'Add Music to Video',
-    description: 'Redesigning a video editor for 22M+ users',
-    category: 'UX Research + iOS + Android',
+    description: 'Redesigning the creative workflow for 22M+ creators',
+    category: 'UX Research · iOS · Android',
     image: amtvThumbnail,
     year: '2016–2023',
     slug: 'add-music-to-video',
-    impactBadge: '22M+ Users',
-    roleTags: ['iOS', 'AI / ML', 'Lead Designer'],
+    impactBadge: '22M Users',
+    roleTags: ['Product Strategy', 'ML Implementation', 'iOS Lead'],
     challengeResult: 'Challenge: Scale a video editor for 22M users. Result: 35% increase in retention.',
     filterTags: ['mobile', 'ai-systems'],
     featured: true,
+    glowType: 'ai',
   },
   {
     id: 'spotlight',
@@ -73,11 +76,12 @@ const allStudies: CaseStudy[] = [
     image: spotlightThumbnail,
     year: '2016–2023',
     slug: 'spotlight',
-    impactBadge: 'Top 10 App Store',
-    roleTags: ['Design Systems', 'Mobile', 'Lead'],
+    impactBadge: 'Top 10 App',
+    roleTags: ['Design Systems', 'Cross-Platform', 'Governance'],
     challengeResult: 'Challenge: Unify 3 creative apps. Result: Cross-platform design governance.',
     filterTags: ['design-systems', 'mobile'],
     featured: false,
+    glowType: 'award',
   },
   {
     id: 'screenlife',
@@ -87,8 +91,8 @@ const allStudies: CaseStudy[] = [
     image: screenlifeThumbnail,
     year: '2018',
     slug: 'screenlife',
-    impactBadge: 'First-of-its-Kind',
-    roleTags: ['Mobile', 'SaaS', 'UX Research'],
+    impactBadge: 'First-of-Kind',
+    roleTags: ['UX Research', 'Mobile', 'SaaS'],
     challengeResult: 'Challenge: Create the first interactive video recorder. Result: Novel interaction paradigm.',
     filterTags: ['mobile', 'saas'],
     featured: false,
@@ -97,7 +101,7 @@ const allStudies: CaseStudy[] = [
     id: 'phantom',
     title: 'Phantom Footprint',
     description: 'IoT-enhanced board game closing the climate feedback loop',
-    category: 'UX Design + Physical Computing',
+    category: 'UX Design · Physical Computing',
     image: phantomFootprintThumbnail,
     year: '2024',
     slug: 'phantom-footprint',
@@ -106,6 +110,7 @@ const allStudies: CaseStudy[] = [
     challengeResult: 'Challenge: Close the climate feedback loop. Result: IoT-enhanced board game.',
     filterTags: ['ai-systems'],
     featured: true,
+    glowType: 'ai',
   },
   // Branding
   {
@@ -232,24 +237,24 @@ const allStudies: CaseStudy[] = [
   },
 ];
 
-// ── Optimized image with placeholder ───────────────────
+// ── Lazy Image ─────────────────────────────────────────
 const CaseStudyImage = memo(({ src, alt }: { src: string; alt: string }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const handleLoad = useCallback(() => setIsLoaded(true), []);
 
   return (
-    <div className="relative h-full w-full">
+    <div className="relative h-full w-full overflow-hidden">
       <img
         src={placeholderSvg}
         alt=""
-        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${isLoaded ? 'opacity-0' : 'opacity-100'}`}
+        className={`no-border absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${isLoaded ? 'opacity-0' : 'opacity-100'}`}
       />
       <img
         src={src}
         alt={alt}
         onLoad={handleLoad}
         loading="lazy"
-        className={`h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.15] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`no-border h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-110 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
       />
     </div>
   );
@@ -258,15 +263,50 @@ CaseStudyImage.displayName = 'CaseStudyImage';
 
 // ── Impact Badge ───────────────────────────────────────
 const ImpactBadge = ({ text }: { text: string }) => (
-  <div className="impact-badge absolute top-4 right-4 z-10">
-    <span className="text-[11px] font-mono font-semibold tracking-wide text-white">
+  <div className="absolute top-4 right-4 z-10 rounded-full px-3 py-1.5 
+    bg-foreground/80 backdrop-blur-xl border border-background/10
+    shadow-[0_0_12px_hsla(var(--works-glow-ai),0.2)]">
+    <span className="text-[11px] font-mono font-semibold tracking-wide text-background">
       {text}
     </span>
   </div>
 );
 
+// ── Filter Pill Bar ────────────────────────────────────
+const FilterBar = ({ active, onChange }: { active: FilterKey; onChange: (k: FilterKey) => void }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <div ref={containerRef} className="relative flex flex-wrap items-center gap-1.5">
+      {filters.map((f) => (
+        <button
+          key={f.key}
+          onClick={() => onChange(f.key)}
+          className={`relative z-10 px-4 py-2 rounded-full text-xs font-medium tracking-wide transition-colors duration-300 
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+            ${active === f.key
+              ? 'text-background'
+              : 'text-muted-foreground hover:text-foreground'
+            }`}
+        >
+          {/* Sliding pill background */}
+          {active === f.key && (
+            <motion.div
+              layoutId="active-filter-pill"
+              className="absolute inset-0 rounded-full bg-foreground"
+              style={{ zIndex: -1 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 28 }}
+            />
+          )}
+          {f.label}
+        </button>
+      ))}
+    </div>
+  );
+};
+
 // ── Card Component ─────────────────────────────────────
-const CaseStudyCard = ({ study, index, isBento }: { study: CaseStudy; index: number; isBento: boolean }) => {
+const CaseStudyCard = ({ study, index, isFeatured }: { study: CaseStudy; index: number; isFeatured: boolean }) => {
   const isExternal = !!study.externalUrl;
   const isInternal = !!study.slug;
   const CardWrapper = isExternal ? 'a' : isInternal ? Link : 'div';
@@ -276,72 +316,92 @@ const CaseStudyCard = ({ study, index, isBento }: { study: CaseStudy; index: num
       ? { to: `/case-study/${study.slug}` }
       : {};
 
-  const isFeaturedLayout = isBento && study.featured;
+  const glowVar = study.glowType === 'award' ? '--works-glow-award' : '--works-glow-ai';
 
   return (
-    <CardWrapper
-      {...(cardProps as any)}
-      className={`group cursor-pointer block bento-card animate-fade-up ${
-        isFeaturedLayout && index === 0 ? 'md:col-span-1 md:row-span-2' : ''
-      }${isFeaturedLayout && index === 3 ? 'md:col-span-1 md:row-span-1' : ''}`}
-      style={{ animationDelay: `${index * 80}ms` }}
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 24, scale: 0.97 }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: { delay: index * 0.06, duration: 0.5, ease: 'easeOut' },
+      }}
+      exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.25 } }}
+      className={isFeatured ? 'md:col-span-2' : ''}
     >
-      <article className="h-full flex flex-col">
-        {/* Image container */}
-        <div className={`relative overflow-hidden rounded-2xl bg-secondary ${
-          isFeaturedLayout ? 'flex-1 min-h-[300px]' : 'aspect-[4/5]'
-        }`}>
-          <CaseStudyImage src={study.image} alt={study.title} />
+      <CardWrapper
+        {...(cardProps as any)}
+        className="group cursor-pointer block rounded-2xl overflow-hidden transition-all duration-500 ease-out
+          bg-[hsl(var(--works-card-bg))] border border-[hsl(var(--works-card-border))]
+          hover:scale-[1.02] hover:-translate-y-1
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        style={{
+          boxShadow: 'var(--works-card-shadow)',
+        }}
+        onMouseEnter={(e: any) => {
+          e.currentTarget.style.boxShadow = `var(--works-card-shadow-hover)${study.glowType ? `, 0 0 30px hsla(var(${glowVar}), 0.08)` : ''}`;
+        }}
+        onMouseLeave={(e: any) => {
+          e.currentTarget.style.boxShadow = 'var(--works-card-shadow)';
+        }}
+      >
+        <article className="h-full flex flex-col">
+          {/* Image container */}
+          <div className={`relative overflow-hidden ${
+            isFeatured ? 'aspect-[16/10]' : 'aspect-[4/3]'
+          }`}>
+            <CaseStudyImage src={study.image} alt={study.title} />
 
-          {/* Impact badge */}
-          {study.impactBadge && <ImpactBadge text={study.impactBadge} />}
+            {study.impactBadge && <ImpactBadge text={study.impactBadge} />}
 
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            {/* Gradient overlay on hover */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-          {/* Arrow button */}
-          <div className="absolute top-4 left-4 opacity-0 scale-75 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-100">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/90 backdrop-blur-sm shadow-lg">
-              <ArrowUpRight className="h-5 w-5 text-foreground transition-transform duration-300 group-hover:rotate-45" />
+            {/* View arrow — fades in bottom-right */}
+            <div className="absolute bottom-4 right-4 opacity-0 translate-y-2 transition-all duration-400 ease-out group-hover:opacity-100 group-hover:translate-y-0">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-background/90 backdrop-blur-sm">
+                <ArrowUpRight className="h-5 w-5 text-foreground transition-transform duration-300 group-hover:rotate-12" />
+              </div>
             </div>
+
+            {/* Progressive disclosure */}
+            {study.challengeResult && (
+              <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-100">
+                <p className="text-[13px] leading-relaxed text-white/90 font-medium">
+                  {study.challengeResult}
+                </p>
+              </div>
+            )}
           </div>
 
-          {/* Progressive disclosure - challenge/result */}
-          {study.challengeResult && (
-            <div className="card-reveal absolute bottom-0 left-0 right-0 p-5">
-              <p className="text-[13px] leading-relaxed text-white/90 font-medium">
-                {study.challengeResult}
-              </p>
+          {/* Metadata */}
+          <div className="p-5 space-y-2.5">
+            <div className="flex items-center justify-between text-[11px] text-muted-foreground tracking-wide uppercase">
+              <span>{study.category}</span>
+              <span>{study.year}</span>
             </div>
-          )}
-        </div>
-
-        {/* Meta */}
-        <div className="space-y-2 pt-5 pb-2">
-          <div className="flex items-center justify-between text-xs text-muted-foreground tracking-wide">
-            <span>{study.category}</span>
-            <span>{study.year}</span>
+            <h3 className="font-display text-lg md:text-xl lg:text-2xl font-bold leading-tight tracking-tight text-foreground">
+              {study.title}
+            </h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">{study.description}</p>
+            {study.roleTags && study.roleTags.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {study.roleTags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-[10px] font-mono tracking-wider px-2 py-1 rounded-md bg-secondary text-muted-foreground border border-border"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
-          <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-bold leading-tight">
-            {study.title}
-          </h3>
-          <p className="text-muted-foreground text-sm">{study.description}</p>
-          {/* Role tags */}
-          {study.roleTags && study.roleTags.length > 0 && (
-            <div className="flex flex-wrap gap-2 pt-1">
-              {study.roleTags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-[11px] font-mono tracking-wide px-2.5 py-1 rounded-md bg-secondary text-muted-foreground border border-border"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </div>
-      </article>
-    </CardWrapper>
+        </article>
+      </CardWrapper>
+    </motion.div>
   );
 };
 
@@ -353,12 +413,12 @@ const CaseStudies = () => {
     ? allStudies
     : allStudies.filter((s) => s.filterTags.includes(activeFilter));
 
-  // Use bento layout only when showing UX projects (all or specific UX filters)
+  // Determine if we should use bento (asymmetric) layout
   const uxFilters: FilterKey[] = ['all', 'mobile', 'ai-systems', 'saas', 'design-systems'];
   const isBentoLayout = uxFilters.includes(activeFilter) && filtered.some((s) => s.featured);
 
-  // For bento: arrange so featured items land in grid-spanning positions
-  const bentoStudies = isBentoLayout
+  // Sort featured first for bento
+  const sortedStudies = isBentoLayout
     ? [...filtered].sort((a, b) => {
         if (a.featured && !b.featured) return -1;
         if (!a.featured && b.featured) return 1;
@@ -366,58 +426,69 @@ const CaseStudies = () => {
       })
     : filtered;
 
+  // Grid class
+  const gridClass = isBentoLayout
+    ? 'grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-2'
+    : filtered.some((s) => s.filterTags.includes('writing'))
+      ? 'grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-3'
+      : 'grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-2';
+
   return (
     <section id="case-studies" className="py-24 md:py-32">
       <div className="container">
         {/* Section header */}
-        <div className="mb-16 space-y-8">
-          <h2 className="font-display font-bold leading-[1.05] tracking-tight text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem]">
+        <div className="mb-12 md:mb-16 space-y-6">
+          <motion.h2
+            className="font-display font-bold leading-[1.05] tracking-tight text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem]"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             Selected Works
-          </h2>
+          </motion.h2>
 
           {/* Filter bar */}
-          <div className="flex flex-wrap items-center gap-2">
-            {filters.map((f) => (
-              <button
-                key={f.key}
-                onClick={() => setActiveFilter(f.key)}
-                className={`px-4 py-2 rounded-full text-xs font-medium tracking-wide transition-all duration-300 ${
-                  activeFilter === f.key
-                    ? 'bg-foreground text-background shadow-md'
-                    : 'bg-secondary text-muted-foreground hover:bg-muted hover:text-foreground'
-                }`}
-              >
-                {f.label}
-              </button>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.15, duration: 0.5 }}
+          >
+            <LayoutGroup>
+              <FilterBar active={activeFilter} onChange={setActiveFilter} />
+            </LayoutGroup>
+          </motion.div>
         </div>
 
         {/* Grid */}
-        <div
-          className={
-            isBentoLayout
-              ? 'grid gap-8 grid-cols-1 md:grid-cols-2 md:grid-rows-[auto_auto] auto-rows-fr'
-              : filtered.some((s) => s.filterTags.includes('writing'))
-                ? 'grid gap-8 grid-cols-1 md:grid-cols-3'
-                : 'grid gap-8 grid-cols-1 md:grid-cols-2'
-          }
-        >
-          {bentoStudies.map((study, index) => (
-            <CaseStudyCard
-              key={study.id}
-              study={study}
-              index={index}
-              isBento={isBentoLayout}
-            />
-          ))}
-        </div>
+        <LayoutGroup>
+          <motion.div layout className={gridClass}>
+            <AnimatePresence mode="popLayout">
+              {sortedStudies.map((study, index) => (
+                <CaseStudyCard
+                  key={study.id}
+                  study={study}
+                  index={index}
+                  isFeatured={isBentoLayout && !!study.featured}
+                />
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        </LayoutGroup>
 
-        {filtered.length === 0 && (
-          <p className="text-center text-muted-foreground py-20 text-lg">
-            No projects match this filter.
-          </p>
-        )}
+        <AnimatePresence>
+          {filtered.length === 0 && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="text-center text-muted-foreground py-20 text-lg"
+            >
+              No projects match this filter.
+            </motion.p>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
