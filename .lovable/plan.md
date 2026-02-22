@@ -1,62 +1,97 @@
 
 
-# Navigation & Brand Header Redesign
+# Case Studies Section Redesign: Premium Editorial Gallery
 
 ## Overview
-Redesign the navigation bar to be high-contrast, accessible, and visually polished. The current header uses `bg-background/95` (white/light) which clashes with the dark hero. This fix ensures the nav is always readable, adds glassmorphism on scroll, a shimmer CTA, a status badge, and improves mobile UX.
+Transform the current 2-column grid case studies section into a high-end, interactive gallery with an asymmetric bento layout, impact badges, parallax hover effects, progressive disclosure, and a filter bar with animated layout transitions.
 
 ---
 
-## The Problem
-The header currently uses the light theme's background color variables. Over the dark (#050505) hero section, the white/light text and background create a low-contrast, unreadable experience. A FAANG recruiter would immediately flag this as an accessibility failure.
+## 1. Layout: Asymmetric Bento Grid
+
+Replace the uniform `grid-cols-2` with a mixed layout for the UX Projects tab:
+
+```text
++-------------------------------+---------------+
+|                               |               |
+|   FEATURED CARD 1             |   CARD 3      |
+|   Add Music to Video          |   Spotlight    |
+|   (spans 2 rows tall)         |   Design Sys  |
+|                               |               |
++-------------------------------+---------------+
+|               |                               |
+|   CARD 2      |   FEATURED CARD 4             |
+|   Screenlife  |   Phantom Footprint           |
+|               |   (spans wider)               |
++---------------+-------------------------------+
+```
+
+- Featured cards ("Add Music to Video" and "Design System for Spotlight") get larger visual presence using `col-span` and `row-span` in a CSS grid
+- Other tabs (branding, writing, academic) keep a simpler grid layout since they don't need the asymmetry
 
 ---
 
-## Changes
+## 2. Case Study Card Component
 
-### 1. Smart Header Theming (Dark on Hero, Glass on Scroll)
+Each card will include:
 
-**Before scroll:** Fully transparent background, white text/logo when over the dark hero.  
-**After scroll:** Glassmorphism effect with `backdrop-filter: blur(12px)`, a thin `1px` bottom border (`rgba(255,255,255,0.08)` on dark, `rgba(0,0,0,0.06)` on light), and a semi-transparent background.
+**Impact Badge (top-right corner):**
+- Glassmorphism pill with glowing border, always visible
+- Content per project:
+  - Add Music to Video: "22M+ Users"
+  - Spotlight: "Top 10 App Store"
+  - Screenlife: "First-of-its-Kind"
+  - Phantom Footprint: "IoT + Board Game"
 
-The header will detect whether it's on the home page and over the hero section to apply white text. On other pages or when scrolled past the hero, it reverts to the standard theme colors.
+**Role Tags (below title):**
+- Displayed in a monospace font (`font-mono`) for a technical feel
+- Tags like: `AI / ML`, `iOS`, `Lead Designer`, `SaaS`, `Design Systems`
 
-### 2. Logo & Name Visibility
+**Progressive Disclosure (on hover):**
+- A one-sentence "Challenge / Result" summary slides up from the bottom of the image
+- Example: "Challenge: Scale a video editor for 22M users. Result: 35% increase in retention."
 
-- Logo image: apply a CSS `brightness(0) invert(1)` filter when over the dark hero to force white rendering
-- Name text: use `text-white` when over hero, `text-foreground` otherwise
-- Increase font weight to `font-bold` (700) for "gazi yeasin arifin" to ensure legibility at small sizes
-- Add a subtle hover glow effect (soft white text-shadow) instead of just opacity changes
+**Hover Effects:**
+- Card scales up slightly (`scale-[1.02]`) with a smooth transition
+- Background image zooms in slightly more (`scale-110` to `scale-115`) creating a parallax-like effect
+- Layered shadow deepens on hover for the floating effect
 
-### 3. Navigation Links
+---
 
-- Over dark hero: links use `text-white/60` base, `text-white` on hover
-- Scrolled/light: links use `text-muted-foreground` base, `text-foreground` on hover
-- Hover underline adapts color to match current theme context
+## 3. Visual Treatment
 
-### 4. "Available in San Francisco" Status Badge
+- **Squircle radius:** Change card corners from `rounded-[4px]` to `rounded-2xl` (16px) for the Apple squircle feel
+- **Layered shadows:** Multi-layer `box-shadow` on cards: a diffuse outer shadow + a tighter inner shadow
+- **Typography:** Project titles increase to `text-3xl font-bold` with the display font (Syne)
+- **High-contrast headings:** Section title stays large and bold
 
-- Add a green pulsing dot + "Available in SF" text next to the nav links (desktop only)
-- Small pill-shaped badge with subtle border
-- Uses the same pulse animation already defined (`hero-dot-pulse`)
+---
 
-### 5. "Say Hi" Button Shimmer
+## 4. Filter Bar
 
-- Add a CSS shimmer animation: a diagonal light sweep that plays once on hover
-- Button keeps the existing dark/light contrast but gains the shimmer for visual interest
-- No new dependencies needed -- pure CSS `@keyframes` and pseudo-element
+Replace the current tab system with a minimalist pill-style filter bar:
 
-### 6. Resume Link Enhancement
+**Filters:** `[All] [AI Systems] [Mobile] [SaaS] [Design Systems]`
 
-- Add a small download icon (`Download` from lucide-react) next to "resume"
-- Icon animates downward slightly on hover (translateY +2px)
+- Each filter is a pill button; selected state has a solid background
+- Selecting a filter animates cards in/out with a staggered fade-up effect
+- The existing tab categories (branding, writing, academic) move to a secondary row or are accessible via "All"
+- Cards are tagged with filter categories and filtered client-side
 
-### 7. Mobile Menu Improvements
+**Implementation approach:** Since we cannot use Framer Motion (not installed), we'll use CSS transitions with `opacity` and `transform` for enter/exit animations. Cards that don't match the filter get `opacity-0 scale-95 pointer-events-none h-0` with transitions.
 
-- Full-screen overlay already exists -- enhance with:
-  - Social links (LinkedIn, Medium) at the bottom of the mobile menu
-  - "Available in SF" badge visible in mobile menu footer
-  - Dark background matching the hero when on home page
+---
+
+## 5. Content Mapping
+
+| Project | Impact Badge | Filter Tags | Challenge/Result |
+|---------|-------------|-------------|-----------------|
+| Add Music to Video | 22M+ Users | Mobile, AI Systems | Challenge: Scale a video editor for 22M users. Result: 35% retention increase. |
+| Spotlight Design System | Top 10 App Store | Design Systems, Mobile | Challenge: Unify 3 creative apps. Result: Cross-platform design governance. |
+| Screenlife | First-of-its-Kind | Mobile, SaaS | Challenge: Create the first interactive video recorder. Result: Novel interaction paradigm. |
+| Phantom Footprint | IoT Innovation | AI Systems | Challenge: Close the climate feedback loop. Result: IoT-enhanced board game. |
+
+Branding, writing, and academic items appear under "All" filter only (or their own dedicated filter if space permits).
 
 ---
 
@@ -64,29 +99,27 @@ The header will detect whether it's on the home page and over the hero section t
 
 ### Files to modify:
 
-1. **`src/components/Header.tsx`**
-   - Add state: `isOverHero` (boolean) -- computed from scroll position and whether on home page. The hero section is `min-h-screen`, so roughly `window.innerHeight` is the threshold
-   - Derive `isDarkNav` = `isHomePage && !isScrolled` (when at top of home page, use white text)
-   - Update header classes: when `isScrolled`, apply `backdrop-blur-xl bg-background/80 border-b border-border/10`; when not scrolled on home page, fully transparent
-   - Logo `<img>`: add conditional `filter brightness(0) invert(1)` class when `isDarkNav`
-   - Name text: conditional `text-white` vs `text-foreground`
-   - Nav links: conditional color classes based on `isDarkNav`
-   - Add "Available in SF" badge component inline (desktop nav area)
-   - Add `Download` icon to resume link
-   - "Say Hi" button: add `shimmer-button` class with CSS animation
-   - Mobile menu: add LinkedIn + Medium social links, "Available in SF" badge
+1. **`src/components/CaseStudies.tsx`** -- Major rewrite:
+   - Add `impactBadge`, `filterTags`, `challengeResult`, and `roleTags` fields to each case study data object
+   - Replace tab system with a unified filter bar (pill buttons)
+   - Implement asymmetric bento grid using CSS Grid with `grid-template-rows` and `col-span`/`row-span` for featured items
+   - New `CaseStudyCard` sub-component with: impact badge (glassmorphism pill), role tags (mono font), hover parallax zoom, progressive disclosure overlay, layered shadows
+   - Filter logic: all items in one flat array, filtered by selected tag
+   - Animated transitions using CSS `transition` on `opacity`, `transform`, and `max-height`
 
-2. **`src/index.css`**
-   - Add `@keyframes shimmer` for the button shine effect
-   - Add `.shimmer-button` styles with pseudo-element overlay
-   - Add `.nav-glass` utility for the glassmorphism scroll state
+2. **`src/index.css`** -- Add new utility styles:
+   - `.bento-card` class with layered shadow and squircle radius
+   - `.bento-card:hover` with deepened shadow and slight lift
+   - `.impact-badge` glassmorphism styling (reuses `hero-glass-card` pattern)
+   - `.card-reveal` for the progressive disclosure slide-up animation
 
-### No new dependencies needed
-- All effects use CSS animations and Tailwind utilities
-- Download icon from existing `lucide-react` package
+### No new dependencies:
+- All animations use CSS transitions and keyframes
+- Filter animation via CSS classes toggled by React state
+- No Framer Motion needed (layout animations approximated with CSS grid + transitions)
 
-### Accessibility improvements
-- All text meets WCAG AA contrast ratios (white on #050505 = 18.4:1)
-- Focus-visible states maintained on all interactive elements
-- Semantic HTML preserved (nav, ul/li, button/a)
+### Responsive behavior:
+- Desktop (1024px+): Full asymmetric bento grid, hover effects active
+- Tablet (768-1023px): 2-column grid, simplified hover
+- Mobile (<768px): Single column stack, impact badges still visible, no hover effects
 
