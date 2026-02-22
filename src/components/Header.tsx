@@ -14,8 +14,19 @@ const Header = () => {
   const navigate = useNavigate();
   const isHomePage = location.pathname === '/';
 
-  // isDarkNav: true when on home page AND not scrolled (over the dark hero)
-  const isDarkNav = isHomePage && !isScrolled;
+  // In the new system-aware hero, the hero follows the system theme.
+  // isDarkNav is true when on home page, not scrolled, AND system is in dark mode.
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const checkDark = () => setIsDarkMode(document.documentElement.classList.contains('dark'));
+    checkDark();
+    const observer = new MutationObserver(checkDark);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
+  const isDarkNav = isHomePage && !isScrolled && isDarkMode;
 
   useEffect(() => {
     const handleScroll = () => {
