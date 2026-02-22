@@ -282,7 +282,7 @@ const FilterBar = ({ active, onChange }: { active: FilterKey; onChange: (k: Filt
         <button
           key={f.key}
           onClick={() => onChange(f.key)}
-          className={`relative z-10 px-4 py-2 rounded-full text-xs font-medium tracking-wide transition-colors duration-300 
+          className={`relative z-10 px-4 py-2 rounded-md text-xs font-medium tracking-wide transition-colors duration-300 
             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
             ${active === f.key
               ? 'text-background'
@@ -293,7 +293,7 @@ const FilterBar = ({ active, onChange }: { active: FilterKey; onChange: (k: Filt
           {active === f.key && (
             <motion.div
               layoutId="active-filter-pill"
-              className="absolute inset-0 rounded-full bg-foreground"
+              className="absolute inset-0 rounded-md bg-foreground"
               style={{ zIndex: -1 }}
               transition={{ type: 'spring', stiffness: 400, damping: 28 }}
             />
@@ -333,8 +333,8 @@ const CaseStudyCard = ({ study, index, isFeatured }: { study: CaseStudy; index: 
     >
       <CardWrapper
         {...(cardProps as any)}
-        className="group cursor-pointer block rounded-2xl overflow-hidden transition-all duration-500 ease-out
-          bg-[hsl(var(--works-card-bg))] border border-[hsl(var(--works-card-border))]
+        className="group cursor-pointer block rounded-card overflow-hidden transition-all duration-500 ease-out
+          bg-surface-card border border-surface-card-border
           hover:scale-[1.02] hover:-translate-y-1
           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         style={{
@@ -361,7 +361,7 @@ const CaseStudyCard = ({ study, index, isFeatured }: { study: CaseStudy; index: 
 
             {/* View arrow — fades in bottom-right */}
             <div className="absolute bottom-4 right-4 opacity-0 translate-y-2 transition-all duration-400 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-background/90 backdrop-blur-sm">
+              <div className="flex h-10 w-10 items-center justify-center rounded-md bg-background/90 backdrop-blur-sm">
                 <ArrowUpRight className="h-5 w-5 text-foreground transition-transform duration-300 group-hover:rotate-12" />
               </div>
             </div>
@@ -377,7 +377,7 @@ const CaseStudyCard = ({ study, index, isFeatured }: { study: CaseStudy; index: 
           </div>
 
           {/* Metadata */}
-          <div className="p-5 space-y-2.5">
+          <div className="p-6 space-y-3">
             <div className="flex items-center justify-between text-[11px] text-muted-foreground tracking-wide uppercase">
               <span>{study.category}</span>
               <span>{study.year}</span>
@@ -391,7 +391,7 @@ const CaseStudyCard = ({ study, index, isFeatured }: { study: CaseStudy; index: 
                 {study.roleTags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-[10px] font-mono tracking-wider px-2 py-1 rounded-md bg-secondary text-muted-foreground border border-border"
+                    className="text-[10px] font-mono tracking-wider px-2 py-1 rounded-sm bg-secondary text-muted-foreground border border-border"
                   >
                     {tag}
                   </span>
@@ -428,16 +428,16 @@ const CaseStudies = () => {
 
   // Grid class
   const gridClass = isBentoLayout
-    ? 'grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-2'
+    ? 'grid gap-8 grid-cols-1 md:grid-cols-2'
     : filtered.some((s) => s.filterTags.includes('writing'))
-      ? 'grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-3'
-      : 'grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-2';
+      ? 'grid gap-8 grid-cols-1 md:grid-cols-3'
+      : 'grid gap-8 grid-cols-1 md:grid-cols-2';
 
   return (
     <section id="case-studies" className="py-24 md:py-32">
       <div className="container">
         {/* Section header */}
-        <div className="mb-12 md:mb-16 space-y-6">
+        <div className="mb-16 space-y-6">
           <motion.h2
             className="font-display font-bold leading-[1.05] tracking-tight text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem]"
             initial={{ opacity: 0, y: 20 }}

@@ -24,7 +24,7 @@ const Marquee = () => {
   );
 
   return (
-    <section className="border-y border-border bg-secondary/50 py-8 sm:py-10 md:py-12 overflow-hidden group">
+    <section className="border-y border-surface-card-border bg-secondary/50 py-8 sm:py-10 md:py-12 overflow-hidden group">
       <div className="flex">
         <div className="marquee flex items-center shrink-0 group-hover:[animation-play-state:paused]">
           <MarqueeContent />

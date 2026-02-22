@@ -64,7 +64,7 @@ const Testimonials = () => {
 
   return (
     <section className="py-24 md:py-32 overflow-hidden">
-      <div className="container mb-12 md:mb-16">
+      <div className="container mb-16">
         <div className="space-y-4">
           <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
             testimonials
@@ -95,13 +95,13 @@ const Testimonials = () => {
           {duplicatedTestimonials.map((testimonial, index) => (
             <div
               key={`${testimonial.id}-${index}`}
-              className="flex-shrink-0 w-[210px] sm:w-[245px] md:w-[280px] rounded-[4px] border border-border bg-card p-4 sm:p-5 transition-all duration-300 hover:border-accent/50 hover:shadow-lg will-change-transform"
+              className="flex-shrink-0 w-[216px] sm:w-[248px] md:w-[280px] rounded-card border border-surface-card-border bg-surface-card p-6 transition-all duration-300 hover:border-accent/50 hover:shadow-lg will-change-transform"
             >
               <blockquote className="mb-4 sm:mb-5 font-display text-xs sm:text-sm md:text-base italic leading-relaxed text-foreground/90">
                 "{testimonial.quote}"
               </blockquote>
               <div className="flex items-center gap-2 sm:gap-3">
-                <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-[4px] bg-secondary flex items-center justify-center">
+                <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-sm bg-secondary flex items-center justify-center">
                   <span className="text-xs sm:text-sm font-medium text-muted-foreground">
                     {testimonial.author.split(' ').map(n => n[0]).join('')}
                   </span>

@@ -28,38 +28,52 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 0 0% 92%;
-    --input: 0 0% 92%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
     --ring: 0 0% 7%;
 
-    --radius: 8px;
+    /* ── Unified Design System ── */
+    --radius: 24px;
+    --radius-card: 24px;
+    --radius-sm: 12px;
+    --radius-xs: 8px;
 
-    /* Editorial design tokens */
-    --surface: 0 0% 98%;
+    /* Unified Surface Logic — Light */
+    --surface-card: 0 0% 100%;           /* #FFFFFF */
+    --surface-card-border: 0 0% 90%;     /* #E5E5E7 */
     --surface-elevated: 0 0% 100%;
+    --surface-sunken: 240 5% 96%;        /* F2F2F7 for section backgrounds */
+    --surface-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px -4px rgba(0,0,0,0.06);
+    --surface-shadow-hover: 0 8px 40px -8px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.04);
+
+    /* Typography */
+    --tracking-display: -0.02em;
+    --leading-body: 1.6;
+
+    /* Accent — Electric Blue (used sparingly) */
+    --electric: 225 100% 50%;
+
+    /* Editorial tokens */
     --text-primary: 0 0% 7%;
     --text-secondary: 0 0% 40%;
     --text-tertiary: 0 0% 55%;
-    
+
     --hero-gradient: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(0 0% 98%) 100%);
     --text-gradient: linear-gradient(90deg, hsl(0 0% 7%) 0%, hsl(0 0% 30%) 100%);
-    --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
-    --card-shadow-hover: 0 10px 40px -12px rgba(0, 0, 0, 0.08);
-    --image-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.08);
 
-    /* Works card tokens — Light */
-    --works-card-bg: 0 0% 100%;           /* #FFFFFF */
-    --works-card-border: 0 0% 90%;        /* #E5E5E7 */
-    --works-card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px -4px rgba(0,0,0,0.06);
-    --works-card-shadow-hover: 0 8px 40px -8px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.04);
-    --works-glow-ai: 225 100% 50%;        /* Blue glow for AI */
-    --works-glow-award: 45 100% 50%;      /* Gold glow for Awards */
+    /* Works card tokens — Light (unified with surface) */
+    --works-card-bg: var(--surface-card);
+    --works-card-border: var(--surface-card-border);
+    --works-card-shadow: var(--surface-shadow);
+    --works-card-shadow-hover: var(--surface-shadow-hover);
+    --works-glow-ai: 225 100% 50%;
+    --works-glow-award: 45 100% 50%;
 
     /* Hero system-aware tokens — Light (Paper White) */
-    --hero-bg: 240 20% 99%;          /* #FBFBFD */
-    --hero-text: 0 0% 11%;           /* #1D1D1F */
+    --hero-bg: 240 20% 99%;
+    --hero-text: 0 0% 11%;
     --hero-text-sub: 0 0% 40%;
-    --hero-accent: 225 100% 40%;     /* International Klein Blue */
+    --hero-accent: 225 100% 40%;
     --hero-accent-glow: none;
     --hero-mesh-color: 0 0% 80%;
     --hero-mesh-opacity: 0.15;
@@ -68,18 +82,18 @@
     --hero-card-shadow: 0 2px 12px -2px rgba(0,0,0,0.06);
     --hero-card-shadow-hover: 0 8px 30px -8px rgba(0,0,0,0.12);
 
-    /* Process section tokens — Light */
-    --process-bg: 240 5% 96%;            /* #F2F2F7 */
-    --process-card-bg: 0 0% 100%;
-    --process-card-border: 0 0% 90%;
+    /* Process section tokens — Light (unified) */
+    --process-bg: var(--surface-sunken);
+    --process-card-bg: var(--surface-card);
+    --process-card-border: var(--surface-card-border);
     --process-dot-color: 0 0% 85%;
     --process-accent: 225 100% 50%;
     --process-line: 0 0% 80%;
 
-    /* About section tokens — Light */
-    --about-bg: 240 5% 97%;              /* #F5F5F7 Soft Stone */
-    --about-card-bg: 0 0% 100%;
-    --about-card-border: 0 0% 90%;
+    /* About section tokens — Light (unified) */
+    --about-bg: var(--surface-sunken);
+    --about-card-bg: var(--surface-card);
+    --about-card-border: var(--surface-card-border);
     --about-chip-bg: 0 0% 96%;
     --about-chip-border: 0 0% 88%;
 
@@ -96,7 +110,7 @@
     --footer-text-muted: 0 0% 100% / 0.45;
     --footer-border: 0 0% 100% / 0.05;
     --footer-link-hover: 0 0% 100%;
-    
+
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -110,9 +124,9 @@
   .dark {
     --background: 0 0% 4%;
     --foreground: 0 0% 98%;
-    --card: 0 0% 8%;
+    --card: 0 0% 9%;
     --card-foreground: 0 0% 98%;
-    --popover: 0 0% 8%;
+    --popover: 0 0% 9%;
     --popover-foreground: 0 0% 98%;
     --primary: 0 0% 98%;
     --primary-foreground: 0 0% 4%;
@@ -126,11 +140,22 @@
     --input: 0 0% 18%;
     --ring: 0 0% 98%;
 
+    /* Unified Surface Logic — Dark */
+    --surface-card: 0 0% 9%;             /* #161617 */
+    --surface-card-border: 0 0% 17%;     /* #2C2C2E */
+    --surface-elevated: 0 0% 12%;
+    --surface-sunken: 0 0% 2%;           /* near-black for section bgs */
+    --surface-shadow: none;
+    --surface-shadow-hover: none;
+
+    /* Accent — Electric Blue */
+    --electric: 225 100% 55%;
+
     /* Hero system-aware tokens — Dark (Deep Obsidian) */
-    --hero-bg: 0 0% 2%;              /* #050505 */
-    --hero-text: 0 0% 100%;          /* #FFFFFF */
+    --hero-bg: 0 0% 2%;
+    --hero-text: 0 0% 100%;
     --hero-text-sub: 0 0% 53%;
-    --hero-accent: 187 100% 50%;     /* Electric Cyan */
+    --hero-accent: 187 100% 50%;
     --hero-accent-glow: 0 0 20px hsla(187, 100%, 50%, 0.3);
     --hero-mesh-color: 187 100% 50%;
     --hero-mesh-opacity: 0.06;
@@ -139,25 +164,25 @@
     --hero-card-shadow: 0 2px 12px -2px rgba(0,212,255,0.06);
     --hero-card-shadow-hover: 0 8px 30px -8px rgba(0,212,255,0.15);
 
-    /* Works card tokens — Dark */
-    --works-card-bg: 0 0% 9%;            /* #161617 */
-    --works-card-border: 0 0% 17%;       /* #2C2C2E */
+    /* Works card tokens — Dark (unified) */
+    --works-card-bg: var(--surface-card);
+    --works-card-border: var(--surface-card-border);
     --works-card-shadow: none;
     --works-card-shadow-hover: none;
-    --works-glow-ai: 187 100% 50%;       /* Cyan glow for AI */
-    --works-glow-award: 45 100% 60%;     /* Gold glow for Awards */
+    --works-glow-ai: 187 100% 50%;
+    --works-glow-award: 45 100% 60%;
 
-    /* Process section tokens — Dark */
-    --process-bg: 0 0% 0%;               /* Pure Black */
+    /* Process section tokens — Dark (unified) */
+    --process-bg: var(--surface-sunken);
     --process-card-bg: 0 0% 6%;
     --process-card-border: 0 0% 100% / 0.1;
     --process-dot-color: 0 0% 100% / 0.06;
     --process-accent: 187 100% 50%;
     --process-line: 0 0% 100% / 0.15;
 
-    /* About section tokens — Dark */
-    --about-bg: 240 5% 4%;               /* #0A0A0B Midnight Navy */
-    --about-card-bg: 0 0% 7%;
+    /* About section tokens — Dark (unified) */
+    --about-bg: var(--surface-sunken);
+    --about-card-bg: var(--surface-card);
     --about-card-border: 0 0% 100% / 0.08;
     --about-chip-bg: 0 0% 10%;
     --about-chip-border: 0 0% 100% / 0.1;
@@ -195,11 +220,21 @@
     @apply bg-background text-foreground font-sans antialiased;
     overflow-x: hidden;
   }
+
+  /* ── Typography Harmony ── */
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: var(--tracking-display);
+  }
+
+  p, li, blockquote {
+    line-height: var(--leading-body);
+  }
 }
 
 @layer components {
   .font-display {
     font-family: 'Syne', system-ui, sans-serif;
+    letter-spacing: var(--tracking-display);
   }
 
   .font-sans {
@@ -232,28 +267,37 @@
     animation-direction: reverse;
   }
 
+  /* ── Unified Card Surface ── */
+  .surface-card {
+    background: hsl(var(--surface-card));
+    border: 1px solid hsl(var(--surface-card-border));
+    border-radius: var(--radius-card);
+    box-shadow: var(--surface-shadow);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .surface-card:hover {
+    box-shadow: var(--surface-shadow-hover);
+  }
+
   .card-hover {
     @apply transition-all duration-500 ease-out;
   }
 
   .card-hover:hover {
     @apply -translate-y-1;
-    box-shadow: var(--card-shadow-hover);
+    box-shadow: var(--surface-shadow-hover);
   }
 
   /* Bento card styles */
   .bento-card {
     @apply transition-all duration-500 ease-out;
-    box-shadow:
-      0 1px 3px 0 rgba(0, 0, 0, 0.04),
-      0 4px 16px -2px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--surface-shadow);
   }
 
   .bento-card:hover {
     transform: scale(1.02) translateY(-4px);
-    box-shadow:
-      0 4px 12px 0 rgba(0, 0, 0, 0.06),
-      0 20px 50px -12px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--surface-shadow-hover);
   }
 
   /* Impact badge - glassmorphism pill */
@@ -263,7 +307,7 @@
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 9999px;
-    padding: 6px 14px;
+    padding: 8px 16px;
     box-shadow: 0 0 12px rgba(0, 102, 255, 0.15), inset 0 0 8px rgba(255, 255, 255, 0.05);
   }
 
@@ -296,7 +340,7 @@
   video,
   .gif-asset {
     border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
+    border-radius: var(--radius-xs);
   }
 
   /* Exception for images that should have no border/radius */
@@ -384,6 +428,7 @@
   border: 1px solid hsla(var(--hero-glass-border));
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-sm);
   box-shadow: var(--hero-card-shadow);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }

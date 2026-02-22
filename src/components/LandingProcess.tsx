@@ -86,7 +86,7 @@ const DottedGrid = () => (
 // ── Icon Chip ──────────────────────────────────────────
 const IconChip = ({ Icon, isInView }: { Icon: typeof Search; isInView: boolean }) => (
   <motion.div
-    className="relative flex h-12 w-12 items-center justify-center rounded-xl
+    className="relative flex h-12 w-12 items-center justify-center rounded-md
       bg-[hsl(var(--process-card-bg))] border border-[hsl(var(--process-card-border))]"
     initial={{ scale: 0.8, opacity: 0 }}
     animate={isInView ? { scale: 1, opacity: 1 } : {}}
@@ -101,7 +101,7 @@ const IconChip = ({ Icon, isInView }: { Icon: typeof Search; isInView: boolean }
 
 // ── Code Block ─────────────────────────────────────────
 const CodeBlock = ({ title, code }: { title: string; code: string }) => (
-  <div className="mt-4 rounded-xl overflow-hidden border border-[hsl(var(--process-card-border))] bg-[hsl(var(--process-bg))]">
+  <div className="mt-4 rounded-md overflow-hidden border border-[hsl(var(--process-card-border))] bg-[hsl(var(--process-bg))]">
     <div className="flex items-center gap-2 px-4 py-2 border-b border-[hsl(var(--process-card-border))]">
       <div className="flex gap-1.5">
         <span className="w-2.5 h-2.5 rounded-full bg-red-400/60" />
@@ -139,7 +139,7 @@ const StepCard = ({ step, index }: { step: typeof steps[0]; index: number }) => 
       transition={{ delay: index * 0.12, duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
     >
       <div
-        className="relative overflow-hidden rounded-2xl border border-[hsl(var(--process-card-border))]
+        className="relative overflow-hidden rounded-card border border-[hsl(var(--process-card-border))]
           bg-[hsl(var(--process-card-bg))] p-6 md:p-8 transition-all duration-500"
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setMousePos({ x: 50, y: 50 })}
@@ -186,7 +186,7 @@ const StepCard = ({ step, index }: { step: typeof steps[0]; index: number }) => 
           </div>
 
           {/* Mobile metric */}
-          <div className="flex sm:hidden items-center gap-3 mb-4 p-3 rounded-xl bg-[hsl(var(--process-bg))] border border-[hsl(var(--process-card-border))]">
+          <div className="flex sm:hidden items-center gap-3 mb-4 p-4 rounded-md bg-[hsl(var(--process-bg))] border border-[hsl(var(--process-card-border))]">
             <span className="font-display text-xl font-bold text-[hsl(var(--process-accent))]">
               {step.metric.value}
             </span>
@@ -276,7 +276,7 @@ const LandingProcess = () => {
     <section
       ref={sectionRef}
       id="process"
-      className="relative py-24 md:py-32 overflow-hidden transition-colors duration-500"
+      className="relative py-24 md:py-32 overflow-hidden transition-colors duration-500 border-t border-[hsl(var(--surface-card-border))]"
       style={{ backgroundColor: 'hsl(var(--process-bg))' }}
     >
       {/* Full section dotted grid */}
@@ -286,7 +286,7 @@ const LandingProcess = () => {
 
       <div className="container relative z-10">
         {/* Section header */}
-        <div className="mb-16 md:mb-20 max-w-2xl">
+        <div className="mb-16 md:mb-24 max-w-2xl">
           <motion.span
             className="text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground block mb-4"
             initial={{ opacity: 0, y: 12 }}
@@ -325,7 +325,7 @@ const LandingProcess = () => {
             <ConnectorLine />
           </div>
 
-          <div className="grid gap-6 md:gap-8 lg:pl-20">
+          <div className="grid gap-8 lg:pl-20">
             {steps.map((step, index) => (
               <StepCard key={step.number} step={step} index={index} />
             ))}

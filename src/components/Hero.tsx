@@ -135,7 +135,7 @@ const StatCard = ({ value, label, index }: { value: string; label: string; index
 
   return (
     <motion.div
-      className="hero-glass-card rounded-2xl px-5 py-5 text-center cursor-default select-none"
+      className="hero-glass-card px-5 py-5 text-center cursor-default select-none"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.6 + index * 0.1, duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
@@ -208,7 +208,7 @@ const Hero = () => {
       {isDesktop && <NeuralMesh mouseX={mousePos.x} mouseY={mousePos.y} />}
 
       {/* Content with parallax */}
-      <div className="container relative z-20 flex min-h-screen flex-col items-center justify-center px-6 sm:px-8 lg:px-12 py-24 sm:py-28 md:py-32 lg:py-40 text-center">
+      <div className="container relative z-20 flex min-h-screen flex-col items-center justify-center px-6 sm:px-8 lg:px-12 py-24 sm:py-32 md:py-40 lg:py-48 text-center">
         <motion.div
           className="flex flex-col items-center gap-6 sm:gap-7 md:gap-8 max-w-4xl"
           style={isDesktop ? { x: parallaxX, y: parallaxY } : undefined}
@@ -255,7 +255,7 @@ const Hero = () => {
           </motion.p>
 
           {/* Bento Stats Strip */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 w-full max-w-2xl">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full max-w-2xl">
             {stats.map((stat, i) => (
               <StatCard key={stat.label} {...stat} index={i} />
             ))}
@@ -270,7 +270,7 @@ const Hero = () => {
           >
             <a
               href="#case-studies"
-              className="group inline-flex items-center gap-3 rounded-xl px-7 py-3.5 text-sm font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] bg-[hsl(var(--hero-accent))] text-white"
+              className="group inline-flex items-center gap-3 rounded-md px-8 py-4 text-sm font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] bg-[hsl(var(--hero-accent))] text-white"
               style={{ boxShadow: '0 0 24px hsla(var(--hero-accent), 0.25)' }}
             >
               View Case Studies
@@ -278,7 +278,7 @@ const Hero = () => {
             </a>
             <a
               href="#process"
-              className="group inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-medium transition-all duration-300 hover:scale-[1.02] border text-[hsl(var(--hero-text))] border-[hsla(var(--hero-text),0.15)] hover:border-[hsla(var(--hero-text),0.4)]"
+              className="group inline-flex items-center gap-2 rounded-md px-8 py-4 text-sm font-medium transition-all duration-300 hover:scale-[1.02] border text-[hsl(var(--hero-text))] border-[hsla(var(--hero-text),0.15)] hover:border-[hsla(var(--hero-text),0.4)]"
             >
               Learn My Process
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
