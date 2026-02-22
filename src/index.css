@@ -212,10 +212,21 @@
   }
 
   html {
-    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+  }
+
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
   }
 
   body {
@@ -305,8 +316,8 @@
   /* Impact badge - glassmorphism pill */
   .impact-badge {
     background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 9999px;
     padding: 8px 16px;
@@ -428,8 +439,8 @@
 .hero-glass-card {
   background: hsla(var(--hero-glass-bg));
   border: 1px solid hsla(var(--hero-glass-border));
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: var(--radius-sm);
   box-shadow: var(--hero-card-shadow);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -520,14 +531,14 @@
 
 /* Nav glassmorphism */
 .nav-glass {
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  background: hsla(0, 0%, 100%, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: hsla(0, 0%, 100%, 0.75);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .nav-glass-dark {
-  background: hsla(0, 0%, 2%, 0.6);
+  background: hsla(0, 0%, 2%, 0.55);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 

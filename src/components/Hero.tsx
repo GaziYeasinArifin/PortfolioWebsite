@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { ArrowDown, ArrowRight, MapPin } from 'lucide-react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import MagneticWrapper from '@/components/MagneticWrapper';
 
 const stats = [
   { value: '850K+', label: 'Monthly Users' },
@@ -268,21 +269,25 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.7 }}
           >
-            <a
-              href="#case-studies"
-              className="group inline-flex items-center gap-3 rounded-md px-8 py-4 text-sm font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] bg-[hsl(var(--hero-accent))] text-white"
-              style={{ boxShadow: '0 0 24px hsla(var(--hero-accent), 0.25)' }}
-            >
-              View Case Studies
-              <ArrowDown className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5" />
-            </a>
-            <a
-              href="#process"
-              className="group inline-flex items-center gap-2 rounded-md px-8 py-4 text-sm font-medium transition-all duration-300 hover:scale-[1.02] border text-[hsl(var(--hero-text))] border-[hsla(var(--hero-text),0.15)] hover:border-[hsla(var(--hero-text),0.4)]"
-            >
-              Learn My Process
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
+            <MagneticWrapper strength={0.3} radius={100}>
+              <a
+                href="#case-studies"
+                className="group inline-flex items-center gap-3 rounded-md px-8 py-4 text-sm font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] bg-[hsl(var(--hero-accent))] text-white"
+                style={{ boxShadow: '0 0 24px hsla(var(--hero-accent), 0.25)' }}
+              >
+                View Case Studies
+                <ArrowDown className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5" />
+              </a>
+            </MagneticWrapper>
+            <MagneticWrapper strength={0.3} radius={100}>
+              <a
+                href="#process"
+                className="group inline-flex items-center gap-2 rounded-md px-8 py-4 text-sm font-medium transition-all duration-300 hover:scale-[1.02] border text-[hsl(var(--hero-text))] border-[hsla(var(--hero-text),0.15)] hover:border-[hsla(var(--hero-text),0.4)]"
+              >
+                Learn My Process
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </a>
+            </MagneticWrapper>
           </motion.div>
 
           {/* Location Badge */}

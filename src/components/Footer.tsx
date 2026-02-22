@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { ArrowUp, Linkedin, BookOpen, FileUser } from 'lucide-react';
 import logoSvg from '@/assets/logo.svg';
+import MagneticWrapper from '@/components/MagneticWrapper';
 
 const Footer = forwardRef<HTMLElement>((_, ref) => {
   const navigate = useNavigate();
@@ -125,15 +126,17 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
                   const Icon = link.icon;
                   return (
                     <li key={link.label}>
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-sm text-[hsl(var(--footer-text))]/70 transition-colors duration-200 hover:text-[hsl(var(--footer-link-hover))]"
-                      >
-                        <Icon className="h-4 w-4" />
-                        {link.label}
-                      </a>
+                      <MagneticWrapper strength={0.4} radius={60}>
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-sm text-[hsl(var(--footer-text))]/70 transition-colors duration-200 hover:text-[hsl(var(--footer-link-hover))]"
+                        >
+                          <Icon className="h-4 w-4" />
+                          {link.label}
+                        </a>
+                      </MagneticWrapper>
                     </li>
                   );
                 })}
