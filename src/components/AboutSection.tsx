@@ -31,7 +31,7 @@ const trustedBy = [
   'InShot', 'Screenlife', 'Spotlight', 'Cal State EB', 'Maze', 'Amplitude', 'Figma', 'Dovetail',
 ];
 
-// ── Stat Card ──────────────────────────────────────────
+// ── Stat Card with Shimmer ─────────────────────────────
 const StatCard = ({ stat, index }: { stat: typeof impactStats[0]; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-40px' });
@@ -39,20 +39,30 @@ const StatCard = ({ stat, index }: { stat: typeof impactStats[0]; index: number 
   return (
     <motion.div
       ref={ref}
-      className="relative overflow-hidden rounded-card p-6 md:p-8
+      className="stat-shimmer-card relative overflow-hidden rounded-card p-6
         bg-surface-card border border-surface-card-border
-        transition-all duration-500 hover:-translate-y-1"
+        transition-all duration-500 group cursor-default"
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: index * 0.1, duration: 0.5, ease: 'easeOut' }}
-      style={{ boxShadow: 'var(--card-shadow)' }}
+      style={{ boxShadow: 'var(--surface-shadow)' }}
     >
-      <div className="font-display text-3xl md:text-4xl font-bold text-foreground">
-        {stat.value}
+      {/* Shimmer sweep overlay on hover */}
+      <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100">
+        <div className="stat-shimmer-sweep absolute inset-[-1px] rounded-card" />
       </div>
-      <div className="mt-1 text-sm font-medium text-foreground">{stat.label}</div>
-      <div className="text-[11px] font-mono tracking-wider uppercase text-muted-foreground mt-0.5">
-        {stat.sublabel}
+
+      <div className="relative z-10">
+        <div
+          className="text-3xl md:text-4xl font-bold text-foreground"
+          style={{ fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace" }}
+        >
+          {stat.value}
+        </div>
+        <div className="mt-1 text-sm font-medium text-foreground">{stat.label}</div>
+        <div className="text-[11px] font-mono tracking-wider uppercase text-muted-foreground mt-0.5">
+          {stat.sublabel}
+        </div>
       </div>
     </motion.div>
   );
@@ -67,7 +77,7 @@ const SkillChip = ({ skill, index }: { skill: typeof skills[0]; index: number })
   return (
     <motion.div
       ref={ref}
-      className="flex items-center gap-3 px-4 py-3 rounded-md cursor-default select-none
+      className="flex items-center gap-3 px-4 py-3 rounded-sm cursor-default select-none
         border transition-all duration-400"
       initial={{ opacity: 0, scale: 0.9 }}
       animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -151,12 +161,12 @@ const AboutSection = () => {
       style={{ backgroundColor: 'hsl(var(--about-bg))' }}
     >
       <div className="container relative z-10">
-        {/* Two-column master layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-16 mb-16 md:mb-24">
+        {/* Golden Ratio Layout: 40/60 split */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-16 md:mb-24">
 
-          {/* Left: Portrait */}
+          {/* Left 40%: Portrait (5 of 12 ≈ ~40%) */}
           <motion.div
-            className="lg:col-span-2 relative"
+            className="lg:col-span-5 relative"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -190,8 +200,8 @@ const AboutSection = () => {
             </div>
           </motion.div>
 
-          {/* Right: Executive Summary */}
-          <div ref={headingRef} className="lg:col-span-3 flex flex-col justify-center">
+          {/* Right 60%: Executive Summary (7 of 12 ≈ ~60%) */}
+          <div ref={headingRef} className="lg:col-span-7 flex flex-col justify-center">
             <motion.span
               className="text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground block mb-4"
               initial={{ opacity: 0, y: 12 }}
@@ -202,7 +212,7 @@ const AboutSection = () => {
             </motion.span>
 
             <motion.h2
-              className="font-display font-bold leading-[1.1] tracking-tight text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] text-foreground mb-6"
+              className="font-display font-bold leading-[1.1] tracking-tight text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] text-foreground mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.1, duration: 0.6 }}
@@ -210,31 +220,46 @@ const AboutSection = () => {
               11+ years leading design for high-scale AI systems, moving the needle on adoption and multi-million dollar business goals.
             </motion.h2>
 
-            <motion.p
-              className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6"
-              initial={{ opacity: 0, y: 16 }}
-              animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2, duration: 0.5 }}
-            >
-              I specialize in the intersection of product design and AI systems, building interfaces that translate complex machine learning models into intuitive user experiences. My work spans iOS, Android, and SaaS platforms serving millions of users.
-            </motion.p>
+            {/* Three distinct paragraphs with bold lead-ins */}
+            <div className="space-y-5">
+              <motion.p
+                className="text-base md:text-lg text-muted-foreground leading-relaxed"
+                initial={{ opacity: 0, y: 16 }}
+                animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.2, duration: 0.5 }}
+              >
+                <span className="font-semibold text-foreground">AI meets intuition.</span>{' '}
+                I specialize in the intersection of product design and AI systems, building interfaces that translate complex machine learning models into experiences people actually trust and enjoy.
+              </motion.p>
 
-            <motion.p
-              className="text-sm text-muted-foreground leading-relaxed"
-              initial={{ opacity: 0, y: 16 }}
-              animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3, duration: 0.5 }}
-            >
-              Previously at InShot (22M+ users), I led design across 3 creative apps that hit the App Store Top 10, established a cross-platform design system, and drove $1.5M+ in operational savings.
-            </motion.p>
+              <motion.p
+                className="text-base md:text-lg text-muted-foreground leading-relaxed"
+                initial={{ opacity: 0, y: 16 }}
+                animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.3, duration: 0.5 }}
+              >
+                <span className="font-semibold text-foreground">Scale without compromise.</span>{' '}
+                My work spans iOS, Android, and SaaS platforms serving millions of users, where every pixel must perform under real-world constraints like latency budgets, confidence thresholds, and cross-platform parity.
+              </motion.p>
+
+              <motion.p
+                className="text-sm text-muted-foreground leading-relaxed"
+                initial={{ opacity: 0, y: 16 }}
+                animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.4, duration: 0.5 }}
+              >
+                <span className="font-semibold text-foreground">Proven at InShot.</span>{' '}
+                I led design across 3 creative apps that hit the App Store Top 10, established a cross-platform design system, and drove $1.5M+ in operational savings.
+              </motion.p>
+            </div>
+
+            {/* Stats grid — aligned with text column */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+              {impactStats.map((stat, i) => (
+                <StatCard key={stat.label} stat={stat} index={i} />
+              ))}
+            </div>
           </div>
-        </div>
-
-        {/* Impact Ticker */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mb-16 md:mb-24">
-          {impactStats.map((stat, i) => (
-            <StatCard key={stat.label} stat={stat} index={i} />
-          ))}
         </div>
 
         {/* Skill Cloud */}
