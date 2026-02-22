@@ -1,129 +1,92 @@
 
 
-# Hero Section Redesign: "Minimalist Tech-Noir"
+# Navigation & Brand Header Redesign
 
 ## Overview
-A complete redesign of the Hero section targeting Lead Product Design roles at FAANG/Tier-1 companies. The new design combines Apple's precision with Vercel's technical edge, featuring interactive elements that showcase your interaction design expertise.
+Redesign the navigation bar to be high-contrast, accessible, and visually polished. The current header uses `bg-background/95` (white/light) which clashes with the dark hero. This fix ensures the nav is always readable, adds glassmorphism on scroll, a shimmer CTA, a status badge, and improves mobile UX.
 
 ---
 
-## 1. Visual Design
-
-**Color palette shift:**
-- Background: Deep navy-black (#050505) applied to the hero section only (not global)
-- Accent: Electric Blue (#0066FF) to Cyan (#00D4FF) gradient for "AI-Powered" text
-- Text: Pure white (#FAFAFA) for headlines, silver (#888) for secondary text
-- Card borders: Subtle white/blue glow using rgba borders
-
-**Typography:**
-- Headline in Syne (existing display font) -- bold, uppercase
-- Sub-headline in Inter (existing body font) -- regular weight
-- Stats in Inter with tabular numbers
+## The Problem
+The header currently uses the light theme's background color variables. Over the dark (#050505) hero section, the white/light text and background create a low-contrast, unreadable experience. A FAANG recruiter would immediately flag this as an accessibility failure.
 
 ---
 
-## 2. Layout Structure
+## Changes
 
-**Stacked center-aligned layout with wide margins:**
+### 1. Smart Header Theming (Dark on Hero, Glass on Scroll)
 
-```text
-+--------------------------------------------------+
-|          [Generative mesh background]             |
-|                                                   |
-|     "AI Cursor" trailing light on mouse move      |
-|                                                   |
-|        Interaction / UX / Product Designer        |
-|          (typewriter -- kept from current)         |
-|                                                   |
-|      PRODUCT DESIGN LEADER                        |
-|      FOR  AI-Powered  SYSTEMS                     |
-|           ^^^^^^^^^^ gradient text                |
-|                                                   |
-|   Driving adoption and $1.5M+ in measurable       |
-|   impact through high-scale iOS and SaaS systems  |
-|                                                   |
-|   +----------+ +----------+ +----------+          |
-|   | 850K+    | | $1.5M+   | | 35%+     |          |
-|   | Monthly  | | Savings  | | Adoption |          |
-|   | Users    | | Generated| | Gains    |          |
-|   +----------+ +----------+ +----------+          |
-|   (glassmorphism bento cards with glow)            |
-|                                                   |
-|   [View Case Studies]   Learn My Process -->       |
-|                                                   |
-|   Now in San Francisco  *                         |
-|                                                   |
-|              (scroll indicator)                   |
-+--------------------------------------------------+
-```
+**Before scroll:** Fully transparent background, white text/logo when over the dark hero.  
+**After scroll:** Glassmorphism effect with `backdrop-filter: blur(12px)`, a thin `1px` bottom border (`rgba(255,255,255,0.08)` on dark, `rgba(0,0,0,0.06)` on light), and a semi-transparent background.
 
----
+The header will detect whether it's on the home page and over the hero section to apply white text. On other pages or when scrolled past the hero, it reverts to the standard theme colors.
 
-## 3. Interactive Elements
+### 2. Logo & Name Visibility
 
-**Generative mesh background:**
-- A canvas-based flowing mesh/gradient that reacts slowly to mouse position (desktop only)
-- Uses 3-4 soft radial gradients in deep blue/cyan that shift position based on cursor
-- Lightweight -- no heavy libraries, just CSS radial gradients with transform
+- Logo image: apply a CSS `brightness(0) invert(1)` filter when over the dark hero to force white rendering
+- Name text: use `text-white` when over hero, `text-foreground` otherwise
+- Increase font weight to `font-bold` (700) for "gazi yeasin arifin" to ensure legibility at small sizes
+- Add a subtle hover glow effect (soft white text-shadow) instead of just opacity changes
 
-**AI cursor trailing light:**
-- A soft, glowing radial gradient (~200px) that follows the mouse with a slight delay
-- Creates a "spotlight" effect over dark content
-- Desktop only, hidden on mobile
+### 3. Navigation Links
 
-**Staggered reveal animations:**
-- Each element (label, headline, sub-headline, stats, CTAs) fades in with slide-up effect
-- Progressive delays (100ms, 200ms, 300ms, etc.) using existing animation utilities
+- Over dark hero: links use `text-white/60` base, `text-white` on hover
+- Scrolled/light: links use `text-muted-foreground` base, `text-foreground` on hover
+- Hover underline adapts color to match current theme context
 
----
+### 4. "Available in San Francisco" Status Badge
 
-## 4. Bento Grid Stats
+- Add a green pulsing dot + "Available in SF" text next to the nav links (desktop only)
+- Small pill-shaped badge with subtle border
+- Uses the same pulse animation already defined (`hero-dot-pulse`)
 
-Three glassmorphism cards in a horizontal row:
-- **850K+** Monthly Users
-- **$1.5M+** Savings Generated  
-- **35%+** Adoption Gains
+### 5. "Say Hi" Button Shimmer
 
-Card styling:
-- Semi-transparent background: rgba(255,255,255,0.03)
-- 1px border with subtle white/blue glow
-- Slight hover: border brightens, card lifts 2px
+- Add a CSS shimmer animation: a diagonal light sweep that plays once on hover
+- Button keeps the existing dark/light contrast but gains the shimmer for visual interest
+- No new dependencies needed -- pure CSS `@keyframes` and pseudo-element
 
----
+### 6. Resume Link Enhancement
 
-## 5. CTA Buttons
+- Add a small download icon (`Download` from lucide-react) next to "resume"
+- Icon animates downward slightly on hover (translateY +2px)
 
-- **Primary "View Case Studies"**: Solid electric blue button with subtle pulse animation on hover, white text
-- **Secondary "Learn My Process"**: Outline button with arrow icon that slides right on hover
+### 7. Mobile Menu Improvements
 
----
-
-## 6. Location Badge
-
-A small pill badge: "Now in San Francisco" with a subtle pulsing green dot, positioned below CTAs.
+- Full-screen overlay already exists -- enhance with:
+  - Social links (LinkedIn, Medium) at the bottom of the mobile menu
+  - "Available in SF" badge visible in mobile menu footer
+  - Dark background matching the hero when on home page
 
 ---
 
 ## Technical Details
 
 ### Files to modify:
-1. **`src/components/Hero.tsx`** -- Complete rewrite with new layout, generative background (CSS-based), mouse-tracking cursor light, glassmorphism stat cards, updated copy, gradient text, location badge
-2. **`src/index.css`** -- Add new keyframes for pulse glow, gradient animation, and cursor light styles; add delay-250, delay-275, delay-350 utilities if not present
-3. **`tailwind.config.ts`** -- No changes needed (existing animations sufficient with CSS additions)
 
-### No new dependencies:
-- All animations done with CSS transforms, keyframes, and React state (no Framer Motion needed to keep bundle light)
-- Generative background uses CSS radial-gradient with mousemove-driven inline styles
-- Cursor light effect uses a div with pointer-events-none that tracks mouse position
+1. **`src/components/Header.tsx`**
+   - Add state: `isOverHero` (boolean) -- computed from scroll position and whether on home page. The hero section is `min-h-screen`, so roughly `window.innerHeight` is the threshold
+   - Derive `isDarkNav` = `isHomePage && !isScrolled` (when at top of home page, use white text)
+   - Update header classes: when `isScrolled`, apply `backdrop-blur-xl bg-background/80 border-b border-border/10`; when not scrolled on home page, fully transparent
+   - Logo `<img>`: add conditional `filter brightness(0) invert(1)` class when `isDarkNav`
+   - Name text: conditional `text-white` vs `text-foreground`
+   - Nav links: conditional color classes based on `isDarkNav`
+   - Add "Available in SF" badge component inline (desktop nav area)
+   - Add `Download` icon to resume link
+   - "Say Hi" button: add `shimmer-button` class with CSS animation
+   - Mobile menu: add LinkedIn + Medium social links, "Available in SF" badge
 
-### Performance considerations:
-- Mouse tracking throttled with requestAnimationFrame
-- Canvas-free approach (CSS gradients only) for maximum performance
-- Background effects disabled on mobile to preserve battery
-- Will-change hints on animated elements
+2. **`src/index.css`**
+   - Add `@keyframes shimmer` for the button shine effect
+   - Add `.shimmer-button` styles with pseudo-element overlay
+   - Add `.nav-glass` utility for the glassmorphism scroll state
 
-### Responsive behavior:
-- Desktop (1024px+): Full interactive experience with cursor light and mesh background
-- Tablet (768-1023px): Static mesh background, no cursor effects, stats in 3-column grid
-- Mobile (<768px): Simplified dark hero, stats stacked in single column, no interactive background effects
+### No new dependencies needed
+- All effects use CSS animations and Tailwind utilities
+- Download icon from existing `lucide-react` package
+
+### Accessibility improvements
+- All text meets WCAG AA contrast ratios (white on #050505 = 18.4:1)
+- Focus-visible states maintained on all interactive elements
+- Semantic HTML preserved (nav, ul/li, button/a)
 
