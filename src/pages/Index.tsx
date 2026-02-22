@@ -7,8 +7,11 @@ import LandingProcess from '@/components/LandingProcess';
 import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import { useLenis } from '@/hooks/use-lenis';
 
 const Index = () => {
+  useLenis();
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
