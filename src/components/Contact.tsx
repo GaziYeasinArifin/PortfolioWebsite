@@ -44,7 +44,7 @@ const MagneticButton = ({ children, href }: { children: React.ReactNode; href: s
       }}
       transition={{ type: 'spring', stiffness: 250, damping: 20, mass: 0.5 }}
       className={`
-        relative z-10 inline-flex items-center gap-3 rounded-full px-10 py-5 text-base font-semibold
+        relative z-10 inline-flex items-center gap-3 rounded-md px-10 py-5 text-base font-semibold
         transition-colors duration-500
         ${isHovered
           ? 'bg-[hsl(var(--cta-btn-hover-bg))] text-[hsl(var(--cta-btn-hover-text))]'
@@ -73,7 +73,7 @@ const CopyEmailButton = () => {
   return (
     <button
       onClick={handleCopy}
-      className="relative z-10 inline-flex items-center gap-2 rounded-full border border-[hsl(var(--footer-border))] px-8 py-4 text-sm font-medium text-[hsl(var(--cta-text))] transition-all duration-300 hover:border-[hsl(var(--cta-text))] hover:bg-[hsl(var(--cta-text))]/5"
+      className="relative z-10 inline-flex items-center gap-2 rounded-md border border-[hsl(var(--footer-border))] px-8 py-4 text-sm font-medium text-[hsl(var(--cta-text))] transition-all duration-300 hover:border-[hsl(var(--cta-text))] hover:bg-[hsl(var(--cta-text))]/5"
     >
       Copy Email
     </button>
@@ -88,7 +88,7 @@ const Contact = () => {
     <section
       id="contact"
       ref={sectionRef}
-      className="grainy-gradient relative overflow-hidden bg-[hsl(var(--cta-bg))] py-32 md:py-44"
+      className="grainy-gradient relative overflow-hidden bg-[hsl(var(--cta-bg))] py-32 md:py-40"
     >
       {/* Radial gradient bg */}
       <div className="pointer-events-none absolute inset-0 z-0">

@@ -75,8 +75,8 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
         ref={ref}
         className="grainy-gradient relative border-t border-[hsl(var(--footer-border))] bg-[hsl(var(--footer-bg))]"
       >
-        <div className="container relative z-10 py-16 md:py-20">
-          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+        <div className="container relative z-10 py-16 md:py-24">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {/* Col 1 — Identity */}
             <div className="lg:col-span-1">
               <img src={logoSvg} alt="Gazi Arifin" className="no-border mb-4 h-8 w-auto brightness-0 invert" />
@@ -146,7 +146,7 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
                 Status
               </h3>
               <div className="space-y-4">
-                <div className="rounded-lg border border-[hsl(var(--footer-border))] bg-white/[0.03] p-4">
+                <div className="rounded-card border border-[hsl(var(--footer-border))] bg-white/[0.03] p-4">
                   <div className="flex items-center gap-2 text-xs text-[hsl(var(--footer-text-muted))]">
                     <span className="relative flex h-2 w-2">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -166,7 +166,7 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
           </div>
 
           {/* Bottom bar */}
-          <div className="mt-16 flex flex-col items-center justify-between gap-3 border-t border-[hsl(var(--footer-border))] pt-8 text-xs text-[hsl(var(--footer-text-muted))] md:flex-row">
+          <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-[hsl(var(--footer-border))] pt-8 text-xs text-[hsl(var(--footer-text-muted))] md:flex-row">
             <p>© 2026 gazi. all rights reserved.</p>
             <p className="opacity-50">
               Designed with precision in San Francisco. Built for the next 22 million.
@@ -184,7 +184,7 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="fixed bottom-8 right-8 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-black/60 text-white backdrop-blur-xl transition-colors hover:bg-black/80"
+            className="fixed bottom-8 right-8 z-50 flex h-12 w-12 items-center justify-center rounded-md border border-white/10 bg-black/60 text-white backdrop-blur-xl transition-colors hover:bg-black/80"
             aria-label="Scroll to top"
           >
             <ArrowUp className="h-5 w-5" />

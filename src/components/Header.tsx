@@ -164,10 +164,10 @@ const Header = () => {
             </ul>
 
             {/* Available in SF badge (desktop) */}
-            <div className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium border ${
+            <div className={`flex items-center gap-2 rounded-md px-3 py-1.5 text-xs font-medium border ${
               isDarkNav
                 ? 'border-white/10 text-white/50'
-                : 'border-border text-muted-foreground'
+                : 'border-surface-card-border text-muted-foreground'
             }`}>
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" />

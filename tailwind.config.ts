@@ -16,7 +16,12 @@ export default {
       fontFamily: {
         display: ["Syne", "system-ui", "sans-serif"],
         sans: ["Inter", "system-ui", "sans-serif"],
-        poppins: ["Poppins", "system-ui", "sans-serif"],
+      },
+      letterSpacing: {
+        display: "var(--tracking-display)",
+      },
+      lineHeight: {
+        body: "var(--leading-body)",
       },
       colors: {
         border: "hsl(var(--border))",
@@ -24,6 +29,7 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        electric: "hsl(var(--electric))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -52,6 +58,12 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        surface: {
+          card: "hsl(var(--surface-card))",
+          "card-border": "hsl(var(--surface-card-border))",
+          elevated: "hsl(var(--surface-elevated))",
+          sunken: "hsl(var(--surface-sunken))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -64,9 +76,17 @@ export default {
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        "card": "var(--radius-card)",
+        lg: "var(--radius-card)",
+        md: "var(--radius-sm)",
+        sm: "var(--radius-xs)",
+      },
+      spacing: {
+        /* 8px grid enforcement helpers */
+        '18': '4.5rem',   /* 72px */
+        '22': '5.5rem',   /* 88px */
+        '26': '6.5rem',   /* 104px */
+        '30': '7.5rem',   /* 120px */
       },
       keyframes: {
         "accordion-down": {

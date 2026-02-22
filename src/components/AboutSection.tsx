@@ -39,8 +39,8 @@ const StatCard = ({ stat, index }: { stat: typeof impactStats[0]; index: number 
   return (
     <motion.div
       ref={ref}
-      className="relative overflow-hidden rounded-2xl p-5 md:p-6
-        bg-[hsl(var(--about-card-bg))] border border-[hsl(var(--about-card-border))]
+      className="relative overflow-hidden rounded-card p-6 md:p-8
+        bg-surface-card border border-surface-card-border
         transition-all duration-500 hover:-translate-y-1"
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -67,7 +67,7 @@ const SkillChip = ({ skill, index }: { skill: typeof skills[0]; index: number })
   return (
     <motion.div
       ref={ref}
-      className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl cursor-default select-none
+      className="flex items-center gap-3 px-4 py-3 rounded-md cursor-default select-none
         border transition-all duration-400"
       initial={{ opacity: 0, scale: 0.9 }}
       animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -152,7 +152,7 @@ const AboutSection = () => {
     >
       <div className="container relative z-10">
         {/* Two-column master layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 mb-16 md:mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-16 mb-16 md:mb-24">
 
           {/* Left: Portrait */}
           <motion.div
@@ -162,7 +162,7 @@ const AboutSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <div className="relative rounded-2xl overflow-hidden aspect-[3/4] lg:aspect-auto lg:h-full">
+            <div className="relative rounded-card overflow-hidden aspect-[3/4] lg:aspect-auto lg:h-full">
               <img
                 src={aboutImage}
                 alt="Gazi Yeasin Arifin"
@@ -231,7 +231,7 @@ const AboutSection = () => {
         </div>
 
         {/* Impact Ticker */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-16 md:mb-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mb-16 md:mb-24">
           {impactStats.map((stat, i) => (
             <StatCard key={stat.label} stat={stat} index={i} />
           ))}
@@ -248,7 +248,7 @@ const AboutSection = () => {
           >
             Core Competencies
           </motion.p>
-          <div className="flex flex-wrap gap-2.5">
+          <div className="flex flex-wrap gap-3">
             {skills.map((skill, i) => (
               <SkillChip key={skill.label} skill={skill} index={i} />
             ))}
