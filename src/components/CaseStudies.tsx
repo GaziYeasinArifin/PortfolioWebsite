@@ -243,7 +243,9 @@ const CaseStudyImage = memo(({ src, alt }: { src: string; alt: string }) => {
   const handleLoad = useCallback(() => setIsLoaded(true), []);
 
   return (
-    <div className="relative h-full w-full overflow-hidden">
+    <div className="relative h-full w-full overflow-hidden bg-muted/30">
+      {/* Internal 1px border to prevent image bleeding */}
+      <div className="absolute inset-0 z-[2] pointer-events-none rounded-[inherit] border border-foreground/[0.06]" />
       <img
         src={placeholderSvg}
         alt=""
@@ -254,19 +256,19 @@ const CaseStudyImage = memo(({ src, alt }: { src: string; alt: string }) => {
         alt={alt}
         onLoad={handleLoad}
         loading="lazy"
-        className={`no-border h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-110 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`no-border h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
       />
     </div>
   );
 });
 CaseStudyImage.displayName = 'CaseStudyImage';
 
-// ── Impact Badge ───────────────────────────────────────
+// ── Impact Badge (standardized glassmorphism pill) ─────
 const ImpactBadge = ({ text }: { text: string }) => (
-  <div className="absolute top-4 right-4 z-10 rounded-full px-3 py-1.5 
-    bg-foreground/80 backdrop-blur-xl border border-background/10
-    shadow-[0_0_12px_hsla(var(--works-glow-ai),0.2)]">
-    <span className="text-[11px] font-mono font-semibold tracking-wide text-background">
+  <div className="absolute top-4 right-4 z-10 rounded-full px-3.5 py-1.5
+    bg-black/50 backdrop-blur-xl border border-white/15
+    shadow-[0_2px_12px_rgba(0,0,0,0.2)]">
+    <span className="text-[11px] font-mono font-semibold tracking-wider uppercase text-white">
       {text}
     </span>
   </div>
@@ -289,7 +291,6 @@ const FilterBar = ({ active, onChange }: { active: FilterKey; onChange: (k: Filt
               : 'text-muted-foreground hover:text-foreground'
             }`}
         >
-          {/* Sliding pill background */}
           {active === f.key && (
             <motion.div
               layoutId="active-filter-pill"
@@ -305,7 +306,7 @@ const FilterBar = ({ active, onChange }: { active: FilterKey; onChange: (k: Filt
   );
 };
 
-// ── Card Component ─────────────────────────────────────
+// ── Card Component (Unified "Frame" family) ───────────
 const CaseStudyCard = ({ study, index, isFeatured }: { study: CaseStudy; index: number; isFeatured: boolean }) => {
   const isExternal = !!study.externalUrl;
   const isInternal = !!study.slug;
@@ -315,8 +316,6 @@ const CaseStudyCard = ({ study, index, isFeatured }: { study: CaseStudy; index: 
     : isInternal
       ? { to: `/case-study/${study.slug}` }
       : {};
-
-  const glowVar = study.glowType === 'award' ? '--works-glow-award' : '--works-glow-ai';
 
   return (
     <motion.div
@@ -338,20 +337,18 @@ const CaseStudyCard = ({ study, index, isFeatured }: { study: CaseStudy; index: 
           hover:scale-[1.02] hover:-translate-y-1
           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         style={{
-          boxShadow: 'var(--works-card-shadow)',
+          boxShadow: 'var(--surface-shadow)',
         }}
         onMouseEnter={(e: any) => {
-          e.currentTarget.style.boxShadow = `var(--works-card-shadow-hover)${study.glowType ? `, 0 0 30px hsla(var(${glowVar}), 0.08)` : ''}`;
+          e.currentTarget.style.boxShadow = 'var(--surface-shadow-hover)';
         }}
         onMouseLeave={(e: any) => {
-          e.currentTarget.style.boxShadow = 'var(--works-card-shadow)';
+          e.currentTarget.style.boxShadow = 'var(--surface-shadow)';
         }}
       >
         <article className="h-full flex flex-col">
-          {/* Image container */}
-          <div className={`relative overflow-hidden ${
-            isFeatured ? 'aspect-[16/10]' : 'aspect-[4/3]'
-          }`}>
+          {/* Image Frame — consistent aspect ratio */}
+          <div className="relative overflow-hidden aspect-[16/10]">
             <CaseStudyImage src={study.image} alt={study.title} />
 
             {study.impactBadge && <ImpactBadge text={study.impactBadge} />}
@@ -361,14 +358,14 @@ const CaseStudyCard = ({ study, index, isFeatured }: { study: CaseStudy; index: 
 
             {/* View arrow — fades in bottom-right */}
             <div className="absolute bottom-4 right-4 opacity-0 translate-y-2 transition-all duration-400 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-              <div className="flex h-10 w-10 items-center justify-center rounded-md bg-background/90 backdrop-blur-sm">
+              <div className="flex h-10 w-10 items-center justify-center rounded-md bg-white/90 dark:bg-black/70 backdrop-blur-sm">
                 <ArrowUpRight className="h-5 w-5 text-foreground transition-transform duration-300 group-hover:rotate-12" />
               </div>
             </div>
 
             {/* Progressive disclosure */}
             {study.challengeResult && (
-              <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-100">
+              <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-100">
                 <p className="text-[13px] leading-relaxed text-white/90 font-medium">
                   {study.challengeResult}
                 </p>
@@ -376,18 +373,25 @@ const CaseStudyCard = ({ study, index, isFeatured }: { study: CaseStudy; index: 
             )}
           </div>
 
-          {/* Metadata */}
-          <div className="p-6 space-y-3">
-            <div className="flex items-center justify-between text-[11px] text-muted-foreground tracking-wide uppercase">
+          {/* Metadata — fixed position & weights for every card */}
+          <div className="p-6 flex flex-col gap-2 flex-1">
+            {/* Row 1: Category · Year */}
+            <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground tracking-wider uppercase">
               <span>{study.category}</span>
               <span>{study.year}</span>
             </div>
-            <h3 className="font-display text-lg md:text-xl lg:text-2xl font-bold leading-tight tracking-tight text-foreground">
+
+            {/* Row 2: Title — always same weight/size */}
+            <h3 className="font-display text-xl font-bold leading-tight text-foreground">
               {study.title}
             </h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">{study.description}</p>
+
+            {/* Row 3: Description */}
+            <p className="text-muted-foreground text-sm">{study.description}</p>
+
+            {/* Row 4: Role Tags (always at bottom) */}
             {study.roleTags && study.roleTags.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 pt-1">
+              <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
                 {study.roleTags.map((tag) => (
                   <span
                     key={tag}
