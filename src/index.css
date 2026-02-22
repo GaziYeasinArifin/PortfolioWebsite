@@ -141,6 +141,44 @@
     box-shadow: var(--card-shadow-hover);
   }
 
+  /* Bento card styles */
+  .bento-card {
+    @apply transition-all duration-500 ease-out;
+    box-shadow:
+      0 1px 3px 0 rgba(0, 0, 0, 0.04),
+      0 4px 16px -2px rgba(0, 0, 0, 0.06);
+  }
+
+  .bento-card:hover {
+    transform: scale(1.02) translateY(-4px);
+    box-shadow:
+      0 4px 12px 0 rgba(0, 0, 0, 0.06),
+      0 20px 50px -12px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Impact badge - glassmorphism pill */
+  .impact-badge {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 9999px;
+    padding: 6px 14px;
+    box-shadow: 0 0 12px rgba(0, 102, 255, 0.15), inset 0 0 8px rgba(255, 255, 255, 0.05);
+  }
+
+  /* Progressive disclosure slide-up */
+  .card-reveal {
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+  }
+
+  .group:hover .card-reveal {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
   .image-reveal {
     @apply overflow-hidden;
   }
