@@ -75,6 +75,13 @@
     --process-dot-color: 0 0% 85%;
     --process-accent: 225 100% 50%;
     --process-line: 0 0% 80%;
+
+    /* About section tokens — Light */
+    --about-bg: 240 5% 97%;              /* #F5F5F7 Soft Stone */
+    --about-card-bg: 0 0% 100%;
+    --about-card-border: 0 0% 90%;
+    --about-chip-bg: 0 0% 96%;
+    --about-chip-border: 0 0% 88%;
     
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -133,6 +140,13 @@
     --process-dot-color: 0 0% 100% / 0.06;
     --process-accent: 187 100% 50%;
     --process-line: 0 0% 100% / 0.15;
+
+    /* About section tokens — Dark */
+    --about-bg: 240 5% 4%;               /* #0A0A0B Midnight Navy */
+    --about-card-bg: 0 0% 7%;
+    --about-card-border: 0 0% 100% / 0.08;
+    --about-chip-bg: 0 0% 10%;
+    --about-chip-border: 0 0% 100% / 0.1;
   }
 }
 
