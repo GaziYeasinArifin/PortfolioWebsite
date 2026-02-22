@@ -67,6 +67,14 @@
     --hero-glass-border: 0 0% 0% / 0.06;
     --hero-card-shadow: 0 2px 12px -2px rgba(0,0,0,0.06);
     --hero-card-shadow-hover: 0 8px 30px -8px rgba(0,0,0,0.12);
+
+    /* Process section tokens — Light */
+    --process-bg: 240 5% 96%;            /* #F2F2F7 */
+    --process-card-bg: 0 0% 100%;
+    --process-card-border: 0 0% 90%;
+    --process-dot-color: 0 0% 85%;
+    --process-accent: 225 100% 50%;
+    --process-line: 0 0% 80%;
     
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -117,6 +125,14 @@
     --works-card-shadow-hover: none;
     --works-glow-ai: 187 100% 50%;       /* Cyan glow for AI */
     --works-glow-award: 45 100% 60%;     /* Gold glow for Awards */
+
+    /* Process section tokens — Dark */
+    --process-bg: 0 0% 0%;               /* Pure Black */
+    --process-card-bg: 0 0% 6%;
+    --process-card-border: 0 0% 100% / 0.1;
+    --process-dot-color: 0 0% 100% / 0.06;
+    --process-accent: 187 100% 50%;
+    --process-line: 0 0% 100% / 0.15;
   }
 }
 
