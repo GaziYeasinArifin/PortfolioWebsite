@@ -1,123 +1,197 @@
-import { useState, useEffect, forwardRef } from 'react';
+import { useState, useEffect, useCallback, forwardRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence, useScroll } from 'framer-motion';
+import { ArrowUp, Linkedin, BookOpen, FileUser } from 'lucide-react';
+import logoSvg from '@/assets/logo.svg';
 
 const Footer = forwardRef<HTMLElement>((_, ref) => {
   const navigate = useNavigate();
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const [currentTime, setCurrentTime] = useState('');
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const { scrollY } = useScroll();
 
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      const pstTime = now.toLocaleTimeString('en-GB', {
-        timeZone: 'America/Los_Angeles',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false,
-      });
-      setCurrentTime(pstTime);
+      setCurrentTime(
+        now.toLocaleTimeString('en-US', {
+          timeZone: 'America/Los_Angeles',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true,
+        })
+      );
     };
-
     updateTime();
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
   }, []);
 
-  const handleNavClick = (href: string) => {
-    if (!href.startsWith('/#')) {
-      navigate(href);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-    
-    const sectionId = href.substring(2);
-    if (isHomePage) {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      navigate('/');
-      setTimeout(() => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    }
-  };
+  useEffect(() => {
+    return scrollY.on('change', (v) => {
+      setShowScrollTop(v > 600);
+    });
+  }, [scrollY]);
 
-  const socialLinks = [
-    { label: 'linkedin', href: 'https://www.linkedin.com/in/yeasin-arifin/' },
-    { label: 'behance', href: 'https://www.behance.net/arifinyeasin1/projects' },
-    { label: 'medium', href: 'https://medium.com/@yeasinarifin' },
-  ];
+  const handleNavClick = useCallback(
+    (href: string) => {
+      if (!href.startsWith('/#')) {
+        navigate(href);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      const sectionId = href.substring(2);
+      if (isHomePage) {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        navigate('/');
+        setTimeout(() => {
+          document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    },
+    [isHomePage, navigate]
+  );
 
   const navLinks = [
-    { label: 'works', href: '/#case-studies' },
-    { label: 'about', href: '/about' },
-    { label: 'contact', href: '/#contact' },
+    { label: 'Work', href: '/#case-studies' },
+    { label: 'About', href: '/about' },
+    { label: 'Process', href: '/#process' },
+    { label: 'Resume', href: '/Gazi_Arifin_Resume.pdf' },
+  ];
+
+  const socialLinks = [
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/yeasin-arifin/', icon: Linkedin },
+    { label: 'Medium', href: 'https://medium.com/@yeasinarifin', icon: BookOpen },
+    { label: 'Read.cv', href: 'https://read.cv/gaziarifin', icon: FileUser },
   ];
 
   return (
-    <footer ref={ref} className="border-t border-white/10 bg-black py-16 md:py-24">
-      <div className="container">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          <div className="lg:col-span-2">
-            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.1] text-white">
-              gazi arifin
-            </h2>
-            <p className="mt-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white/60 font-display">PST</p>
-            <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white/60 font-display tabular-nums">{currentTime}</p>
+    <>
+      <footer
+        ref={ref}
+        className="grainy-gradient relative border-t border-[hsl(var(--footer-border))] bg-[hsl(var(--footer-bg))]"
+      >
+        <div className="container relative z-10 py-16 md:py-20">
+          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+            {/* Col 1 — Identity */}
+            <div className="lg:col-span-1">
+              <img src={logoSvg} alt="Gazi Arifin" className="no-border mb-4 h-8 w-auto brightness-0 invert" />
+              <p className="text-sm leading-relaxed text-[hsl(var(--footer-text-muted))]">
+                Product designer crafting intelligent systems at the intersection of AI, data, and human behavior.
+              </p>
+            </div>
+
+            {/* Col 2 — Navigation */}
+            <div>
+              <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.15em] text-[hsl(var(--footer-text-muted))]">
+                Navigation
+              </h3>
+              <ul className="space-y-3">
+                {navLinks.map((link) => (
+                  <li key={link.label}>
+                    {link.href.endsWith('.pdf') ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-[hsl(var(--footer-text))]/70 transition-colors duration-200 hover:text-[hsl(var(--footer-link-hover))]"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <button
+                        onClick={() => handleNavClick(link.href)}
+                        className="text-sm text-[hsl(var(--footer-text))]/70 transition-colors duration-200 hover:text-[hsl(var(--footer-link-hover))]"
+                      >
+                        {link.label}
+                      </button>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Col 3 — Social */}
+            <div>
+              <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.15em] text-[hsl(var(--footer-text-muted))]">
+                Connect
+              </h3>
+              <ul className="space-y-3">
+                {socialLinks.map((link) => {
+                  const Icon = link.icon;
+                  return (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm text-[hsl(var(--footer-text))]/70 transition-colors duration-200 hover:text-[hsl(var(--footer-link-hover))]"
+                      >
+                        <Icon className="h-4 w-4" />
+                        {link.label}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            {/* Col 4 — Status */}
+            <div>
+              <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.15em] text-[hsl(var(--footer-text-muted))]">
+                Status
+              </h3>
+              <div className="space-y-4">
+                <div className="rounded-lg border border-[hsl(var(--footer-border))] bg-white/[0.03] p-4">
+                  <div className="flex items-center gap-2 text-xs text-[hsl(var(--footer-text-muted))]">
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                    </span>
+                    Open to opportunities
+                  </div>
+                  <p className="mt-2 text-xs text-[hsl(var(--footer-text-muted))]">
+                    San Francisco, CA
+                  </p>
+                  <p className="mt-1 font-mono text-sm tabular-nums text-[hsl(var(--footer-text))]">
+                    {currentTime} PST
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <h3 className="mb-4 text-sm font-medium uppercase tracking-widest text-white/50">
-              navigation
-            </h3>
-            <ul className="space-y-3">
-              {navLinks.map((link) => (
-                <li key={link.label}>
-                  <button
-                    onClick={() => handleNavClick(link.href)}
-                    className="relative text-white/80 transition-colors hover:text-accent after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
-                  >
-                    {link.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="mb-4 text-sm font-medium uppercase tracking-widest text-white/50">
-              connect
-            </h3>
-            <ul className="space-y-3">
-              {socialLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative text-white/80 transition-colors hover:text-accent after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          {/* Bottom bar */}
+          <div className="mt-16 flex flex-col items-center justify-between gap-3 border-t border-[hsl(var(--footer-border))] pt-8 text-xs text-[hsl(var(--footer-text-muted))] md:flex-row">
+            <p>© 2026 gazi. all rights reserved.</p>
+            <p className="opacity-50">
+              Designed with precision in San Francisco. Built for the next 22 million.
+            </p>
           </div>
         </div>
+      </footer>
 
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-white/50 md:flex-row">
-          <p>© 2026 gazi. all rights reserved.</p>
-          <p>designed & developed by gazi in san francisco</p>
-        </div>
-      </div>
-    </footer>
+      {/* Scroll-to-top */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="fixed bottom-8 right-8 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-black/60 text-white backdrop-blur-xl transition-colors hover:bg-black/80"
+            aria-label="Scroll to top"
+          >
+            <ArrowUp className="h-5 w-5" />
+          </motion.button>
+        )}
+      </AnimatePresence>
+    </>
   );
 });
 
