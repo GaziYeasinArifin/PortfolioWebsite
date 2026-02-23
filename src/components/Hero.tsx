@@ -131,28 +131,33 @@ const TypewriterEyebrow = () => {
   );
 };
 
-// Bento stat card with spring hover
+// Glassmorphic stat card with magnetic pull
 const StatCard = ({ value, label, index }: { value: string; label: string; index: number }) => {
   const y = useMotionValue(0);
   const springY = useSpring(y, { stiffness: 300, damping: 20 });
 
   return (
-    <motion.div
-      className="hero-glass-card px-5 py-5 text-center cursor-default select-none"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.6 + index * 0.1, duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-      style={{ y: springY }}
-      onHoverStart={() => y.set(-6)}
-      onHoverEnd={() => y.set(0)}
-    >
-      <div className="font-display text-2xl sm:text-3xl font-bold text-[hsl(var(--hero-text))]">
-        {value}
-      </div>
-      <div className="text-xs sm:text-sm mt-1.5 text-[hsl(var(--hero-text-sub))]">
-        {label}
-      </div>
-    </motion.div>
+    <MagneticWrapper strength={0.2} radius={80}>
+      <motion.div
+        className="px-5 py-5 text-center cursor-default select-none rounded-[var(--radius-sm)]
+          bg-white/40 dark:bg-black/40
+          backdrop-blur-[20px] border border-white/20 dark:border-white/10
+          transition-all duration-400"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6 + index * 0.1, duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+        style={{ y: springY }}
+        onHoverStart={() => y.set(-6)}
+        onHoverEnd={() => y.set(0)}
+      >
+        <div className="font-display text-2xl sm:text-3xl font-bold text-[hsl(var(--hero-text))]">
+          {value}
+        </div>
+        <div className="text-xs sm:text-sm mt-1.5 text-[hsl(var(--hero-text-sub))]">
+          {label}
+        </div>
+      </motion.div>
+    </MagneticWrapper>
   );
 };
 
@@ -228,7 +233,7 @@ const Hero = () => {
 
           {/* Main headline */}
           <h1
-            className="font-display font-bold leading-[1.05] tracking-tight uppercase"
+            className="font-display font-bold leading-[1.05] tracking-[-0.04em] uppercase"
             style={{
               textShadow: '3px 6px 12px rgba(0, 0, 0, 0.12)',
               filter: 'drop-shadow(2px 4px 6px rgba(0,0,0,0.06))',
