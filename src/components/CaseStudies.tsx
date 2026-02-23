@@ -1,4 +1,4 @@
-import { useState, useCallback, memo, useRef } from 'react';
+import { useState, useCallback, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
@@ -21,231 +21,208 @@ import articleTeslaPyramids from '@/assets/article-tesla-pyramids.png';
 import placeholderSvg from '@/assets/placeholder-image.svg';
 
 // ── Types ──────────────────────────────────────────────
-interface CaseStudy {
+interface WorkItem {
   id: string;
   title: string;
-  description: string;
-  category: string;
+  subtitle: string;
+  label: string;
   image: string;
   year: string;
   slug?: string;
   externalUrl?: string;
   impactBadge?: string;
-  roleTags?: string[];
-  challengeResult?: string;
-  filterTags: string[];
-  featured?: boolean;
-  glowType?: 'ai' | 'award';
+  category: CategoryKey;
 }
 
-type FilterKey = 'all' | 'ai-systems' | 'mobile' | 'saas' | 'design-systems' | 'writing' | 'branding' | 'academic';
+type CategoryKey = 'ux' | 'branding' | 'writing' | 'academic';
 
-const filters: { key: FilterKey; label: string }[] = [
-  { key: 'all', label: 'All' },
-  { key: 'ai-systems', label: 'AI Systems' },
-  { key: 'mobile', label: 'iOS / Mobile' },
-  { key: 'saas', label: 'Enterprise SaaS' },
-  { key: 'design-systems', label: 'Design Systems' },
+const categories: { key: CategoryKey; label: string }[] = [
+  { key: 'ux', label: 'UX Projects' },
   { key: 'branding', label: 'Branding' },
   { key: 'writing', label: 'Writing' },
   { key: 'academic', label: 'Academic' },
 ];
 
 // ── Data ───────────────────────────────────────────────
-const allStudies: CaseStudy[] = [
+const allWorks: WorkItem[] = [
+  // UX Projects
   {
     id: 'amtv',
     title: 'Add Music to Video',
-    description: 'Redesigning the creative workflow for 22M+ creators',
-    category: 'UX Research · iOS · Android',
+    subtitle: 'Redesigning the creative workflow for 22M+ creators',
+    label: 'Case Study',
     image: amtvThumbnail,
     year: '2016–2023',
     slug: 'add-music-to-video',
     impactBadge: '22M Users',
-    roleTags: ['Product Strategy', 'ML Implementation', 'iOS Lead'],
-    challengeResult: 'Challenge: Scale a video editor for 22M users. Result: 35% increase in retention.',
-    filterTags: ['mobile', 'ai-systems'],
-    featured: true,
-    glowType: 'ai',
+    category: 'ux',
   },
   {
     id: 'spotlight',
     title: 'Design System for the Spotlight',
-    description: 'How three apps revolutionized creativity and topped the App Store charts',
-    category: 'Product Design',
+    subtitle: 'Three apps revolutionized creativity and topped App Store charts',
+    label: 'Case Study',
     image: spotlightThumbnail,
     year: '2016–2023',
     slug: 'spotlight',
     impactBadge: 'Top 10 App',
-    roleTags: ['Design Systems', 'Cross-Platform', 'Governance'],
-    challengeResult: 'Challenge: Unify 3 creative apps. Result: Cross-platform design governance.',
-    filterTags: ['design-systems', 'mobile'],
-    featured: false,
-    glowType: 'award',
+    category: 'ux',
   },
   {
     id: 'screenlife',
     title: 'Iterative Design Process',
-    description: 'Designing the first interactive video recorder',
-    category: 'Product Design',
+    subtitle: 'Designing the first interactive video recorder',
+    label: 'Case Study',
     image: screenlifeThumbnail,
     year: '2018',
     slug: 'screenlife',
     impactBadge: 'First-of-Kind',
-    roleTags: ['UX Research', 'Mobile', 'SaaS'],
-    challengeResult: 'Challenge: Create the first interactive video recorder. Result: Novel interaction paradigm.',
-    filterTags: ['mobile', 'saas'],
-    featured: false,
+    category: 'ux',
   },
   {
     id: 'phantom',
     title: 'Phantom Footprint',
-    description: 'IoT-enhanced board game closing the climate feedback loop',
-    category: 'UX Design · Physical Computing',
+    subtitle: 'IoT-enhanced board game closing the climate feedback loop',
+    label: 'Case Study',
     image: phantomFootprintThumbnail,
     year: '2024',
     slug: 'phantom-footprint',
     impactBadge: 'IoT Innovation',
-    roleTags: ['AI / ML', 'IoT', 'Physical Computing'],
-    challengeResult: 'Challenge: Close the climate feedback loop. Result: IoT-enhanced board game.',
-    filterTags: ['ai-systems'],
-    featured: true,
-    glowType: 'ai',
+    category: 'ux',
   },
   // Branding
   {
     id: 'branding-asi',
     title: 'Cal State EB Branding for ASI',
-    description: 'Bold visual language for student govt.',
-    category: 'Brand Identity',
+    subtitle: 'Bold visual language for student government',
+    label: 'Brand Identity',
     image: brandingCaseStudy1,
     year: '2024',
     externalUrl: 'https://www.canva.com/design/DAG0BfinlkQ/UvL4uRgqPElvkLF6oUIEig/view?utm_content=DAG0BfinlkQ&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h2ba7e72444',
-    filterTags: ['branding'],
+    category: 'branding',
   },
   {
     id: 'branding-icons',
     title: 'iOS App Icon Design',
-    description: 'Crafting distinctive app icons for iOS',
-    category: 'Visual Design',
+    subtitle: 'Crafting distinctive app icons for iOS',
+    label: 'Visual Design',
     image: brandingIosIcons,
     year: '2020',
     externalUrl: 'https://dribbble.com/shots/12017945-iOS-App-Icon-Design',
-    filterTags: ['branding'],
+    category: 'branding',
   },
   {
     id: 'branding-f1',
     title: 'F1 Game Design Concept',
-    description: 'Formula One Grand Prix Monaco mobile app concept',
-    category: 'UI Design',
+    subtitle: 'Formula One Grand Prix Monaco mobile app concept',
+    label: 'UI Design',
     image: brandingF1Design,
     year: '2020',
     externalUrl: 'https://dribbble.com/shots/14884595-F1-Formula-One-Game-Design-Concept-Grand-Prix-Monaco',
-    filterTags: ['branding'],
+    category: 'branding',
   },
   {
     id: 'branding-hamburger',
     title: 'Hamburger Menu Icons',
-    description: 'Exploring delicious alternatives to the hamburger icon',
-    category: 'Icon Design',
+    subtitle: 'Exploring delicious alternatives to the hamburger icon',
+    label: 'Icon Design',
     image: brandingHamburgerIcons,
     year: '2020',
     externalUrl: 'https://dribbble.com/shots/14880132-There-are-other-delicious-foods-rather-than-the-Hamburger-icon',
-    filterTags: ['branding'],
+    category: 'branding',
   },
   // Writing
   {
     id: 'article-storytelling',
     title: 'The Story of Storytelling in UX Design',
-    description: 'Exploring the power of narrative in user experience',
-    category: 'Article',
+    subtitle: 'Exploring the power of narrative in user experience',
+    label: 'Essay',
     image: articleStorytelling,
     year: '2023',
     externalUrl: 'https://medium.com/@yeasinarifin/the-story-of-storytelling-in-ux-design-b2570fd29c14',
-    filterTags: ['writing'],
+    category: 'writing',
   },
   {
     id: 'article-interviews',
     title: 'User Interviews: The Secret Weapon',
-    description: 'The secret weapon of UX practitioners',
-    category: 'Article',
+    subtitle: 'The secret weapon of UX practitioners',
+    label: 'Essay',
     image: articleUserInterviews,
     year: '2022',
     externalUrl: 'https://medium.com/@yeasinarifin/user-interviews-the-secret-weapon-of-ux-practitioners-a792146e70f6',
-    filterTags: ['writing'],
+    category: 'writing',
   },
   {
     id: 'article-neural',
     title: 'Neural Network: The Brainy World of AI',
-    description: 'The brainy world of artificial intelligence',
-    category: 'Article',
+    subtitle: 'The brainy world of artificial intelligence',
+    label: 'Essay',
     image: articleNeuralNetwork,
     year: '2024',
     externalUrl: 'https://medium.com/@yeasinarifin/neural-network-the-brainy-world-of-artificial-intelligence-daa7970807a4',
-    filterTags: ['writing'],
+    category: 'writing',
   },
   {
     id: 'article-problem',
     title: 'The Science and Art of UX Problem-Solving',
-    description: 'A deep dive into UX problem-solving methodologies',
-    category: 'Article',
+    subtitle: 'A deep dive into UX problem-solving methodologies',
+    label: 'Essay',
     image: articleProblemSolving,
     year: '2023',
     externalUrl: 'https://medium.com/@yeasinarifin/the-science-and-art-of-ux-problem-solving-180450a86f19',
-    filterTags: ['writing'],
+    category: 'writing',
   },
   {
     id: 'article-ai-ux',
     title: 'The Power of AI in UX Design',
-    description: 'Generating innovative ideas with artificial intelligence',
-    category: 'Article',
+    subtitle: 'Generating innovative ideas with artificial intelligence',
+    label: 'Essay',
     image: articleAiUx,
     year: '2024',
     externalUrl: 'https://medium.com/@yeasinarifin/unleashing-the-power-of-ai-in-ux-design-generating-innovative-ideas-71002f3e2ef6',
-    filterTags: ['writing'],
+    category: 'writing',
   },
   {
     id: 'article-tesla',
     title: "Nikola Tesla's Research on Pyramids",
-    description: 'Separating fact from fiction',
-    category: 'Article',
+    subtitle: 'Separating fact from fiction',
+    label: 'Essay',
     image: articleTeslaPyramids,
     year: '2021',
     externalUrl: 'https://medium.com/@yeasinarifin/nikola-teslas-research-on-pyramids-separating-fact-from-fiction-ec3e546bb33',
-    filterTags: ['writing'],
+    category: 'writing',
   },
   // Academic
   {
     id: 'carepal',
     title: 'CarePal',
-    description: 'Designing a wellness companion for everyday care',
-    category: 'Research',
+    subtitle: 'Designing a wellness companion for everyday care',
+    label: 'Research',
     image: carepalWriting,
     year: '2024',
     externalUrl: 'https://www.canva.com/design/DAGkpwN0h1k/xyIfEievf8rfQnLJM6ccvw/view?utm_content=DAGkpwN0h1k&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h30849d3be1',
-    filterTags: ['academic'],
+    category: 'academic',
   },
   {
     id: 'thesis',
     title: 'CarePal Thesis Document',
-    description: "Master's thesis research paper from CSU East Bay",
-    category: 'Thesis',
+    subtitle: "Master's thesis research paper from CSU East Bay",
+    label: 'Thesis',
     image: academicThesis,
     year: '2024',
     externalUrl: 'https://drive.google.com/file/d/1Be1mJV8ZjIJNeOyu6F4-KR-MvskellIJ/view?usp=sharing',
-    filterTags: ['academic'],
+    category: 'academic',
   },
 ];
 
 // ── Lazy Image ─────────────────────────────────────────
-const CaseStudyImage = memo(({ src, alt }: { src: string; alt: string }) => {
+const CardImage = memo(({ src, alt }: { src: string; alt: string }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const handleLoad = useCallback(() => setIsLoaded(true), []);
 
   return (
     <div className="relative h-full w-full overflow-hidden bg-muted/30">
-      {/* Internal 1px border to prevent image bleeding */}
-      <div className="absolute inset-0 z-[2] pointer-events-none rounded-[inherit] border border-foreground/[0.06]" />
+      <div className="absolute inset-0 z-[2] pointer-events-none border border-foreground/[0.06]" />
       <img
         src={placeholderSvg}
         alt=""
@@ -256,14 +233,14 @@ const CaseStudyImage = memo(({ src, alt }: { src: string; alt: string }) => {
         alt={alt}
         onLoad={handleLoad}
         loading="lazy"
-        className={`no-border h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`no-border h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
       />
     </div>
   );
 });
-CaseStudyImage.displayName = 'CaseStudyImage';
+CardImage.displayName = 'CardImage';
 
-// ── Impact Badge (standardized glassmorphism pill) ─────
+// ── Impact Badge ──────────────────────────────────────
 const ImpactBadge = ({ text }: { text: string }) => (
   <div className="absolute top-4 right-4 z-10 rounded-full px-3.5 py-1.5
     bg-black/50 backdrop-blur-xl border border-white/15
@@ -274,134 +251,97 @@ const ImpactBadge = ({ text }: { text: string }) => (
   </div>
 );
 
-// ── Filter Pill Bar ────────────────────────────────────
-const FilterBar = ({ active, onChange }: { active: FilterKey; onChange: (k: FilterKey) => void }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+// ── Category Controller ────────────────────────────────
+const CategoryController = ({
+  active,
+  onChange,
+}: {
+  active: CategoryKey;
+  onChange: (k: CategoryKey) => void;
+}) => (
+  <div className="flex items-center gap-8">
+    {categories.map((cat) => (
+      <button
+        key={cat.key}
+        onClick={() => onChange(cat.key)}
+        className={`relative pb-3 text-[13px] font-medium uppercase tracking-[0.05em] transition-colors duration-300 focus-visible:outline-none
+          ${active === cat.key ? 'text-foreground' : 'text-muted-foreground hover:text-foreground/70'}`}
+      >
+        {cat.label}
+        {active === cat.key && (
+          <motion.div
+            layoutId="works-category-underline"
+            className="absolute bottom-0 left-0 right-0 h-[2px] bg-foreground"
+            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+          />
+        )}
+      </button>
+    ))}
+  </div>
+);
 
-  return (
-    <div ref={containerRef} className="relative flex flex-wrap items-center gap-1.5">
-      {filters.map((f) => (
-        <button
-          key={f.key}
-          onClick={() => onChange(f.key)}
-          className={`relative z-10 px-4 py-2 rounded-md text-xs font-medium tracking-wide transition-colors duration-300 
-            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
-            ${active === f.key
-              ? 'text-background'
-              : 'text-muted-foreground hover:text-foreground'
-            }`}
-        >
-          {active === f.key && (
-            <motion.div
-              layoutId="active-filter-pill"
-              className="absolute inset-0 rounded-md bg-foreground"
-              style={{ zIndex: -1 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 28 }}
-            />
-          )}
-          {f.label}
-        </button>
-      ))}
-    </div>
-  );
-};
-
-// ── Card Component (Unified "Frame" family) ───────────
-const CaseStudyCard = ({ study, index, isFeatured }: { study: CaseStudy; index: number; isFeatured: boolean }) => {
-  const isExternal = !!study.externalUrl;
-  const isInternal = !!study.slug;
+// ── Card Component ────────────────────────────────────
+const WorkCard = ({ item, index }: { item: WorkItem; index: number }) => {
+  const isExternal = !!item.externalUrl;
+  const isInternal = !!item.slug;
   const CardWrapper = isExternal ? 'a' : isInternal ? Link : 'div';
   const cardProps = isExternal
-    ? { href: study.externalUrl, target: '_blank', rel: 'noopener noreferrer' }
+    ? { href: item.externalUrl, target: '_blank', rel: 'noopener noreferrer' }
     : isInternal
-      ? { to: `/case-study/${study.slug}` }
+      ? { to: `/case-study/${item.slug}` }
       : {};
 
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 24, scale: 0.97 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={{
         opacity: 1,
         y: 0,
-        scale: 1,
-        transition: { delay: index * 0.06, duration: 0.5, ease: 'easeOut' },
+        transition: { delay: index * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] },
       }}
-      exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.25 } }}
-      className={isFeatured ? 'md:col-span-2' : ''}
+      exit={{ opacity: 0, y: -20, transition: { duration: 0.25 } }}
     >
       <CardWrapper
         {...(cardProps as any)}
-        className="group cursor-pointer block rounded-card overflow-hidden transition-all duration-500 ease-out
-          bg-surface-card border border-surface-card-border
-          hover:scale-[1.02] hover:-translate-y-1
+        className="group cursor-pointer block overflow-hidden transition-colors duration-500
+          bg-[hsl(var(--works-card-bg))] border border-[hsl(var(--works-card-border))]
+          dark:border-[hsla(0,0%,100%,0.1)]
+          hover:border-[hsl(var(--works-card-border-hover))]
+          dark:hover:border-[hsla(0,0%,100%,0.2)]
           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-        style={{
-          boxShadow: 'var(--surface-shadow)',
-        }}
-        onMouseEnter={(e: any) => {
-          e.currentTarget.style.boxShadow = 'var(--surface-shadow-hover)';
-        }}
-        onMouseLeave={(e: any) => {
-          e.currentTarget.style.boxShadow = 'var(--surface-shadow)';
-        }}
+        style={{ borderRadius: '16px' }}
       >
         <article className="h-full flex flex-col">
-          {/* Image Frame — consistent aspect ratio */}
-          <div className="relative overflow-hidden aspect-[16/10]">
-            <CaseStudyImage src={study.image} alt={study.title} />
+          {/* 4:3 Media Frame */}
+          <div className="relative overflow-hidden aspect-[4/3]">
+            <CardImage src={item.image} alt={item.title} />
+            {item.impactBadge && <ImpactBadge text={item.impactBadge} />}
 
-            {study.impactBadge && <ImpactBadge text={study.impactBadge} />}
-
-            {/* Gradient overlay on hover */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-            {/* View arrow — fades in bottom-right */}
+            {/* View arrow on hover */}
             <div className="absolute bottom-4 right-4 opacity-0 translate-y-2 transition-all duration-400 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-              <div className="flex h-10 w-10 items-center justify-center rounded-md bg-white/90 dark:bg-black/70 backdrop-blur-sm">
+              <div className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] bg-white/90 dark:bg-black/70 backdrop-blur-sm">
                 <ArrowUpRight className="h-5 w-5 text-foreground transition-transform duration-300 group-hover:rotate-12" />
               </div>
             </div>
-
-            {/* Progressive disclosure */}
-            {study.challengeResult && (
-              <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-100">
-                <p className="text-[13px] leading-relaxed text-white/90 font-medium">
-                  {study.challengeResult}
-                </p>
-              </div>
-            )}
           </div>
 
-          {/* Metadata — fixed position & weights for every card */}
-          <div className="p-6 flex flex-col gap-2 flex-1">
-            {/* Row 1: Category · Year */}
-            <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground tracking-wider uppercase">
-              <span>{study.category}</span>
-              <span>{study.year}</span>
-            </div>
+          {/* Content — 32px internal padding */}
+          <div className="p-8 flex flex-col gap-2 flex-1">
+            {/* Label */}
+            <span className="text-[10px] font-mono font-medium uppercase tracking-[0.1em] text-muted-foreground">
+              {item.label} · {item.year}
+            </span>
 
-            {/* Row 2: Title — always same weight/size */}
-            <h3 className="font-display text-xl font-bold leading-tight text-foreground">
-              {study.title}
+            {/* Title */}
+            <h3 className="font-display text-lg font-bold leading-snug text-foreground">
+              {item.title}
             </h3>
 
-            {/* Row 3: Description */}
-            <p className="text-muted-foreground text-sm">{study.description}</p>
-
-            {/* Row 4: Role Tags (always at bottom) */}
-            {study.roleTags && study.roleTags.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
-                {study.roleTags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[10px] font-mono tracking-wider px-2 py-1 rounded-sm bg-secondary text-muted-foreground border border-border"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
+            {/* Subtitle */}
+            <p className="text-sm text-muted-foreground leading-relaxed line-clamp-1">
+              {item.subtitle}
+            </p>
           </div>
         </article>
       </CardWrapper>
@@ -411,37 +351,15 @@ const CaseStudyCard = ({ study, index, isFeatured }: { study: CaseStudy; index: 
 
 // ── Main Section ───────────────────────────────────────
 const CaseStudies = () => {
-  const [activeFilter, setActiveFilter] = useState<FilterKey>('all');
+  const [activeCategory, setActiveCategory] = useState<CategoryKey>('ux');
 
-  const filtered = activeFilter === 'all'
-    ? allStudies
-    : allStudies.filter((s) => s.filterTags.includes(activeFilter));
-
-  // Determine if we should use bento (asymmetric) layout
-  const uxFilters: FilterKey[] = ['all', 'mobile', 'ai-systems', 'saas', 'design-systems'];
-  const isBentoLayout = uxFilters.includes(activeFilter) && filtered.some((s) => s.featured);
-
-  // Sort featured first for bento
-  const sortedStudies = isBentoLayout
-    ? [...filtered].sort((a, b) => {
-        if (a.featured && !b.featured) return -1;
-        if (!a.featured && b.featured) return 1;
-        return 0;
-      })
-    : filtered;
-
-  // Grid class
-  const gridClass = isBentoLayout
-    ? 'grid gap-8 grid-cols-1 md:grid-cols-2'
-    : filtered.some((s) => s.filterTags.includes('writing'))
-      ? 'grid gap-8 grid-cols-1 md:grid-cols-3'
-      : 'grid gap-8 grid-cols-1 md:grid-cols-2';
+  const filtered = allWorks.filter((w) => w.category === activeCategory);
 
   return (
     <section id="case-studies" className="py-24 md:py-32">
       <div className="container">
         {/* Section header */}
-        <div className="mb-16 space-y-6">
+        <div className="mb-16 space-y-8">
           <motion.h2
             className="font-display font-bold leading-[1.05] tracking-tight text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem]"
             initial={{ opacity: 0, y: 20 }}
@@ -452,7 +370,6 @@ const CaseStudies = () => {
             Selected Works
           </motion.h2>
 
-          {/* Filter bar */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -460,22 +377,17 @@ const CaseStudies = () => {
             transition={{ delay: 0.15, duration: 0.5 }}
           >
             <LayoutGroup>
-              <FilterBar active={activeFilter} onChange={setActiveFilter} />
+              <CategoryController active={activeCategory} onChange={setActiveCategory} />
             </LayoutGroup>
           </motion.div>
         </div>
 
-        {/* Grid */}
+        {/* Uniform 2-column grid — 40px gap */}
         <LayoutGroup>
-          <motion.div layout className={gridClass}>
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2" style={{ gap: '40px' }}>
             <AnimatePresence mode="popLayout">
-              {sortedStudies.map((study, index) => (
-                <CaseStudyCard
-                  key={study.id}
-                  study={study}
-                  index={index}
-                  isFeatured={isBentoLayout && !!study.featured}
-                />
+              {filtered.map((item, index) => (
+                <WorkCard key={item.id} item={item} index={index} />
               ))}
             </AnimatePresence>
           </motion.div>
@@ -489,7 +401,7 @@ const CaseStudies = () => {
               exit={{ opacity: 0 }}
               className="text-center text-muted-foreground py-20 text-lg"
             >
-              No projects match this filter.
+              No projects in this category yet.
             </motion.p>
           )}
         </AnimatePresence>
