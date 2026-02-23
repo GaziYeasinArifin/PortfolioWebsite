@@ -1,35 +1,34 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * GeometricKinetic — "Atmospheric Refraction" v3
+ * Prismatic Refraction — "Living Light" v4
  *
- * Brand-exact geometry from the NY logo (~62° angle). Paired parallel Light Blades
- * with shadow/light opacity. Signature Hook arcs in corners. Chromatic aberration
- * at blade tips. Soft-focus → sharp mouse interaction. Silica grain overlay.
+ * Brand-exact geometry from the NY logo (~65° angle). Elongated Light Ribbons
+ * with variable widths (1px–200px). Sweeping Hook Arcs in periphery.
+ * Flashlight mouse effect with sharpening. Silica grain overlay.
+ * 30-second pendulum drift along the brand diagonal.
+ * All opacities halved and blur maximised for ethereal atmosphere.
  */
 
-/* ─── Brand angle: ~62° from horizontal (NY logo diagonal) ─── */
-const BRAND_ANGLE = (62 * Math.PI) / 180;
+/* ─── Brand angle: 65° from horizontal (NY logo diagonal) ─── */
+const BRAND_ANGLE = (65 * Math.PI) / 180;
 const COS_A = Math.cos(BRAND_ANGLE);
 const SIN_A = Math.sin(BRAND_ANGLE);
 
-/* ─── Paired Light Blade definition ─── */
-interface BladePair {
+/* ─── Light Ribbon definition ─── */
+interface LightRibbon {
   cx: number;
   cy: number;
-  length: number;
-  primaryWidth: number;
-  secondaryWidth: number;
-  spacing: number; // gap between paired blades (fraction of diag)
-  speed: number;
+  length: number;       // fraction of diagonal
+  width: number;        // fraction of diagonal (variable: thin=0.001, broad=0.12)
+  speed: number;        // pendulum drift multiplier
   phase: number;
-  period: number;
-  colorPrimary: { dark: string; light: string };
-  colorSecondary: { dark: string; light: string };
+  period: number;       // seconds for full pendulum cycle (~30s)
+  color: { dark: string; light: string };
 }
 
-/* ─── Signature Hook Arc ─── */
-interface HookArc {
+/* ─── Sweeping Arc ─── */
+interface SweepingArc {
   cx: number;
   cy: number;
   radius: number;
@@ -40,45 +39,51 @@ interface HookArc {
   color: { dark: string; light: string };
 }
 
-const BLADE_PAIRS: BladePair[] = [
+const RIBBONS: LightRibbon[] = [
+  // Broad ribbon — Deep Indigo
   {
-    cx: 0.18, cy: 0.25, length: 0.75, primaryWidth: 0.045, secondaryWidth: 0.025,
-    spacing: 0.035, speed: 0.35, phase: 0, period: 40,
-    colorPrimary: { dark: 'rgba(18, 42, 110, 0.20)', light: 'rgba(185, 195, 220, 0.15)' },
-    colorSecondary: { dark: 'rgba(18, 42, 110, 0.08)', light: 'rgba(185, 195, 220, 0.06)' },
+    cx: 0.22, cy: 0.3, length: 0.85, width: 0.10,
+    speed: 0.4, phase: 0, period: 30,
+    color: { dark: 'rgba(25, 30, 90, 0.10)', light: 'rgba(200, 210, 235, 0.08)' },
   },
+  // Medium ribbon — Electric Cyan
   {
-    cx: 0.62, cy: 0.45, length: 0.9, primaryWidth: 0.035, secondaryWidth: 0.02,
-    spacing: 0.03, speed: -0.28, phase: 2.0, period: 44,
-    colorPrimary: { dark: 'rgba(50, 60, 95, 0.16)', light: 'rgba(195, 210, 240, 0.13)' },
-    colorSecondary: { dark: 'rgba(50, 60, 95, 0.06)', light: 'rgba(195, 210, 240, 0.05)' },
+    cx: 0.55, cy: 0.5, length: 0.95, width: 0.06,
+    speed: -0.32, phase: 1.8, period: 32,
+    color: { dark: 'rgba(0, 170, 210, 0.08)', light: 'rgba(180, 220, 240, 0.07)' },
   },
+  // Thin hairline — Slate Grey
   {
-    cx: 0.4, cy: 0.72, length: 0.65, primaryWidth: 0.04, secondaryWidth: 0.022,
-    spacing: 0.028, speed: 0.22, phase: 3.5, period: 38,
-    colorPrimary: { dark: 'rgba(28, 48, 105, 0.17)', light: 'rgba(205, 215, 238, 0.11)' },
-    colorSecondary: { dark: 'rgba(28, 48, 105, 0.07)', light: 'rgba(205, 215, 238, 0.04)' },
+    cx: 0.38, cy: 0.65, length: 0.7, width: 0.002,
+    speed: 0.25, phase: 3.2, period: 28,
+    color: { dark: 'rgba(100, 116, 139, 0.12)', light: 'rgba(160, 175, 195, 0.10)' },
   },
+  // Medium-thin — Deep Indigo variant
   {
-    cx: 0.82, cy: 0.2, length: 0.5, primaryWidth: 0.028, secondaryWidth: 0.015,
-    spacing: 0.022, speed: -0.18, phase: 5.2, period: 42,
-    colorPrimary: { dark: 'rgba(210, 218, 235, 0.06)', light: 'rgba(175, 190, 220, 0.08)' },
-    colorSecondary: { dark: 'rgba(210, 218, 235, 0.025)', light: 'rgba(175, 190, 220, 0.03)' },
+    cx: 0.75, cy: 0.25, length: 0.6, width: 0.035,
+    speed: -0.2, phase: 4.8, period: 34,
+    color: { dark: 'rgba(30, 40, 100, 0.07)', light: 'rgba(210, 220, 242, 0.06)' },
+  },
+  // Ultra-thin hairline — Cyan accent
+  {
+    cx: 0.48, cy: 0.42, length: 0.55, width: 0.001,
+    speed: 0.15, phase: 6.0, period: 36,
+    color: { dark: 'rgba(0, 200, 255, 0.10)', light: 'rgba(170, 210, 230, 0.08)' },
   },
 ];
 
-const HOOK_ARCS: HookArc[] = [
+const SWEEPING_ARCS: SweepingArc[] = [
   {
-    cx: 0.08, cy: 0.85, radius: 0.42,
-    startAngle: -0.8, arcLength: 1.1,
-    period: 50, phase: 0,
-    color: { dark: 'rgba(30, 50, 100, 0.05)', light: 'rgba(180, 195, 215, 0.035)' },
+    cx: 0.05, cy: 0.88, radius: 0.50,
+    startAngle: -0.6, arcLength: 1.3,
+    period: 55, phase: 0,
+    color: { dark: 'rgba(25, 35, 80, 0.025)', light: 'rgba(190, 205, 225, 0.02)' },
   },
   {
-    cx: 0.92, cy: 0.12, radius: 0.35,
-    startAngle: 2.0, arcLength: 0.9,
-    period: 46, phase: 2.8,
-    color: { dark: 'rgba(25, 40, 85, 0.04)', light: 'rgba(190, 205, 228, 0.03)' },
+    cx: 0.95, cy: 0.08, radius: 0.42,
+    startAngle: 2.2, arcLength: 1.0,
+    period: 50, phase: 3.0,
+    color: { dark: 'rgba(20, 30, 70, 0.02)', light: 'rgba(200, 215, 235, 0.018)' },
   },
 ];
 
@@ -95,8 +100,6 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
   const startRef = useRef(performance.now());
   const isVisibleRef = useRef(true);
   const sizeRef = useRef({ w: 0, h: 0 });
-  const mouseSpeedRef = useRef(0);
-  const lastMouseRef = useRef({ x: 0, y: 0, t: 0 });
 
   // Generate silica grain texture once
   useEffect(() => {
@@ -112,7 +115,7 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
     for (let i = 0; i < d.length; i += 4) {
       const v = Math.random() * 255;
       d[i] = v; d[i + 1] = v; d[i + 2] = v;
-      d[i + 3] = 8;
+      d[i + 3] = 6; // ~2.5% opacity
     }
     ctx.putImageData(imageData, 0, 0);
   }, []);
@@ -158,7 +161,7 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
     return () => document.removeEventListener('visibilitychange', handler);
   }, []);
 
-  // Main render
+  // Main render loop
   useEffect(() => {
     const canvas = canvasRef.current;
     const grain = grainRef.current;
@@ -181,170 +184,108 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
       const mx = isDesktop ? (mouseX / 100) * w : -9999;
       const my = isDesktop ? (mouseY / 100) * h : -9999;
 
-      // Track mouse speed for focus state
-      const nowMs = performance.now();
-      const dt = (nowMs - lastMouseRef.current.t) / 1000;
-      if (dt > 0) {
-        const dx = mx - lastMouseRef.current.x;
-        const dy = my - lastMouseRef.current.y;
-        const speed = Math.sqrt(dx * dx + dy * dy) / dt;
-        mouseSpeedRef.current = mouseSpeedRef.current * 0.9 + speed * 0.1;
-      }
-      lastMouseRef.current = { x: mx, y: my, t: nowMs };
+      // ── Draw Light Ribbons with massive blur simulation ──
+      for (const ribbon of RIBBONS) {
+        // Pendulum drift along brand diagonal (30s cycle)
+        const pendulum = Math.sin((elapsed / ribbon.period) * Math.PI * 2 + ribbon.phase);
+        const driftMag = diag * 0.08 * ribbon.speed;
+        const driftX = pendulum * driftMag * COS_A;
+        const driftY = pendulum * driftMag * SIN_A;
 
-      // Focus amount: moving mouse = sharp, stationary = soft
-      const isMoving = mouseSpeedRef.current > 5;
-      const globalFocusMix = isMoving ? Math.min(mouseSpeedRef.current / 200, 1) : 0;
+        const cx = ribbon.cx * w + driftX;
+        const cy = ribbon.cy * h + driftY;
+        const halfLen = (ribbon.length * diag) / 2;
+        const halfWid = Math.max((ribbon.width * diag) / 2, 0.5);
 
-      // Helper: parse alpha from rgba string
-      const parseAlpha = (c: string) => parseFloat(c.match(/[\d.]+\)$/)?.[0] || '0.1');
-      const replaceAlpha = (c: string, a: number) => c.replace(/[\d.]+\)$/, a.toFixed(4) + ')');
-
-      // ── Draw Paired Light Blades ──
-      for (const pair of BLADE_PAIRS) {
-        const drift = Math.sin((elapsed / pair.period) * Math.PI * 2 + pair.phase) * diag * 0.07;
-        const driftX = drift * COS_A;
-        const driftY = drift * SIN_A;
-
-        const cx = pair.cx * w + driftX;
-        const cy = pair.cy * h + driftY;
-        const halfLen = (pair.length * diag) / 2;
-
-        // Distance from mouse to blade axis (perpendicular)
-        const perpDist = Math.abs(
-          (mx - cx) * Math.cos(BRAND_ANGLE + Math.PI / 2) +
-          (my - cy) * Math.sin(BRAND_ANGLE + Math.PI / 2)
-        );
-        const focusRadius = Math.min(w, h) * 0.28;
-        const localFocus = perpDist < focusRadius
-          ? (1 - perpDist / focusRadius) * globalFocusMix
-          : 0;
-
-        // Draw primary and secondary (shadow) blade
-        for (let bi = 0; bi < 2; bi++) {
-          const isPrimary = bi === 0;
-          const colorStr = isDark
-            ? (isPrimary ? pair.colorPrimary.dark : pair.colorSecondary.dark)
-            : (isPrimary ? pair.colorPrimary.light : pair.colorSecondary.light);
-          const halfWid = ((isPrimary ? pair.primaryWidth : pair.secondaryWidth) * diag) / 2;
-          const offset = isPrimary ? 0 : pair.spacing * diag;
-
-          ctx.save();
-          ctx.translate(cx, cy);
-          ctx.rotate(BRAND_ANGLE);
-          ctx.translate(0, isPrimary ? 0 : offset);
-
-          // Soft-focus → sharp: blur simulation via alpha modulation
-          const baseAlpha = parseAlpha(colorStr);
-          const focusedAlpha = Math.min(baseAlpha + localFocus * 0.15, 0.45);
-          const focusedWidth = halfWid * (1 - localFocus * 0.35);
-
-          const grad = ctx.createLinearGradient(-halfLen, 0, halfLen, 0);
-          const colorBase = colorStr.replace(/[\d.]+\)$/, '');
-
-          // Variable blur: sharper center, ethereal ends
-          const sharpness = 0.15 + localFocus * 0.2; // tighter center in focus
-          grad.addColorStop(0, colorBase + '0)');
-          grad.addColorStop(sharpness, colorBase + (focusedAlpha * 0.35).toFixed(4) + ')');
-          grad.addColorStop(0.5, colorBase + focusedAlpha.toFixed(4) + ')');
-          grad.addColorStop(1 - sharpness, colorBase + (focusedAlpha * 0.35).toFixed(4) + ')');
-          grad.addColorStop(1, colorBase + '0)');
-
-          ctx.fillStyle = grad;
-          ctx.fillRect(-halfLen, -focusedWidth, halfLen * 2, focusedWidth * 2);
-
-          // ── Chromatic Aberration at blade tips ──
-          if (isPrimary) {
-            const tipLen = halfLen * 0.15;
-            const aberrationAlpha = isDark ? 0.08 : 0.06;
-
-            // Cyan tip (left end)
-            ctx.fillStyle = `rgba(0, 200, 255, ${(aberrationAlpha * (0.5 + localFocus * 0.5)).toFixed(4)})`;
-            ctx.fillRect(-halfLen - 1, -focusedWidth * 0.5, tipLen, focusedWidth);
-
-            // Magenta tip (right end)
-            ctx.fillStyle = `rgba(220, 0, 255, ${(aberrationAlpha * (0.5 + localFocus * 0.5)).toFixed(4)})`;
-            ctx.fillRect(halfLen - tipLen + 1, -focusedWidth * 0.5, tipLen, focusedWidth);
+        // Mouse flashlight: increase brightness near cursor
+        let flashlightBoost = 0;
+        if (isDesktop && mx > 0) {
+          const dist = Math.sqrt((mx - cx) ** 2 + (my - cy) ** 2);
+          const flashRadius = 200;
+          if (dist < flashRadius) {
+            flashlightBoost = (1 - dist / flashRadius) * 0.6;
           }
-
-          ctx.restore();
         }
-      }
 
-      // ── Signature Hook Arcs (corners, 50% slower drift) ──
-      for (const hook of HOOK_ARCS) {
-        const driftAngle = Math.sin((elapsed / hook.period) * Math.PI * 2 + hook.phase) * 0.08;
-        const r = hook.radius * Math.min(w, h);
-        const hx = hook.cx * w;
-        const hy = hook.cy * h;
-        const color = isDark ? hook.color.dark : hook.color.light;
+        const colorStr = isDark ? ribbon.color.dark : ribbon.color.light;
+        const baseAlpha = parseFloat(colorStr.match(/[\d.]+\)$/)?.[0] || '0.1');
+        const boostedAlpha = Math.min(baseAlpha + flashlightBoost * baseAlpha * 3, 0.35);
+        const colorBase = colorStr.replace(/[\d.]+\)$/, '');
 
         ctx.save();
-        ctx.translate(hx, hy);
+        ctx.translate(cx, cy);
+        ctx.rotate(BRAND_ANGLE);
+
+        // Simulate extreme blur with very wide gradient falloff
+        // For broad ribbons, the gradient extends well beyond the geometric width
+        const blurSpread = halfWid + Math.max(halfWid * 3, 40); // atmospheric spread
+
+        const grad = ctx.createLinearGradient(0, -blurSpread, 0, blurSpread);
+        grad.addColorStop(0, colorBase + '0)');
+        grad.addColorStop(0.2, colorBase + (boostedAlpha * 0.15).toFixed(4) + ')');
+        grad.addColorStop(0.4, colorBase + (boostedAlpha * 0.6).toFixed(4) + ')');
+        grad.addColorStop(0.5, colorBase + boostedAlpha.toFixed(4) + ')');
+        grad.addColorStop(0.6, colorBase + (boostedAlpha * 0.6).toFixed(4) + ')');
+        grad.addColorStop(0.8, colorBase + (boostedAlpha * 0.15).toFixed(4) + ')');
+        grad.addColorStop(1, colorBase + '0)');
+
+        // Also fade along length
+        const lengthGrad = ctx.createLinearGradient(-halfLen, 0, halfLen, 0);
+        lengthGrad.addColorStop(0, 'rgba(255,255,255,0)');
+        lengthGrad.addColorStop(0.15, 'rgba(255,255,255,1)');
+        lengthGrad.addColorStop(0.85, 'rgba(255,255,255,1)');
+        lengthGrad.addColorStop(1, 'rgba(255,255,255,0)');
+
+        // Draw the ribbon as a very soft rectangle
+        ctx.fillStyle = grad;
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillRect(-halfLen, -blurSpread, halfLen * 2, blurSpread * 2);
+
+        ctx.restore();
+      }
+
+      // ── Sweeping Arcs (periphery) ──
+      for (const arc of SWEEPING_ARCS) {
+        const driftAngle = Math.sin((elapsed / arc.period) * Math.PI * 2 + arc.phase) * 0.06;
+        const r = arc.radius * Math.min(w, h);
+        const ax = arc.cx * w;
+        const ay = arc.cy * h;
+        const color = isDark ? arc.color.dark : arc.color.light;
+
+        ctx.save();
+        ctx.translate(ax, ay);
         ctx.rotate(driftAngle);
 
-        // Main arc — thick frosted stroke
         ctx.beginPath();
-        ctx.arc(0, 0, r, hook.startAngle, hook.startAngle + hook.arcLength);
+        ctx.arc(0, 0, r, arc.startAngle, arc.startAngle + arc.arcLength);
         ctx.strokeStyle = color;
-        ctx.lineWidth = 1.5;
+        ctx.lineWidth = 2;
         ctx.lineCap = 'round';
         ctx.stroke();
 
-        // Inner companion arc — thinner, fainter
+        // Inner companion
         ctx.beginPath();
-        ctx.arc(0, 0, r * 0.93, hook.startAngle + 0.08, hook.startAngle + hook.arcLength - 0.08);
-        ctx.strokeStyle = replaceAlpha(color, parseAlpha(color) * 0.4);
-        ctx.lineWidth = 0.5;
+        ctx.arc(0, 0, r * 0.92, arc.startAngle + 0.1, arc.startAngle + arc.arcLength - 0.1);
+        const innerAlpha = parseFloat(color.match(/[\d.]+\)$/)?.[0] || '0.02') * 0.4;
+        ctx.strokeStyle = color.replace(/[\d.]+\)$/, innerAlpha.toFixed(4) + ')');
+        ctx.lineWidth = 0.8;
         ctx.stroke();
 
         ctx.restore();
       }
 
-      // ── Logo Resonance ghost — brand-angle line near headline ──
-      if (isDesktop && mx > 0 && my > 0) {
-        const centerX = w / 2;
-        const centerY = h * 0.42;
-        const distToCenter = Math.sqrt((mx - centerX) ** 2 + (my - centerY) ** 2);
-        const resonanceRadius = Math.min(w, h) * 0.3;
-
-        if (distToCenter < resonanceRadius) {
-          const resonanceAlpha = (1 - distToCenter / resonanceRadius) * (isDark ? 0.06 : 0.04);
-          const ghostLen = Math.min(w, h) * 0.4;
-
-          ctx.save();
-          ctx.translate(centerX, centerY);
-          ctx.rotate(BRAND_ANGLE);
-
-          const ghostGrad = ctx.createLinearGradient(-ghostLen / 2, 0, ghostLen / 2, 0);
-          const ghostColor = isDark ? '255, 255, 255' : '0, 0, 0';
-          ghostGrad.addColorStop(0, `rgba(${ghostColor}, 0)`);
-          ghostGrad.addColorStop(0.5, `rgba(${ghostColor}, ${resonanceAlpha})`);
-          ghostGrad.addColorStop(1, `rgba(${ghostColor}, 0)`);
-
-          ctx.strokeStyle = ghostGrad;
-          ctx.lineWidth = 0.5;
-          ctx.beginPath();
-          ctx.moveTo(-ghostLen / 2, 0);
-          ctx.lineTo(ghostLen / 2, 0);
-          ctx.stroke();
-
-          ctx.restore();
-        }
-      }
-
-      // ── Refractive focus spotlight ──
-      if (isDesktop && mx > 0 && globalFocusMix > 0.01) {
-        const spotRadius = Math.min(w, h) * 0.18;
+      // ── Flashlight Focus Spotlight ──
+      if (isDesktop && mx > 0) {
+        const spotRadius = 200;
         const spotGrad = ctx.createRadialGradient(mx, my, 0, mx, my, spotRadius);
-        const spotAlpha = globalFocusMix * 0.04;
+        const spotAlpha = 0.04;
         if (isDark) {
-          spotGrad.addColorStop(0, `rgba(200, 220, 255, ${spotAlpha.toFixed(4)})`);
-          spotGrad.addColorStop(0.5, `rgba(150, 180, 220, ${(spotAlpha * 0.4).toFixed(4)})`);
+          spotGrad.addColorStop(0, `rgba(180, 210, 255, ${spotAlpha})`);
+          spotGrad.addColorStop(0.4, `rgba(120, 160, 220, ${(spotAlpha * 0.5).toFixed(4)})`);
           spotGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
         } else {
-          spotGrad.addColorStop(0, `rgba(255, 255, 255, ${(spotAlpha * 2).toFixed(4)})`);
-          spotGrad.addColorStop(0.4, `rgba(255, 255, 255, ${(spotAlpha * 0.8).toFixed(4)})`);
+          spotGrad.addColorStop(0, `rgba(255, 255, 255, ${(spotAlpha * 1.5).toFixed(4)})`);
+          spotGrad.addColorStop(0.35, `rgba(255, 255, 255, ${(spotAlpha * 0.6).toFixed(4)})`);
           spotGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
         }
         ctx.beginPath();
@@ -353,8 +294,8 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
         ctx.fill();
       }
 
-      // ── Silica Grain overlay (3%) ──
-      ctx.globalAlpha = isDark ? 0.04 : 0.03;
+      // ── Silica Grain overlay ──
+      ctx.globalAlpha = isDark ? 0.03 : 0.025;
       const ox = (Math.random() * 256) | 0;
       const oy = (Math.random() * 256) | 0;
       const pattern = ctx.createPattern(grain, 'repeat');
