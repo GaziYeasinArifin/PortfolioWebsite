@@ -80,7 +80,7 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {/* Col 1 — Identity */}
             <div className="lg:col-span-1">
-              <img src={logoSvg} alt="Gazi Arifin" className="no-border mb-4 h-8 w-auto brightness-0 invert" />
+              <img src={logoSvg} alt="Gazi Arifin" className="no-border mb-4 h-10 w-auto rounded" />
               <p className="text-sm leading-relaxed text-[hsl(var(--footer-text-muted))]">
                 Product designer crafting intelligent systems at the intersection of AI, data, and human behavior.
               </p>
