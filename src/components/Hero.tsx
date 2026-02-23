@@ -100,7 +100,7 @@ const TypewriterEyebrow = () => {
   if (reducedMotion) {
     return (
       <span className="text-xs font-medium uppercase tracking-[0.15em] text-[hsl(var(--hero-text-sub))] font-mono">
-        PRODUCT DESIGNER · SAN FRANCISCO
+        PRODUCT DESIGNER
       </span>
     );
   }
@@ -127,8 +127,6 @@ const TypewriterEyebrow = () => {
       />
       {/* Static suffix */}
       <span>{SUFFIX}</span>
-      <span className="mx-2 opacity-40">·</span>
-      <span>SAN FRANCISCO</span>
     </span>
   );
 };
