@@ -1,66 +1,84 @@
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { useEffect, useState, useMemo } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useEffect, useState, useMemo, useCallback, useRef } from 'react';
 
 /**
- * FloatingGlass — Framer Motion + Tailwind hero background
+ * Anamorphic Refraction — v6
  *
- * 5 slanted rectangles at 65° (via CSS transform: skewY(-25deg))
- * with independent floating animations, mouse parallax,
- * proximity-based opacity boost, frosted blur layer, and film grain.
- *
- * Light: Soft Orange, Pale Blue, Lavender
- * Dark: Deep Indigo (#1E1B4B), Charcoal (#0F172A)
+ * 7 "Light Slashes" at exact 65° (rotate: 65deg), varying from broad soft
+ * (300px) to thin sharp hairlines (2px). Independent drift animations,
+ * depth-based parallax, mouse-driven illumination, frosted blur layer,
+ * silica grain, and rim-light edge glow on sharp slashes.
  */
 
-interface PanelConfig {
-  // Position & size (% or viewport units)
-  left: string;
+interface SlashConfig {
+  left: string;        // CSS position
   top: string;
-  width: string;
-  height: string;
-  // Light / Dark mode colors
-  lightColor: string;
-  darkColor: string;
-  // Animation
-  animate: Record<string, number[]>;
-  duration: number;
+  width: number;       // px at 1920 baseline
+  height: string;      // CSS height
+  depth: number;       // 0=far back, 1=front — affects parallax & opacity
+  driftX: [number, number]; // horizontal drift range in px
+  driftDuration: number;    // seconds
+  lightColor: string;  // hsla
+  darkColor: string;   // hsla
+  sharp: boolean;      // thin slash with rim light
 }
 
-const PANELS: PanelConfig[] = [
+const SLASHES: SlashConfig[] = [
+  // Broad soft — Deep Indigo / Silver
   {
-    left: '5%', top: '-10%', width: '220px', height: '140%',
-    lightColor: 'hsla(28, 80%, 78%, 0.4)',   // Soft Orange
-    darkColor: 'hsla(244, 47%, 20%, 0.4)',    // Deep Indigo
-    animate: { y: [-20, 20] },
-    duration: 15,
+    left: '8%', top: '-20%', width: 300, height: '160%',
+    depth: 0.1, driftX: [-35, 35], driftDuration: 28,
+    lightColor: 'hsla(210, 50%, 88%, 0.35)',
+    darkColor: 'hsla(244, 47%, 20%, 0.30)',
+    sharp: false,
   },
+  // Medium — Lavender / Indigo
   {
-    left: '22%', top: '-5%', width: '160px', height: '130%',
-    lightColor: 'hsla(210, 60%, 82%, 0.4)',   // Pale Blue
-    darkColor: 'hsla(222, 47%, 11%, 0.4)',    // Charcoal
-    animate: { x: [-30, 30] },
-    duration: 22,
+    left: '25%', top: '-15%', width: 180, height: '150%',
+    depth: 0.25, driftX: [30, -30], driftDuration: 24,
+    lightColor: 'hsla(270, 35%, 87%, 0.30)',
+    darkColor: 'hsla(244, 47%, 18%, 0.25)',
+    sharp: false,
   },
+  // Thin hairline — edge highlight
   {
-    left: '42%', top: '-15%', width: '280px', height: '150%',
-    lightColor: 'hsla(270, 40%, 85%, 0.4)',   // Lavender
-    darkColor: 'hsla(244, 47%, 20%, 0.35)',   // Deep Indigo
-    animate: { rotate: [-1, 1] },
-    duration: 18,
+    left: '35%', top: '-10%', width: 2, height: '140%',
+    depth: 0.7, driftX: [-20, 20], driftDuration: 20,
+    lightColor: 'hsla(0, 0%, 100%, 0.18)',
+    darkColor: 'hsla(0, 0%, 100%, 0.08)',
+    sharp: true,
   },
+  // Broad soft — Pale Blue / Charcoal
   {
-    left: '62%', top: '-8%', width: '120px', height: '135%',
-    lightColor: 'hsla(28, 70%, 82%, 0.35)',   // Soft Orange light
-    darkColor: 'hsla(222, 47%, 11%, 0.35)',   // Charcoal
-    animate: { y: [15, -15] },
-    duration: 20,
+    left: '48%', top: '-25%', width: 260, height: '170%',
+    depth: 0.15, driftX: [-40, 40], driftDuration: 30,
+    lightColor: 'hsla(210, 55%, 85%, 0.28)',
+    darkColor: 'hsla(222, 47%, 11%, 0.28)',
+    sharp: false,
   },
+  // Medium-thin — Cyan accent
   {
-    left: '80%', top: '-12%', width: '200px', height: '145%',
-    lightColor: 'hsla(210, 55%, 86%, 0.35)',  // Pale Blue light
-    darkColor: 'hsla(244, 47%, 20%, 0.3)',    // Deep Indigo muted
-    animate: { x: [20, -20] },
-    duration: 25,
+    left: '60%', top: '-12%', width: 80, height: '145%',
+    depth: 0.45, driftX: [25, -25], driftDuration: 22,
+    lightColor: 'hsla(195, 50%, 85%, 0.25)',
+    darkColor: 'hsla(200, 80%, 40%, 0.12)',
+    sharp: false,
+  },
+  // Thin hairline — edge highlight
+  {
+    left: '72%', top: '-8%', width: 2, height: '135%',
+    depth: 0.8, driftX: [-15, 15], driftDuration: 18,
+    lightColor: 'hsla(0, 0%, 100%, 0.15)',
+    darkColor: 'hsla(0, 0%, 100%, 0.06)',
+    sharp: true,
+  },
+  // Broad soft — Warm Pearl / Deep Indigo
+  {
+    left: '82%', top: '-18%', width: 220, height: '155%',
+    depth: 0.2, driftX: [30, -30], driftDuration: 26,
+    lightColor: 'hsla(28, 40%, 90%, 0.30)',
+    darkColor: 'hsla(244, 47%, 22%, 0.22)',
+    sharp: false,
   },
 ];
 
@@ -77,7 +95,6 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }, []);
 
-  // Track dark mode
   useEffect(() => {
     const check = () => setIsDark(document.documentElement.classList.contains('dark'));
     check();
@@ -86,54 +103,56 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
     return () => obs.disconnect();
   }, []);
 
-  // Mouse parallax — entire group shifts by 0.02 factor
+  // Mouse parallax for entire group (gentle)
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
-  const springX = useSpring(mx, { stiffness: 50, damping: 30 });
-  const springY = useSpring(my, { stiffness: 50, damping: 30 });
+  const springX = useSpring(mx, { stiffness: 40, damping: 30 });
+  const springY = useSpring(my, { stiffness: 40, damping: 30 });
 
   useEffect(() => {
     if (!isDesktop) return;
-    // Convert 0-100 to centered offset, multiply by 0.02 factor
-    mx.set((mouseX - 50) * 0.4); // 50 * 0.02 * 20px range = ±10px
-    my.set((mouseY - 50) * 0.4);
+    mx.set((mouseX - 50) * 0.3);
+    my.set((mouseY - 50) * 0.3);
   }, [mouseX, mouseY, isDesktop, mx, my]);
+
+  // Scale factor for responsive widths
+  const [scale, setScale] = useState(1);
+  useEffect(() => {
+    const update = () => setScale(Math.max(window.innerWidth / 1920, 0.5));
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden">
-      {/* Layer 1: Moving rectangles */}
+      {/* Layer 1: Light Slashes */}
       <motion.div
         className="absolute inset-0"
         style={isDesktop ? { x: springX, y: springY } : undefined}
       >
-        {PANELS.map((panel, i) => (
-          <GlassPanel
+        {SLASHES.map((slash, i) => (
+          <LightSlash
             key={i}
-            config={panel}
+            config={slash}
             isDark={isDark}
             mouseX={mouseX}
             mouseY={mouseY}
             isDesktop={isDesktop}
             reducedMotion={reducedMotion}
-            index={i}
+            scale={scale}
           />
         ))}
       </motion.div>
 
-      {/* Layer 2: Frosted blur overlay — above rectangles, below text */}
-      <div
-        className="absolute inset-0 z-[1]"
-        style={{
-          backdropFilter: 'blur(80px)',
-          WebkitBackdropFilter: 'blur(80px)',
-        }}
-      />
+      {/* Layer 2: Frosted blur — "refraction" layer */}
+      <FrostLayer mouseX={mouseX} mouseY={mouseY} isDesktop={isDesktop} />
 
-      {/* Layer 3: Film grain noise */}
+      {/* Layer 3: Silica grain */}
       <div
         className="absolute inset-0 z-[2] pointer-events-none opacity-[0.03]"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
           backgroundRepeat: 'repeat',
           backgroundSize: '256px 256px',
         }}
@@ -142,49 +161,79 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
   );
 };
 
-/* ─── Individual Glass Panel ─── */
-const GlassPanel = ({
+/* ─── Frost Layer with mouse-driven focus reduction ─── */
+const FrostLayer = ({ mouseX, mouseY, isDesktop }: { mouseX: number; mouseY: number; isDesktop: boolean }) => {
+  // Dynamic blur: base 120px, reduced to 60px within 250px of cursor
+  // We approximate this with a radial "clear" overlay
+  return (
+    <div className="absolute inset-0 z-[1]">
+      {/* Base heavy blur */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backdropFilter: 'blur(120px)',
+          WebkitBackdropFilter: 'blur(120px)',
+        }}
+      />
+      {/* Focus reveal near cursor — reduces blur effect */}
+      {isDesktop && (
+        <div
+          className="absolute inset-0 pointer-events-none transition-opacity duration-300"
+          style={{
+            background: `radial-gradient(250px circle at ${mouseX}% ${mouseY}%, rgba(255,255,255,0.03) 0%, transparent 100%)`,
+          }}
+        />
+      )}
+    </div>
+  );
+};
+
+/* ─── Individual Light Slash ─── */
+const LightSlash = ({
   config,
   isDark,
   mouseX,
   mouseY,
   isDesktop,
   reducedMotion,
-  index,
+  scale,
 }: {
-  config: PanelConfig;
+  config: SlashConfig;
   isDark: boolean;
   mouseX: number;
   mouseY: number;
   isDesktop: boolean;
   reducedMotion: boolean;
-  index: number;
+  scale: number;
 }) => {
   const color = isDark ? config.darkColor : config.lightColor;
+  const scaledWidth = Math.max(config.width * scale, config.sharp ? 1 : 40);
 
-  // Calculate proximity to mouse for opacity boost
-  const [proximity, setProximity] = useState(0);
+  // Parallax: deeper layers move slower with mouse
+  const depthFactor = config.depth;
+  const parallaxX = isDesktop ? (mouseX - 50) * depthFactor * 0.5 : 0;
+  const parallaxY = isDesktop ? (mouseY - 50) * depthFactor * 0.3 : 0;
 
-  useEffect(() => {
-    if (!isDesktop) {
-      setProximity(0);
-      return;
-    }
-    // Approximate panel center from CSS values
-    const panelCenterX = parseFloat(config.left) + parseFloat(config.width) / (2 * 19.2); // rough %
-    const panelCenterY = 50; // approximate center
-    const dist = Math.sqrt(
-      (mouseX - panelCenterX) ** 2 + (mouseY - panelCenterY) ** 2
-    );
-    const maxDist = 40; // proximity radius in % units
-    setProximity(Math.max(0, 1 - dist / maxDist));
-  }, [mouseX, mouseY, isDesktop, config.left, config.width]);
+  // Proximity-based brightness boost
+  const panelCenterX = parseFloat(config.left);
+  const dist = Math.sqrt(
+    (mouseX - panelCenterX) ** 2 + (mouseY - 50) ** 2
+  );
+  const illumination = isDesktop && dist < 35
+    ? (1 - dist / 35) * 0.25
+    : 0;
 
-  // Opacity: base 0.4 → up to 0.6 on proximity
-  const dynamicOpacity = 0.4 + proximity * 0.2;
+  // Extract base alpha and boost it
+  const baseAlpha = parseFloat(color.match(/[\d.]+\)$/)?.[0] || '0.3');
+  const boostedAlpha = Math.min(baseAlpha + illumination, 0.55);
+  const dynamicColor = color.replace(/[\d.]+\)$/, `${boostedAlpha.toFixed(3)})`);
 
-  // Build the color with dynamic opacity
-  const dynamicColor = color.replace(/[\d.]+\)$/, `${dynamicOpacity.toFixed(2)})`);
+  // Rim light for sharp slashes
+  const rimLight = config.sharp
+    ? isDark
+      ? 'inset 0 0 0 1px rgba(255,255,255,0.10)'
+      : 'inset 0 0 0 1px rgba(255,255,255,0.20)'
+    : 'none';
 
   return (
     <motion.div
@@ -192,27 +241,30 @@ const GlassPanel = ({
       style={{
         left: config.left,
         top: config.top,
-        width: config.width,
+        width: `${scaledWidth}px`,
         height: config.height,
         backgroundColor: dynamicColor,
-        transform: 'skewY(-25deg)',
-        borderRadius: '2px',
+        transform: `rotate(65deg) translate(${parallaxX}px, ${parallaxY}px)`,
+        transformOrigin: 'center center',
+        borderRadius: config.sharp ? '0px' : '2px',
         transition: 'background-color 1s ease-in-out',
-        // Edge refraction — subtle inner glow
-        boxShadow: isDark
-          ? 'inset 1px 0 0 rgba(255,255,255,0.08), inset -1px 0 0 rgba(255,255,255,0.08)'
-          : 'inset 1px 0 0 rgba(255,255,255,0.15), inset -1px 0 0 rgba(255,255,255,0.15)',
+        boxShadow: rimLight,
+        // Soft edges for broad slashes
+        ...(config.sharp ? {} : {
+          maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+        }),
       }}
-      animate={reducedMotion ? undefined : config.animate}
+      animate={reducedMotion ? undefined : {
+        x: config.driftX,
+      }}
       transition={
-        reducedMotion
-          ? undefined
-          : {
-              repeat: Infinity,
-              repeatType: 'mirror' as const,
-              duration: config.duration,
-              ease: 'easeInOut',
-            }
+        reducedMotion ? undefined : {
+          repeat: Infinity,
+          repeatType: 'mirror' as const,
+          duration: config.driftDuration,
+          ease: 'easeInOut',
+        }
       }
     />
   );
