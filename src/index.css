@@ -432,7 +432,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: hero-shimmer-text 6s linear infinite;
+  animation: hero-shimmer-text 9s linear infinite;
   filter: drop-shadow(var(--hero-accent-glow));
 }
 
