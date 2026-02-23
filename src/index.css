@@ -62,8 +62,9 @@
     --text-gradient: linear-gradient(90deg, hsl(0 0% 7%) 0%, hsl(0 0% 30%) 100%);
 
     /* Works card tokens — Light (unified with surface) */
-    --works-card-bg: var(--surface-card);
-    --works-card-border: var(--surface-card-border);
+    --works-card-bg: 0 0% 100%;
+    --works-card-border: 0 0% 90%;
+    --works-card-border-hover: 0 0% 80%;
     --works-card-shadow: var(--surface-shadow);
     --works-card-shadow-hover: var(--surface-shadow-hover);
     --works-glow-ai: 225 100% 50%;
@@ -166,8 +167,9 @@
     --hero-card-shadow-hover: 0 8px 30px -8px rgba(0,212,255,0.15);
 
     /* Works card tokens — Dark (unified) */
-    --works-card-bg: var(--surface-card);
-    --works-card-border: var(--surface-card-border);
+    --works-card-bg: 0 0% 7%;
+    --works-card-border: 0 0% 100% / 0.1;
+    --works-card-border-hover: 0 0% 100% / 0.2;
     --works-card-shadow: none;
     --works-card-shadow-hover: none;
     --works-glow-ai: 187 100% 50%;
