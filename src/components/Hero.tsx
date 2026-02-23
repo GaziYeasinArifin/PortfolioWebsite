@@ -108,7 +108,7 @@ const Hero = () => {
           </motion.p>
 
           {/* Main headline */}
-          <h1 className="font-display font-bold leading-[1.05] tracking-tight">
+          <h1 className="font-display font-bold leading-[1.05] tracking-tight uppercase">
             <motion.span
               className="block whitespace-nowrap text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] text-[hsl(var(--hero-text))]"
               initial={{ opacity: 0, y: 30 }}
