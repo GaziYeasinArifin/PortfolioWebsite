@@ -314,7 +314,7 @@ const WorkCard = ({ item, index }: { item: WorkItem; index: number }) => {
       >
         <article className="h-full flex flex-col">
           {/* 4:3 Media Frame */}
-          <div className="relative overflow-hidden aspect-[4/3]">
+          <div className="relative overflow-hidden aspect-[3/4]">
             <CardImage src={item.image} alt={item.title} />
             {item.impactBadge && <ImpactBadge text={item.impactBadge} />}
 
