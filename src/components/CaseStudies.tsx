@@ -325,7 +325,13 @@ const WorkCard = ({ item, index }: { item: WorkItem; index: number }) => {
             hover:border-[hsl(var(--works-card-border-hover))]
             dark:hover:border-[hsla(0,0%,100%,0.2)]
             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`}
-          style={{ borderRadius: '16px' }}
+          style={{
+            borderRadius: '16px',
+            boxShadow: isHovered
+              ? '0 20px 60px -15px rgba(0,0,0,0.15), 0 8px 24px -8px rgba(0,0,0,0.08)'
+              : 'none',
+            transition: 'box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.5s',
+          }}
         >
           <article className="h-full flex flex-col relative">
             {/* Glow overlay */}

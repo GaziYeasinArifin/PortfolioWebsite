@@ -1,5 +1,5 @@
 import { useRef, useState, useCallback } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Search, BrainCircuit, FlaskConical, Shield } from 'lucide-react';
 
 // ── Step Data ──────────────────────────────────────────
@@ -58,10 +58,13 @@ const steps = [
   },
 ];
 
-// ── Step Card (Bento) ─────────────────────────────────
-const StepCard = ({ step, index }: { step: typeof steps[0]; index: number }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: '-60px' });
+const tabLabels = ['Discovery', 'Strategy', 'Iteration', 'Governance'];
+
+// ── Main Section ───────────────────────────────────────
+const LandingProcess = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const activeStep = steps[activeIndex];
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -73,115 +76,6 @@ const StepCard = ({ step, index }: { step: typeof steps[0]; index: number }) => 
   }, []);
 
   return (
-    <motion.div
-      ref={cardRef}
-      className="relative group"
-      initial={{ opacity: 0, y: 24 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: index * 0.1, duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-    >
-      <div
-        className="relative overflow-hidden rounded-card border border-[hsl(var(--process-card-border))]
-          bg-[hsl(var(--process-card-bg))] p-6 md:p-8 h-full
-          backdrop-blur-md transition-all duration-500"
-        onMouseMove={handleMouseMove}
-        onMouseLeave={() => setMousePos({ x: 50, y: 50 })}
-        style={{
-          boxShadow: 'var(--process-card-shadow)',
-        }}
-      >
-        {/* Hover radial glow */}
-        <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-          style={{
-            background: `radial-gradient(350px circle at ${mousePos.x}% ${mousePos.y}%, hsla(var(--process-accent), 0.06) 0%, transparent 70%)`,
-          }}
-        />
-
-        <div className="relative z-10 flex flex-col h-full">
-          {/* Step number + Icon row */}
-          <div className="flex items-center justify-between mb-6">
-            <span
-              className="text-[32px] md:text-[40px] font-bold leading-none text-[hsl(var(--process-accent))]"
-              style={{ fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace", opacity: 0.25 }}
-            >
-              {step.number}
-            </span>
-            <motion.div
-              className="flex h-10 w-10 items-center justify-center rounded-sm
-                bg-[hsla(var(--process-accent),0.08)] border border-[hsla(var(--process-accent),0.15)]"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={isInView ? { scale: 1, opacity: 1 } : {}}
-              transition={{ duration: 0.4, delay: index * 0.1 + 0.2 }}
-            >
-              <step.icon className="h-5 w-5 text-[hsl(var(--process-accent))]" strokeWidth={1} />
-            </motion.div>
-          </div>
-
-          {/* Title block */}
-          <div className="mb-4">
-            <span
-              className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground block mb-1"
-              style={{ fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace" }}
-            >
-              {step.subtitle}
-            </span>
-            <h3 className="font-display text-lg md:text-xl font-bold tracking-tight text-foreground leading-tight">
-              {step.title}
-            </h3>
-          </div>
-
-          {/* Description */}
-          <p className="text-sm leading-relaxed text-muted-foreground mb-6">
-            {step.description}
-          </p>
-
-          {/* Detail bullets */}
-          <ul className="space-y-2 mb-6 flex-1">
-            {step.details.map((detail, i) => (
-              <motion.li
-                key={i}
-                className="flex items-start gap-2.5 text-[13px] text-foreground/80"
-                initial={{ opacity: 0, x: -6 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: index * 0.1 + 0.3 + i * 0.06, duration: 0.35 }}
-              >
-                <span className="mt-1.5 h-1 w-1 rounded-full bg-[hsl(var(--process-accent))] flex-shrink-0" />
-                <span style={{ fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace", fontSize: '12px', letterSpacing: '0.01em' }}>
-                  {detail}
-                </span>
-              </motion.li>
-            ))}
-          </ul>
-
-          {/* Metric badge — anchored to bottom */}
-          <div className="pt-4 border-t border-[hsl(var(--process-card-border))] mt-auto">
-            <div className="flex items-baseline gap-2">
-              <span
-                className="text-xl md:text-2xl font-bold text-[hsl(var(--process-accent))]"
-                style={{ fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace" }}
-              >
-                {step.metric.value}
-              </span>
-              <span
-                className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground"
-                style={{ fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace" }}
-              >
-                {step.metric.label}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-// ── Main Section ───────────────────────────────────────
-const LandingProcess = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  return (
     <section
       ref={sectionRef}
       id="process"
@@ -190,7 +84,7 @@ const LandingProcess = () => {
     >
       <div className="container relative z-10">
         {/* Section header */}
-        <div className="mb-16 md:mb-24 max-w-2xl">
+        <div className="mb-12 md:mb-16 max-w-2xl">
           <motion.span
             className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground block mb-4"
             style={{ fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace" }}
@@ -202,7 +96,7 @@ const LandingProcess = () => {
             Methodology
           </motion.span>
           <motion.h2
-            className="font-display font-bold leading-[1.05] tracking-tight text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl text-foreground"
+            className="font-display font-bold leading-[1.05] tracking-[-0.04em] text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl text-foreground"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -222,12 +116,143 @@ const LandingProcess = () => {
           </motion.p>
         </div>
 
-        {/* 2×2 Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {steps.map((step, index) => (
-            <StepCard key={step.number} step={step} index={index} />
+        {/* Tab Controller */}
+        <motion.div
+          className="flex items-center gap-1 mb-10 p-1 rounded-[var(--radius-sm)] bg-[hsl(var(--process-card-bg))] border border-[hsl(var(--process-card-border))] w-fit"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.25, duration: 0.5 }}
+        >
+          {tabLabels.map((label, i) => (
+            <button
+              key={label}
+              onClick={() => setActiveIndex(i)}
+              className={`relative px-5 py-2.5 text-[12px] font-medium uppercase tracking-[0.08em] rounded-[var(--radius-xs)] transition-colors duration-300 focus-visible:outline-none
+                ${activeIndex === i ? 'text-foreground' : 'text-muted-foreground hover:text-foreground/70'}`}
+              style={{ fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace" }}
+            >
+              {activeIndex === i && (
+                <motion.div
+                  layoutId="blueprint-tab-bg"
+                  className="absolute inset-0 rounded-[var(--radius-xs)] bg-[hsla(var(--process-accent),0.1)] border border-[hsla(var(--process-accent),0.2)]"
+                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10">{label}</span>
+            </button>
           ))}
-        </div>
+        </motion.div>
+
+        {/* Content Panel */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeIndex}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+          >
+            <div
+              className="relative overflow-hidden rounded-card border border-[hsl(var(--process-card-border))]
+                bg-[hsl(var(--process-card-bg))] backdrop-blur-md"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={() => setMousePos({ x: 50, y: 50 })}
+              style={{ boxShadow: 'var(--process-card-shadow)' }}
+            >
+              {/* Hover radial glow */}
+              <div
+                className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{
+                  background: `radial-gradient(500px circle at ${mousePos.x}% ${mousePos.y}%, hsla(var(--process-accent), 0.05) 0%, transparent 70%)`,
+                }}
+              />
+
+              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_1px_1fr] gap-0">
+                {/* Left — Main content */}
+                <div className="p-8 md:p-12">
+                  <div className="flex items-center justify-between mb-8">
+                    <span
+                      className="text-[48px] md:text-[64px] font-bold leading-none text-[hsl(var(--process-accent))]"
+                      style={{ fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace", opacity: 0.2 }}
+                    >
+                      {activeStep.number}
+                    </span>
+                    <div
+                      className="flex h-12 w-12 items-center justify-center rounded-sm
+                        bg-[hsla(var(--process-accent),0.08)] border border-[hsla(var(--process-accent),0.15)]"
+                    >
+                      <activeStep.icon className="h-6 w-6 text-[hsl(var(--process-accent))]" strokeWidth={1} />
+                    </div>
+                  </div>
+
+                  <span
+                    className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground block mb-2"
+                    style={{ fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace" }}
+                  >
+                    {activeStep.subtitle}
+                  </span>
+                  <h3 className="font-display text-2xl md:text-3xl font-bold tracking-[-0.04em] text-foreground leading-tight mb-4">
+                    {activeStep.title}
+                  </h3>
+                  <p className="text-base leading-relaxed text-muted-foreground max-w-lg">
+                    {activeStep.description}
+                  </p>
+
+                  {/* Metric */}
+                  <div className="mt-8 pt-6 border-t border-[hsl(var(--process-card-border))]">
+                    <div className="flex items-baseline gap-3">
+                      <span
+                        className="text-3xl md:text-4xl font-bold text-[hsl(var(--process-accent))]"
+                        style={{ fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace" }}
+                      >
+                        {activeStep.metric.value}
+                      </span>
+                      <span
+                        className="text-[11px] tracking-[0.15em] uppercase text-muted-foreground"
+                        style={{ fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace" }}
+                      >
+                        {activeStep.metric.label}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div className="hidden lg:block bg-[hsl(var(--process-card-border))]" />
+
+                {/* Right — Detail bullets */}
+                <div className="p-8 md:p-12 flex flex-col justify-center border-t lg:border-t-0 border-[hsl(var(--process-card-border))]">
+                  <span
+                    className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground block mb-6"
+                    style={{ fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace" }}
+                  >
+                    Key Activities
+                  </span>
+                  <ul className="space-y-4">
+                    {activeStep.details.map((detail, i) => (
+                      <motion.li
+                        key={detail}
+                        className="flex items-start gap-3 text-foreground/80"
+                        initial={{ opacity: 0, x: -8 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 + i * 0.08, duration: 0.35 }}
+                      >
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[hsl(var(--process-accent))] flex-shrink-0" />
+                        <span
+                          className="text-sm leading-relaxed"
+                          style={{ fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace", letterSpacing: '0.01em' }}
+                        >
+                          {detail}
+                        </span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );
