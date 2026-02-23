@@ -2,6 +2,7 @@ import { useState, useCallback, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { useMagnetic } from '@/hooks/use-magnetic';
 import screenlifeThumbnail from '@/assets/screenlife-thumbnail.png';
 import amtvThumbnail from '@/assets/amtv-thumbnail.png';
 import spotlightThumbnail from '@/assets/spotlight-thumbnail.png';
@@ -281,6 +282,8 @@ const CategoryController = ({
 );
 
 // ── Card Component ────────────────────────────────────
+const magneticSpring = { type: 'spring' as const, stiffness: 150, damping: 15, mass: 0.1 };
+
 const WorkCard = ({ item, index }: { item: WorkItem; index: number }) => {
   const isExternal = !!item.externalUrl;
   const isInternal = !!item.slug;
@@ -290,6 +293,9 @@ const WorkCard = ({ item, index }: { item: WorkItem; index: number }) => {
     : isInternal
       ? { to: `/case-study/${item.slug}` }
       : {};
+
+  const { ref, disabled, cardAnimateProps, imageAnimateProps, glowStyle, isHovered, handlers } =
+    useMagnetic({ radius: 100, maxOffset: 15, parallaxOffset: 5 });
 
   return (
     <motion.div
@@ -302,49 +308,69 @@ const WorkCard = ({ item, index }: { item: WorkItem; index: number }) => {
       }}
       exit={{ opacity: 0, y: -20, transition: { duration: 0.25 } }}
     >
-      <CardWrapper
-        {...(cardProps as any)}
-        className="group cursor-pointer block overflow-hidden transition-colors duration-500
-          bg-[hsl(var(--works-card-bg))] border border-[hsl(var(--works-card-border))]
-          dark:border-[hsla(0,0%,100%,0.1)]
-          hover:border-[hsl(var(--works-card-border-hover))]
-          dark:hover:border-[hsla(0,0%,100%,0.2)]
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-        style={{ borderRadius: '16px' }}
+      <motion.div
+        ref={ref}
+        {...handlers}
+        animate={cardAnimateProps}
+        transition={magneticSpring}
+        style={{ willChange: disabled ? 'auto' : 'transform' }}
       >
-        <article className="h-full flex flex-col">
-          {/* 4:3 Media Frame */}
-          <div className="relative overflow-hidden aspect-[3/4]">
-            <CardImage src={item.image} alt={item.title} />
-            {item.impactBadge && <ImpactBadge text={item.impactBadge} />}
+        <CardWrapper
+          {...(cardProps as any)}
+          className={`group cursor-pointer block overflow-hidden transition-all duration-500
+            bg-[hsl(var(--works-card-bg))] border
+            ${isHovered
+              ? 'border-[hsla(0,0%,0%,0.25)] dark:border-[hsla(0,0%,100%,0.2)]'
+              : 'border-[hsl(var(--works-card-border))] dark:border-[hsla(0,0%,100%,0.1)]'}
+            hover:border-[hsl(var(--works-card-border-hover))]
+            dark:hover:border-[hsla(0,0%,100%,0.2)]
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`}
+          style={{ borderRadius: '16px' }}
+        >
+          <article className="h-full flex flex-col relative">
+            {/* Glow overlay */}
+            {!disabled && isHovered && (
+              <div
+                className="absolute inset-0 z-[3] pointer-events-none transition-opacity duration-300"
+                style={{ ...glowStyle, borderRadius: '16px', opacity: isHovered ? 1 : 0 }}
+              />
+            )}
 
-            {/* View arrow on hover */}
-            <div className="absolute bottom-4 right-4 opacity-0 translate-y-2 transition-all duration-400 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-              <div className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] bg-white/90 dark:bg-black/70 backdrop-blur-sm">
-                <ArrowUpRight className="h-5 w-5 text-foreground transition-transform duration-300 group-hover:rotate-12" />
+            {/* 4:3 Media Frame with parallax */}
+            <div className="relative overflow-hidden aspect-[3/4]">
+              <motion.div
+                className="h-full w-full"
+                animate={imageAnimateProps}
+                transition={magneticSpring}
+                style={{ scale: 1.05 }}
+              >
+                <CardImage src={item.image} alt={item.title} />
+              </motion.div>
+              {item.impactBadge && <ImpactBadge text={item.impactBadge} />}
+
+              {/* View arrow on hover */}
+              <div className="absolute bottom-4 right-4 opacity-0 translate-y-2 transition-all duration-400 ease-out group-hover:opacity-100 group-hover:translate-y-0">
+                <div className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] bg-white/90 dark:bg-black/70 backdrop-blur-sm">
+                  <ArrowUpRight className="h-5 w-5 text-foreground transition-transform duration-300 group-hover:rotate-12" />
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Content — 32px internal padding */}
-          <div className="p-8 flex flex-col gap-2 flex-1">
-            {/* Label */}
-            <span className="text-[10px] font-mono font-medium uppercase tracking-[0.1em] text-muted-foreground">
-              {item.label} · {item.year}
-            </span>
-
-            {/* Title */}
-            <h3 className="font-display text-lg font-bold leading-snug text-foreground">
-              {item.title}
-            </h3>
-
-            {/* Subtitle */}
-            <p className="text-sm text-muted-foreground leading-relaxed line-clamp-1">
-              {item.subtitle}
-            </p>
-          </div>
-        </article>
-      </CardWrapper>
+            {/* Content — 32px internal padding */}
+            <div className="p-8 flex flex-col gap-2 flex-1">
+              <span className="text-[10px] font-mono font-medium uppercase tracking-[0.1em] text-muted-foreground">
+                {item.label} · {item.year}
+              </span>
+              <h3 className="font-display text-lg font-bold leading-snug text-foreground">
+                {item.title}
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed line-clamp-1">
+                {item.subtitle}
+              </p>
+            </div>
+          </article>
+        </CardWrapper>
+      </motion.div>
     </motion.div>
   );
 };
