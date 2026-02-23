@@ -10,124 +10,7 @@ const stats = [
   { value: 'Top 10', label: 'App Store' },
 ];
 
-// Neural Mesh Canvas — low-opacity grid that ripples on cursor
-const NeuralMesh = ({ mouseX, mouseY }: { mouseX: number; mouseY: number }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animRef = useRef<number>();
-  const nodesRef = useRef<{ x: number; y: number; baseX: number; baseY: number }[]>([]);
-  const sizeRef = useRef({ w: 0, h: 0 });
-
-  const initNodes = useCallback((w: number, h: number) => {
-    const spacing = 60;
-    const nodes: typeof nodesRef.current = [];
-    for (let x = 0; x < w + spacing; x += spacing) {
-      for (let y = 0; y < h + spacing; y += spacing) {
-        nodes.push({ x, y, baseX: x, baseY: y });
-      }
-    }
-    nodesRef.current = nodes;
-    sizeRef.current = { w, h };
-  }, []);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const resize = () => {
-      const dpr = window.devicePixelRatio || 1;
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      ctx.scale(dpr, dpr);
-      initNodes(rect.width, rect.height);
-    };
-    resize();
-    window.addEventListener('resize', resize);
-    return () => window.removeEventListener('resize', resize);
-  }, [initNodes]);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const draw = () => {
-      const { w, h } = sizeRef.current;
-      ctx.clearRect(0, 0, w, h);
-
-      const mx = mouseX * w / 100;
-      const my = mouseY * h / 100;
-      const rippleRadius = 180;
-
-      // Compute if dark mode
-      const isDark = document.documentElement.classList.contains('dark');
-      const lineColor = isDark ? 'rgba(0, 212, 255,' : 'rgba(140, 140, 140,';
-
-      for (const node of nodesRef.current) {
-        const dx = mx - node.baseX;
-        const dy = my - node.baseY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < rippleRadius) {
-          const force = (1 - dist / rippleRadius) * 12;
-          node.x = node.baseX - (dx / dist) * force;
-          node.y = node.baseY - (dy / dist) * force;
-        } else {
-          node.x += (node.baseX - node.x) * 0.08;
-          node.y += (node.baseY - node.y) * 0.08;
-        }
-      }
-
-      // Draw connections
-      const spacing = 60;
-      const cols = Math.ceil(w / spacing) + 1;
-      for (let i = 0; i < nodesRef.current.length; i++) {
-        const n = nodesRef.current[i];
-        // Right neighbor
-        const right = nodesRef.current[i + 1];
-        if (right && Math.abs(n.baseY - right.baseY) < 1) {
-          const d = Math.sqrt((mx - n.x) ** 2 + (my - n.y) ** 2);
-          const alpha = Math.max(0.03, Math.min(0.15, 1 - d / 400));
-          ctx.beginPath();
-          ctx.moveTo(n.x, n.y);
-          ctx.lineTo(right.x, right.y);
-          ctx.strokeStyle = `${lineColor} ${alpha})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-        // Down neighbor
-        const down = nodesRef.current[i + cols];
-        if (down) {
-          const d = Math.sqrt((mx - n.x) ** 2 + (my - n.y) ** 2);
-          const alpha = Math.max(0.03, Math.min(0.15, 1 - d / 400));
-          ctx.beginPath();
-          ctx.moveTo(n.x, n.y);
-          ctx.lineTo(down.x, down.y);
-          ctx.strokeStyle = `${lineColor} ${alpha})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
-
-      animRef.current = requestAnimationFrame(draw);
-    };
-
-    draw();
-    return () => {
-      if (animRef.current) cancelAnimationFrame(animRef.current);
-    };
-  }, [mouseX, mouseY]);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ opacity: 'var(--hero-mesh-opacity, 0.1)' }}
-    />
-  );
-};
+import NeuralField from '@/components/NeuralField';
 
 // Bento stat card with spring hover
 const StatCard = ({ value, label, index }: { value: string; label: string; index: number }) => {
@@ -205,8 +88,8 @@ const Hero = () => {
         transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
       }}
     >
-      {/* Neural Mesh Background */}
-      {isDesktop && <NeuralMesh mouseX={mousePos.x} mouseY={mousePos.y} />}
+      {/* Neural Field Background */}
+      <NeuralField mouseX={mousePos.x} mouseY={mousePos.y} isDesktop={isDesktop} />
 
       {/* Content with parallax */}
       <div className="container relative z-20 flex min-h-screen flex-col items-center justify-center px-6 sm:px-8 lg:px-12 py-24 sm:py-32 md:py-40 lg:py-48 text-center">
