@@ -10,7 +10,7 @@ const stats = [
   { value: 'Top 10', label: 'App Store' },
 ];
 
-import NeuralField from '@/components/NeuralField';
+import AtmosphericBackground from '@/components/AtmosphericBackground';
 
 // Bento stat card with spring hover
 const StatCard = ({ value, label, index }: { value: string; label: string; index: number }) => {
@@ -88,8 +88,8 @@ const Hero = () => {
         transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
       }}
     >
-      {/* Neural Field Background */}
-      <NeuralField mouseX={mousePos.x} mouseY={mousePos.y} isDesktop={isDesktop} />
+      {/* Atmospheric Refraction Background */}
+      <AtmosphericBackground mouseX={mousePos.x} mouseY={mousePos.y} isDesktop={isDesktop} />
 
       {/* Content with parallax */}
       <div className="container relative z-20 flex min-h-screen flex-col items-center justify-center px-6 sm:px-8 lg:px-12 py-24 sm:py-32 md:py-40 lg:py-48 text-center">
