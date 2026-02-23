@@ -1,7 +1,88 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { ArrowDown, ArrowRight, MapPin } from 'lucide-react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { ArrowDown, ArrowRight } from 'lucide-react';
+import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import MagneticWrapper from '@/components/MagneticWrapper';
+
+// ─── Typewriter Hook ───────────────────────────────────────────────
+const PREFIXES = ['PRODUCT', 'UX', 'INTERACTION'];
+const SUFFIX = ' DESIGNER';
+const TYPE_SPEED = 45;
+const DELETE_SPEED = 15;
+const PAUSE_DURATION = 2000;
+const INITIAL_DELAY = 1000;
+
+type Phase = 'idle' | 'deleting' | 'typing' | 'paused';
+
+function useTypewriter() {
+  const [prefixIndex, setPrefixIndex] = useState(0);
+  const [displayed, setDisplayed] = useState(PREFIXES[0]); // start with PRODUCT
+  const [phase, setPhase] = useState<Phase>('idle');
+  const [cursorVisible, setCursorVisible] = useState(false);
+  const reducedMotion = useMemo(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion) return;
+
+    // Initial pause, then start deleting
+    const initialTimer = setTimeout(() => {
+      setPhase('deleting');
+      setCursorVisible(true);
+    }, INITIAL_DELAY);
+    return () => clearTimeout(initialTimer);
+  }, [reducedMotion]);
+
+  useEffect(() => {
+    if (reducedMotion || phase === 'idle') return;
+
+    if (phase === 'deleting') {
+      if (displayed.length === 0) {
+        // Move to next prefix
+        const next = (prefixIndex + 1) % PREFIXES.length;
+        setPrefixIndex(next);
+        setPhase('typing');
+        return;
+      }
+      const timer = setTimeout(() => {
+        setDisplayed(prev => prev.slice(0, -1));
+      }, DELETE_SPEED);
+      return () => clearTimeout(timer);
+    }
+
+    if (phase === 'typing') {
+      const target = PREFIXES[prefixIndex];
+      if (displayed.length === target.length) {
+        setCursorVisible(false);
+        setPhase('paused');
+        return;
+      }
+      const timer = setTimeout(() => {
+        setDisplayed(target.slice(0, displayed.length + 1));
+      }, TYPE_SPEED);
+      return () => clearTimeout(timer);
+    }
+
+    if (phase === 'paused') {
+      const timer = setTimeout(() => {
+        setCursorVisible(true);
+        setPhase('deleting');
+      }, PAUSE_DURATION);
+      return () => clearTimeout(timer);
+    }
+  }, [phase, displayed, prefixIndex, reducedMotion]);
+
+  // Cursor blink during active phases
+  const [cursorBlink, setCursorBlink] = useState(true);
+  useEffect(() => {
+    if (!cursorVisible) return;
+    const interval = setInterval(() => setCursorBlink(prev => !prev), 500);
+    return () => clearInterval(interval);
+  }, [cursorVisible]);
+
+  return { displayed, cursorVisible, cursorBlink, reducedMotion };
+}
 
 const stats = [
   { value: '850K+', label: 'Monthly Users' },
@@ -11,6 +92,46 @@ const stats = [
 ];
 
 import GeometricKinetic from '@/components/GeometricKinetic';
+
+// ─── Typewriter Eyebrow Component ──────────────────────────────────
+const TypewriterEyebrow = () => {
+  const { displayed, cursorVisible, cursorBlink, reducedMotion } = useTypewriter();
+
+  if (reducedMotion) {
+    return (
+      <span className="text-xs font-medium uppercase tracking-[0.15em] text-[hsl(var(--hero-text-sub))] font-mono">
+        PRODUCT DESIGNER · SAN FRANCISCO
+      </span>
+    );
+  }
+
+  return (
+    <span
+      className="inline-flex items-baseline text-xs font-medium uppercase tracking-[0.15em] text-[hsl(var(--hero-text-sub))]"
+      style={{ fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace", fontWeight: 500 }}
+    >
+      {/* Dynamic prefix — min-width prevents DESIGNER from jumping */}
+      <span
+        className="inline-block text-right"
+        style={{ minWidth: '9.5ch' }}
+      >
+        {displayed}
+      </span>
+      {/* Cursor */}
+      <span
+        className="inline-block w-[1.5px] h-[1.1em] mx-[1px] align-baseline"
+        style={{
+          backgroundColor: cursorVisible && cursorBlink ? 'hsl(var(--hero-text-sub))' : 'transparent',
+          transition: 'none',
+        }}
+      />
+      {/* Static suffix */}
+      <span>{SUFFIX}</span>
+      <span className="mx-2 opacity-40">·</span>
+      <span>SAN FRANCISCO</span>
+    </span>
+  );
+};
 
 // Bento stat card with spring hover
 const StatCard = ({ value, label, index }: { value: string; label: string; index: number }) => {
@@ -97,15 +218,15 @@ const Hero = () => {
           className="flex flex-col items-center gap-6 sm:gap-7 md:gap-8 max-w-4xl"
           style={isDesktop ? { x: parallaxX, y: parallaxY } : undefined}
         >
-          {/* Eyebrow */}
-          <motion.p
-            className="text-xs font-medium uppercase tracking-[0.3em] text-[hsl(var(--hero-text-sub))]"
+          {/* Typewriter Eyebrow */}
+          <motion.div
+            className="flex items-center justify-center"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.7 }}
           >
-            Product Designer · San Francisco
-          </motion.p>
+            <TypewriterEyebrow />
+          </motion.div>
 
           {/* Main headline */}
           <h1
