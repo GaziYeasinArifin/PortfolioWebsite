@@ -1,95 +1,77 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * Prismatic Refraction — "Living Light" v4
+ * Architectural Glass — "Prismatic Refraction" v5
  *
- * Brand-exact geometry from the NY logo (~65° angle). Elongated Light Ribbons
- * with variable widths (1px–200px). Sweeping Hook Arcs in periphery.
- * Flashlight mouse effect with sharpening. Silica grain overlay.
- * 30-second pendulum drift along the brand diagonal.
- * All opacities halved and blur maximised for ethereal atmosphere.
+ * 65° slanted rectangles at different depth layers behaving like light
+ * through architectural glass. Edge refraction glow, mouse spotlight
+ * with blur reveal, horizontal drift on 20s loops, film grain overlay.
+ * Pauses when off-screen for performance.
  */
 
-/* ─── Brand angle: 65° from horizontal (NY logo diagonal) ─── */
 const BRAND_ANGLE = (65 * Math.PI) / 180;
-const COS_A = Math.cos(BRAND_ANGLE);
-const SIN_A = Math.sin(BRAND_ANGLE);
 
-/* ─── Light Ribbon definition ─── */
-interface LightRibbon {
-  cx: number;
-  cy: number;
-  length: number;       // fraction of diagonal
-  width: number;        // fraction of diagonal (variable: thin=0.001, broad=0.12)
-  speed: number;        // pendulum drift multiplier
-  phase: number;
-  period: number;       // seconds for full pendulum cycle (~30s)
-  color: { dark: string; light: string };
+/* ─── Glass Panel (slanted rectangle at depth) ─── */
+interface GlassPanel {
+  cx: number;          // center X (fraction of width)
+  cy: number;          // center Y (fraction of height)
+  rectW: number;       // rectangle width in px (at 1920 baseline, scaled)
+  rectH: number;       // rectangle height in px
+  depth: number;       // 0=back, 1=front — affects parallax speed & opacity
+  driftRange: number;  // horizontal drift range in px
+  driftPeriod: number; // seconds for full cycle
+  driftPhase: number;
+  color: {
+    dark: [number, number, number];   // RGB
+    light: [number, number, number];
+  };
+  opacity: {
+    dark: number;
+    light: number;
+  };
 }
 
-/* ─── Sweeping Arc ─── */
-interface SweepingArc {
-  cx: number;
-  cy: number;
-  radius: number;
-  startAngle: number;
-  arcLength: number;
-  period: number;
-  phase: number;
-  color: { dark: string; light: string };
-}
-
-const RIBBONS: LightRibbon[] = [
-  // Broad ribbon — Deep Indigo
+const PANELS: GlassPanel[] = [
+  // Panel 1 — Broad, far back — Deep Indigo
   {
-    cx: 0.22, cy: 0.3, length: 0.85, width: 0.10,
-    speed: 0.4, phase: 0, period: 30,
-    color: { dark: 'rgba(25, 30, 90, 0.10)', light: 'rgba(200, 210, 235, 0.08)' },
+    cx: 0.18, cy: 0.35, rectW: 180, rectH: 900,
+    depth: 0.1, driftRange: 12, driftPeriod: 22, driftPhase: 0,
+    color: { dark: [30, 40, 100], light: [205, 215, 235] },
+    opacity: { dark: 0.12, light: 0.09 },
   },
-  // Medium ribbon — Electric Cyan
+  // Panel 2 — Medium, mid-depth — Slate Blue
   {
-    cx: 0.55, cy: 0.5, length: 0.95, width: 0.06,
-    speed: -0.32, phase: 1.8, period: 32,
-    color: { dark: 'rgba(0, 170, 210, 0.08)', light: 'rgba(180, 220, 240, 0.07)' },
+    cx: 0.52, cy: 0.45, rectW: 120, rectH: 1100,
+    depth: 0.35, driftRange: 16, driftPeriod: 20, driftPhase: 2.5,
+    color: { dark: [55, 70, 120], light: [195, 205, 228] },
+    opacity: { dark: 0.09, light: 0.07 },
   },
-  // Thin hairline — Slate Grey
+  // Panel 3 — Narrow, mid-front — Electric Cyan tint
   {
-    cx: 0.38, cy: 0.65, length: 0.7, width: 0.002,
-    speed: 0.25, phase: 3.2, period: 28,
-    color: { dark: 'rgba(100, 116, 139, 0.12)', light: 'rgba(160, 175, 195, 0.10)' },
+    cx: 0.72, cy: 0.3, rectW: 60, rectH: 800,
+    depth: 0.6, driftRange: 18, driftPeriod: 18, driftPhase: 4.2,
+    color: { dark: [0, 140, 180], light: [180, 218, 238] },
+    opacity: { dark: 0.07, light: 0.06 },
   },
-  // Medium-thin — Deep Indigo variant
+  // Panel 4 — Very broad, far back — Deep Indigo dark
   {
-    cx: 0.75, cy: 0.25, length: 0.6, width: 0.035,
-    speed: -0.2, phase: 4.8, period: 34,
-    color: { dark: 'rgba(30, 40, 100, 0.07)', light: 'rgba(210, 220, 242, 0.06)' },
+    cx: 0.38, cy: 0.6, rectW: 200, rectH: 1000,
+    depth: 0.05, driftRange: 10, driftPeriod: 24, driftPhase: 1.0,
+    color: { dark: [20, 28, 75], light: [215, 222, 242] },
+    opacity: { dark: 0.08, light: 0.06 },
   },
-  // Ultra-thin hairline — Cyan accent
+  // Panel 5 — Thin accent, front — Slate Grey
   {
-    cx: 0.48, cy: 0.42, length: 0.55, width: 0.001,
-    speed: 0.15, phase: 6.0, period: 36,
-    color: { dark: 'rgba(0, 200, 255, 0.10)', light: 'rgba(170, 210, 230, 0.08)' },
-  },
-];
-
-const SWEEPING_ARCS: SweepingArc[] = [
-  {
-    cx: 0.05, cy: 0.88, radius: 0.50,
-    startAngle: -0.6, arcLength: 1.3,
-    period: 55, phase: 0,
-    color: { dark: 'rgba(25, 35, 80, 0.025)', light: 'rgba(190, 205, 225, 0.02)' },
-  },
-  {
-    cx: 0.95, cy: 0.08, radius: 0.42,
-    startAngle: 2.2, arcLength: 1.0,
-    period: 50, phase: 3.0,
-    color: { dark: 'rgba(20, 30, 70, 0.02)', light: 'rgba(200, 215, 235, 0.018)' },
+    cx: 0.85, cy: 0.55, rectW: 35, rectH: 700,
+    depth: 0.8, driftRange: 20, driftPeriod: 19, driftPhase: 5.5,
+    color: { dark: [100, 116, 139], light: [170, 185, 200] },
+    opacity: { dark: 0.10, light: 0.08 },
   },
 ];
 
 interface Props {
-  mouseX: number;
-  mouseY: number;
+  mouseX: number; // 0-100
+  mouseY: number; // 0-100
   isDesktop: boolean;
 }
 
@@ -101,7 +83,7 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
   const isVisibleRef = useRef(true);
   const sizeRef = useRef({ w: 0, h: 0 });
 
-  // Generate silica grain texture once
+  // Generate film grain texture once
   useEffect(() => {
     const grain = grainRef.current;
     if (!grain) return;
@@ -115,12 +97,12 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
     for (let i = 0; i < d.length; i += 4) {
       const v = Math.random() * 255;
       d[i] = v; d[i + 1] = v; d[i + 2] = v;
-      d[i + 3] = 6; // ~2.5% opacity
+      d[i + 3] = 7; // ~3% opacity
     }
     ctx.putImageData(imageData, 0, 0);
   }, []);
 
-  // Resize
+  // Resize handler
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -138,7 +120,7 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
     return () => window.removeEventListener('resize', resize);
   }, []);
 
-  // Visibility
+  // Pause when off-screen
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -161,7 +143,7 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
     return () => document.removeEventListener('visibilitychange', handler);
   }, []);
 
-  // Main render loop
+  // ─── Main Render Loop ───
   useEffect(() => {
     const canvas = canvasRef.current;
     const grain = grainRef.current;
@@ -177,124 +159,136 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
       const { w, h } = sizeRef.current;
       if (w === 0 || h === 0) return;
       const isDark = document.documentElement.classList.contains('dark');
-      const diag = Math.sqrt(w * w + h * h);
+      const scale = w / 1920; // scale panels relative to 1920 baseline
 
       ctx.clearRect(0, 0, w, h);
 
+      // Mouse position in px
       const mx = isDesktop ? (mouseX / 100) * w : -9999;
       const my = isDesktop ? (mouseY / 100) * h : -9999;
 
-      // ── Draw Light Ribbons with massive blur simulation ──
-      for (const ribbon of RIBBONS) {
-        // Pendulum drift along brand diagonal (30s cycle)
-        const pendulum = Math.sin((elapsed / ribbon.period) * Math.PI * 2 + ribbon.phase);
-        const driftMag = diag * 0.08 * ribbon.speed;
-        const driftX = pendulum * driftMag * COS_A;
-        const driftY = pendulum * driftMag * SIN_A;
+      // Parallax offset from mouse (normalized -0.5 to 0.5)
+      const parallaxNx = isDesktop ? (mouseX / 100 - 0.5) : 0;
+      const parallaxNy = isDesktop ? (mouseY / 100 - 0.5) : 0;
 
-        const cx = ribbon.cx * w + driftX;
-        const cy = ribbon.cy * h + driftY;
-        const halfLen = (ribbon.length * diag) / 2;
-        const halfWid = Math.max((ribbon.width * diag) / 2, 0.5);
+      // ── Draw Glass Panels (back to front by depth) ──
+      const sorted = [...PANELS].sort((a, b) => a.depth - b.depth);
 
-        // Mouse flashlight: increase brightness near cursor
-        let flashlightBoost = 0;
+      for (const panel of sorted) {
+        // Horizontal drift (slow-motion reflection)
+        const drift = Math.sin((elapsed / panel.driftPeriod) * Math.PI * 2 + panel.driftPhase) * panel.driftRange * scale;
+
+        // Parallax: deeper panels move less with mouse, front panels move more
+        const parallaxStrength = panel.depth * 15 * scale;
+        const px = parallaxNx * parallaxStrength;
+        const py = parallaxNy * parallaxStrength;
+
+        const cx = panel.cx * w + drift + px;
+        const cy = panel.cy * h + py;
+        const rw = panel.rectW * scale;
+        const rh = panel.rectH * scale;
+
+        const [r, g, b] = isDark ? panel.color.dark : panel.color.light;
+        let baseOpacity = isDark ? panel.opacity.dark : panel.opacity.light;
+
+        // ── Mouse Spotlight: boost brightness & saturation near cursor ──
+        let spotlightBoost = 0;
         if (isDesktop && mx > 0) {
           const dist = Math.sqrt((mx - cx) ** 2 + (my - cy) ** 2);
-          const flashRadius = 200;
-          if (dist < flashRadius) {
-            flashlightBoost = (1 - dist / flashRadius) * 0.6;
+          const spotRadius = 150;
+          if (dist < spotRadius) {
+            spotlightBoost = (1 - dist / spotRadius);
           }
         }
 
-        const colorStr = isDark ? ribbon.color.dark : ribbon.color.light;
-        const baseAlpha = parseFloat(colorStr.match(/[\d.]+\)$/)?.[0] || '0.1');
-        const boostedAlpha = Math.min(baseAlpha + flashlightBoost * baseAlpha * 3, 0.35);
-        const colorBase = colorStr.replace(/[\d.]+\)$/, '');
+        const finalOpacity = Math.min(baseOpacity + spotlightBoost * baseOpacity * 2.5, 0.3);
 
         ctx.save();
         ctx.translate(cx, cy);
         ctx.rotate(BRAND_ANGLE);
 
-        // Simulate extreme blur with very wide gradient falloff
-        // For broad ribbons, the gradient extends well beyond the geometric width
-        const blurSpread = halfWid + Math.max(halfWid * 3, 40); // atmospheric spread
+        // ── The Glass Panel Body ──
+        // Soft fill with gradient edges to simulate frosted glass blur
+        const blurPad = rw * 0.8; // soft edge spread
+        const totalW = rw + blurPad * 2;
 
-        const grad = ctx.createLinearGradient(0, -blurSpread, 0, blurSpread);
-        grad.addColorStop(0, colorBase + '0)');
-        grad.addColorStop(0.2, colorBase + (boostedAlpha * 0.15).toFixed(4) + ')');
-        grad.addColorStop(0.4, colorBase + (boostedAlpha * 0.6).toFixed(4) + ')');
-        grad.addColorStop(0.5, colorBase + boostedAlpha.toFixed(4) + ')');
-        grad.addColorStop(0.6, colorBase + (boostedAlpha * 0.6).toFixed(4) + ')');
-        grad.addColorStop(0.8, colorBase + (boostedAlpha * 0.15).toFixed(4) + ')');
-        grad.addColorStop(1, colorBase + '0)');
+        // Cross-axis gradient (width direction) for soft blur edges
+        const crossGrad = ctx.createLinearGradient(-totalW / 2, 0, totalW / 2, 0);
+        crossGrad.addColorStop(0, `rgba(${r},${g},${b}, 0)`);
+        crossGrad.addColorStop(blurPad / totalW, `rgba(${r},${g},${b}, ${(finalOpacity * 0.4).toFixed(4)})`);
+        crossGrad.addColorStop(0.35, `rgba(${r},${g},${b}, ${(finalOpacity * 0.85).toFixed(4)})`);
+        crossGrad.addColorStop(0.5, `rgba(${r},${g},${b}, ${finalOpacity.toFixed(4)})`);
+        crossGrad.addColorStop(0.65, `rgba(${r},${g},${b}, ${(finalOpacity * 0.85).toFixed(4)})`);
+        crossGrad.addColorStop(1 - blurPad / totalW, `rgba(${r},${g},${b}, ${(finalOpacity * 0.4).toFixed(4)})`);
+        crossGrad.addColorStop(1, `rgba(${r},${g},${b}, 0)`);
 
-        // Also fade along length
-        const lengthGrad = ctx.createLinearGradient(-halfLen, 0, halfLen, 0);
-        lengthGrad.addColorStop(0, 'rgba(255,255,255,0)');
-        lengthGrad.addColorStop(0.15, 'rgba(255,255,255,1)');
-        lengthGrad.addColorStop(0.85, 'rgba(255,255,255,1)');
-        lengthGrad.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = crossGrad;
+        // Fade along length too
+        ctx.globalAlpha = 1;
+        ctx.fillRect(-totalW / 2, -rh / 2, totalW, rh);
 
-        // Draw the ribbon as a very soft rectangle
-        ctx.fillStyle = grad;
+        // Top & bottom length fade overlay (erase ends to transparency)
+        const fadeLen = rh * 0.2;
+        // Top fade
+        const topFade = ctx.createLinearGradient(0, -rh / 2, 0, -rh / 2 + fadeLen);
+        topFade.addColorStop(0, 'rgba(0,0,0,1)');
+        topFade.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.globalCompositeOperation = 'destination-in';
+        ctx.fillStyle = topFade;
+        ctx.fillRect(-totalW / 2, -rh / 2, totalW, fadeLen);
+
+        // Bottom fade
+        const botFade = ctx.createLinearGradient(0, rh / 2 - fadeLen, 0, rh / 2);
+        botFade.addColorStop(0, 'rgba(0,0,0,0)');
+        botFade.addColorStop(1, 'rgba(0,0,0,1)');
+        ctx.fillStyle = botFade;
+        ctx.fillRect(-totalW / 2, rh / 2 - fadeLen, totalW, fadeLen);
+
+        // Reset composite before edge refraction
         ctx.globalCompositeOperation = 'source-over';
-        ctx.fillRect(-halfLen, -blurSpread, halfLen * 2, blurSpread * 2);
+        ctx.globalAlpha = 1;
 
-        ctx.restore();
-      }
+        // ── Edge Refraction — inner glow on panel edges ──
+        const edgeAlpha = isDark ? 0.08 + spotlightBoost * 0.12 : 0.06 + spotlightBoost * 0.08;
+        const edgeColor = isDark ? `rgba(255,255,255,${edgeAlpha.toFixed(4)})` : `rgba(0,0,0,${(edgeAlpha * 0.5).toFixed(4)})`;
 
-      // ── Sweeping Arcs (periphery) ──
-      for (const arc of SWEEPING_ARCS) {
-        const driftAngle = Math.sin((elapsed / arc.period) * Math.PI * 2 + arc.phase) * 0.06;
-        const r = arc.radius * Math.min(w, h);
-        const ax = arc.cx * w;
-        const ay = arc.cy * h;
-        const color = isDark ? arc.color.dark : arc.color.light;
-
-        ctx.save();
-        ctx.translate(ax, ay);
-        ctx.rotate(driftAngle);
-
+        // Left edge
         ctx.beginPath();
-        ctx.arc(0, 0, r, arc.startAngle, arc.startAngle + arc.arcLength);
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 2;
-        ctx.lineCap = 'round';
+        ctx.moveTo(-rw / 2, -rh / 2 + fadeLen);
+        ctx.lineTo(-rw / 2, rh / 2 - fadeLen);
+        ctx.strokeStyle = edgeColor;
+        ctx.lineWidth = 1;
         ctx.stroke();
 
-        // Inner companion
+        // Right edge
         ctx.beginPath();
-        ctx.arc(0, 0, r * 0.92, arc.startAngle + 0.1, arc.startAngle + arc.arcLength - 0.1);
-        const innerAlpha = parseFloat(color.match(/[\d.]+\)$/)?.[0] || '0.02') * 0.4;
-        ctx.strokeStyle = color.replace(/[\d.]+\)$/, innerAlpha.toFixed(4) + ')');
-        ctx.lineWidth = 0.8;
+        ctx.moveTo(rw / 2, -rh / 2 + fadeLen);
+        ctx.lineTo(rw / 2, rh / 2 - fadeLen);
         ctx.stroke();
 
         ctx.restore();
       }
 
-      // ── Flashlight Focus Spotlight ──
+      // ── Mouse "Reveal" Spotlight — decreases fog, increases clarity ──
       if (isDesktop && mx > 0) {
-        const spotRadius = 200;
-        const spotGrad = ctx.createRadialGradient(mx, my, 0, mx, my, spotRadius);
-        const spotAlpha = 0.04;
+        const revealRadius = 150;
+        const spotGrad = ctx.createRadialGradient(mx, my, 0, mx, my, revealRadius);
         if (isDark) {
-          spotGrad.addColorStop(0, `rgba(180, 210, 255, ${spotAlpha})`);
-          spotGrad.addColorStop(0.4, `rgba(120, 160, 220, ${(spotAlpha * 0.5).toFixed(4)})`);
+          spotGrad.addColorStop(0, 'rgba(160, 190, 240, 0.035)');
+          spotGrad.addColorStop(0.5, 'rgba(100, 140, 200, 0.015)');
           spotGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
         } else {
-          spotGrad.addColorStop(0, `rgba(255, 255, 255, ${(spotAlpha * 1.5).toFixed(4)})`);
-          spotGrad.addColorStop(0.35, `rgba(255, 255, 255, ${(spotAlpha * 0.6).toFixed(4)})`);
+          spotGrad.addColorStop(0, 'rgba(255, 255, 255, 0.05)');
+          spotGrad.addColorStop(0.4, 'rgba(255, 255, 255, 0.02)');
           spotGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
         }
         ctx.beginPath();
-        ctx.arc(mx, my, spotRadius, 0, Math.PI * 2);
+        ctx.arc(mx, my, revealRadius, 0, Math.PI * 2);
         ctx.fillStyle = spotGrad;
         ctx.fill();
       }
 
-      // ── Silica Grain overlay ──
+      // ── Film Grain overlay (3%) ──
       ctx.globalAlpha = isDark ? 0.03 : 0.025;
       const ox = (Math.random() * 256) | 0;
       const oy = (Math.random() * 256) | 0;
