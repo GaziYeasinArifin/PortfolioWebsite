@@ -6,10 +6,10 @@ import MagneticWrapper from '@/components/MagneticWrapper';
 // ─── Typewriter Hook ───────────────────────────────────────────────
 const PREFIXES = ['PRODUCT', 'UX', 'INTERACTION'];
 const SUFFIX = ' DESIGNER';
-const TYPE_SPEED = 45;
-const DELETE_SPEED = 15;
-const PAUSE_DURATION = 2000;
-const INITIAL_DELAY = 1000;
+const TYPE_SPEED = 80;
+const DELETE_SPEED = 40;
+const PAUSE_DURATION = 3000;
+const INITIAL_DELAY = 1500;
 
 type Phase = 'idle' | 'deleting' | 'typing' | 'paused';
 
