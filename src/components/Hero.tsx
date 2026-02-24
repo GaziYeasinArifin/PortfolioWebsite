@@ -117,14 +117,6 @@ const TypewriterEyebrow = () => {
       >
         {displayed}
       </span>
-      {/* Cursor */}
-      <span
-        className="inline-block w-[1.5px] h-[1.1em] mx-[1px] align-baseline"
-        style={{
-          backgroundColor: cursorVisible && cursorBlink ? 'hsl(var(--hero-text-sub))' : 'transparent',
-          transition: 'none',
-        }}
-      />
       {/* Static suffix */}
       <span>{SUFFIX}</span>
     </span>
