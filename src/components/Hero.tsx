@@ -5,7 +5,7 @@ import MagneticWrapper from '@/components/MagneticWrapper';
 
 // ─── Typewriter Hook ───────────────────────────────────────────────
 const PREFIXES = ['PRODUCT', 'UX', 'INTERACTION'];
-const SUFFIX = ' DESIGNER';
+const SUFFIX = '  DESIGNER';
 const TYPE_SPEED = 80;
 const DELETE_SPEED = 40;
 const PAUSE_DURATION = 3000;
