@@ -2,10 +2,10 @@ import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'fram
 import { useEffect, useState, useMemo, useRef } from 'react';
 
 /**
- * Fluid Color Storm — v8
+ * Geometric Light v9
  *
- * 3 massive amorphous blobs: one follows the mouse with heavy spring lag,
- * two orbit and "breathe". 180px+ blur, 5% film grain, vignette fades.
+ * Three distinct geometric shapes (circle, square, triangle) with extreme blur,
+ * spring-physics mouse attraction, proximity highlight, and film grain.
  */
 
 interface Props {
@@ -29,191 +29,182 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
     return () => obs.disconnect();
   }, []);
 
-  // Scroll-driven dynamics
+  // Scroll
   const { scrollY } = useScroll();
-  const blobScale = useTransform(scrollY, [0, 800], [1, 1.15]);
-  const blobOpacity = useTransform(scrollY, [0, 800], [1, 0.3]);
+  const containerScale = useTransform(scrollY, [0, 800], [1, 1.1]);
+  const containerOpacity = useTransform(scrollY, [0, 800], [1, 0.3]);
 
-  // Mouse-following blob with heavy spring lag
-  const rawX = useMotionValue(50);
-  const rawY = useMotionValue(50);
-  const lagX = useSpring(rawX, { stiffness: 20, damping: 40 });
-  const lagY = useSpring(rawY, { stiffness: 20, damping: 40 });
-  const lagXPercent = useTransform(lagX, v => `${v}%`);
-  const lagYPercent = useTransform(lagY, v => `${v}%`);
+  // Mouse position as motion values for spring physics
+  const targetX = useMotionValue(50);
+  const targetY = useMotionValue(50);
 
-  // Track mouse velocity for opacity spike
-  const prevMouseRef = useRef({ x: 50, y: 50, time: Date.now() });
-  const velocityOpacity = useMotionValue(0.7);
-  const smoothOpacity = useSpring(velocityOpacity, { stiffness: 60, damping: 20 });
+  // Each shape follows with different spring strengths
+  const s1x = useSpring(targetX, { stiffness: 50, damping: 20 });
+  const s1y = useSpring(targetY, { stiffness: 50, damping: 20 });
+  const s2x = useSpring(targetX, { stiffness: 35, damping: 25 });
+  const s2y = useSpring(targetY, { stiffness: 35, damping: 25 });
+  const s3x = useSpring(targetX, { stiffness: 25, damping: 30 });
+  const s3y = useSpring(targetY, { stiffness: 25, damping: 30 });
+
+  // Proximity tracking for highlight
+  const closestIdx = useRef(0);
+  const [activeShape, setActiveShape] = useState(0);
 
   useEffect(() => {
     if (!isDesktop) return;
-    rawX.set(mouseX);
-    rawY.set(mouseY);
+    targetX.set(mouseX);
+    targetY.set(mouseY);
+  }, [mouseX, mouseY, isDesktop, targetX, targetY]);
 
-    const now = Date.now();
-    const dt = Math.max(now - prevMouseRef.current.time, 1);
-    const dx = mouseX - prevMouseRef.current.x;
-    const dy = mouseY - prevMouseRef.current.y;
-    const speed = Math.sqrt(dx * dx + dy * dy) / dt;
-    // Map speed to opacity: base 0.7, spike to 0.9
-    const targetOp = Math.min(0.7 + speed * 0.8, 0.9);
-    velocityOpacity.set(targetOp);
-    prevMouseRef.current = { x: mouseX, y: mouseY, time: now };
-  }, [mouseX, mouseY, isDesktop, rawX, rawY, velocityOpacity]);
+  // Update closest shape based on spring positions
+  useEffect(() => {
+    if (!isDesktop) return;
+    const interval = setInterval(() => {
+      const positions = [
+        { x: s1x.get(), y: s1y.get() },
+        { x: s2x.get(), y: s2y.get() },
+        { x: s3x.get(), y: s3y.get() },
+      ];
+      let minDist = Infinity;
+      let closest = 0;
+      positions.forEach((p, i) => {
+        const dx = p.x - mouseX;
+        const dy = p.y - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < minDist) { minDist = dist; closest = i; }
+      });
+      if (closest !== closestIdx.current) {
+        closestIdx.current = closest;
+        setActiveShape(closest);
+      }
+    }, 200);
+    return () => clearInterval(interval);
+  }, [isDesktop, mouseX, mouseY, s1x, s1y, s2x, s2y, s3x, s3y]);
 
-  // Blob colors
-  const blob1 = isDark
-    ? 'hsla(255, 70%, 45%, 0.7)'   // Electric Indigo
-    : 'hsla(25, 85%, 60%, 0.65)';  // Sunset Orange
+  // Offset transforms — shapes orbit around cursor, not directly on it
+  const shape1Left = useTransform(s1x, v => `calc(${v}% - 200px)`);
+  const shape1Top = useTransform(s1y, v => `calc(${v}% - 200px)`);
+  const shape2Left = useTransform(s2x, v => `calc(${v}% + 50px)`);
+  const shape2Top = useTransform(s2y, v => `calc(${v}% - 250px)`);
+  const shape3Left = useTransform(s3x, v => `calc(${v}% - 100px)`);
+  const shape3Top = useTransform(s3y, v => `calc(${v}% + 80px)`);
 
-  const blob2 = isDark
-    ? 'hsla(280, 60%, 40%, 0.6)'   // Vibrant Violet
-    : 'hsla(270, 50%, 70%, 0.6)';  // Deep Lavender
+  // Colors
+  const circleColor = isDark
+    ? 'radial-gradient(circle, hsla(190, 90%, 55%, 0.7), hsla(220, 80%, 50%, 0.5))'
+    : 'radial-gradient(circle, hsla(190, 70%, 65%, 0.6), hsla(210, 60%, 55%, 0.4))';
+  const squareColor = isDark
+    ? 'radial-gradient(circle, hsla(280, 75%, 50%, 0.7), hsla(310, 70%, 45%, 0.5))'
+    : 'radial-gradient(circle, hsla(280, 55%, 65%, 0.6), hsla(300, 50%, 60%, 0.4))';
+  const triangleColor = isDark
+    ? 'radial-gradient(circle, hsla(30, 90%, 55%, 0.7), hsla(45, 85%, 50%, 0.5))'
+    : 'radial-gradient(circle, hsla(25, 80%, 60%, 0.6), hsla(40, 70%, 55%, 0.4))';
 
-  const blob3 = isDark
-    ? 'hsla(210, 80%, 50%, 0.5)'   // Azure Blue
-    : 'hsla(350, 60%, 75%, 0.55)'; // Soft Rose
-
-  // Breathing animation for orbiting blobs
-  const breathe = reducedMotion ? undefined : {
-    scale: [1, 1.5, 1],
+  // Idle orbit animations
+  const idleOrbit1 = reducedMotion ? undefined : {
+    x: ['-30px', '40px', '-20px', '30px', '-30px'],
+    y: ['20px', '-35px', '30px', '-25px', '20px'],
+    rotate: [0, 5, -3, 4, 0],
   };
-  const breatheTransition = {
-    repeat: Infinity,
-    duration: 10,
-    ease: 'easeInOut' as const,
+  const idleOrbit2 = reducedMotion ? undefined : {
+    x: ['25px', '-35px', '30px', '-25px', '25px'],
+    y: ['-20px', '30px', '-25px', '35px', '-20px'],
+    rotate: [15, 25, 10, 20, 15],
+  };
+  const idleOrbit3 = reducedMotion ? undefined : {
+    x: ['-20px', '30px', '-40px', '20px', '-20px'],
+    y: ['30px', '-20px', '25px', '-30px', '30px'],
   };
 
-  // Orbit paths for blob 2 & 3
-  const orbit2 = reducedMotion ? undefined : {
-    x: ['-8%', '12%', '5%', '-10%', '-8%'],
-    y: ['5%', '-8%', '10%', '-5%', '5%'],
-    scale: [1, 1.4, 1, 1.3, 1],
-  };
-  const orbit3 = reducedMotion ? undefined : {
-    x: ['10%', '-6%', '-12%', '8%', '10%'],
-    y: ['-6%', '8%', '-4%', '10%', '-6%'],
-    scale: [1.2, 1, 1.5, 1, 1.2],
-  };
+  const baseTransition = { repeat: Infinity, duration: 30, ease: 'easeInOut' as const };
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-      {/* Blob container — scroll reactive */}
       <motion.div
         className="absolute inset-0"
-        style={{
-          scale: blobScale,
-          opacity: blobOpacity,
-          willChange: 'transform, filter',
-        }}
+        style={{ scale: containerScale, opacity: containerOpacity, willChange: 'transform' }}
       >
-        {/* Blob 1 — Mouse follower (largest, dominant) */}
-        {isDesktop ? (
-          <motion.div
-            className="absolute"
-            style={{
-              width: '60vw',
-              height: '60vh',
-              borderRadius: '40% 60% 55% 45% / 50% 40% 60% 50%',
-              background: blob1,
-              filter: 'blur(180px)',
-              opacity: smoothOpacity,
-              left: lagXPercent,
-              top: lagYPercent,
-              x: '-50%',
-              y: '-50%',
-              willChange: 'transform, filter',
-              transition: 'background 1s ease',
-            }}
-          />
-        ) : (
-          <motion.div
-            className="absolute"
-            style={{
-              width: '60vw',
-              height: '60vh',
-              borderRadius: '40% 60% 55% 45% / 50% 40% 60% 50%',
-              background: blob1,
-              filter: 'blur(180px)',
-              opacity: 0.7,
-              left: '20%',
-              top: '20%',
-              willChange: 'transform, filter',
-              transition: 'background 1s ease',
-            }}
-            animate={!reducedMotion ? {
-              x: ['-5%', '8%', '-3%', '-5%'],
-              y: ['-8%', '5%', '8%', '-8%'],
-            } : undefined}
-            transition={{ repeat: Infinity, duration: 30, ease: 'easeInOut' }}
-          />
-        )}
-        {/* Blob 2 — Orbiting, breathing */}
+        {/* Shape 1 — Circle (Cyan/Blue) */}
         <motion.div
           className="absolute"
           style={{
-            left: '60%',
-            top: '30%',
-            width: '50vw',
-            height: '50vh',
-            borderRadius: '55% 45% 40% 60% / 45% 55% 50% 50%',
-            background: blob2,
-            filter: 'blur(180px)',
-            willChange: 'transform, filter',
-            transition: 'background 1s ease',
+            width: 400, height: 400,
+            borderRadius: '50%',
+            background: circleColor,
+            filter: 'blur(120px)',
+            opacity: activeShape === 0 ? 0.9 : 0.7,
+            transform: `scale(${activeShape === 0 ? 1.1 : 1})`,
+            ...(isDesktop ? { left: shape1Left, top: shape1Top } : { left: '15%', top: '20%' }),
+            willChange: 'transform, filter, opacity',
+            transition: 'opacity 0.6s ease, transform 0.6s ease, background 1s ease',
           }}
-          animate={orbit2}
-          transition={{ repeat: Infinity, duration: 25, ease: 'easeInOut' }}
+          animate={!isDesktop ? idleOrbit1 : idleOrbit1}
+          transition={{ ...baseTransition, duration: 28 }}
         />
 
-        {/* Blob 3 — Orbiting, breathing (accent) */}
+        {/* Shape 2 — Square (Purple/Magenta), slightly rotated */}
         <motion.div
           className="absolute"
           style={{
-            left: '30%',
-            bottom: '10%',
-            width: '45vw',
-            height: '45vh',
-            borderRadius: '50% 50% 45% 55% / 55% 45% 50% 50%',
-            background: blob3,
-            filter: 'blur(180px)',
-            willChange: 'transform, filter',
-            transition: 'background 1s ease',
+            width: 350, height: 350,
+            borderRadius: '20%',
+            background: squareColor,
+            filter: 'blur(120px)',
+            opacity: activeShape === 1 ? 0.9 : 0.65,
+            transform: `scale(${activeShape === 1 ? 1.1 : 1})`,
+            ...(isDesktop ? { left: shape2Left, top: shape2Top } : { left: '55%', top: '15%' }),
+            willChange: 'transform, filter, opacity',
+            transition: 'opacity 0.6s ease, transform 0.6s ease, background 1s ease',
           }}
-          animate={orbit3}
-          transition={{ repeat: Infinity, duration: 20, ease: 'easeInOut' }}
+          animate={!isDesktop ? idleOrbit2 : idleOrbit2}
+          transition={{ ...baseTransition, duration: 32 }}
+        />
+
+        {/* Shape 3 — Triangle (Orange/Yellow) via clip-path */}
+        <motion.div
+          className="absolute"
+          style={{
+            width: 380, height: 380,
+            clipPath: 'polygon(50% 5%, 95% 90%, 5% 90%)',
+            background: triangleColor,
+            filter: 'blur(120px)',
+            opacity: activeShape === 2 ? 0.9 : 0.6,
+            transform: `scale(${activeShape === 2 ? 1.1 : 1})`,
+            ...(isDesktop ? { left: shape3Left, top: shape3Top } : { left: '30%', top: '45%' }),
+            willChange: 'transform, filter, opacity',
+            transition: 'opacity 0.6s ease, transform 0.6s ease, background 1s ease',
+          }}
+          animate={!isDesktop ? idleOrbit3 : idleOrbit3}
+          transition={{ ...baseTransition, duration: 35 }}
         />
       </motion.div>
 
-      {/* Top vignette fade */}
+      {/* Top vignette */}
       <div
-        className="absolute inset-x-0 top-0 z-[1] h-[20%]"
+        className="absolute inset-x-0 top-0 z-[1] h-[15%]"
         style={{
           background: isDark
-            ? 'linear-gradient(to bottom, #050505 0%, #050505 30%, transparent 100%)'
-            : 'linear-gradient(to bottom, #FBFBFD 0%, #FBFBFD 30%, transparent 100%)',
+            ? 'linear-gradient(to bottom, #050505 0%, transparent 100%)'
+            : 'linear-gradient(to bottom, #FBFBFD 0%, transparent 100%)',
+          transition: 'background 1s ease',
+        }}
+      />
+      {/* Bottom vignette */}
+      <div
+        className="absolute inset-x-0 bottom-0 z-[1] h-[15%]"
+        style={{
+          background: isDark
+            ? 'linear-gradient(to top, #050505 0%, transparent 100%)'
+            : 'linear-gradient(to top, #FBFBFD 0%, transparent 100%)',
           transition: 'background 1s ease',
         }}
       />
 
-      {/* Bottom vignette fade */}
+      {/* Film Grain — 3% */}
       <div
-        className="absolute inset-x-0 bottom-0 z-[1] h-[20%]"
+        className="absolute inset-0 z-[2] opacity-[0.03]"
         style={{
-          background: isDark
-            ? 'linear-gradient(to top, #050505 0%, #050505 30%, transparent 100%)'
-            : 'linear-gradient(to top, #FBFBFD 0%, #FBFBFD 30%, transparent 100%)',
-          transition: 'background 1s ease',
-        }}
-      />
-
-      {/* Film Grain texture — 5% opacity */}
-      <div
-        className="absolute inset-0 z-[2] opacity-[0.05]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
           backgroundRepeat: 'repeat',
           backgroundSize: '256px 256px',
         }}
