@@ -43,6 +43,8 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
   const s1y = useSpring(targetY, { stiffness: 50, damping: 20 });
   const s2x = useSpring(targetX, { stiffness: 35, damping: 25 });
   const s2y = useSpring(targetY, { stiffness: 35, damping: 25 });
+  const s3x = useSpring(targetX, { stiffness: 25, damping: 30 });
+  const s3y = useSpring(targetY, { stiffness: 25, damping: 30 });
 
   // Proximity tracking for highlight
   const closestIdx = useRef(0);
@@ -61,6 +63,7 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
       const positions = [
         { x: s1x.get(), y: s1y.get() },
         { x: s2x.get(), y: s2y.get() },
+        { x: s3x.get(), y: s3y.get() },
       ];
       let minDist = Infinity;
       let closest = 0;
@@ -76,7 +79,7 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
       }
     }, 200);
     return () => clearInterval(interval);
-  }, [isDesktop, mouseX, mouseY, s1x, s1y, s2x, s2y]);
+  }, [isDesktop, mouseX, mouseY, s1x, s1y, s2x, s2y, s3x, s3y]);
 
   // Offset transforms — shapes orbit around cursor, not directly on it
   const shape1Left = useTransform(s1x, v => `calc(${v}% - 200px)`);
