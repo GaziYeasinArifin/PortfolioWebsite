@@ -117,8 +117,8 @@ const TypewriterEyebrow = () => {
       >
         {displayed}
       </span>
-      {/* Static suffix */}
-      <span>{SUFFIX}</span>
+      {/* Static suffix with spacing */}
+      <span style={{ marginLeft: '0.5ch' }}>DESIGNER</span>
     </span>
   );
 };
