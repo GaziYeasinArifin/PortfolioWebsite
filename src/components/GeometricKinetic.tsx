@@ -165,7 +165,7 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
           className="absolute"
           style={{
             width: 380, height: 380,
-            clipPath: 'polygon(50% 5%, 95% 90%, 5% 90%)',
+            borderRadius: '30% 70% 55% 45% / 60% 40% 65% 35%',
             background: triangleColor,
             filter: 'blur(120px)',
             opacity: activeShape === 2 ? 0.9 : 0.6,
