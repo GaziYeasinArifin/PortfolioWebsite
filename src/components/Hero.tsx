@@ -295,21 +295,6 @@ const Hero = () => {
             </MagneticWrapper>
           </motion.div>
 
-          {/* Location Badge */}
-          <motion.div
-            className="flex items-center gap-2 mt-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.6 }}
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" style={{ animation: 'hero-dot-pulse 2s ease-in-out infinite' }} />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
-            </span>
-            <span className="text-xs tracking-wider uppercase text-[hsl(var(--hero-text-sub))]">
-              Now in San Francisco
-            </span>
-          </motion.div>
 
           {/* Scroll indicator */}
           <motion.a
