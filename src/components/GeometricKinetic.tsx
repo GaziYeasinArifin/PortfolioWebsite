@@ -1,12 +1,5 @@
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
-import { useEffect, useState, useMemo, useRef } from 'react';
-
-/**
- * Geometric Light v9
- *
- * Three distinct geometric shapes (circle, square, triangle) with extreme blur,
- * spring-physics mouse attraction, proximity highlight, and film grain.
- */
+import { useEffect, useState, useMemo } from 'react';
 
 interface Props {
   mouseX: number; // 0-100
@@ -38,17 +31,13 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
   const targetX = useMotionValue(50);
   const targetY = useMotionValue(50);
 
-  // Each shape follows with different spring strengths
-  const s1x = useSpring(targetX, { stiffness: 50, damping: 20 });
-  const s1y = useSpring(targetY, { stiffness: 50, damping: 20 });
-  const s2x = useSpring(targetX, { stiffness: 35, damping: 25 });
-  const s2y = useSpring(targetY, { stiffness: 35, damping: 25 });
-  const s3x = useSpring(targetX, { stiffness: 25, damping: 30 });
-  const s3y = useSpring(targetY, { stiffness: 25, damping: 30 });
-
-  // Proximity tracking for highlight
-  const closestIdx = useRef(0);
-  const [activeShape, setActiveShape] = useState(0);
+  // Each shape follows with slightly reduced stiffness for smoother settling
+  const s1x = useSpring(targetX, { stiffness: 40, damping: 22 });
+  const s1y = useSpring(targetY, { stiffness: 40, damping: 22 });
+  const s2x = useSpring(targetX, { stiffness: 28, damping: 26 });
+  const s2y = useSpring(targetY, { stiffness: 28, damping: 26 });
+  const s3x = useSpring(targetX, { stiffness: 20, damping: 30 });
+  const s3y = useSpring(targetY, { stiffness: 20, damping: 30 });
 
   useEffect(() => {
     if (!isDesktop) return;
@@ -56,49 +45,24 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
     targetY.set(mouseY);
   }, [mouseX, mouseY, isDesktop, targetX, targetY]);
 
-  // Update closest shape based on spring positions
-  useEffect(() => {
-    if (!isDesktop) return;
-    const interval = setInterval(() => {
-      const positions = [
-        { x: s1x.get(), y: s1y.get() },
-        { x: s2x.get(), y: s2y.get() },
-        { x: s3x.get(), y: s3y.get() },
-      ];
-      let minDist = Infinity;
-      let closest = 0;
-      positions.forEach((p, i) => {
-        const dx = p.x - mouseX;
-        const dy = p.y - mouseY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < minDist) { minDist = dist; closest = i; }
-      });
-      if (closest !== closestIdx.current) {
-        closestIdx.current = closest;
-        setActiveShape(closest);
-      }
-    }, 200);
-    return () => clearInterval(interval);
-  }, [isDesktop, mouseX, mouseY, s1x, s1y, s2x, s2y, s3x, s3y]);
+  // GPU-composited x/y transforms instead of calc() strings for left/top
+  const shape1X = useTransform(s1x, v => (v / 100) * (typeof window !== 'undefined' ? window.innerWidth : 1440) - 350);
+  const shape1Y = useTransform(s1y, v => (v / 100) * (typeof window !== 'undefined' ? window.innerHeight : 900) - 350);
+  const shape2X = useTransform(s2x, v => (v / 100) * (typeof window !== 'undefined' ? window.innerWidth : 1440) + 50);
+  const shape2Y = useTransform(s2y, v => (v / 100) * (typeof window !== 'undefined' ? window.innerHeight : 900) - 400);
+  const shape3X = useTransform(s3x, v => (v / 100) * (typeof window !== 'undefined' ? window.innerWidth : 1440) - 100);
+  const shape3Y = useTransform(s3y, v => (v / 100) * (typeof window !== 'undefined' ? window.innerHeight : 900) + 80);
 
-  // Offset transforms — shapes orbit around cursor, not directly on it
-  const shape1Left = useTransform(s1x, v => `calc(${v}% - 200px)`);
-  const shape1Top = useTransform(s1y, v => `calc(${v}% - 200px)`);
-  const shape2Left = useTransform(s2x, v => `calc(${v}% + 50px)`);
-  const shape2Top = useTransform(s2y, v => `calc(${v}% - 250px)`);
-  const shape3Left = useTransform(s3x, v => `calc(${v}% - 100px)`);
-  const shape3Top = useTransform(s3y, v => `calc(${v}% + 80px)`);
-
-  // Colors
-  const circleColor = isDark
-    ? 'radial-gradient(circle, hsla(190, 90%, 55%, 0.7), hsla(220, 80%, 50%, 0.5))'
-    : 'radial-gradient(circle, hsla(190, 70%, 65%, 0.6), hsla(210, 60%, 55%, 0.4))';
-  const squareColor = isDark
-    ? 'radial-gradient(circle, hsla(280, 75%, 50%, 0.7), hsla(310, 70%, 45%, 0.5))'
-    : 'radial-gradient(circle, hsla(280, 55%, 65%, 0.6), hsla(300, 50%, 60%, 0.4))';
-  const triangleColor = isDark
-    ? 'radial-gradient(circle, hsla(30, 90%, 55%, 0.7), hsla(45, 85%, 50%, 0.5))'
-    : 'radial-gradient(circle, hsla(25, 80%, 60%, 0.6), hsla(40, 70%, 55%, 0.4))';
+  // Pre-blurred radial gradients — larger shapes with soft falloff, no CSS filter needed
+  const circleGradient = isDark
+    ? 'radial-gradient(circle, hsla(190, 90%, 55%, 0.7) 0%, hsla(220, 80%, 50%, 0.35) 35%, transparent 65%)'
+    : 'radial-gradient(circle, hsla(190, 70%, 65%, 0.6) 0%, hsla(210, 60%, 55%, 0.3) 35%, transparent 65%)';
+  const squareGradient = isDark
+    ? 'radial-gradient(circle, hsla(280, 75%, 50%, 0.7) 0%, hsla(310, 70%, 45%, 0.35) 35%, transparent 65%)'
+    : 'radial-gradient(circle, hsla(280, 55%, 65%, 0.6) 0%, hsla(300, 50%, 60%, 0.3) 35%, transparent 65%)';
+  const triangleGradient = isDark
+    ? 'radial-gradient(circle, hsla(30, 90%, 55%, 0.7) 0%, hsla(45, 85%, 50%, 0.35) 35%, transparent 65%)'
+    : 'radial-gradient(circle, hsla(25, 80%, 60%, 0.6) 0%, hsla(40, 70%, 55%, 0.3) 35%, transparent 65%)';
 
   // Idle orbit animations
   const idleOrbit1 = reducedMotion ? undefined : {
@@ -118,6 +82,11 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
 
   const baseTransition = { repeat: Infinity, duration: 30, ease: 'easeInOut' as const };
 
+  // Static default positions for mobile
+  const mobilePos1 = { left: '15%', top: '20%' };
+  const mobilePos2 = { left: '55%', top: '15%' };
+  const mobilePos3 = { left: '30%', top: '45%' };
+
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
       <motion.div
@@ -128,53 +97,47 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
         <motion.div
           className="absolute"
           style={{
-            width: 400, height: 400,
+            width: 700, height: 700,
             borderRadius: '50%',
-            background: circleColor,
-            filter: 'blur(120px)',
-            opacity: activeShape === 0 ? 0.9 : 0.7,
-            transform: `scale(${activeShape === 0 ? 1.1 : 1})`,
-            ...(isDesktop ? { left: shape1Left, top: shape1Top } : { left: '15%', top: '20%' }),
-            willChange: 'transform, filter, opacity',
-            transition: 'opacity 0.6s ease, transform 0.6s ease, background 1s ease',
+            background: circleGradient,
+            opacity: 0.75,
+            ...(isDesktop ? { x: shape1X, y: shape1Y, left: 0, top: 0 } : mobilePos1),
+            willChange: 'transform',
+            transition: 'background 1s ease',
           }}
-          animate={!isDesktop ? idleOrbit1 : idleOrbit1}
+          animate={idleOrbit1}
           transition={{ ...baseTransition, duration: 28 }}
         />
 
-        {/* Shape 2 — Square (Purple/Magenta), slightly rotated */}
+        {/* Shape 2 — Square (Purple/Magenta) */}
         <motion.div
           className="absolute"
           style={{
-            width: 350, height: 350,
+            width: 650, height: 650,
             borderRadius: '20%',
-            background: squareColor,
-            filter: 'blur(120px)',
-            opacity: activeShape === 1 ? 0.9 : 0.65,
-            transform: `scale(${activeShape === 1 ? 1.1 : 1})`,
-            ...(isDesktop ? { left: shape2Left, top: shape2Top } : { left: '55%', top: '15%' }),
-            willChange: 'transform, filter, opacity',
-            transition: 'opacity 0.6s ease, transform 0.6s ease, background 1s ease',
+            background: squareGradient,
+            opacity: 0.7,
+            ...(isDesktop ? { x: shape2X, y: shape2Y, left: 0, top: 0 } : mobilePos2),
+            willChange: 'transform',
+            transition: 'background 1s ease',
           }}
-          animate={!isDesktop ? idleOrbit2 : idleOrbit2}
+          animate={idleOrbit2}
           transition={{ ...baseTransition, duration: 32 }}
         />
 
-        {/* Shape 3 — Triangle (Orange/Yellow) via clip-path */}
+        {/* Shape 3 — Organic blob (Orange/Yellow) */}
         <motion.div
           className="absolute"
           style={{
-            width: 380, height: 380,
+            width: 680, height: 680,
             borderRadius: '30% 70% 55% 45% / 60% 40% 65% 35%',
-            background: triangleColor,
-            filter: 'blur(120px)',
-            opacity: activeShape === 2 ? 0.9 : 0.6,
-            transform: `scale(${activeShape === 2 ? 1.1 : 1})`,
-            ...(isDesktop ? { left: shape3Left, top: shape3Top } : { left: '30%', top: '45%' }),
-            willChange: 'transform, filter, opacity',
-            transition: 'opacity 0.6s ease, transform 0.6s ease, background 1s ease',
+            background: triangleGradient,
+            opacity: 0.65,
+            ...(isDesktop ? { x: shape3X, y: shape3Y, left: 0, top: 0 } : mobilePos3),
+            willChange: 'transform',
+            transition: 'background 1s ease',
           }}
-          animate={!isDesktop ? idleOrbit3 : idleOrbit3}
+          animate={idleOrbit3}
           transition={{ ...baseTransition, duration: 35 }}
         />
       </motion.div>
