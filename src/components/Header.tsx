@@ -138,8 +138,8 @@ const Header = () => {
               alt="Gazi Yeasin Arifin Logo" 
               className={`no-border h-[30px] w-auto transition-all duration-500 group-hover:scale-105 ${
                 showLogo ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-              } ${isDarkNav ? 'brightness-0 invert' : ''}`}
-              style={isDarkNav ? { filter: 'brightness(0) invert(1)' } : undefined}
+              } ${isDarkMode ? 'brightness-0 invert' : ''}`}
+              style={isDarkMode ? { filter: 'brightness(0) invert(1)' } : undefined}
             />
             <span className={`font-display text-lg font-bold tracking-tight transition-all duration-300 inline-flex items-center ${
               isDarkNav ? 'text-white' : 'text-foreground'
@@ -213,7 +213,7 @@ const Header = () => {
             <a
               href="mailto:arifin.yeasin@gmail.com"
               className={`shimmer-button group rounded-[4px] px-5 py-2.5 text-sm font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ${
-                isDarkNav
+                isDarkMode
                   ? 'bg-white text-[#050505] hover:bg-white/90'
                   : 'border border-foreground bg-foreground text-primary-foreground hover:bg-transparent hover:text-foreground'
               }`}
@@ -301,8 +301,8 @@ const Header = () => {
               </a>
               <a
                 href="mailto:arifin.yeasin@gmail.com"
-                className={`shimmer-button group rounded-[4px] px-6 py-4 text-center text-base font-medium transition-all duration-300 active:scale-[0.98] ${
-                  isDarkNav
+              className={`shimmer-button group rounded-[4px] px-6 py-4 text-center text-base font-medium transition-all duration-300 active:scale-[0.98] ${
+                  isDarkMode
                     ? 'bg-white text-[#050505] hover:bg-white/90'
                     : 'border border-foreground bg-foreground text-primary-foreground hover:bg-transparent hover:text-foreground'
                 }`}
