@@ -414,9 +414,9 @@ const CaseStudies = () => {
           </motion.div>
         </div>
 
-        {/* Uniform 2-column grid — 40px gap */}
+        {/* Grid: 3 columns for writing, 2 columns for others */}
         <LayoutGroup>
-          <motion.div layout className="grid grid-cols-1 md:grid-cols-2" style={{ gap: '40px' }}>
+          <motion.div layout className={`grid grid-cols-1 ${activeCategory === 'writing' ? 'md:grid-cols-3' : 'md:grid-cols-2'}`} style={{ gap: '40px' }}>
             <AnimatePresence mode="popLayout">
               {filtered.map((item, index) => (
                 <WorkCard key={item.id} item={item} index={index} />
