@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useCallback, useRef } from 'react';
 
 interface Props {
   mouseX: number; // 0-100
@@ -22,70 +22,113 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
     return () => obs.disconnect();
   }, []);
 
-  // Scroll
+  // Scroll parallax
   const { scrollY } = useScroll();
   const containerScale = useTransform(scrollY, [0, 800], [1, 1.1]);
   const containerOpacity = useTransform(scrollY, [0, 800], [1, 0.3]);
 
-  // Mouse position as motion values for spring physics
+  // ─── Inertia Spring System ──────────────────────────────────────
+  // All shapes track the same target but with different spring configs
   const targetX = useMotionValue(50);
   const targetY = useMotionValue(50);
 
-  // Each shape follows with slightly reduced stiffness for smoother settling
-  const s1x = useSpring(targetX, { stiffness: 40, damping: 22 });
-  const s1y = useSpring(targetY, { stiffness: 40, damping: 22 });
-  const s2x = useSpring(targetX, { stiffness: 28, damping: 26 });
-  const s2y = useSpring(targetY, { stiffness: 28, damping: 26 });
-  const s3x = useSpring(targetX, { stiffness: 20, damping: 30 });
-  const s3y = useSpring(targetY, { stiffness: 20, damping: 30 });
+  // Circle (Azure) — heavy, slow lag: stiffness 50, damping 30
+  const circleX = useSpring(targetX, { stiffness: 50, damping: 30 });
+  const circleY = useSpring(targetY, { stiffness: 50, damping: 30 });
+
+  // Square (Magenta) — magnetic, snappy: stiffness 90, damping 20
+  const squareX = useSpring(targetX, { stiffness: 90, damping: 20 });
+  const squareY = useSpring(targetY, { stiffness: 90, damping: 20 });
+
+  // Triangle (Teal) — floaty, only reacts within 200px proximity
+  const triangleTargetX = useMotionValue(55);
+  const triangleTargetY = useMotionValue(45);
+  const triangleX = useSpring(triangleTargetX, { stiffness: 35, damping: 35 });
+  const triangleY = useSpring(triangleTargetY, { stiffness: 35, damping: 35 });
+
+  // Triangle center for proximity check
+  const triCenterRef = useRef({ x: 55, y: 45 });
 
   useEffect(() => {
     if (!isDesktop) return;
     targetX.set(mouseX);
     targetY.set(mouseY);
-  }, [mouseX, mouseY, isDesktop, targetX, targetY]);
 
-  // GPU-composited x/y transforms instead of calc() strings for left/top
-  const shape1X = useTransform(s1x, v => (v / 100) * (typeof window !== 'undefined' ? window.innerWidth : 1440) - 350);
-  const shape1Y = useTransform(s1y, v => (v / 100) * (typeof window !== 'undefined' ? window.innerHeight : 900) - 350);
-  const shape2X = useTransform(s2x, v => (v / 100) * (typeof window !== 'undefined' ? window.innerWidth : 1440) + 50);
-  const shape2Y = useTransform(s2y, v => (v / 100) * (typeof window !== 'undefined' ? window.innerHeight : 900) - 400);
-  const shape3X = useTransform(s3x, v => (v / 100) * (typeof window !== 'undefined' ? window.innerWidth : 1440) - 100);
-  const shape3Y = useTransform(s3y, v => (v / 100) * (typeof window !== 'undefined' ? window.innerHeight : 900) + 80);
+    // Triangle: only react if mouse is within ~200px (≈20% of viewport)
+    const triCenter = triCenterRef.current;
+    const dx = mouseX - triCenter.x;
+    const dy = mouseY - triCenter.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 20) {
+      // Within proximity — attract gently
+      triangleTargetX.set(triCenter.x + dx * 0.4);
+      triangleTargetY.set(triCenter.y + dy * 0.4);
+    } else {
+      // Outside proximity — drift back to home
+      triangleTargetX.set(triCenter.x);
+      triangleTargetY.set(triCenter.y);
+    }
+  }, [mouseX, mouseY, isDesktop, targetX, targetY, triangleTargetX, triangleTargetY]);
 
-  // Pre-blurred radial gradients — larger shapes with soft falloff, no CSS filter needed
+  // ─── GPU-composited transforms ──────────────────────────────────
+  const ww = typeof window !== 'undefined' ? window.innerWidth : 1440;
+  const wh = typeof window !== 'undefined' ? window.innerHeight : 900;
+
+  // Circle: top-left anchor
+  const c1X = useTransform(circleX, v => (v / 100) * ww - 350);
+  const c1Y = useTransform(circleY, v => (v / 100) * wh - 350);
+
+  // Square: bottom-right anchor, tilted 15deg
+  const c2X = useTransform(squareX, v => (v / 100) * ww + 50);
+  const c2Y = useTransform(squareY, v => (v / 100) * wh - 100);
+
+  // Triangle: center-right anchor
+  const c3X = useTransform(triangleX, v => (v / 100) * ww - 100);
+  const c3Y = useTransform(triangleY, v => (v / 100) * wh + 80);
+
+  // ─── Gradients — vibrant, max opacity 60% ──────────────────────
   const circleGradient = isDark
-    ? 'radial-gradient(circle, hsla(190, 90%, 55%, 0.7) 0%, hsla(220, 80%, 50%, 0.35) 35%, transparent 65%)'
-    : 'radial-gradient(circle, hsla(190, 70%, 65%, 0.6) 0%, hsla(210, 60%, 55%, 0.3) 35%, transparent 65%)';
-  const squareGradient = isDark
-    ? 'radial-gradient(circle, hsla(280, 75%, 50%, 0.7) 0%, hsla(310, 70%, 45%, 0.35) 35%, transparent 65%)'
-    : 'radial-gradient(circle, hsla(280, 55%, 65%, 0.6) 0%, hsla(300, 50%, 60%, 0.3) 35%, transparent 65%)';
-  const triangleGradient = isDark
-    ? 'radial-gradient(circle, hsla(30, 90%, 55%, 0.7) 0%, hsla(45, 85%, 50%, 0.35) 35%, transparent 65%)'
-    : 'radial-gradient(circle, hsla(25, 80%, 60%, 0.6) 0%, hsla(40, 70%, 55%, 0.3) 35%, transparent 65%)';
+    ? 'radial-gradient(circle, hsla(210, 100%, 60%, 0.6) 0%, hsla(220, 90%, 50%, 0.3) 35%, transparent 65%)'
+    : 'radial-gradient(circle, hsla(210, 80%, 65%, 0.55) 0%, hsla(215, 70%, 55%, 0.25) 35%, transparent 65%)';
 
-  // Idle orbit animations
-  const idleOrbit1 = reducedMotion ? undefined : {
+  const squareGradient = isDark
+    ? 'radial-gradient(circle, hsla(290, 85%, 55%, 0.6) 0%, hsla(310, 80%, 45%, 0.3) 35%, transparent 65%)'
+    : 'radial-gradient(circle, hsla(285, 60%, 65%, 0.55) 0%, hsla(300, 55%, 60%, 0.25) 35%, transparent 65%)';
+
+  const triangleGradient = isDark
+    ? 'radial-gradient(circle, hsla(175, 90%, 50%, 0.6) 0%, hsla(185, 85%, 45%, 0.3) 35%, transparent 65%)'
+    : 'radial-gradient(circle, hsla(175, 70%, 55%, 0.55) 0%, hsla(180, 60%, 50%, 0.25) 35%, transparent 65%)';
+
+  // ─── Idle orbits ────────────────────────────────────────────────
+  const idleCircle = reducedMotion ? undefined : {
     x: ['-30px', '40px', '-20px', '30px', '-30px'],
     y: ['20px', '-35px', '30px', '-25px', '20px'],
-    rotate: [0, 5, -3, 4, 0],
+    rotate: [0, 3, -2, 4, 0],
   };
-  const idleOrbit2 = reducedMotion ? undefined : {
+  const idleSquare = reducedMotion ? undefined : {
     x: ['25px', '-35px', '30px', '-25px', '25px'],
     y: ['-20px', '30px', '-25px', '35px', '-20px'],
     rotate: [15, 25, 10, 20, 15],
   };
-  const idleOrbit3 = reducedMotion ? undefined : {
+  const idleTriangle = reducedMotion ? undefined : {
     x: ['-20px', '30px', '-40px', '20px', '-20px'],
     y: ['30px', '-20px', '25px', '-30px', '30px'],
+    rotate: [0, 8, -5, 10, 0],
   };
 
-  const baseTransition = { repeat: Infinity, duration: 30, ease: 'easeInOut' as const };
+  const baseTransition = { repeat: Infinity, ease: 'easeInOut' as const };
 
   // Static default positions for mobile
   const mobilePos1 = { left: '15%', top: '20%' };
   const mobilePos2 = { left: '55%', top: '15%' };
   const mobilePos3 = { left: '30%', top: '45%' };
+
+  // Shared GPU hint styles
+  const gpuHints: React.CSSProperties = {
+    willChange: 'transform',
+    backfaceVisibility: 'hidden',
+    transition: 'background 1s ease',
+  };
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -93,51 +136,49 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
         className="absolute inset-0"
         style={{ scale: containerScale, opacity: containerOpacity, willChange: 'transform' }}
       >
-        {/* Shape 1 — Circle (Cyan/Blue) */}
+        {/* Shape 1 — Circle (Azure Blue) — heavy, slow lag */}
         <motion.div
-          className="absolute"
+          className="absolute blur-[120px]"
           style={{
             width: 700, height: 700,
             borderRadius: '50%',
             background: circleGradient,
-            opacity: 0.75,
-            ...(isDesktop ? { x: shape1X, y: shape1Y, left: 0, top: 0 } : mobilePos1),
-            willChange: 'transform',
-            transition: 'background 1s ease',
+            opacity: 0.6,
+            ...(isDesktop ? { x: c1X, y: c1Y, left: 0, top: 0 } : mobilePos1),
+            ...gpuHints,
           }}
-          animate={idleOrbit1}
+          animate={idleCircle}
           transition={{ ...baseTransition, duration: 28 }}
         />
 
-        {/* Shape 2 — Square (Purple/Magenta) */}
+        {/* Shape 2 — Square (Magenta/Violet) — magnetic, snappy, 15deg tilt */}
         <motion.div
-          className="absolute"
+          className="absolute blur-[120px]"
           style={{
             width: 650, height: 650,
             borderRadius: '20%',
+            rotate: 15,
             background: squareGradient,
-            opacity: 0.7,
-            ...(isDesktop ? { x: shape2X, y: shape2Y, left: 0, top: 0 } : mobilePos2),
-            willChange: 'transform',
-            transition: 'background 1s ease',
+            opacity: 0.55,
+            ...(isDesktop ? { x: c2X, y: c2Y, left: 0, top: 0 } : mobilePos2),
+            ...gpuHints,
           }}
-          animate={idleOrbit2}
+          animate={idleSquare}
           transition={{ ...baseTransition, duration: 32 }}
         />
 
-        {/* Shape 3 — Organic blob (Orange/Yellow) */}
+        {/* Shape 3 — Triangle/Organic (Teal/Cyan) — floaty, proximity-gated */}
         <motion.div
-          className="absolute"
+          className="absolute blur-[120px]"
           style={{
             width: 680, height: 680,
             borderRadius: '30% 70% 55% 45% / 60% 40% 65% 35%',
             background: triangleGradient,
-            opacity: 0.65,
-            ...(isDesktop ? { x: shape3X, y: shape3Y, left: 0, top: 0 } : mobilePos3),
-            willChange: 'transform',
-            transition: 'background 1s ease',
+            opacity: 0.5,
+            ...(isDesktop ? { x: c3X, y: c3Y, left: 0, top: 0 } : mobilePos3),
+            ...gpuHints,
           }}
-          animate={idleOrbit3}
+          animate={idleTriangle}
           transition={{ ...baseTransition, duration: 35 }}
         />
       </motion.div>
@@ -163,7 +204,7 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
         }}
       />
 
-      {/* Film Grain — 3% */}
+      {/* Film Grain — 3% opacity noise overlay */}
       <div
         className="absolute inset-0 z-[2] opacity-[0.03]"
         style={{
