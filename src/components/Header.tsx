@@ -238,9 +238,9 @@ const Header = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`md:hidden fixed inset-0 z-40 backdrop-blur-md transition-all duration-500 ${
+        className={`md:hidden fixed inset-0 z-40 transition-all duration-500 ${
           isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        } ${isDarkNav ? 'bg-[#050505]/95' : 'bg-background/95'}`}
+        } ${isDarkNav ? 'bg-[#050505]/[0.97]' : 'bg-background/[0.97]'}`}
         style={{ top: isScrolled ? '64px' : '80px' }}
       >
         <nav className="container h-full flex flex-col pt-12 pb-8">
