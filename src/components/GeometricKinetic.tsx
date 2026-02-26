@@ -123,19 +123,18 @@ const GeometricKinetic = ({ mouseX, mouseY, isDesktop }: Props) => {
   const mobilePos2 = { left: '55%', top: '15%' };
   const mobilePos3 = { left: '30%', top: '45%' };
 
-  // Shared GPU hint styles — force compositing layer for Safari
+  // Shared GPU hint styles
   const gpuHints: React.CSSProperties = {
     willChange: 'transform',
     backfaceVisibility: 'hidden',
-    transform: 'translateZ(0)',
     transition: 'background 1s ease',
   };
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" style={{ isolation: 'isolate' }}>
+    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
       <motion.div
         className="absolute inset-0"
-        style={{ scale: containerScale, opacity: containerOpacity, willChange: 'transform', transform: 'translateZ(0)' }}
+        style={{ scale: containerScale, opacity: containerOpacity, willChange: 'transform' }}
       >
         {/* Shape 1 — Circle (Azure Blue) — heavy, slow lag */}
         <motion.div

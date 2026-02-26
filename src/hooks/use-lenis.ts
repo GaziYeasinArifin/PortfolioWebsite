@@ -1,12 +1,24 @@
-// Lenis disabled for Safari performance — using native CSS smooth scrolling instead.
-// Anchor scroll support preserved via native behavior.
-
 import { useEffect } from 'react';
+import Lenis from 'lenis';
+
+let lenisInstance: Lenis | null = null;
 
 export const useLenis = () => {
   useEffect(() => {
-    // Enable native smooth scrolling
-    document.documentElement.style.scrollBehavior = 'smooth';
+    if (lenisInstance) return;
+
+    lenisInstance = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    const raf = (time: number) => {
+      lenisInstance?.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
 
     // Support anchor scrolling
     const handleAnchor = (e: MouseEvent) => {
@@ -17,16 +29,17 @@ export const useLenis = () => {
       const el = document.querySelector(href);
       if (el) {
         e.preventDefault();
-        el.scrollIntoView({ behavior: 'smooth' });
+        lenisInstance?.scrollTo(el as HTMLElement, { offset: 0 });
       }
     };
     document.addEventListener('click', handleAnchor);
 
     return () => {
       document.removeEventListener('click', handleAnchor);
-      document.documentElement.style.scrollBehavior = '';
+      lenisInstance?.destroy();
+      lenisInstance = null;
     };
   }, []);
 };
 
-export const getLenis = () => null;
+export const getLenis = () => lenisInstance;
