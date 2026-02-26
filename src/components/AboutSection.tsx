@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import {
   Compass, PenTool, BrainCircuit, Layers, Shield,
@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import aboutImage from '@/assets/about-1.png';
 
-// ── Impact Stats ───────────────────────────────────────
+// ── Data ───────────────────────────────────────────────
 const impactStats = [
   { value: '22M+', label: 'Installs', sublabel: 'iOS & Android' },
   { value: '$1.5M', label: 'Savings', sublabel: 'Design Systems' },
@@ -14,47 +14,63 @@ const impactStats = [
   { value: '210+', label: 'A/B Tests', sublabel: 'Managed' },
 ];
 
-// ── Skill Chips ────────────────────────────────────────
 const skills = [
-  { label: 'Product Strategy', icon: Compass, hue: '225 80% 55%' },
-  { label: 'Interaction Design', icon: PenTool, hue: '187 100% 45%' },
-  { label: 'ML / AI Interface Design', icon: BrainCircuit, hue: '270 80% 60%' },
-  { label: 'Prototyping & Motion', icon: Sparkles, hue: '340 80% 55%' },
-  { label: 'Design Systems', icon: Layers, hue: '160 70% 45%' },
-  { label: 'System Governance', icon: Shield, hue: '45 90% 50%' },
-  { label: 'Data-Driven Design', icon: BarChart3, hue: '200 80% 50%' },
-  { label: 'UX Research', icon: Lightbulb, hue: '30 90% 55%' },
+  { label: 'Product Strategy', icon: Compass },
+  { label: 'Interaction Design', icon: PenTool },
+  { label: 'ML / AI Interface Design', icon: BrainCircuit },
+  { label: 'Prototyping & Motion', icon: Sparkles },
+  { label: 'Design Systems', icon: Layers },
+  { label: 'System Governance', icon: Shield },
+  { label: 'Data-Driven Design', icon: BarChart3 },
+  { label: 'UX Research', icon: Lightbulb },
 ];
 
-// ── Trusted-by logos (text-based for monochrome) ───────
 const trustedBy = [
   'InShot', 'Screenlife', 'Spotlight', 'Cal State EB', 'Maze', 'Amplitude', 'Figma', 'Dovetail',
 ];
 
-// ── Stat Card with Shimmer ─────────────────────────────
-const StatCard = ({ stat, index }: { stat: typeof impactStats[0]; index: number }) => {
+// ── Stagger animation helpers ──────────────────────────
+const cellVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.1, duration: 0.6, ease: [0.4, 0, 0.2, 1] as const },
+  }),
+};
+
+// ── Metric Pill ────────────────────────────────────────
+const MetricPill = ({ stat, index }: { stat: typeof impactStats[0]; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-40px' });
 
   return (
     <motion.div
       ref={ref}
-      className="stat-shimmer-card relative overflow-hidden rounded-card p-6
-        bg-surface-card border border-surface-card-border
-        transition-all duration-500 group cursor-default"
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: index * 0.1, duration: 0.5, ease: 'easeOut' }}
-      style={{ boxShadow: 'var(--surface-shadow)' }}
+      className="metric-pill group relative overflow-hidden rounded-[var(--radius-sm)] p-5
+        bg-[hsl(var(--surface-card))]/5 dark:bg-[hsla(0,0%,100%,0.03)]
+        backdrop-blur-xl
+        border border-[hsla(0,0%,0%,0.06)] dark:border-[hsla(0,0%,100%,0.08)]
+        transition-all duration-500 cursor-default"
+      custom={index + 3}
+      variants={cellVariant}
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
+      whileHover={{ scale: 1.02, y: -2 }}
+      style={{
+        boxShadow: 'inset 0 1px 0 0 hsla(0,0%,100%,0.06)',
+      }}
     >
-      {/* Shimmer sweep overlay on hover */}
-      <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100">
-        <div className="stat-shimmer-sweep absolute inset-[-1px] rounded-card" />
-      </div>
-
+      {/* Hover glow — matches hero AI-Powered gradient */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[var(--radius-sm)]"
+        style={{
+          background: 'radial-gradient(ellipse at center, hsla(210,100%,60%,0.08) 0%, transparent 70%)',
+        }}
+      />
       <div className="relative z-10">
         <div
-          className="text-3xl md:text-4xl font-bold text-foreground"
+          className="text-2xl md:text-3xl font-bold text-foreground group-hover:text-[hsl(var(--electric))] transition-colors duration-300"
           style={{ fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace" }}
         >
           {stat.value}
@@ -68,40 +84,27 @@ const StatCard = ({ stat, index }: { stat: typeof impactStats[0]; index: number 
   );
 };
 
-// ── Skill Chip ─────────────────────────────────────────
-const SkillChip = ({ skill, index }: { skill: typeof skills[0]; index: number }) => {
-  const [isHovered, setIsHovered] = useState(false);
+// ── Ghost Tag ──────────────────────────────────────────
+const GhostTag = ({ skill, index }: { skill: typeof skills[0]; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-20px' });
 
   return (
     <motion.div
       ref={ref}
-      className="flex items-center gap-3 px-4 py-3 rounded-sm cursor-default select-none
-        border transition-all duration-400"
-      initial={{ opacity: 0, scale: 0.9 }}
+      className="flex items-center gap-2.5 px-4 py-2.5 rounded-[var(--radius-xs)] cursor-default select-none
+        border border-[hsla(0,0%,0%,0.08)] dark:border-[hsla(0,0%,100%,0.08)]
+        bg-transparent hover:bg-[hsla(0,0%,0%,0.03)] dark:hover:bg-[hsla(0,0%,100%,0.04)]
+        transition-all duration-300 group"
+      initial={{ opacity: 0, scale: 0.95 }}
       animate={isInView ? { opacity: 1, scale: 1 } : {}}
-      transition={{ delay: index * 0.05, duration: 0.4 }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{
-        backgroundColor: isHovered
-          ? `hsla(${skill.hue}, 0.08)`
-          : 'hsl(var(--about-chip-bg))',
-        borderColor: isHovered
-          ? `hsla(${skill.hue}, 0.3)`
-          : 'hsl(var(--about-chip-border))',
-        boxShadow: isHovered
-          ? `0 0 20px hsla(${skill.hue}, 0.12)`
-          : 'none',
-      }}
+      transition={{ delay: index * 0.04, duration: 0.4 }}
     >
       <skill.icon
-        className="h-4 w-4 transition-colors duration-300 flex-shrink-0"
+        className="h-3.5 w-3.5 text-muted-foreground group-hover:text-foreground transition-colors duration-300 flex-shrink-0"
         strokeWidth={1.5}
-        style={{ color: isHovered ? `hsl(${skill.hue})` : 'hsl(var(--muted-foreground))' }}
       />
-      <span className="text-[13px] font-medium tracking-wide text-foreground whitespace-nowrap">
+      <span className="text-[13px] font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300 whitespace-nowrap">
         {skill.label}
       </span>
     </motion.div>
@@ -134,12 +137,10 @@ const TrustedByMarquee = () => {
       <div className="overflow-hidden group">
         <div className="flex">
           <div className="marquee flex items-center shrink-0 group-hover:[animation-play-state:paused]">
-            <Track />
-            <Track />
+            <Track /><Track />
           </div>
           <div className="marquee flex items-center shrink-0 group-hover:[animation-play-state:paused]" aria-hidden="true">
-            <Track />
-            <Track />
+            <Track /><Track />
           </div>
         </div>
       </div>
@@ -147,11 +148,11 @@ const TrustedByMarquee = () => {
   );
 };
 
-// ── Main About Section ─────────────────────────────────
+// ── Main About Section — Bento Grid ────────────────────
 const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLDivElement>(null);
-  const isHeadingInView = useInView(headingRef, { once: true, margin: '-60px' });
+  const gridRef = useRef<HTMLDivElement>(null);
+  const isGridInView = useInView(gridRef, { once: true, margin: '-60px' });
 
   return (
     <section
@@ -160,124 +161,123 @@ const AboutSection = () => {
       className="relative py-24 md:py-32 overflow-hidden transition-colors duration-500"
       style={{ backgroundColor: 'hsl(var(--about-bg))' }}
     >
-      <div className="container relative z-10">
-        {/* Golden Ratio Layout: 40/60 split */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-16 md:mb-24">
+      <div className="container relative z-10 max-w-6xl">
+        {/* Section label */}
+        <motion.span
+          className="text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground block mb-8"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          About
+        </motion.span>
 
-          {/* Left 40%: Portrait (5 of 12 ≈ ~40%) */}
+        {/* ── Bento Grid ── */}
+        <div ref={gridRef} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+          {/* Cell A — Narrative Card (2/3 width) */}
           <motion.div
-            className="lg:col-span-5 relative"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            className="lg:col-span-2 rounded-[var(--radius-card)] p-8 md:p-10
+              bg-[hsl(var(--surface-card))] dark:bg-[hsl(var(--surface-card))]
+              border border-[hsl(var(--surface-card-border))]
+              dark:border-[hsla(0,0%,100%,0.06)]"
+            custom={0}
+            variants={cellVariant}
+            initial="hidden"
+            animate={isGridInView ? 'visible' : 'hidden'}
+            style={{
+              boxShadow: 'inset 0 1px 0 0 hsla(0,0%,100%,0.5), var(--surface-shadow)',
+            }}
           >
-            <div className="relative rounded-card overflow-hidden aspect-[3/4] lg:aspect-auto lg:h-full">
-              <img
-                src={aboutImage}
-                alt="Gazi Yeasin Arifin"
-                className="no-border h-full w-full object-cover"
-              />
+            <h2
+              className="font-display font-bold leading-[1.15] tracking-tight text-xl sm:text-2xl md:text-3xl lg:text-[2rem] text-foreground mb-8"
+            >
+              11+ years leading design for high-scale AI systems, moving the needle on adoption and multi-million dollar business goals.
+            </h2>
 
-              {/* Glassmorphism overlay at bottom */}
-              <div className="absolute bottom-0 left-0 right-0 p-5
-                backdrop-blur-xl bg-background/60 border-t border-border/20">
-                <div className="flex items-center gap-2.5">
-                  <span className="relative flex h-2.5 w-2.5">
-                    <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" />
-                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
-                  </span>
-                  <div>
-                    <span className="text-sm font-medium text-foreground flex items-center gap-1.5">
-                      <MapPin className="h-3.5 w-3.5" /> San Francisco, CA
-                    </span>
-                    <span className="text-[11px] text-muted-foreground block mt-0.5">
-                      Open to Lead Product Design roles
-                    </span>
-                  </div>
-                </div>
-              </div>
+            <div className="space-y-5">
+              <p className="text-base md:text-lg text-muted-foreground leading-[1.6]">
+                <span className="font-semibold text-foreground text-[1.05em]">AI meets intuition.</span>{' '}
+                I specialize in the intersection of product design and AI systems, building interfaces that translate complex machine learning models into experiences people actually trust and enjoy.
+              </p>
+              <p className="text-base md:text-lg text-muted-foreground leading-[1.6]">
+                <span className="font-semibold text-foreground text-[1.05em]">Scale without compromise.</span>{' '}
+                My work spans iOS, Android, and SaaS platforms serving millions of users, where every pixel must perform under real-world constraints like latency budgets, confidence thresholds, and cross-platform parity.
+              </p>
+              <p className="text-sm md:text-base text-muted-foreground leading-[1.6]">
+                <span className="font-semibold text-foreground text-[1.05em]">Proven at InShot.</span>{' '}
+                I led design across 3 creative apps that hit the App Store Top 10, established a cross-platform design system, and drove $1.5M+ in operational savings.
+              </p>
             </div>
           </motion.div>
 
-          {/* Right 60%: Executive Summary (7 of 12 ≈ ~60%) */}
-          <div ref={headingRef} className="lg:col-span-7 flex flex-col justify-center">
-            <motion.span
-              className="text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground block mb-4"
-              initial={{ opacity: 0, y: 12 }}
-              animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5 }}
+          {/* Cell B — Human Card (1/3 width) */}
+          <motion.div
+            className="lg:col-span-1 relative rounded-[var(--radius-card)] overflow-hidden group
+              border border-[hsl(var(--surface-card-border))]
+              dark:border-[hsla(0,0%,100%,0.06)]"
+            custom={1}
+            variants={cellVariant}
+            initial="hidden"
+            animate={isGridInView ? 'visible' : 'hidden'}
+          >
+            <img
+              src={aboutImage}
+              alt="Gazi Yeasin Arifin"
+              className="no-border h-full w-full object-cover
+                grayscale-[40%] saturate-[70%]
+                group-hover:grayscale-0 group-hover:saturate-100
+                transition-all duration-700 ease-out"
+              style={{ borderRadius: 'var(--radius-card)' }}
+            />
+
+            {/* Status tag — top-right corner */}
+            <div
+              className="absolute top-4 right-4 z-10
+                flex items-center gap-2 px-3 py-1.5 rounded-full
+                backdrop-blur-xl
+                bg-foreground/45 dark:bg-foreground/15
+                border border-background/12"
             >
-              About
-            </motion.span>
-
-            <motion.h2
-              className="font-display font-bold leading-[1.1] tracking-tight text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] text-foreground mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.1, duration: 0.6 }}
-            >
-              11+ years leading design for high-scale AI systems, moving the needle on adoption and multi-million dollar business goals.
-            </motion.h2>
-
-            {/* Three distinct paragraphs with bold lead-ins */}
-            <div className="space-y-5">
-              <motion.p
-                className="text-base md:text-lg text-muted-foreground leading-relaxed"
-                initial={{ opacity: 0, y: 16 }}
-                animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.2, duration: 0.5 }}
-              >
-                <span className="font-semibold text-foreground">AI meets intuition.</span>{' '}
-                I specialize in the intersection of product design and AI systems, building interfaces that translate complex machine learning models into experiences people actually trust and enjoy.
-              </motion.p>
-
-              <motion.p
-                className="text-base md:text-lg text-muted-foreground leading-relaxed"
-                initial={{ opacity: 0, y: 16 }}
-                animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.3, duration: 0.5 }}
-              >
-                <span className="font-semibold text-foreground">Scale without compromise.</span>{' '}
-                My work spans iOS, Android, and SaaS platforms serving millions of users, where every pixel must perform under real-world constraints like latency budgets, confidence thresholds, and cross-platform parity.
-              </motion.p>
-
-              <motion.p
-                className="text-sm text-muted-foreground leading-relaxed"
-                initial={{ opacity: 0, y: 16 }}
-                animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.4, duration: 0.5 }}
-              >
-                <span className="font-semibold text-foreground">Proven at InShot.</span>{' '}
-                I led design across 3 creative apps that hit the App Store Top 10, established a cross-platform design system, and drove $1.5M+ in operational savings.
-              </motion.p>
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+              </span>
+              <span className="text-[11px] font-medium text-background dark:text-foreground flex items-center gap-1">
+                <MapPin className="h-3 w-3" /> San Francisco
+              </span>
             </div>
+          </motion.div>
 
-            {/* Stats grid — aligned with text column */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
-              {impactStats.map((stat, i) => (
-                <StatCard key={stat.label} stat={stat} index={i} />
+          {/* Cell C — Metric Pills (4 equal columns) */}
+          {impactStats.map((stat, i) => (
+            <MetricPill key={stat.label} stat={stat} index={i} />
+          ))}
+
+          {/* Cell D — Competencies (full width) */}
+          <motion.div
+            className="lg:col-span-3 rounded-[var(--radius-card)] p-6 md:p-8
+              bg-[hsl(var(--surface-card))] dark:bg-[hsl(var(--surface-card))]
+              border border-[hsl(var(--surface-card-border))]
+              dark:border-[hsla(0,0%,100%,0.06)]"
+            custom={7}
+            variants={cellVariant}
+            initial="hidden"
+            animate={isGridInView ? 'visible' : 'hidden'}
+            style={{
+              boxShadow: 'inset 0 1px 0 0 hsla(0,0%,100%,0.5), var(--surface-shadow)',
+            }}
+          >
+            <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground mb-5">
+              Core Competencies
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {skills.map((skill, i) => (
+                <GhostTag key={skill.label} skill={skill} index={i} />
               ))}
             </div>
-          </div>
-        </div>
-
-        {/* Skill Cloud */}
-        <div className="mb-0">
-          <motion.p
-            className="text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground mb-5"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-          >
-            Core Competencies
-          </motion.p>
-          <div className="flex flex-wrap gap-3">
-            {skills.map((skill, i) => (
-              <SkillChip key={skill.label} skill={skill} index={i} />
-            ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Trusted-By Marquee */}
