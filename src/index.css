@@ -487,6 +487,7 @@
 
 .shimmer-button:hover::after {
   animation: shimmer-sweep 0.6s ease-out forwards;
+}
 
 /* Stat card shimmer border effect */
 @keyframes stat-border-shimmer {
@@ -532,7 +533,6 @@
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   animation: stat-border-shimmer 3s linear infinite;
-}
 }
 
 /* Nav glassmorphism */
