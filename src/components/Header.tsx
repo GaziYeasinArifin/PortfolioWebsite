@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Download, ArrowUpRight } from 'lucide-react';
+import { Menu, X, Download, ArrowUpRight, Moon, Sun } from 'lucide-react';
 import logo from '@/assets/logo.png';
 
 const fullName = 'gazi yeasin arifin';
@@ -16,7 +16,7 @@ const Header = () => {
 
   // In the new system-aware hero, the hero follows the system theme.
   // isDarkNav is true when on home page, not scrolled, AND system is in dark mode.
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => document.documentElement.classList.contains('dark'));
 
   useEffect(() => {
     const checkDark = () => setIsDarkMode(document.documentElement.classList.contains('dark'));
@@ -25,6 +25,13 @@ const Header = () => {
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
     return () => observer.disconnect();
   }, []);
+
+  const toggleTheme = () => {
+    const newDark = !isDarkMode;
+    document.documentElement.classList.toggle('dark', newDark);
+    localStorage.setItem('theme', newDark ? 'dark' : 'light');
+    setIsDarkMode(newDark);
+  };
 
   const isDarkNav = isHomePage && !isScrolled && isDarkMode;
 
@@ -179,6 +186,18 @@ const Header = () => {
 
           {/* Right: Resume + Say Hi (Desktop) */}
           <div className="hidden md:flex items-center gap-4">
+            <button
+              onClick={toggleTheme}
+              className={`relative flex items-center justify-center w-8 h-8 rounded-md transition-all duration-300 ${
+                isDarkNav
+                  ? 'text-white/60 hover:text-white'
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              <Moon className={`w-[18px] h-[18px] absolute transition-all duration-300 ${isDarkMode ? 'opacity-0 rotate-90 scale-0' : 'opacity-100 rotate-0 scale-100'}`} />
+              <Sun className={`w-[18px] h-[18px] absolute transition-all duration-300 ${isDarkMode ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-0'}`} />
+            </button>
             <a
               href="/Gazi_Arifin_Resume.pdf"
               download="Gazi_Arifin_Resume.pdf"
@@ -262,6 +281,15 @@ const Header = () => {
             <div className={`pt-4 border-t flex flex-col gap-4 ${
               isDarkNav ? 'border-white/10' : 'border-border/50'
             }`}>
+              <button
+                onClick={toggleTheme}
+                className={`flex items-center gap-2 py-3 text-lg font-medium transition-all duration-300 hover:translate-x-2 ${
+                  isDarkNav ? 'text-white/60 hover:text-white' : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                {isDarkMode ? 'light mode' : 'dark mode'}
+              </button>
               <a
                 href="/Gazi_Arifin_Resume.pdf"
                 download="Gazi_Arifin_Resume.pdf"
