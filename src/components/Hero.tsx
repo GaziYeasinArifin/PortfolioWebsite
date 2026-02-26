@@ -232,7 +232,7 @@ const Hero = () => {
             }}
           >
             <motion.span
-              className="block whitespace-nowrap text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] text-[hsl(var(--hero-text))]"
+              className="block text-[1.5rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] lg:whitespace-nowrap text-[hsl(var(--hero-text))]"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
@@ -240,7 +240,7 @@ const Hero = () => {
               Product Design Leader
             </motion.span>
             <motion.span
-              className="block text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] text-[hsl(var(--hero-text))]"
+              className="block text-[1.5rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] text-[hsl(var(--hero-text))]"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
