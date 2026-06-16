@@ -1,73 +1,87 @@
-# Welcome to your Lovable project
+# gaziarifin.com — Personal Portfolio
 
-## Project info
+The source for my personal portfolio: [gaziarifin.com](https://gaziarifin.com)
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+I am **Gazi Yeasin Arifin**, a Product Designer and Design Engineer. I design AI-first product experiences and build them end to end, from interaction concept through production code. This site is where my case studies, shipped products, and writing live, and it is built to a high craft bar as a sample of how I think about motion, performance, and detail.
 
-## How can I edit this code?
+## Highlights
 
-There are several ways of editing your application.
+- **Motion-led interaction design** — Framer Motion for choreography, Lenis for smooth scroll, plus custom magnetic and reveal interactions.
+- **Bespoke visual components** — kinetic and atmospheric backgrounds (NeuralField, GeometricKinetic, AtmosphericBackground) rather than off-the-shelf templates.
+- **Full case studies** — long-form, image-rich write-ups for Screenlife, Phantom Footprint, Add Music to Video, and Spotlight.
+- **Light and dark themes** — a complete token-driven theming system with no flash of incorrect theme on load.
+- **Accessible, responsive, performance-minded** — semantic markup, optimized image loading, and font preconnect.
 
-**Use Lovable**
+## Tech Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+| Area | Tools |
+| --- | --- |
+| Framework | React 18 + TypeScript |
+| Build | Vite (SWC) |
+| Styling | Tailwind CSS + shadcn/ui (Radix primitives) |
+| Motion | Framer Motion + Lenis |
+| Routing | React Router |
+| Data/State | TanStack Query |
+| Icons | lucide-react |
 
-Changes made via Lovable will be committed automatically to this repo.
+## Getting Started
 
-**Use your preferred IDE**
+Requires Node.js 18+ and npm.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+    git clone https://github.com/GaziYeasinArifin/PortfolioWebsite.git
+    cd PortfolioWebsite
+    npm install
+    npm run dev
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Scripts
 
-Follow these steps:
+| Command | Description |
+| --- | --- |
+| npm run dev | Start the Vite dev server with hot reload |
+| npm run build | Produce a production build in dist/ |
+| npm run preview | Preview the production build locally |
+| npm run lint | Run ESLint across the project |
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## Project Structure
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+    public/                 Static assets (favicon, resume PDF, OG image, robots.txt)
+    src/
+      assets/               Case-study imagery and media
+      components/           Section + interaction components (Hero, CaseStudies, Contact, ...)
+        ui/                 shadcn/ui primitives
+      hooks/                Custom hooks (use-lenis, use-magnetic, use-mobile, ...)
+      lib/                  Utilities
+      pages/                Routed pages (Index, About, case studies, NotFound)
+      index.css             Tailwind layers + design tokens (light/dark)
+      App.tsx               App shell, providers, and routes
+      main.tsx              Entry point
+    index.html              Document shell, meta/OG tags, font + theme bootstrap
+    tailwind.config.ts      Tailwind + design-system configuration
+    vite.config.ts          Vite configuration
 
-# Step 3: Install the necessary dependencies.
-npm i
+## Routes
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+| Path | Page |
+| --- | --- |
+| / | Home |
+| /about | About |
+| /case-study/screenlife | Screenlife case study |
+| /case-study/phantom-footprint | Phantom Footprint case study |
+| /case-study/add-music-to-video | Add Music to Video case study |
+| /case-study/spotlight | Spotlight case study |
 
-**Edit a file directly in GitHub**
+## Deployment
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+The app builds to a static dist/ bundle and can be hosted on any static host (Vercel, Netlify, Cloudflare Pages, etc.):
 
-**Use GitHub Codespaces**
+    npm run build
+    npm run preview
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## License
 
-## What technologies are used for this project?
+This repository is shared as a portfolio reference. The code may be read for reference, but the content, copy, branding, and case-study material are not licensed for reuse. Please reach out before repurposing any part of it.
 
-This project is built with:
+## Contact
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- Portfolio: [gaziarifin.com](https://gaziarifin.com)
+- Email: arifin.yeasin@gmail.com
